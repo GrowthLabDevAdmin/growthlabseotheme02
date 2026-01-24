@@ -3,19 +3,103 @@
 // Helper function to get ACF option fields
 function get_field_options($field_name, $format_value = true)
 {
-    return get_field($field_name, 'option', $format_value);
+    if (empty($field_name) || !is_string($field_name)) return null;
+
+    static $cache = [];
+    $key = $field_name . '|' . ($format_value ? '1' : '0');
+    if (array_key_exists($key, $cache)) {
+        return $cache[$key];
+    }
+
+    $value = get_field($field_name, 'option', $format_value);
+    $cache[$key] = $value;
+    return $value;
 }
 
 // Language Filter
 function filterContentByLanguage($lang = 'es')
 {
-    if (empty($lang)) return false;
+    if (empty($lang) || !is_string($lang)) return false;
 
-    $current_url = $_SERVER['REQUEST_URI'] ?? '/';
-    $lang_escaped = preg_quote($lang, '#');
-    $pattern = '#^/' . $lang_escaped . '(/|$)#';
+    $uri = $_SERVER['REQUEST_URI'] ?? '/';
+    $path = parse_url($uri, PHP_URL_PATH) ?: '/';
+    $prefix = '/' . ltrim($lang, '/');
 
-    return preg_match($pattern, $current_url) === 1;
+    if ($path === $prefix) return true;
+    if (strpos($path, $prefix . '/') === 0) return true;
+
+    return false;
+}
+
+// Languages map accessor (cached per request)
+function get_languages_map()
+{
+    static $map = null;
+    if ($map !== null) return $map;
+
+    $lang_options = get_field_options('options_by_language') ?: [];
+    if (!is_array($lang_options)) {
+        $map = [];
+        return $map;
+    }
+
+    $map = array_column($lang_options, 'language', 'url_language_slug');
+    return $map;
+}
+
+// Get Current Language
+function get_current_language()
+{
+    static $cached = null;
+    if ($cached !== null) return $cached;
+
+    $languages = get_languages_map();
+
+    foreach ($languages as $slug => $language) {
+        if (filterContentByLanguage($slug)) {
+            $cached = [
+                'slug' => $slug,
+                'language' => $language
+            ];
+            return $cached;
+        }
+    }
+
+    $cached = [
+        'slug' => '',
+        'language' => 'English'
+    ];
+
+    return $cached;
+}
+
+function get_current_language_suffix()
+{
+    if (get_current_language()['slug'] !== '')  return '_' . get_current_language()['slug'];
+    return '';
+}
+
+// Get Current Language Options
+function get_current_language_options()
+{
+    $current = get_current_language();
+    $slug = $current['slug'] ?? '';
+
+    if ($slug === '') {
+        return get_field_options('options');
+    }
+
+    $lang_opts = get_field_options('options_by_language') ?: [];
+    if (!is_array($lang_opts)) return get_field_options('options');
+
+    foreach ($lang_opts as $lang_opt) {
+        if (!isset($lang_opt['url_language_slug'])) continue;
+        if ($lang_opt['url_language_slug'] === $slug && isset($lang_opt['options'])) {
+            return $lang_opt['options'];
+        }
+    }
+
+    return get_field_options('options');
 }
 
 //Phone number format remover

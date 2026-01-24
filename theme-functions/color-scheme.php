@@ -99,7 +99,7 @@ function hex_to_rgb($hex)
 /* function theme_enqueue_styles()
 {
     $color_scheme = theme_get_customizer_css();
-    wp_add_inline_style('growthlabtheme01-main-stylesheet', $color_scheme);
+    wp_add_inline_style('growthlabtheme02-main-stylesheet', $color_scheme);
 }
 
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles'); */

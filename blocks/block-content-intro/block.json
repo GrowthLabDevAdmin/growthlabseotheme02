@@ -3,7 +3,7 @@
   "title": "Content Intro",
   "style": ["file:./block-min.css"],
   "script": ["file:./block-min.js"],
-  "category": "growthlabtheme01-blocks",
+  "category": "growthlabtheme02-blocks",
   "icon": "block-default",
   "keywords": ["growthlabseo", "cta", "content", "picture", "caption"],
   "acf": {

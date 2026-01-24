@@ -30,7 +30,7 @@
 
 ```bash
 git clone https://github.com/GrowthLabDevAdmin/gorwthlabseotheme01.git
-cd wp-content/themes/growthlabtheme01
+cd wp-content/themes/growthlabtheme02
 ```
 
 2. Install Node dependencies:
@@ -51,7 +51,7 @@ npx gulp
 
 ### Production
 
-- Upload theme files to `/wp-content/themes/growthlabtheme01/`
+- Upload theme files to `/wp-content/themes/growthlabtheme02/`
 - Activate theme from WordPress Admin
 - Import ACF JSON (if needed): Dashboard → ACF → Tools → Import
 - Clear cache from plugins and CDN
@@ -60,7 +60,7 @@ npx gulp
 # 📁 Project Structure
 
 ```text
-growthlabtheme01/
+growthlabtheme02/
 ├── blocks/                      # Dynamic Gutenberg blocks
 │   ├── block-contact-form/      # Contact form block
 │   ├── block-cta-box/           # CTA block
@@ -318,7 +318,7 @@ Speeds up development workflow
 Step 1: Initial Setup
 
 Navigate to theme directory
-    cd wp-content/themes/growthlabtheme01
+    cd wp-content/themes/growthlabtheme02
 
 Install dependencies (one time)
     npm install

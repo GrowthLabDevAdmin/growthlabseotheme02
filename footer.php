@@ -7,8 +7,7 @@
   <footer id="site-footer" class="site-footer">
 
     <?php
-    $es = filterContentByLanguage() ? '_es' : '';
-    $options = get_field_options('options' . $es);
+    $options = get_current_language_options();
     foreach ($options as $key => $value) $$key = $value;
     $phone_number = $contact_phone ?: $main_phone_number;
     ?>

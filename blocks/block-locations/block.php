@@ -38,8 +38,7 @@ if (get_field('toggle_block')):
 
                 <?php
                 if ($show_all_locations) {
-                    $es = filterContentByLanguage() ? '_es' : '';
-                    $options = get_field_options('options' . $es);
+                    $options = get_current_language_options();
                     $locations = $options['offices'];
                 } else {
                     $locations = $offices;

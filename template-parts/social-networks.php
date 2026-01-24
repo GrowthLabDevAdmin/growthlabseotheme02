@@ -3,8 +3,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$es = filterContentByLanguage() ? '_es' : '';
-$options = get_field_options('options' . $es);
+$options = get_current_language_options();
 
 $social_networks = array(
     'facebook_url'   => 'icon-facebook.svg',
@@ -20,7 +19,7 @@ $icon_dir = get_template_directory() . '/assets/icons/';
 
 <ul class="social-networks">
     <?php foreach ($social_networks as $field_key => $icon_file) : ?>
-        <?php $url = $options[ $field_key ] ?? ''; ?>
+        <?php $url = $options[$field_key] ?? ''; ?>
         <?php if (!empty($url)) : ?>
             <li>
                 <a href="<?= esc_url($url) ?>" target="_blank" rel="noopener noreferrer">

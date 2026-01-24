@@ -166,52 +166,52 @@ function my_wp_editor_formats()
     // Add support for custom formats
     add_theme_support('editor-color-palette', array(
         array(
-            'name'  => __('Primary Color', 'growthlabtheme01'),
+            'name'  => __('Primary Color', 'growthlabtheme02'),
             'slug'  => 'primary',
             'color' => get_theme_mod('primary_color', '#15253f'),
         ),
         array(
-            'name'  => __('Primary Dark', 'growthlabtheme01'),
+            'name'  => __('Primary Dark', 'growthlabtheme02'),
             'slug'  => 'primary-dark',
             'color' => get_theme_mod('primary_color_dark', '#08182f'),
         ),
         array(
-            'name'  => __('Primary Light', 'growthlabtheme01'),
+            'name'  => __('Primary Light', 'growthlabtheme02'),
             'slug'  => 'primary-light',
             'color' => get_theme_mod('primary_color_light', '#2C3D5B'),
         ),
         array(
-            'name'  => __('Secondary Color', 'growthlabtheme01'),
+            'name'  => __('Secondary Color', 'growthlabtheme02'),
             'slug'  => 'secondary',
             'color' => get_theme_mod('secondary_color', '#F4F3EE'),
         ),
         array(
-            'name'  => __('Secondary Dark', 'growthlabtheme01'),
+            'name'  => __('Secondary Dark', 'growthlabtheme02'),
             'slug'  => 'secondary-dark',
             'color' => get_theme_mod('secondary_color_dark', '#E7E5DF'),
         ),
         array(
-            'name'  => __('Secondary Light', 'growthlabtheme01'),
+            'name'  => __('Secondary Light', 'growthlabtheme02'),
             'slug'  => 'secondary-light',
             'color' => get_theme_mod('secondary_color_light', '#FFFFFF'),
         ),
         array(
-            'name'  => __('Tertiary Color', 'growthlabtheme01'),
+            'name'  => __('Tertiary Color', 'growthlabtheme02'),
             'slug'  => 'tertiary',
             'color' => get_theme_mod('tertiary_color', '#BC9061'),
         ),
         array(
-            'name'  => __('Tertiary Dark', 'growthlabtheme01'),
+            'name'  => __('Tertiary Dark', 'growthlabtheme02'),
             'slug'  => 'tertiary-dark',
             'color' => get_theme_mod('tertiary_color_dark', '#9D7A55'),
         ),
         array(
-            'name'  => __('Tertiary Light', 'growthlabtheme01'),
+            'name'  => __('Tertiary Light', 'growthlabtheme02'),
             'slug'  => 'tertiary-light',
             'color' => get_theme_mod('tertiary_color_light', '#DCAB77'),
         ),
         array(
-            'name'  => __('Text Color', 'growthlabtheme01'),
+            'name'  => __('Text Color', 'growthlabtheme02'),
             'slug'  => 'text',
             'color' => get_theme_mod('text_color', '#15253f'),
         ),

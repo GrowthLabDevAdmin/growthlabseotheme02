@@ -3,19 +3,19 @@
 -------------------------------------------------------------- */
 
 // Custom Block Categories
-function growthlabtheme01_blocks_category($categories, $post)
+function growthlabtheme02_blocks_category($categories, $post)
 {
     return array_merge(
         $categories,
         array(
             array(
-                'slug'  => 'growthlabtheme01-blocks',
-                'title' => __('Growthlab Theme 01 Blocks', 'growthlabtheme01-blocks'),
+                'slug'  => 'growthlabtheme02-blocks',
+                'title' => __('Growthlab Theme 01 Blocks', 'growthlabtheme02-blocks'),
             )
         )
     );
 }
-add_filter('block_categories_all', 'growthlabtheme01_blocks_category', 10, 2);
+add_filter('block_categories_all', 'growthlabtheme02_blocks_category', 10, 2);
 
 // Register Block Types
 function register_acf_blocks()

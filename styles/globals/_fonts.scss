@@ -1,84 +1,148 @@
 /* CRITICAL FONTS - Use swap */
+/* OPTIONAL FONTS - Use optional */
 
-/* fraunces-regular - CRITICAL */
+/* roboto-serif-100 - latin */
 @font-face {
-  font-display: swap; /* Shows fallback, then swaps */
-  font-family: "Fraunces";
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto Serif';
   font-style: normal;
-  font-weight: 400;
-  src: url("{theme-path}/fonts/fraunces-v38-latin/fraunces-v38-latin-regular.woff2") format("woff2");
+  font-weight: 100;
+  src: url('{theme-path}/fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-100.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-
-/* open-sans-regular - CRITICAL */
+/* roboto-serif-100italic - latin */
 @font-face {
-  font-display: swap;
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: 400;
-  src: url("{theme-path}/fonts/open-sans-v44-latin/open-sans-v44-latin-regular.woff2") format("woff2");
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto Serif';
+  font-style: italic;
+  font-weight: 100;
+  src: url('{theme-path}/fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-100italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-
-/* NON-CRITICAL FONTS - Use optional */
-
-/* fraunces-300 - Optional weight */
+/* roboto-serif-300 - latin */
 @font-face {
-  font-display: optional; /* Uses fallback if font doesn't load quickly */
-  font-family: "Fraunces";
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto Serif';
   font-style: normal;
   font-weight: 300;
-  src: url("{theme-path}/fonts/fraunces-v38-latin/fraunces-v38-latin-300.woff2") format("woff2");
+  src: url('{theme-path}/fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-300.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-
-/* fraunces-500 - Optional weight */
+/* roboto-serif-300italic - latin */
 @font-face {
-  font-display: optional;
-  font-family: "Fraunces";
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto Serif';
+  font-style: italic;
+  font-weight: 300;
+  src: url('{theme-path}/fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-300italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* roboto-serif-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto Serif';
+  font-style: normal;
+  font-weight: 400;
+  src: url('{theme-path}/fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* roboto-serif-italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto Serif';
+  font-style: italic;
+  font-weight: 400;
+  src: url('{theme-path}/fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* roboto-serif-500 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto Serif';
   font-style: normal;
   font-weight: 500;
-  src: url("{theme-path}/fonts/fraunces-v38-latin/fraunces-v38-latin-500.woff2") format("woff2");
+  src: url('{theme-path}/fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-
-/* fraunces-600 - Optional weight */
+/* roboto-serif-500italic - latin */
 @font-face {
-  font-display: swap;
-  font-family: "Fraunces";
-  font-style: normal;
-  font-weight: 600;
-  src: url("{theme-path}/fonts/fraunces-v38-latin/fraunces-v38-latin-600.woff2") format("woff2");
-}
-
-/* fraunces-700 - Semi-critical */
-@font-face {
-  font-display: swap; /* Swap for bold - often used in headings */
-  font-family: "Fraunces";
-  font-style: normal;
-  font-weight: 700;
-  src: url("{theme-path}/fonts/fraunces-v38-latin/fraunces-v38-latin-700.woff2") format("woff2");
-}
-
-/* open-sans-500 - Optional weight */
-@font-face {
-  font-display: optional;
-  font-family: "Open Sans";
-  font-style: normal;
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto Serif';
+  font-style: italic;
   font-weight: 500;
-  src: url("{theme-path}/fonts/open-sans-v44-latin/open-sans-v44-latin-500.woff2") format("woff2");
+  src: url('{theme-path}/fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-500italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-
-/* open-sans-600 - Optional weight */
+/* roboto-serif-600 - latin */
 @font-face {
-  font-display: swap;
-  font-family: "Open Sans";
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto Serif';
   font-style: normal;
   font-weight: 600;
-  src: url("{theme-path}/fonts/open-sans-v44-latin/open-sans-v44-latin-600.woff2") format("woff2");
+  src: url('{theme-path}/fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-
-/* open-sans-700 - Optional weight */
+/* roboto-serif-600italic - latin */
 @font-face {
-  font-display: swap;
-  font-family: "Open Sans";
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto Serif';
+  font-style: italic;
+  font-weight: 600;
+  src: url('{theme-path}/fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-600italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* roboto-serif-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto Serif';
   font-style: normal;
   font-weight: 700;
-  src: url("{theme-path}/fonts/open-sans-v44-latin/open-sans-v44-latin-700.woff2") format("woff2");
+  src: url('{theme-path}/fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* roboto-serif-700italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto Serif';
+  font-style: italic;
+  font-weight: 700;
+  src: url('{theme-path}/fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-700italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* mona-sans-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Mona Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('{theme-path}/fonts/mona-sans-v4-latin/mona-sans-v4-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* mona-sans-italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Mona Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: url('{theme-path}/fonts/mona-sans-v4-latin/mona-sans-v4-latin-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* mona-sans-600 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Mona Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url('{theme-path}/fonts/mona-sans-v4-latin/mona-sans-v4-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* mona-sans-600italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Mona Sans';
+  font-style: italic;
+  font-weight: 600;
+  src: url('{theme-path}/fonts/mona-sans-v4-latin/mona-sans-v4-latin-600italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* mona-sans-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Mona Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('{theme-path}/fonts/mona-sans-v4-latin/mona-sans-v4-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* mona-sans-700italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Mona Sans';
+  font-style: italic;
+  font-weight: 700;
+  src: url('{theme-path}/fonts/mona-sans-v4-latin/mona-sans-v4-latin-700italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }

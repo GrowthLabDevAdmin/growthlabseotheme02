@@ -1,17 +1,18 @@
 const siteHeader = document.querySelector(".site-header");
-const mobileBtn = document.querySelector(".mobile-menu-button");
-const mainMenu = document.querySelector(".site-header .main-nav");
+const mobileBtn = document.querySelector(".site-header__mobile-btn");
+const closeBtn = document.querySelector(".site-header__close-btn");
+const mainMenu = document.querySelector(".site-header__navigation");
 const parentMenuItems = document.querySelectorAll(
-  ".site-header .main-nav .menu-item-has-children"
+  ".site-header .main-nav .menu-item-has-children",
 );
 const mainContent = document.querySelectorAll(
-  ".page-template-default .main-content"
+  ".page-template-default .main-content",
 );
 const blocksInContent = document.querySelectorAll(
-  ".page-template-default .main-content .block[data-extract]"
+  ".page-template-default .main-content .block[data-extract]",
 );
 const footerLocations = document.querySelector(
-  ".locations-footer .locations-cards__carousel .splide"
+  ".locations-footer .locations-cards__carousel .splide",
 );
 
 const accordeonItems = document.querySelectorAll(".accordeon");
@@ -37,6 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function eventListeners() {
   showMenus();
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeMenu);
+  }
 
   // Debounce resize event
   let resizeTimer;
@@ -64,15 +69,15 @@ function eventListeners() {
 function showMenus() {
   // re-query in case the DOM changed
   const parentMenuItems = document.querySelectorAll(
-    ".site-header .main-nav .menu-item-has-children"
+    ".site-header .main-nav .menu-item-has-children",
   );
 
   if (!mobileBtn || !mainMenu) return;
 
   // always remove listener using the same reference before adding
-  mobileBtn.removeEventListener("click", handleMenuClick);
+  mobileBtn.removeEventListener("click", openMenu);
 
-  if (window.screen.width > tablet) {
+  if (window.screen.width > ldpi) {
     mobileBtn.classList.remove("active");
     mainMenu.classList.remove("active");
 
@@ -83,7 +88,7 @@ function showMenus() {
     });
   } else {
     // add listener on mobile (same reference, no wrapper)
-    mobileBtn.addEventListener("click", handleMenuClick);
+    mobileBtn.addEventListener("click", openMenu);
 
     parentMenuItems.forEach((item) => {
       // ensure there are no duplicates
@@ -93,8 +98,14 @@ function showMenus() {
   }
 }
 
+// Function to handle close button clicks
+function closeMenu() {
+  mainMenu.classList.remove("active");
+  mobileBtn.classList.remove("active");
+}
+
 // Function to handle menu item clicks
-function handleMenuClick() {
+function openMenu() {
   removeSubmenuActiveClasses();
   mainMenu.classList.toggle("active");
   mobileBtn.classList.toggle("active");
@@ -241,7 +252,7 @@ function extractBlocks() {
     },
     {
       rootMargin: "100px",
-    }
+    },
   );
 
   // Intersection Observer for entire carousels
@@ -256,7 +267,7 @@ function extractBlocks() {
     },
     {
       rootMargin: "200px",
-    }
+    },
   );
 
   function observeSplideCarousels() {
@@ -339,7 +350,7 @@ function extractBlocks() {
 //Unwrap Elements
 window.addEventListener("load", () => {
   const wrappedImages = document.querySelectorAll(
-    "p:has(img), p:has(picture), p:has(figure)"
+    "p:has(img), p:has(picture), p:has(figure)",
   );
   wrappedImages.forEach((paragraph) => {
     const elementsToUnwrap = paragraph.querySelectorAll("img, picture, figure");
