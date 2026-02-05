@@ -22,7 +22,6 @@ if (get_field('toggle_block')):
                 <?php if ($title): ?>
                     <?php
                     print_title($title, $title_tag, "trust-cards__title");
-                    get_template_part('template-parts/ampersand', 'separator', array('classes' => 'trust-cards__separator'));
                     ?>
                 <?php endif ?>
 
@@ -35,7 +34,6 @@ if (get_field('toggle_block')):
                                 <div class="trust-card__inner border-box">
                                     <?php
                                     echo "<span>" . $heading_card['first_line'] . "</span>";
-                                    get_template_part('template-parts/ampersand', 'separator', array('classes' => 'trust-card__separator'));
                                     echo "<span>" . $heading_card['second_line'] . "</span>";
                                     ?>
                                 </div>

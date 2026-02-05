@@ -77,7 +77,7 @@ function showMenus() {
   // always remove listener using the same reference before adding
   mobileBtn.removeEventListener("click", openMenu);
 
-  if (window.screen.width > ldpi) {
+  if (window.screen.width > mdpi) {
     mobileBtn.classList.remove("active");
     mainMenu.classList.remove("active");
 

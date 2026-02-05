@@ -16,7 +16,6 @@ if (get_field('toggle_block')):
             <div class="locations__content tx-center">
                 <?php
                 print_title($title, $title_tag, "locations__title");
-                get_template_part('template-parts/ampersand', 'separator', array('classes' => 'locations__separator'));
                 echo $main_content;
                 ?>
             </div>

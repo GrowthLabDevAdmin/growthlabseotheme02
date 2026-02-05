@@ -37,7 +37,6 @@ if (get_field('toggle_block')):
                     if (!$show_only_contact_form):
                         if (isset($title) && $title) {
                             print_title($title, $title_tag, "contact-form__title");
-                            get_template_part('template-parts/ampersand', 'separator', array('classes' => 'contact-form__separator'));
                         }
 
                         if (isset($main_content) && !empty($main_content)):
@@ -57,7 +56,6 @@ if (get_field('toggle_block')):
                             <?php if (isset($contact_form_title) && $contact_form_title): ?>
                                 <?php
                                 print_title($contact_form_title, $contact_form_title_tag, "form-box__title tx-center");
-                                get_template_part('template-parts/ampersand', 'separator', array('classes' => 'form-box__separator'));
                                 ?>
                             <?php endif; ?>
 

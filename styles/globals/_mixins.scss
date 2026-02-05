@@ -36,13 +36,6 @@
   } @else {
     font-size: clamp(3.2rem, 3.33vw, 3.6rem);
   }
-
-  strong {
-    all: unset;
-    font-weight: inherit;
-    line-height: inherit;
-    color: rgb(var(--tertiary));
-  }
 }
 
 @mixin flex-center {

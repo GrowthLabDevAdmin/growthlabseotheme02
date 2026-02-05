@@ -80,6 +80,19 @@ if (!defined('ABSPATH')) {
                     <div class="site-header__callout">
 
                         <div class="callout">
+                            <?php if (!empty(get_languages_map())): ?>
+                                <div class="callout__languages">
+                                    <a href="<?= get_site_url() ?>" class="language">
+                                        EN
+                                    </a>
+                                    <?php foreach (get_languages_map() as $lang => $data): ?>
+                                        <a href="<?= get_site_url() . '/' . $lang ?>" class="language">
+                                            <?= $lang ?>
+                                        </a>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+
                             <?php if ($top_callout_first_line): ?>
                                 <span><?= $top_callout_first_line ?></span>
                             <?php endif; ?>

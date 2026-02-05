@@ -181,7 +181,7 @@ li {
 p {
   font-family: var(--font-sans);
   color: rgb(var(--text));
-  font-size: 1.6rem;
+  font-size: clamp(1.4rem, 2.2vw, 1.6rem);
   font-weight: 400;
   line-height: 1.5;
 }
@@ -273,7 +273,8 @@ img.bg-image {
     opacity: 0.75;
 
     @media (min-width: v.$tablet) {
-      background: radial-gradient(
+      background:
+        radial-gradient(
           ellipse at bottom left,
           rgba(var(--tertiary), 0.6) 0%,
           rgba(var(--tertiary), 0) 70%
@@ -298,7 +299,7 @@ img.bg-image {
 }
 
 :where(.formatted-text) {
-  font-size: 1.6rem;
+  font-size: clamp(1.4rem, 2.2vw, 1.6rem);
   font-family: var(--font-sans);
   font-weight: 400;
   line-height: 1.5;

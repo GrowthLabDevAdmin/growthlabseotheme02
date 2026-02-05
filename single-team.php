@@ -13,7 +13,6 @@ foreach (get_fields() as $key => $value) $$key = $value;
                     <?php
                     if (has_post_thumbnail()) {
                         img_print_picture_tag(img: get_the_post_thumbnail_url(), max_size: "cover-mobile", classes: "single-team__picture");
-                        get_template_part('template-parts/ampersand', 'separator', array('classes' => 'posts-grid__separator'));
                     }
                     ?>
 

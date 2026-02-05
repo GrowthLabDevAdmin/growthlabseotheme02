@@ -47,7 +47,6 @@ if (get_field('toggle_block')):
 
             <?php
             print_title($title, $title_tag, "posts-grid__title tx-center");
-            get_template_part('template-parts/ampersand', 'separator', array('classes' => 'posts-grid__separator'));
             ?>
 
             <?php if ($text_content): ?>

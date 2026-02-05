@@ -23,7 +23,6 @@ if (get_field('toggle_block')):
                     <div class="content-intro__heading tx-center <?php if ($first_paragraph) echo "border-box"; ?>">
                         <?php
                         print_title($title, $title_tag, "content-intro__title");
-                        get_template_part('template-parts/ampersand', 'separator', array('classes' => 'content-intro__separator'));
                         echo $first_paragraph;
                         ?>
                     </div>

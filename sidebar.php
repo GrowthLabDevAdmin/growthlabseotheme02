@@ -16,7 +16,6 @@ if (!defined('ABSPATH')) {
             <div class="widget widget--menu border-box tx-center">
                 <?php if (get_sub_field('menu_title')): ?>
                     <p class="widget__title h4"><?= get_sub_field('menu_title') ?></p>
-                    <?php get_template_part('template-parts/ampersand', 'separator', array('classes' => 'widget__separator')); ?>
                 <?php endif ?>
                 <?php if (get_sub_field('meu_text_content')): ?>
                     <p class="widget__content formatted-text"><?= get_sub_field('meu_text_content') ?></p>

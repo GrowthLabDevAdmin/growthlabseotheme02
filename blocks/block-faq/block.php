@@ -20,7 +20,6 @@ if (get_field('toggle_block')):
 
             <?php
             print_title($title, $title_tag, "faq__title");
-            get_template_part('template-parts/ampersand', 'separator', array('classes' => 'faq__separator'));
             ?>
 
             <?php if ($text_content): ?>

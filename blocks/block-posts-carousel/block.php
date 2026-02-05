@@ -52,7 +52,6 @@ if (get_field('toggle_block')):
 
             <?php
             print_title($title, $title_tag, "posts-carousel__title tx-center");
-            get_template_part('template-parts/ampersand', 'separator', array('classes' => 'posts-carousel__separator'));
             ?>
 
             <?php if ($text_content): ?>
