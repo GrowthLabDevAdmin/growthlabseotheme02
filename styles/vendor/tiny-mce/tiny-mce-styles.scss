@@ -1,90 +1,90 @@
-/* fraunces-300 - latin */
+/* roboto-serif-300 - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Fraunces";
+  font-family: "Roboto Serif";
   font-style: normal;
   font-weight: 300;
-  src: url("../../../fonts/fraunces-v38-latin/fraunces-v38-latin-300.woff2")
+  src: url("../../../fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-300.woff2")
     format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-/* fraunces-regular - latin */
+/* roboto-serif-regular - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Fraunces";
+  font-family: "Roboto Serif";
   font-style: normal;
   font-weight: 400;
-  src: url("../../../fonts/fraunces-v38-latin/fraunces-v38-latin-regular.woff2")
+  src: url("../../../fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-regular.woff2")
     format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-/* fraunces-500 - latin */
+/* roboto-serif-500 - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Fraunces";
+  font-family: "Roboto Serif";
   font-style: normal;
   font-weight: 500;
-  src: url("../../../fonts/fraunces-v38-latin/fraunces-v38-latin-500.woff2")
+  src: url("../../../fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-500.woff2")
     format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-/* fraunces-600 - latin */
+/* roboto-serif-600 - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Fraunces";
+  font-family: "Roboto Serif";
   font-style: normal;
   font-weight: 600;
-  src: url("../../../fonts/fraunces-v38-latin/fraunces-v38-latin-600.woff2")
+  src: url("../../../fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-600.woff2")
     format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-/* fraunces-700 - latin */
+/* roboto-serif-700 - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Fraunces";
+  font-family: "Roboto Serif";
   font-style: normal;
   font-weight: 700;
-  src: url("../../../fonts/fraunces-v38-latin/fraunces-v38-latin-700.woff2")
+  src: url("../../../fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-700.woff2")
     format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-/* open-sans-regular - latin */
+/* mona-sans-regular - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Open Sans";
+  font-family: "Mona Sans";
   font-style: normal;
   font-weight: 400;
-  src: url("../../../fonts/open-sans-v44-latin/open-sans-v44-latin-regular.woff2")
+  src: url("../../../fonts/mona-sans-v4-latin/mona-sans-v4-latin-regular.woff2")
     format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-/* open-sans-500 - latin */
+/* mona-sans-500 - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Open Sans";
+  font-family: "Mona Sans";
   font-style: normal;
   font-weight: 500;
-  src: url("../../../fonts/open-sans-v44-latin/open-sans-v44-latin-500.woff2")
+  src: url("../../../fonts/mona-sans-v4-latin/mona-sans-v4-latin-regular.woff2")
     format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-/* open-sans-600 - latin */
+/* mona-sans-600 - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Open Sans";
+  font-family: "Mona Sans";
   font-style: normal;
   font-weight: 600;
-  src: url("../../../fonts/open-sans-v44-latin/open-sans-v44-latin-600.woff2")
+  src: url("../../../fonts/mona-sans-v4-latin/mona-sans-v4-latin-600.woff2")
     format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-/* open-sans-700 - latin */
+/* mona-sans-700 - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: "Open Sans";
+  font-family: "Mona Sans";
   font-style: normal;
   font-weight: 700;
-  src: url("../../../fonts/open-sans-v44-latin/open-sans-v44-latin-700.woff2")
+  src: url("../../../fonts/mona-sans-v4-latin/mona-sans-v4-latin-700.woff2")
     format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 // Asegurar que las fuentes estén disponibles en el iframe
 body#tinymce,
 .mce-content-body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Mona Sans", sans-serif;
 }
 
 // TinyMCE necesita que estas familias estén definidas para poder aplicarlas
@@ -96,31 +96,31 @@ h3,
 h4,
 h5,
 h6 {
-  &[style*="font-family: fraunces"] {
-    font-family: "Fraunces", serif !important;
+  &[style*="font-family: roboto serif"] {
+    font-family: "Roboto Serif", serif !important;
   }
 
-  &[style*="font-family: open sans"] {
-    font-family: "Open Sans", sans-serif !important;
+  &[style*="font-family: mona sans"] {
+    font-family: "Mona Sans", sans-serif !important;
   }
 }
 
 // Soporte directo para cuando TinyMCE aplica inline styles
-*[style*="font-family: fraunces"],
-*[style*="font-family: 'fraunces'"] {
-  font-family: "Fraunces", serif !important;
+*[style*="font-family: roboto serif"],
+*[style*="font-family: 'roboto serif'"] {
+  font-family: "Roboto Serif", serif !important;
 }
 
-*[style*="font-family: open sans"],
-*[style*="font-family: 'open sans'"] {
-  font-family: "Open Sans", sans-serif !important;
+*[style*="font-family: mona sans"],
+*[style*="font-family: 'mona sans'"] {
+  font-family: "Mona Sans", sans-serif !important;
 }
 
 // Clases auxiliares (opcional)
-.open-sans {
-  font-family: "Open Sans", sans-serif;
+.mona-sans {
+  font-family: "Mona Sans", sans-serif;
 }
 
-.fraunces {
-  font-family: "Fraunces", serif;
+.roboto-serif {
+  font-family: "Roboto Serif", serif;
 }

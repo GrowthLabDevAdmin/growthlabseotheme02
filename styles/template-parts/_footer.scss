@@ -303,9 +303,96 @@ section.contact-form--side-pic:has(+ .site-footer .contact-form-footer) {
     }
   }
 
+  .content-info-footer {
+    background: linear-gradient(
+      to bottom,
+      rgba(var(--primary), 1) 0%,
+      rgba(var(--primary-light), 1) 100%
+    );
+
+    &__wrapper {
+      padding: var(--sp-xsm);
+      @include m.flex-center;
+      flex-direction: column;
+      row-gap: var(--sp-sm);
+
+      @media (min-width: v.$ldpi) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+    }
+
+    &__col {
+      padding: var(--sp-sm);
+      order: 1;
+      border: 2px solid rgba(var(--secondary-light));
+
+      @media (min-width: v.$ldpi) {
+        padding: var(--sp-xsm);
+        order: 0;
+        flex: 0 0 33%;
+        border: none;
+      }
+
+      &:nth-of-type(2) {
+        padding: 0;
+        order: 0;
+        @include m.flex-center;
+        flex-direction: column;
+        gap: var(--sp-xsm);
+        border: none;
+
+        @media (min-width: v.$ldpi) {
+          padding: var(--sp-xsm);
+          justify-content: flex-start;
+        }
+
+        .footer-logo {
+          width: 15rem;
+          height: 15rem;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center center;
+          }
+        }
+
+        .btn {
+          border: 2px solid rgb(var(--tertiary-light));
+        }
+      }
+
+      .formatted-text {
+        text-align: center;
+
+        *:not(a) {
+          color: rgb(var(--secondary-light));
+        }
+      }
+    }
+
+    &__social {
+      .social-networks {
+        max-width: 20rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        place-content: center;
+      }
+    }
+  }
+
   .copyright-footer {
     width: 100%;
     padding: var(--sp-xsm) 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(var(--primary-light), 1) 0%,
+      rgba(var(--primary), 1) 100%
+    );
 
     @media (min-width: v.$mdpi) {
       padding: var(--sp-sm) 0;
@@ -313,17 +400,26 @@ section.contact-form--side-pic:has(+ .site-footer .contact-form-footer) {
 
     &__wrapper {
       @include m.flex-center;
-      flex-direction: column;
       gap: var(--sp-xsm);
+      flex-wrap: wrap;
+    }
+
+    &__advertisement {
+      color: rgb(var(--secondary-light));
+      text-align: center;
+      font-size: clamp(1.6rem, 1.6rem + 0.5vw, 2rem);
+      line-height: 1.5;
+    }
+
+    &__logo {
+      flex: 0 0 100%;
+      @include m.flex-center;
     }
   }
 
   .footer-nav {
-    padding: var(--sp-xsm) 0;
-
     &__menu {
       @include m.flex-center;
-      flex-direction: column;
       gap: var(--sp-xsm);
 
       @media (min-width: v.$tablet) {
@@ -332,11 +428,21 @@ section.contact-form--side-pic:has(+ .site-footer .contact-form-footer) {
     }
 
     .menu-item {
+      padding-right: var(--sp-xsm);
+
+      &:first-of-type {
+        padding-left: var(--sp-xsm);
+        border-left: 2px solid rgba(var(--secondary-light), 0.5);
+      }
+
+      &:not(:last-of-type) {
+        border-right: 2px solid rgba(var(--secondary-light), 0.5);
+      }
+
       span {
-        font-size: 1.6rem;
-        font-weight: 600;
+        font-size: clamp(1.6rem, 1.6rem + 0.5vw, 2rem);
         line-height: 1.5;
-        color: rgb(var(--primary));
+        color: rgb(var(--secondary-light));
         transition: 0.3s ease-in-out;
 
         &:hover {

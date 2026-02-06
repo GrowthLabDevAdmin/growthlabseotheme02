@@ -169,11 +169,11 @@
                         "class": "",
                         "id": ""
                     },
-                    "layout": "block",
+                    "layout": "row",
                     "pagination": 0,
                     "min": 0,
                     "max": 0,
-                    "collapsed": "",
+                    "collapsed": "field_6960a06630960",
                     "button_label": "Add Row",
                     "rows_per_page": 20,
                     "sub_fields": [
@@ -909,8 +909,8 @@
                 },
                 {
                     "key": "field_6960a0661dc7f",
-                    "label": "Contact Section",
-                    "name": "contact_section",
+                    "label": "Content Section",
+                    "name": "content_section",
                     "aria-label": "",
                     "type": "group",
                     "instructions": "",
@@ -972,8 +972,8 @@
                         },
                         {
                             "key": "field_6982d5eb47be6",
-                            "label": "First Colum Content",
-                            "name": "first_colum_content",
+                            "label": "First Column Content",
+                            "name": "first_column_content",
                             "aria-label": "",
                             "type": "wysiwyg",
                             "instructions": "",
@@ -2633,5 +2633,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770342612
+    "modified": 1770361464
 }

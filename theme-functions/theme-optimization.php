@@ -120,13 +120,14 @@ add_action('wp_head', function () {
     $theme_uri = get_template_directory_uri();
 
     $fonts = array(
-        // Fraunces fonts
-        'fonts/fraunces-v38-latin/fraunces-v38-latin-regular.woff2',
-        'fonts/fraunces-v38-latin/fraunces-v38-latin-600.woff2',
-        // Open Sans fonts
-        'fonts/open-sans-v44-latin/open-sans-v44-latin-regular.woff2',
-        'fonts/open-sans-v44-latin/open-sans-v44-latin-600.woff2',
-        'fonts/open-sans-v44-latin/open-sans-v44-latin-700.woff2',
+        // Roboto Serif fonts
+        'fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-400.woff2',
+        'fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-600.woff2',
+        'fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-700.woff2',
+        // Mona Sans fonts
+        'fonts/mona-sans-v4-latin/mona-sans-v4-latin-400.woff2',
+        'fonts/mona-sans-v4-latin/mona-sans-v4-latin-600.woff2',
+        'fonts/mona-sans-v4-latin/mona-sans-v4-latin-700.woff2',
     );
 
     foreach ($fonts as $font) {

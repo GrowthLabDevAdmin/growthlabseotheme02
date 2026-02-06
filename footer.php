@@ -103,10 +103,35 @@
     ?>
 
     <?php
-    if (!$contact_section['hide_section'] && !get_field('hide_locations_section')):
-      foreach ($contact_section as $form_field => $form_content) $$form_field = $form_content;
+    if (!$content_section['hide_section'] && !get_field('hide_locations_section')):
+      foreach ($content_section as $form_field => $form_content) $$form_field = $form_content;
     ?>
 
+      <section class="content-info-footer">
+        <div class="content-info-footer__wrapper container">
+          <div class="content-info-footer__col">
+            <div class="formatted-text">
+              <?= $first_column_content ?>
+            </div>
+          </div>
+          <div class="content-info-footer__col">
+            <?= img_print_picture_tag(img: $logo, classes: "footer-logo", max_size: "thumbnail") ?>
+            <div class="content-info-footer__social">
+              <?php get_template_part('template-parts/social', 'networks'); ?>
+            </div>
+            <a href="<?= $cta_button['url'] ?>" class="btn btn--primary" target="<?= $cta_button['target'] ?>">
+              <span>
+                <?= esc_html($cta_button['title']) ?>
+              </span>
+            </a>
+          </div>
+          <div class="content-info-footer__col">
+            <div class="formatted-text">
+              <?= $last_column_content ?>
+            </div>
+          </div>
+        </div>
+      </section>
 
     <?php
     endif;
@@ -118,39 +143,31 @@
     ?>
       <section class="copyright-footer">
         <div class="copyright-footer__wrapper container">
-
-          <div class="copyright-footer__social">
-            <?php get_template_part('template-parts/social', 'networks'); ?>
-          </div>
-
+          <p class="copyright-footer__advertisement">
+            <?= $copyright ?>
+          </p>
           <?php
           wp_nav_menu(
             array(
               'menu'  => $footer_links_menu,
               'container'          => 'nav',
               'container_class' => 'footer-nav',
-              'menu_class'      => 'footer-nav__menu tx-center',
+              'menu_class'      => 'footer-nav__menu',
               'items_wrap'      => '<ul class="%2$s">%3$s</ul>',
               'link_before'          => '<span>',
               'link_after'              => '</span>'
             )
           );
           ?>
-
           <a href="https://growthlabseo.com/" target="_blank" class="copyright-footer__logo">
             <img src="<?= get_stylesheet_directory_uri() . "/assets/img/Growth-Lab-Logo.png" ?>" alt="Growth Lab SEO Logo" width="270" height="50">
           </a>
-
-          <p class="copyright-footer__advertisement tx-center">
-            <?= $copyright ?>
-          </p>
 
         </div>
       </section>
     <?php
     endif;
     ?>
-
   </footer>
 
   <?php wp_footer(); ?>

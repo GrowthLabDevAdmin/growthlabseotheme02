@@ -19,7 +19,7 @@ add_filter('mce_css', 'my_acf_editor_styles');
 function my_acf_wysiwyg_custom_settings($init)
 {
     // Custom fonts
-    $init['font_formats'] = 'Open Sans=Open Sans,sans-serif;Fraunces=Fraunces,serif;Arial=Arial,Helvetica,sans-serif;Times New Roman=Times New Roman,Times,serif';
+    $init['font_formats'] = 'Mona Sans=Mona Sans,sans-serif;Roboto Serif=Roboto Serif,serif;Arial=Arial,Helvetica,sans-serif;Times New Roman=Times New Roman,Times,serif';
 
     // Font sizes
     $init['fontsize_formats'] = '8px 10px 12px 14px 16px 18px 20px 24px 28px 32px 36px 40px 48px';
@@ -35,7 +35,7 @@ add_filter('tiny_mce_before_init', 'my_acf_wysiwyg_custom_settings', 1);
 // 3️⃣ Apply to ACF WYSIWYG - Only fonts and sizes
 function my_acf_tinymce_settings($init, $id)
 {
-    $init['font_formats'] = 'Open Sans=Open Sans,sans-serif;Fraunces=Fraunces,serif;Arial=Arial,Helvetica,sans-serif;Times New Roman=Times New Roman,Times,serif';
+    $init['font_formats'] = 'Mona Sans=Mona Sans,sans-serif;Roboto Serif=Roboto Serif,serif;Arial=Arial,Helvetica,sans-serif;Times New Roman=Times New Roman,Times,serif';
     $init['fontsize_formats'] = '8px 10px 12px 14px 16px 18px 20px 24px 28px 32px 36px 40px 48px';
 
     // DO NOT configure textcolor_map here
@@ -223,7 +223,7 @@ add_action('after_setup_theme', 'my_wp_editor_formats');
 function my_wp_editor_default_settings($init)
 {
     // Font formats (same as ACF)
-    $init['font_formats'] = 'Open Sans=Open Sans,sans-serif;Fraunces=Fraunces,serif;Arial=Arial,Helvetica,sans-serif;Times New Roman=Times New Roman,Times,serif';
+    $init['font_formats'] = 'Mona Sans=Mona Sans,sans-serif;Roboto Serif=Roboto Serif,serif;Arial=Arial,Helvetica,sans-serif;Times New Roman=Times New Roman,Times,serif';
 
     // Font sizes (same as ACF)
     $init['fontsize_formats'] = '8px 10px 12px 14px 16px 18px 20px 24px 28px 32px 36px 40px 48px';
@@ -264,79 +264,81 @@ function my_wp_editor_colors_apply_on_add()
     }
 
     $map_json = json_encode($map);
-    ?>
+?>
     <script type="text/javascript">
-    (function($){
-        var customColors = <?php echo $map_json; ?>;
-        var customCols = 5;
+        (function($) {
+            var customColors = <?php echo $map_json; ?>;
+            var customCols = 5;
 
-        function applyToEditor(editor) {
-            if (!editor || !editor.settings) return;
-            try {
-                editor.settings.textcolor_map = customColors;
-                editor.settings.textcolor_cols = customCols;
-
-                // Forzar actualización de estado e intentar refrescar UI
+            function applyToEditor(editor) {
+                if (!editor || !editor.settings) return;
                 try {
-                    editor.nodeChanged();
-                } catch (err) { /* no crítico */ }
+                    editor.settings.textcolor_map = customColors;
+                    editor.settings.textcolor_cols = customCols;
 
-                // Si el botón forecolor existe, intentar forzar reconstrucción del menú
-                try {
-                    var btn = editor.ui.registry.getAll && editor.ui && editor.ui.registry && editor.ui.registry.getAll && editor.ui.registry.getAll().buttons && editor.ui.registry.getAll().buttons.forecolor;
-                    if (btn && typeof btn.onAction === 'function') {
-                        // No podemos reconstruir internamente el plugin desde aquí fácilmente,
-                        // pero al tener editor.settings actualizado la próxima apertura del picker debería usarlo.
+                    // Forzar actualización de estado e intentar refrescar UI
+                    try {
+                        editor.nodeChanged();
+                    } catch (err) {
+                        /* no crítico */
                     }
-                } catch (e) {}
-            } catch (e) {
-                console.error('[growthlab] applyToEditor error', e);
-            }
-        }
 
-        // Si tinymce ya está cargado
-        if (window.tinymce && window.tinymce.EditorManager) {
-            // Aplicar a los editores ya creados
-            for (var id in tinymce.editors) {
-                if (tinymce.editors.hasOwnProperty(id)) {
-                    applyToEditor(tinymce.editors[id]);
+                    // Si el botón forecolor existe, intentar forzar reconstrucción del menú
+                    try {
+                        var btn = editor.ui.registry.getAll && editor.ui && editor.ui.registry && editor.ui.registry.getAll && editor.ui.registry.getAll().buttons && editor.ui.registry.getAll().buttons.forecolor;
+                        if (btn && typeof btn.onAction === 'function') {
+                            // No podemos reconstruir internamente el plugin desde aquí fácilmente,
+                            // pero al tener editor.settings actualizado la próxima apertura del picker debería usarlo.
+                        }
+                    } catch (e) {}
+                } catch (e) {
+                    console.error('[growthlab] applyToEditor error', e);
                 }
             }
 
-            // Aplicar a nuevos editores cuando se añadan
-            if (tinymce.EditorManager.on) {
-                tinymce.EditorManager.on('AddEditor', function(e){
-                    applyToEditor(e.editor);
-                });
-            } else if (tinymce.on) {
-                tinymce.on('AddEditor', function(e){
-                    applyToEditor(e.editor);
-                });
-            }
-        } else {
-            // Si tinymce no está aún, esperar y aplicar cuando esté listo
-            var wait = setInterval(function(){
-                if (window.tinymce && tinymce.EditorManager) {
-                    clearInterval(wait);
-                    for (var id2 in tinymce.editors) {
-                        if (tinymce.editors.hasOwnProperty(id2)) {
-                            applyToEditor(tinymce.editors[id2]);
+            // Si tinymce ya está cargado
+            if (window.tinymce && window.tinymce.EditorManager) {
+                // Aplicar a los editores ya creados
+                for (var id in tinymce.editors) {
+                    if (tinymce.editors.hasOwnProperty(id)) {
+                        applyToEditor(tinymce.editors[id]);
+                    }
+                }
+
+                // Aplicar a nuevos editores cuando se añadan
+                if (tinymce.EditorManager.on) {
+                    tinymce.EditorManager.on('AddEditor', function(e) {
+                        applyToEditor(e.editor);
+                    });
+                } else if (tinymce.on) {
+                    tinymce.on('AddEditor', function(e) {
+                        applyToEditor(e.editor);
+                    });
+                }
+            } else {
+                // Si tinymce no está aún, esperar y aplicar cuando esté listo
+                var wait = setInterval(function() {
+                    if (window.tinymce && tinymce.EditorManager) {
+                        clearInterval(wait);
+                        for (var id2 in tinymce.editors) {
+                            if (tinymce.editors.hasOwnProperty(id2)) {
+                                applyToEditor(tinymce.editors[id2]);
+                            }
+                        }
+                        if (tinymce.EditorManager.on) {
+                            tinymce.EditorManager.on('AddEditor', function(e) {
+                                applyToEditor(e.editor);
+                            });
+                        } else if (tinymce.on) {
+                            tinymce.on('AddEditor', function(e) {
+                                applyToEditor(e.editor);
+                            });
                         }
                     }
-                    if (tinymce.EditorManager.on) {
-                        tinymce.EditorManager.on('AddEditor', function(e){
-                            applyToEditor(e.editor);
-                        });
-                    } else if (tinymce.on) {
-                        tinymce.on('AddEditor', function(e){
-                            applyToEditor(e.editor);
-                        });
-                    }
-                }
-            }, 250);
-        }
-    })(jQuery);
+                }, 250);
+            }
+        })(jQuery);
     </script>
-    <?php
+<?php
 }
 add_action('admin_print_footer_scripts', 'my_wp_editor_colors_apply_on_add', 999);
