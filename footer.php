@@ -22,24 +22,56 @@
       <section class="contact-form-footer">
 
         <?php if (!empty($offices)): ?>
-          <div class="contact-form-footer__map">
-            <?php
-            if (count($offices) > 1) {
-              foreach ($offices as $office) {
-                if ($office["main_office"]) {
-                  get_template_part('template-parts/google', 'maps', array(
-                    'iframe_src' => $office['google_maps_embed_code'],
-                    'classes' => 'contact-form-footer__map-iframe'
-                  ));
-                }
-              }
-            } else {
-              get_template_part('template-parts/google', 'maps', array(
-                'iframe_src' => $offices[0]['google_maps_embed_code'],
-                'classes' => 'contact-form-footer__map-iframe'
-              ));
-            }
-            ?>
+          <div class="contact-form-footer__offices">
+            <ul class="footer-offices-selector">
+              <?php foreach ($offices as $office): ?>
+                <li class="footer-offices-selector__item btn btn--secondary" data-office="<?= esc_attr($office['city']); ?>">
+                  <span>
+                    <?= esc_html($office['city']); ?>
+                  </span>
+                </li>
+              <?php endforeach ?>
+            </ul>
+
+            <div class="contact-form-footer__offices-wrapper">
+              <?php foreach ($offices as $office): ?>
+                <div class="footer-office" data-office="<?= esc_attr($office['city']); ?>">
+                  <div class="footer-office__inner">
+                    <?php
+                    get_template_part('template-parts/google', 'maps', array(
+                      'iframe_src' => $office['google_maps_embed_code'],
+                      'classes' => 'footer-office__map'
+                    ));
+                    ?>
+
+                    <address class="footer-office__info">
+
+                      <<?= $office["city_tag"] ?> class="footer-office__city">
+                        <a href="<?= $office['target_page_url'] ?>">
+                          <?= esc_html($office['city']); ?>
+                        </a>
+                      </<?= $office["city_tag"] ?>>
+
+                      <div class="footer-office__item">
+                        <?php include get_stylesheet_directory() . '/assets/icons/icon-location-outlined.svg'; ?>
+                        <p><?= esc_html($office['address']); ?></p>
+                      </div>
+
+                      <p class="footer-office__item">
+                        <?php include get_stylesheet_directory() . '/assets/icons/icon-phone.svg'; ?>
+                        <a href="<?= get_flat_number($office['phone']) ?>"><?= esc_html($office['phone']); ?></a>
+                      </p>
+
+                      <a href="<?= $office['cta_button']['url'] ?>" class="footer-office__cta btn btn--tertiary" target="<?= $office['cta_button']['target'] ?>">
+                        <span>
+                          <?= esc_html($office['cta_button']['title']); ?>
+                        </span>
+                      </a>
+                    </address>
+                  </div>
+                </div>
+              <?php endforeach; ?>
+            </div>
           </div>
         <?php endif; ?>
 

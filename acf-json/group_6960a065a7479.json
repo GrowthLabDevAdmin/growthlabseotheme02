@@ -322,10 +322,10 @@
                         },
                         {
                             "key": "field_6960a06642e93",
-                            "label": "Google Map URL",
-                            "name": "google_map_url",
+                            "label": "CTA Button",
+                            "name": "cta_button",
                             "aria-label": "",
-                            "type": "url",
+                            "type": "link",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -334,9 +334,8 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "default_value": "",
+                            "return_format": "array",
                             "allow_in_bindings": 0,
-                            "placeholder": "",
                             "parent_repeater": "field_6960a065cbdae"
                         },
                         {
@@ -972,38 +971,30 @@
                             "endpoint": 0
                         },
                         {
-                            "key": "field_6960a066a87f8",
-                            "label": "Locations Title",
-                            "name": "locations_title",
+                            "key": "field_6982d5eb47be6",
+                            "label": "First Colum Content",
+                            "name": "first_colum_content",
                             "aria-label": "",
-                            "type": "text",
+                            "type": "wysiwyg",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_6960a066a112f",
-                                        "operator": "!=",
-                                        "value": "1"
-                                    }
-                                ]
-                            ],
+                            "conditional_logic": 0,
                             "wrapper": {
                                 "width": "",
                                 "class": "",
                                 "id": ""
                             },
                             "default_value": "",
-                            "maxlength": "",
                             "allow_in_bindings": 0,
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": ""
+                            "tabs": "all",
+                            "toolbar": "full",
+                            "media_upload": 1,
+                            "delay": 0
                         },
                         {
-                            "key": "field_6982d5eb47be6",
-                            "label": "Contact Colum Text",
-                            "name": "contact_colum_text",
+                            "key": "field_69852f92db2df",
+                            "label": "Last Column Content",
+                            "name": "last_column_content",
                             "aria-label": "",
                             "type": "wysiwyg",
                             "instructions": "",
@@ -2642,5 +2633,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770184838
+    "modified": 1770342612
 }

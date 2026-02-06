@@ -44,6 +44,10 @@ textarea {
   }
 }
 
+textarea {
+  height: 22rem;
+}
+
 input[type="checkbox"] {
   all: unset;
   appearance: none;
@@ -83,12 +87,15 @@ input[type="checkbox"] {
     height: 80%;
     z-index: 2;
     background-color: rgb(var(--secondary-light));
-    -webkit-mask: url("{theme-path}/assets/icons/icon-checkmark.svg") no-repeat center / contain;
-    mask: url("{theme-path}/assets/icons/icon-checkmark.svg") no-repeat center / contain;
+    -webkit-mask: url("{theme-path}/assets/icons/icon-checkmark.svg") no-repeat
+      center / contain;
+    mask: url("{theme-path}/assets/icons/icon-checkmark.svg") no-repeat center /
+      contain;
     display: block;
   }
 }
 
+.hidden_sub_label,
 input[type="hidden"] {
   display: none;
 }

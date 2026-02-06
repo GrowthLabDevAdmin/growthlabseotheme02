@@ -410,6 +410,7 @@ add_filter('gform_disable_css', '__return_true');
 add_filter('gform_disable_theme_editor_styles', '__return_true');
 add_filter('gform_init_scripts_footer', '__return_true');
 
+
 //Import All Theme Icons to the Media Library
 //Run only once after theme installation
 function import_theme_images_to_folder()
@@ -474,6 +475,7 @@ function import_theme_images_to_folder()
     import_theme_images_to_folder();
     wp_die('Images imported to /uploads/theme-icons/!');
 } */
+
 // Forzar que las secciones de widgets permanezcan disponibles
 add_action('customize_register', function ($wp_customize) {
     // Verificar y forzar panel de widgets

@@ -37,7 +37,6 @@
       #{$header}__logo {
         @media (min-width: v.$mdpi) {
           max-height: 13rem;
-          padding: var(--sp-xsm);
           grid-row: 1/3;
           justify-content: flex-end;
           img {
@@ -80,8 +79,8 @@
       width: calc(100% - var(--sp-sm));
       margin: 0 auto;
       grid-template-rows: repeat(3, 1fr);
-      grid-template-columns: 3fr 3fr 3fr 3fr;
-      row-gap: var(--sp-xsm);
+      grid-template-columns: repeat(4, 3fr);
+      row-gap: 1rem;
       column-gap: var(--sp-lg);
       place-items: center;
       position: relative;
@@ -91,12 +90,12 @@
   &__logo {
     max-height: 9.5rem;
     padding: var(--sp-xsm) 0;
+    z-index: 10;
     grid-column: 1/3;
     grid-row: 1/2;
     @include m.flex-center;
 
     @media (min-width: v.$tablet) {
-      padding: calc(var(--sp-xsm) / 2) var(--sp-xsm);
       height: 6rem;
       grid-column: 1/2;
     }
@@ -105,7 +104,7 @@
       height: 100%;
       max-width: 100%;
       width: 100%;
-      padding: var(--sp-xsm) var(--sp-xsm);
+      padding: 0.5rem var(--sp-xsm);
       grid-column: 1/2;
       grid-row: 1/4;
     }
@@ -492,6 +491,7 @@
     text-align: center;
 
     @media (min-width: v.$mdpi) {
+      padding: 0.5rem 1.6rem;
       display: grid;
       grid-template-columns: repeat(2, 50%);
       place-items: center;

@@ -25,6 +25,8 @@ const mdpi = 1200;
 const hdpi = 1440;
 
 document.addEventListener("DOMContentLoaded", () => {
+  showMenus();
+  footerOfficesSelector();
   eventListeners();
 
   blocksInContent && extractBlocks();
@@ -37,8 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function eventListeners() {
-  showMenus();
-
   if (closeBtn) {
     closeBtn.addEventListener("click", closeMenu);
   }
@@ -135,25 +135,6 @@ function fadeInHeader() {
   }
 }
 
-//Splide Carousels
-function footerLocationsCarousel() {
-  new Splide(footerLocations, {
-    type: "loop",
-    perMove: 1,
-    perPage: 4,
-    arrows: true,
-    pagination: false,
-    breakpoints: {
-      [tablet]: {
-        perPage: 1,
-      },
-      [ldpi]: {
-        perPage: 2,
-      },
-    },
-  }).mount();
-}
-
 //Blocks
 function extractBlocks() {
   blocksInContent.forEach((item) => {
@@ -205,6 +186,44 @@ function extractBlocks() {
   });
 })();
 
+//Footer Offices Selector
+function footerOfficesSelector() {
+  const officeSelectors = document.querySelectorAll(
+    ".footer-offices-selector__item",
+  );
+  const offices = document.querySelectorAll(".footer-office");
+
+  if (!officeSelectors.length || !offices.length) return;
+
+  // Set first element as active on page load
+  if (officeSelectors[0]) {
+    officeSelectors[0].classList.add("active");
+  }
+  if (offices[0]) {
+    offices[0].classList.add("active");
+  }
+
+  officeSelectors.forEach((selector) => {
+    selector.addEventListener("click", (e) => {
+      const officeCity = selector.getAttribute("data-office");
+
+      // Remove active class from all selectors and offices
+      officeSelectors.forEach((item) => item.classList.remove("active"));
+      offices.forEach((office) => office.classList.remove("active"));
+
+      // Add active class to clicked selector
+      selector.classList.add("active");
+
+      // Add active class to matching office
+      offices.forEach((office) => {
+        if (office.getAttribute("data-office") === officeCity) {
+          office.classList.add("active");
+        }
+      });
+    });
+  });
+}
+
 //Delay Google Maps Rendering
 (function googleMapsLazyLoading() {
   "use strict";
@@ -214,7 +233,6 @@ function extractBlocks() {
 
   let pageLoaded = false;
   const loadedMaps = new WeakSet();
-  const loadedCarousels = new WeakSet();
 
   window.addEventListener("load", () => {
     pageLoaded = true;
@@ -222,25 +240,11 @@ function extractBlocks() {
   });
 
   function initMaps() {
-    const spliceMaps = [];
-    const nonSpliceMaps = [];
-
     embeddedMaps.forEach((map) => {
-      if (map.closest(".splide")) {
-        spliceMaps.push(map);
-      } else {
-        nonSpliceMaps.push(map);
-      }
+      observer.observe(map);
     });
-
-    if (spliceMaps.length) {
-      observeSplideCarousels();
-    }
-
-    nonSpliceMaps.forEach((map) => observer.observe(map));
   }
 
-  // Intersection Observer for non-carousel maps
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -254,60 +258,6 @@ function extractBlocks() {
       rootMargin: "100px",
     },
   );
-
-  // Intersection Observer for entire carousels
-  const carouselObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && pageLoaded) {
-          loadCarouselMaps(entry.target);
-          carouselObserver.unobserve(entry.target); // Unobserve after first trigger
-        }
-      });
-    },
-    {
-      rootMargin: "200px",
-    },
-  );
-
-  function observeSplideCarousels() {
-    const splideElements = document.querySelectorAll(".splide:has(.gmap-lazy)");
-
-    splideElements.forEach((splideEl) => {
-      carouselObserver.observe(splideEl);
-    });
-  }
-
-  function loadCarouselMaps(splideEl) {
-    // Check and add in one step
-    if (loadedCarousels.has(splideEl)) {
-      //console.log("Carousel already loaded, skipping");
-      return;
-    }
-
-    //console.log("Loading carousel maps for the first time");
-    loadedCarousels.add(splideEl);
-
-    const checkSplide = setInterval(() => {
-      const splide = splideEl.classList.contains("is-initialized");
-
-      if (!splide) return;
-
-      clearInterval(checkSplide);
-
-      // Load all maps at once
-      const slides = splideEl.querySelectorAll(".gmap-lazy");
-
-      slides.forEach((slide) => {
-        const map = slide;
-        if (map && map.dataset.src) {
-          loadEmbeddedMaps(map);
-        }
-      });
-    }, 50);
-
-    setTimeout(() => clearInterval(checkSplide), 5000);
-  }
 
   function loadEmbeddedMaps(container) {
     // CRITICAL: Check and mark as loaded IMMEDIATELY
@@ -323,7 +273,6 @@ function extractBlocks() {
     iframe.height = "100%";
     iframe.style.cssText = `
       border: 0;
-      border-radius: 8px;
       position: absolute;
       top: 0;
       left: 0;
