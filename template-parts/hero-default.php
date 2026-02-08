@@ -44,9 +44,10 @@ if ($hero_title === null || $hero_title === "") {
 
     <div class="hero__wrapper container border-box">
         <div class="hero__content tx-center">
-            <?php
-            print_title($hero_title, $hero_title_tag, "hero__title", true);
-            ?>
+
+            <div class="hero__title">
+                <?= $hero_title ?>
+            </div>
 
             <?php if ($cta_button): ?>
                 <a href="<?= $cta_button['url'] ?>" target="<?= $cta_button['target'] ?>" class="hero__btn btn btn--tertiary btn--arrow">

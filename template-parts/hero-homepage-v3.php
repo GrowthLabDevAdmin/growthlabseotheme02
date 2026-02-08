@@ -22,7 +22,6 @@ if (!$bg_tablet) $bg_tablet = [];
 if (!$bg_mobile) $bg_mobile = [];
 
 //Title Values
-$hero_title_tag = $hero_title_tag ?? null;
 $hero_title = $hero_title ?? null;
 
 if ($hero_title === null || $hero_title === "") {
@@ -47,11 +46,11 @@ if ($hero_title === null || $hero_title === "") {
             <div class="content-box shadow-box border-box">
                 <div class="content-box__inner border-box tx-center">
 
-                    <?php
-                    print_title($hero_tagline, $hero_tagline_tag, "content-box__tagline");
-                    print_title($hero_title, $hero_title_tag, "content-box__title", true);
-                    print_title($hero_subtitle, $hero_subtitle_tag, "content-box__subtitle", true);
-                    ?>
+                    <?php print_title($hero_tagline, $hero_tagline_tag, "content-box__tagline"); ?>
+                    <div class="content-box__title">
+                        <?= $hero_title ?>
+                    </div>
+                    <?php print_title($hero_subtitle, $hero_subtitle_tag, "content-box__subtitle", true); ?>
 
                     <?php if ($cta_button): ?>
                         <div class="content-box__btn">

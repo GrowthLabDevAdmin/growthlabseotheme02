@@ -44,8 +44,11 @@ if ($hero_title === null || $hero_title === "") {
 
     <div class="hero__wrapper container">
         <div class="hero__content tx-center">
+
+            <div class="hero__title">
+                <?= $hero_title ?>
+            </div>
             <?php
-            print_title($hero_title, $hero_title_tag, "hero__title", true);
             print_title($hero_subtitle, $hero_subtitle_tag, "hero__subtitle", true);
             ?>
 

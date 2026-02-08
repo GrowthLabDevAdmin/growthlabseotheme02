@@ -2,19 +2,6 @@
 @use "globals/mixins" as m;
 @use "./location-card";
 
-section:has(+ .site-footer .contact-form-footer),
-main:has(+ .site-footer .contact-form-footer) {
-  padding-bottom: var(--sp-lg);
-}
-
-section.contact-form--side-pic:has(+ .site-footer .contact-form-footer) {
-  padding-bottom: 0;
-
-  .contact-form__wrapper {
-    padding-bottom: var(--sp-lg);
-  }
-}
-
 .site-footer {
   position: relative;
   z-index: 5;
@@ -151,7 +138,7 @@ section.contact-form--side-pic:has(+ .site-footer .contact-form-footer) {
 
       @media (min-width: v.$ldpi) {
         top: -100%;
-        transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        transition: 0.3s ease;
       }
 
       &__item {
@@ -229,7 +216,7 @@ section.contact-form--side-pic:has(+ .site-footer .contact-form-footer) {
         @media (min-width: v.$ldpi) {
           iframe {
             filter: saturate(0);
-            transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+            transition: 0.3s ease;
           }
         }
       }
@@ -261,7 +248,7 @@ section.contact-form--side-pic:has(+ .site-footer .contact-form-footer) {
 
         @media (min-width: v.$ldpi) {
           bottom: -100%;
-          transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+          transition: 0.3s ease;
         }
       }
 
