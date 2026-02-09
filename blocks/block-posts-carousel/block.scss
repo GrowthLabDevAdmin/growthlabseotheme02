@@ -28,12 +28,25 @@
     gap: var(--sp-xsm);
 
     @media (min-width: v.$ldpi) {
-      padding: var(--sp-sm);
+      padding: 0;
     }
   }
 
+  &__pretitle {
+    @include m.title(
+      rgba(var(--tertiary-light)),
+      1.8rem,
+      2vw,
+      2.2rem,
+      500,
+      1,
+      false
+    );
+    letter-spacing: 3.7px;
+  }
+
   &__title {
-    @include m.title(null, 4rem, 4.2vw, 4.8rem);
+    @include m.title(null, 2.6rem, 4.5vw, 8rem, 500, 1, false);
   }
 
   &__separator {
@@ -47,6 +60,8 @@
 
   &__carousel {
     width: 100%;
+    padding-top: var(--sp-xsm);
+    border-top: 2px solid rgba(var(--tertiary));
   }
 
   &__card {

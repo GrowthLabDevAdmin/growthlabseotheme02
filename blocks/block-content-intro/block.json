@@ -5,7 +5,7 @@
   "script": ["file:./block-min.js"],
   "category": "growthlabtheme02-blocks",
   "icon": "block-default",
-  "keywords": ["growthlabseo", "cta", "content", "picture", "caption"],
+  "keywords": ["growthlabseo", "cta", "two columns", "image", "content"],
   "acf": {
     "mode": "edit",
     "renderTemplate": "block.php"

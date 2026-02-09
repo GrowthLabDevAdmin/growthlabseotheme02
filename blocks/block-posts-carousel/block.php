@@ -41,16 +41,17 @@ if (get_field('toggle_block')):
 ?>
 
     <section
-        class="block posts-carousel <?php if (!$background_image) echo "bg-bicolor"; ?>"
+        class="block posts-carousel"
         <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
         <?php
         if (isset($background_image) && $background_image) img_print_picture_tag(img: $background_image, is_cover: true, classes: "posts-carousel__bg bg-image gradient-overlay");
         ?>
 
-        <div class="posts-carousel__wrapper container border-box">
+        <div class="posts-carousel__wrapper container">
 
             <?php
+            if (isset($pretitle) && $pretitle) print_title($pretitle, $pretitle_tag, "posts-carousel__pretitle tx-center");
             print_title($title, $title_tag, "posts-carousel__title tx-center");
             ?>
 
@@ -136,7 +137,6 @@ if (get_field('toggle_block')):
                                                 "classes" => "splide__slide posts-carousel__card",
                                                 "picture" => get_the_post_thumbnail_url(),
                                                 "title" => get_the_title(),
-                                                "content" => get_the_excerpt(),
                                                 "link_url" => get_the_permalink(),
                                                 "link_target" => '_blank',
                                             ));

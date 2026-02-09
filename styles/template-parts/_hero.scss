@@ -98,7 +98,7 @@
 
   &__title {
     margin: 0;
-    @include m.title(rgb(var(--secondary)), 4rem, 2.5vw, 4.8rem);
+    @include m.title(rgb(var(--secondary)), 4rem, 2.5vw, 4.8rem, $after: false);
   }
 
   &--homepage {

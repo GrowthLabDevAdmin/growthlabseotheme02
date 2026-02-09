@@ -1,3 +1,6 @@
+@use "./variables" as v;
+@use "sass:string" as string;
+
 /**
  * Title Mixin with Customizable Parameters
  * @param {color} $color - Main title color (default: --primary)
@@ -13,12 +16,17 @@
   $font-size-min: null,
   $font-size-mid: null,
   $font-size-max: null,
-  $font-weight: 600,
-  $line-height: 1.25
+  $font-weight: 400,
+  $line-height: 1.25,
+  $after: true
 ) {
   // Color handling with CSS variable fallback
-  color: if($color != null, $color, rgb(var(--primary)));
+  @if $after {
+    padding-bottom: var(--sp-xsm);
+  }
 
+  position: relative;
+  color: if($color != null, $color, rgb(var(--primary)));
   font-family: var(--font-serif);
   font-style: normal;
   font-weight: $font-weight;
@@ -36,10 +44,130 @@
   } @else {
     font-size: clamp(3.2rem, 3.33vw, 3.6rem);
   }
+
+  @if $after {
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 100%;
+      width: 35%;
+      height: 6px;
+      background: linear-gradient(
+        180deg,
+        rgb(var(--tertiary-dark)) 0%,
+        rgb(var(--tertiary-light)) 50%,
+        rgb(var(--tertiary-dark)) 100%
+      );
+    }
+  }
 }
 
 @mixin flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+// Helper mixin must be top-level: generates a corner pseudoelement when included
+@mixin _corner-pseudo(
+  $which,
+  $pos,
+  $offset,
+  $size,
+  $border-color,
+  $bw-sm,
+  $bw-lg
+) {
+  &::#{$which} {
+    content: "";
+    width: $size;
+    height: auto;
+    position: absolute;
+    z-index: 3;
+    display: block;
+    aspect-ratio: 1/1;
+    border-width: $bw-sm;
+    border-style: solid;
+    border-image: $border-color;
+    border-color: $border-color;
+    @media (min-width: v.$tablet) {
+      border-width: $bw-lg;
+    }
+
+    // Determine vertical placement (top/bottom). Default: top
+    $is-bottom: false;
+    @if string.index($pos, "bottom") {
+      $is-bottom: true;
+    }
+
+    // Determine horizontal placement (left/right). Default: left
+    $is-right: false;
+    @if string.index($pos, "right") {
+      $is-right: true;
+    }
+
+    // Determine whether it's outside the element (outer)
+    $is-outer: false;
+
+    // Vertical pos
+    @if $is-bottom {
+      bottom: $offset;
+      border-top: none;
+    } @else {
+      top: $offset;
+      border-bottom: none;
+    }
+
+    // Horizontal pos and offset
+    @if $is-right {
+      right: $offset;
+      border-left: none;
+    } @else {
+      left: $offset;
+      border-right: none;
+    }
+  }
+}
+
+@mixin nice-corner(
+  $corner_position_1,
+  $corner_position_2: null,
+  $offset: 0,
+  $size: 20%,
+  $border-color: linear-gradient(
+      180deg,
+      rgb(var(--tertiary-dark)) 0%,
+      rgb(var(--tertiary-light)) 50%,
+      rgb(var(--tertiary-dark)) 100%
+    )
+    1,
+  $bw-sm: 5px,
+  $bw-lg: 10px
+) {
+  position: relative;
+
+  @if $corner_position_1 != null {
+    @include _corner-pseudo(
+      before,
+      $corner_position_1,
+      $offset,
+      $size,
+      $border-color,
+      $bw-sm,
+      $bw-lg
+    );
+  }
+
+  @if $corner_position_2 != null {
+    @include _corner-pseudo(
+      after,
+      $corner_position_2,
+      $offset,
+      $size,
+      $border-color,
+      $bw-sm,
+      $bw-lg
+    );
+  }
 }

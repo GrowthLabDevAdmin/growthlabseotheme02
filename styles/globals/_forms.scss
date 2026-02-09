@@ -119,11 +119,16 @@ input[type="submit"] {
   line-height: 1.5;
   font-weight: 700;
   color: rgb(var(--text));
-  transition: 0.3s ease-in-out;
+  transition: 0.3s linear;
 
   &:hover {
     cursor: pointer;
-    background: rgb(var(--primary-dark));
+    background: linear-gradient(
+      180deg,
+      rgb(var(--primary-dark)) 0%,
+      rgb(var(--primary-light)) 50%,
+      rgb(var(--primary-dark)) 100%
+    );
     color: rgb(var(--secondary-light));
   }
 

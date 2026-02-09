@@ -111,7 +111,7 @@ if (!defined('ABSPATH')) {
 
             <?php if ($cta_button): ?>
                 <div class="site-header__cta">
-                    <a href="<?= $cta_button['url'] ?>" class="cta-button" target="<?= $cta_button['target'] ?>">
+                    <a href="<?= $cta_button['url'] ?>" class="cta-button btn btn--tertiary" target="<?= $cta_button['target'] ?>">
 
                         <span class="cta-button__text">
                             <?= $cta_button['title'] ?>

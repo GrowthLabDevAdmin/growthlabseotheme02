@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
           arrows: true,
           pagination: false,
           mediaQuery: "min",
+          focus: "center",
+          trimSpace: false,
           breakpoints: {
             [tablet]: {
               perPage:
@@ -28,8 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 carouselType === "case-result"
                   ? 3
                   : carouselType === "testimonial" || carouselType === "post"
-                  ? 2
-                  : 4,
+                    ? 2
+                    : 3,
             },
           },
         }).mount();

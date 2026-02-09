@@ -1,11 +1,18 @@
 {
-  "name": "acf/selling-points",
-  "title": "Selling Points",
+  "name": "acf/two-columns",
+  "title": "Two Columns",
   "style": ["file:./block-min.css"],
   "script": ["file:./block-min.js", "splide-js"],
   "category": "growthlabtheme02-blocks",
   "icon": "block-default",
-  "keywords": ["growthlabseo", "carousel", "selling points"],
+  "keywords": [
+    "growthlabseo",
+    "two-columns",
+    "columns",
+    "content",
+    "text",
+    "image"
+  ],
   "acf": {
     "mode": "edit",
     "renderTemplate": "block.php"

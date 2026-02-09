@@ -599,27 +599,15 @@
     height: 100%;
     @include m.flex-center;
     gap: 5px;
-    background-color: rgb(var(--tertiary));
-    transition: 0.3s ease-in-out;
-
-    @media (min-width: v.$tablet) {
-    }
 
     @media (min-width: v.$mdpi) {
       min-width: max-content;
       width: 100%;
       padding: 1.6rem 2.4rem;
       aspect-ratio: unset;
-      border-radius: 32px;
-    }
-
-    &:hover {
-      cursor: pointer;
-      background-color: rgb(var(--tertiary-light));
     }
 
     &__text {
-      color: rgb(var(--secondary-light));
       text-transform: uppercase;
 
       @media (min-width: v.$tablet) {
@@ -635,16 +623,5 @@
         font-weight: 600;
       }
     }
-    /* 
-    svg {
-      width: 20px;
-      height: 20px;
-      aspect-ratio: 1/1;
-      fill: rgb(var(--secondary-light));
-
-      @media (min-width: v.$mdpi) {
-        display: none;
-      }
-    } */
   }
 }

@@ -60,7 +60,7 @@
   }
 
   &__title {
-    color: rgb(var(--text-color));
+    color: rgb(var(--text));
     font-family: var(--font-sans);
     font-size: 1.6rem;
     font-weight: 700;
@@ -71,7 +71,7 @@
   &__description {
     max-height: 72px;
     overflow: hidden;
-    color: rgb(var(--text-color));
+    color: rgb(var(--text));
     @extend .result-card__title;
     font-weight: 400;
     display: -webkit-box;

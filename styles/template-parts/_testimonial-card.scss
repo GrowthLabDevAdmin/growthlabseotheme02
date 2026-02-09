@@ -103,7 +103,7 @@
   &__content {
     flex: 0 0 100%;
     text-align: left;
-    color: rgb(var(--text-color));
+    color: rgb(var(--text));
     font-weight: 400;
     transition: 0.4s ease-out 0.4s;
 
@@ -116,7 +116,7 @@
     width: 100%;
     display: block;
     text-align: left;
-    color: rgb(var(--text-color));
+    color: rgb(var(--text));
     font-family: var(--font-sans);
     font-size: 1.6rem;
     font-weight: 700;

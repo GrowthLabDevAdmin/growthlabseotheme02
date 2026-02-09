@@ -1,7 +1,7 @@
 @use "globals/variables" as v;
 @use "globals/mixins" as m;
 
-.ampersand-separator {
+.logo-separator {
   width: 100%;
   @include m.flex-center;
   column-gap: 0.8rem;
