@@ -41,7 +41,12 @@ if (get_field('toggle_block')):
 ?>
 
     <section
-        class="block posts-carousel"
+        class="
+        block 
+        posts-carousel
+        <?php if ($carousel_type === "team") echo " bg-gradient"; ?>
+        <?= $carousel_type ?>
+        "
         <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
         <?php
@@ -51,11 +56,11 @@ if (get_field('toggle_block')):
         <div class="posts-carousel__wrapper container">
 
             <?php
-            if (isset($pretitle) && $pretitle) print_title($pretitle, $pretitle_tag, "posts-carousel__pretitle tx-center");
-            print_title($title, $title_tag, "posts-carousel__title tx-center");
+            if (isset($pretitle) && $pretitle) print_title($pretitle, $pretitle_tag, "posts-carousel__pretitle pretitle tx-center");
+            if (isset($title) && $title) print_title($title, $title_tag, "posts-carousel__title tx-center");
             ?>
 
-            <?php if ($text_content): ?>
+            <?php if (isset($pretitle) && $text_content): ?>
                 <div class="posts-carousel__content formatted-text tx-center">
                     <?= $text_content ?>
                 </div>
@@ -98,11 +103,12 @@ if (get_field('toggle_block')):
                                             break;
 
                                         case 'team':
-                                            get_template_part('template-parts/default', 'card', array(
+                                            get_template_part('template-parts/team', 'card', array(
                                                 "classes" => "splide__slide posts-carousel__card",
-                                                "picture" => get_the_post_thumbnail_url(),
+                                                "picture" => $headshot,
                                                 "title" => get_the_title(),
-                                                "content" => $role,
+                                                "role" => $role,
+                                                "content" => get_the_excerpt(),
                                                 "link_url" => get_the_permalink(),
                                                 "link_target" => '_blank',
                                             ));

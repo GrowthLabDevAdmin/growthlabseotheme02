@@ -437,10 +437,13 @@
         transition: max-height 0.3s cubic-bezier(1, 0.355, 0.355, 1);
 
         @media (min-width: v.$mdpi) {
-          background-color: rgb(var(--primary-light));
+          background-color: rgb(var(--tertiary));
 
           &:hover {
-            background-color: rgb(var(--primary-dark));
+            background-color: rgb(var(--tertiary-light));
+            span {
+              color: rgb(var(--secondary-light));
+            }
           }
         }
 
@@ -599,16 +602,39 @@
     height: 100%;
     @include m.flex-center;
     gap: 5px;
+    background: rgb(var(--tertiary));
+    border-radius: 0;
+    transition: 0.3s ease-in-out;
 
     @media (min-width: v.$mdpi) {
       min-width: max-content;
       width: 100%;
       padding: 1.6rem 2.4rem;
       aspect-ratio: unset;
+      border-radius: 38px;
+      background: linear-gradient(
+        180deg,
+        rgb(var(--tertiary-dark)) 0%,
+        rgb(var(--tertiary-light)) 50%,
+        rgb(var(--tertiary-dark)) 100%
+      );
+      border: 1px solid rgb(var(--tertiary));
+    }
+
+    &:hover {
+      background: linear-gradient(
+        180deg,
+        rgb(var(--primary-dark)) 0%,
+        rgb(var(--primary-light)) 50%,
+        rgb(var(--primary-dark)) 100%
+      );
     }
 
     &__text {
-      text-transform: uppercase;
+      font-size: 1.6rem;
+      font-weight: 500;
+      line-height: 1;
+      color: rgb(var(--secondary-light));
 
       @media (min-width: v.$tablet) {
         width: auto;
@@ -620,7 +646,10 @@
 
       @media (min-width: v.$mdpi) {
         font-size: 2rem;
-        font-weight: 600;
+        line-height: 1.5;
+        font-weight: 700;
+        color: rgb(var(--primary-dark));
+        text-transform: uppercase;
       }
     }
   }

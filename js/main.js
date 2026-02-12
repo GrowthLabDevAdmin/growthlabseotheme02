@@ -147,7 +147,7 @@ function extractBlocks() {
   });
 }
 
-//Find Blocks with Bg-BiColor class
+//Find Blocks with Bg-gradient class
 (function findConsecutiveGroups() {
   const blocks = document.querySelectorAll("body>section");
 
@@ -157,10 +157,10 @@ function extractBlocks() {
   let currentGroup = [];
 
   for (let i = 0; i < blocks.length; i++) {
-    if (blocks[i].classList.contains("bg-bicolor")) {
+    if (blocks[i].classList.contains("bg-gradient")) {
       currentGroup.push(blocks[i]);
     } else {
-      // Non-bg-bicolor element breaks the sequence
+      // Non-bg-gradient element breaks the sequence
       if (currentGroup.length > 1) {
         groups.push([...currentGroup]);
       }
@@ -176,7 +176,7 @@ function extractBlocks() {
   groups.forEach((group) => {
     const firstEl = group[0];
     const wrapper = document.createElement("section");
-    wrapper.classList.add("bg-bicolor");
+    wrapper.classList.add("bg-gradient");
 
     firstEl.parentNode.insertBefore(wrapper, firstEl);
 

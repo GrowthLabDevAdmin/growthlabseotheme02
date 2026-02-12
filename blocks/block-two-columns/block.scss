@@ -1,9 +1,5 @@
 @use "../../styles/globals/variables" as v;
 @use "../../styles/globals/mixins" as m;
-@use "../../styles/template-parts/result-card";
-@use "../../styles/template-parts/post-card";
-@use "../../styles/template-parts/default-card";
-@use "../../styles/template-parts/testimonial-card";
 
 .two-columns {
   position: relative;
@@ -50,7 +46,7 @@
     }
 
     @media (min-width: v.$mdpi) {
-      top: -4rem;
+      top: -5rem;
     }
 
     &.reverse {
@@ -95,8 +91,9 @@
       }
 
       @media (min-width: v.$mdpi) {
-        width: 8rem;
-        height: 8rem;
+        width: 10rem;
+        height: 10rem;
+        padding: 2rem;
       }
     }
   }

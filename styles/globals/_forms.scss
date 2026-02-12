@@ -115,7 +115,8 @@ input[type="submit"] {
   );
   border-radius: 32px;
   font-family: var(--font-sans);
-  font-size: 1.6rem;
+  font-size: clamp(1.6rem, 2.2vw, 2rem);
+  letter-spacing: 0.45px;
   line-height: 1.5;
   font-weight: 700;
   color: rgb(var(--text));

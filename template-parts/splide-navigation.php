@@ -19,7 +19,7 @@
     ?>
 
  <div class="splide__arrows pagination-buttons <?= $args["classes"] ?>">
-     <button class="splide__arrow splide__arrow--prev arrow arrow--prev btn btn--secondary">
+     <button class="splide__arrow splide__arrow--prev arrow arrow--prev">
          <?= $prev_arrow ?>
      </button>
 
@@ -29,7 +29,7 @@
          </a>
      <?php endif ?>
 
-     <button class="splide__arrow splide__arrow--next arrow arrow--next btn btn--secondary">
+     <button class="splide__arrow splide__arrow--next arrow arrow--next">
          <?= $next_arrow ?>
      </button>
  </div>

@@ -19,16 +19,18 @@ document.addEventListener("DOMContentLoaded", () => {
           breakpoints: {
             [tablet]: {
               perPage:
-                carouselType === "case-result" ||
-                carouselType === "testimonial" ||
-                carouselType === "post"
-                  ? 2
-                  : 3,
+                carouselType === "team"
+                  ? 1
+                  : carouselType === "case-result" ||
+                      carouselType === "testimonial" ||
+                      carouselType === "post"
+                    ? 2
+                    : 3,
             },
             [ldpi]: {
               perPage:
-                carouselType === "case-result"
-                  ? 3
+                carouselType === "team"
+                  ? 1
                   : carouselType === "testimonial" || carouselType === "post"
                     ? 2
                     : 3,

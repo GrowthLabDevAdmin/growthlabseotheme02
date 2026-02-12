@@ -4,6 +4,7 @@
 @use "../../styles/template-parts/post-card";
 @use "../../styles/template-parts/default-card";
 @use "../../styles/template-parts/testimonial-card";
+@use "../../styles/template-parts/team-card";
 
 .posts-carousel {
   padding: var(--sp-xsm) 0;
@@ -21,27 +22,56 @@
     }
   }
 
-  &__wrapper {
-    padding: var(--sp-xsm);
-    @include m.flex-center;
-    flex-direction: column;
-    gap: var(--sp-xsm);
+  &.team {
+    #{$parent}__carousel {
+      border-top: none;
+    }
 
-    @media (min-width: v.$ldpi) {
-      padding: 0;
+    #{$parent}__arrows {
+      width: 100%;
+      position: absolute;
+      top: var(--sp-md);
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+
+      @media (min-width: v.$ldpi) {
+        width: fit-content;
+        top: 75%;
+        left: 40%;
+        justify-content: center;
+        gap: var(--sp-xsm);
+
+        button {
+          &:first-of-type {
+            order: 0;
+          }
+
+          &:last-of-type {
+            order: 2;
+          }
+        }
+
+        &::after {
+          content: "";
+          width: 3px;
+          height: auto;
+          background-color: rgb(var(--secondary));
+          display: block;
+          order: 1;
+        }
+      }
     }
   }
 
+  &__wrapper {
+    @include m.flex-center;
+    flex-direction: column;
+    gap: var(--sp-xsm);
+  }
+
   &__pretitle {
-    @include m.title(
-      rgba(var(--tertiary-light)),
-      1.8rem,
-      2vw,
-      2.2rem,
-      500,
-      1,
-      false
-    );
     letter-spacing: 3.7px;
   }
 
@@ -65,7 +95,7 @@
   }
 
   &__card {
-    padding: 0 calc(var(--sp-xsm) / 2);
+    padding-inline: calc(var(--sp-xsm) / 2);
   }
 
   &__arrows {

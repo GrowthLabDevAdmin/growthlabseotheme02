@@ -13,8 +13,8 @@ if (get_field('toggle_block')):
         class="
         block 
         two-columns
-        bg-gradient
-        <?= $background_type ?? "" ?>
+        <?= $background_type ?>
+        <?= $background_type === "dark" ? "bg-gradient" : "" ?>
         <?php if ($reverse_order) echo "reverse" ?> 
         <?php if ($show_top_separator) echo "separator" ?>
         "

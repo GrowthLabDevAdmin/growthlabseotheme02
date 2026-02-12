@@ -261,6 +261,9 @@ add_filter('get_custom_logo', 'growthlabtheme02_remove_custom_logo_link');
 /*Custom Excerpt Size*/
 function growthlabtheme02_custom_excerpt_length($length)
 {
+    if (get_post_type() === 'team') {
+        return 50;
+    }
     return 15;
 }
 add_filter('excerpt_length', 'growthlabtheme02_custom_excerpt_length', 999);
@@ -285,7 +288,7 @@ function inline_main_critical_css()
 
     echo '<style id="main-css">' . $critical_css . '</style>';
 }
-add_action('wp_head', 'inline_main_critical_css', 20);
+add_action('wp_head', 'inline_main_critical_css', 1);
 
 
 function growthlabtheme02_scripts()

@@ -7,6 +7,12 @@ foreach ($args as $key => $value) $$key = $value;
 
 <div class="ampersand-separator <?= esc_attr($classes); ?>">
     <hr>
-    <?php include get_stylesheet_directory() . '/assets/img/ampersand-symbol.svg'; ?>
+    <?php
+    $options = get_current_language_options();
+    if ($options["logo_symbol"]) {
+        img_print_picture_tag(img: $options["logo_symbol"], max_size: "medium");
+    } else {
+        include get_stylesheet_directory() . '/assets/img/ampersand-symbol.svg';
+    } ?>
     <hr>
 </div>

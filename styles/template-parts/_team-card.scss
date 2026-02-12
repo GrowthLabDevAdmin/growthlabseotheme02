@@ -1,0 +1,273 @@
+@use "../globals/variables" as v;
+@use "../globals/mixins" as m;
+
+.team-card {
+  height: auto;
+  padding-inline: 0 !important;
+
+  $card: &;
+
+  @media (min-width: v.$ldpi) {
+    margin-bottom: var(--sp-lg);
+    box-shadow: 0px -20px 14px -8px rgba(var(--primary-dark), 0.5);
+  }
+
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+    @include m.flex-center;
+    flex-direction: column;
+    gap: var(--sp-sm);
+
+    @media (min-width: v.$ldpi) {
+      flex-direction: row-reverse;
+      align-items: stretch;
+    }
+  }
+
+  &__pic-wrapper {
+    min-width: 28rem;
+    width: 100%;
+    min-height: 18rem;
+    height: auto;
+    aspect-ratio: 4/2;
+    position: relative;
+    display: flex;
+    background: linear-gradient(
+      to bottom,
+      rgba(var(--primary-dark), 0) 75%,
+      rgb(var(--primary-dark)) 100%
+    );
+
+    @media (min-width: v.$tablet) {
+      width: 60%;
+      aspect-ratio: 4/3;
+    }
+
+    @media (min-width: v.$ldpi) {
+      width: 100%;
+      height: auto;
+      aspect-ratio: unset;
+      flex: 0 0 calc(50% - var(--sp-xsm));
+      background: none;
+    }
+
+    &::after {
+      content: "";
+      width: 95%;
+      height: 6px;
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      z-index: 5;
+      background: linear-gradient(
+        0deg,
+        rgba(var(--tertiary-dark)) 15%,
+        rgba(var(--tertiary-light)) 50%,
+        rgba(var(--tertiary-dark)) 85%
+      );
+
+      @media (min-width: v.$ldpi) {
+        width: 10px;
+        height: 40%;
+        left: 0;
+      }
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+
+      &:first-of-type {
+        display: none;
+
+        @media (min-width: v.$tablet) {
+          display: block;
+          width: 30%;
+          height: auto;
+          position: absolute;
+          left: 0;
+          top: var(--sp-xsm);
+          z-index: -1;
+        }
+
+        path {
+          fill: rgba(var(--tertiary-light), 0.6);
+        }
+      }
+
+      path {
+        fill: rgb(var(--primary-light), 0.8);
+      }
+    }
+  }
+
+  &__team-card__symbol {
+    display: none;
+
+    @media (min-width: v.$tablet) {
+      display: block;
+      width: 30%;
+      height: auto;
+      position: absolute;
+      left: 0;
+      top: var(--sp-xsm);
+      z-index: -1;
+    }
+  }
+
+  &__pic {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      object-position: bottom center;
+      transition: 0.3s ease-in-out;
+    }
+    @media (min-width: v.$ldpi) {
+      &::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 2;
+        display: block;
+        background: linear-gradient(
+          to bottom,
+          transparent 75%,
+          rgb(var(--primary-dark)) 100%
+        );
+      }
+    }
+  }
+
+  &__inner {
+    min-width: 28rem;
+    padding: var(--sp-sm);
+    @include m.flex-center;
+    flex-direction: column;
+    gap: var(--sp-xsm);
+    transition: padding 0.4s ease;
+
+    @media (min-width: v.$ldpi) {
+      flex: 0 0 calc(50% - var(--sp-xsm));
+      align-items: flex-start;
+      gap: var(--sp-sm);
+    }
+  }
+
+  &__role {
+    margin-bottom: 0;
+    text-align: center;
+    font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+    line-height: 1.5;
+
+    @media (min-width: v.$ldpi) {
+      text-align: left;
+    }
+  }
+
+  &__title {
+    text-transform: uppercase;
+    @include m.title(
+      rgba(var(--secondary-light)),
+      2.2rem,
+      4vw,
+      6rem,
+      500,
+      1,
+      true
+    );
+
+    @media (min-width: v.$ldpi) {
+      text-align: left;
+    }
+
+    &::after {
+      left: 50%;
+      transform: translateX(-50%);
+
+      @media (min-width: v.$ldpi) {
+        left: 0;
+        transform: none;
+      }
+    }
+  }
+
+  &__content {
+    text-align: center;
+    color: rgb(var(--secondary-light));
+
+    @media (min-width: v.$ldpi) {
+      text-align: left;
+      font-size: 1.8rem;
+      line-height: 1.7;
+    }
+  }
+
+  &__btn {
+    width: fit-content;
+  }
+
+  &__separator {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    display: none;
+
+    @media (min-width: v.$ldpi) {
+      bottom: -2.8rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    @media (min-width: v.$mdpi) {
+      bottom: -4.8rem;
+    }
+
+    hr:last-of-type {
+      display: none;
+    }
+
+    hr {
+      height: 2px;
+      width: 85%;
+      display: block;
+      background: linear-gradient(
+        180deg,
+        rgb(var(--tertiary-dark)) 0%,
+        rgb(var(--tertiary-light)) 50%,
+        rgb(var(--tertiary-dark)) 100%
+      );
+    }
+
+    svg {
+      @media (min-width: v.$ldpi) {
+        width: 6rem;
+        height: 6rem;
+        padding: 1rem;
+        display: block;
+        border-radius: 50%;
+        border: 2px solid rgb(var(--tertiary-light));
+        background-color: rgba(var(--secondary-light), 1);
+      }
+
+      @media (min-width: v.$mdpi) {
+        width: 10rem;
+        height: 10rem;
+        padding: 2rem;
+      }
+    }
+  }
+}

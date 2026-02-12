@@ -3,7 +3,7 @@
 
 .default-card {
   height: auto;
-  padding-bottom: 4rem;
+  padding-bottom: var(--sp-md);
 
   $card: &;
 

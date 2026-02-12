@@ -157,35 +157,30 @@
             "save_other_choice": 0
         },
         {
-            "key": "field_690beeb853297",
-            "label": "Background Color",
-            "name": "background_color",
+            "key": "field_698bd517ef657",
+            "label": "Side Image",
+            "name": "side_image",
             "aria-label": "",
-            "type": "color_picker",
+            "type": "image",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_690bd178fc63e",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "enable_opacity": 1,
-            "return_format": "string",
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
             "allow_in_bindings": 0,
-            "show_custom_palette": 0,
-            "show_color_wheel": 0,
-            "custom_palette_source": "",
-            "palette_colors": ""
+            "preview_size": "medium"
         },
         {
             "key": "field_690bd1c8fc641",
@@ -355,5 +350,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1762403971
+    "modified": 1770771769
 }

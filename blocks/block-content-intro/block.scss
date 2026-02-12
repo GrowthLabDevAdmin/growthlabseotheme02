@@ -1,0 +1,243 @@
+@use "../../styles/globals/variables" as v;
+@use "../../styles/globals/mixins" as m;
+
+.content-intro {
+  position: relative;
+  z-index: 5;
+  padding: var(--sp-sm) 0 var(--sp-md);
+  overflow: visible;
+
+  @media (min-width: v.$ldpi) {
+    padding: var(--sp-md) 0 var(--sp-lg);
+  }
+
+  $parent: &;
+
+  &__wrapper {
+    @include m.flex-center;
+    flex-wrap: wrap;
+    gap: var(--sp-sm);
+
+    @media (min-width: v.$ldpi) {
+      gap: var(--sp-md);
+    }
+  }
+
+  &__title {
+    width: 100%;
+    & > * {
+      @include m.title(
+        rgb(var(--secondary-light)),
+        2.4rem,
+        3.2vw,
+        6.5rem,
+        200,
+        1.2,
+        false
+      );
+
+      * {
+        font-size: inherit;
+        color: currentColor;
+      }
+    }
+  }
+
+  .col {
+    min-width: 280px;
+    padding: var(--sp-xsm);
+    flex: 1 0 calc(50% - var(--sp-sm));
+    @include m.flex-center;
+    flex-wrap: wrap;
+    background:
+      linear-gradient(rgba(var(--primary-dark)), rgba(var(--primary-dark)))
+        padding-box,
+      linear-gradient(
+          90deg,
+          rgb(var(--tertiary-dark)) 0%,
+          rgb(var(--tertiary-light)) 50%,
+          rgb(var(--tertiary)) 100%
+        )
+        border-box;
+    border: 2px solid transparent;
+
+    @media (min-width: v.$ldpi) {
+      background: none;
+      border: none;
+    }
+
+    &--image {
+      padding: 0;
+      align-self: stretch;
+      border-top: none;
+      border-inline: none;
+    }
+
+    &__image {
+      width: 100%;
+      height: auto;
+      display: flex;
+      align-self: stretch;
+      align-items: stretch;
+
+      @include m.nice-corner(
+        $corner_position_1: "top-left",
+        $offset: -1rem,
+        $size: 15%
+      );
+
+      @media (min-width: v.$ldpi) {
+        @include m.nice-corner(
+          $corner_position_1: "top-left",
+          $offset: -3rem,
+          $size: 15%
+        );
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+        object-position: center center;
+        mask-image: linear-gradient(
+          rgba(var(--primary-dark)) 50%,
+          transparent 100%
+        );
+      }
+    }
+
+    &__content {
+      flex: 0 0 100%;
+
+      *:not(a) {
+        text-align: center;
+        color: rgb(var(--secondary));
+        font-size: 1.8rem;
+        line-height: 1.8;
+
+        @media (min-width: v.$tablet) {
+          text-align: left;
+        }
+      }
+    }
+
+    &__pretitle {
+      flex: 0 0 100%;
+      color: rgb(var(--tertiary-light));
+      text-align: center;
+
+      @media (min-width: v.$tablet) {
+        text-align: left;
+      }
+    }
+
+    &__title {
+      flex: 0 0 100%;
+      margin-bottom: 3.5rem;
+      @include m.title(
+        rgba(var(--secondary-light)),
+        2.1rem,
+        2vw,
+        3.5rem,
+        500,
+        1.5,
+        true
+      );
+      letter-spacing: -0.4px;
+      text-align: center;
+
+      @media (min-width: v.$tablet) {
+        text-align: left;
+      }
+    }
+  }
+
+  .cta-box {
+    position: relative;
+    flex: 0 0 100%;
+    @include m.flex-center;
+    flex-wrap: wrap;
+    gap: var(--sp-sm);
+
+    @media (min-width: v.$ldpi) {
+      padding-block: var(--sp-lg);
+    }
+
+    &__separator {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+
+      @media (min-width: v.$ldpi) {
+        top: -3rem;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
+      @media (min-width: v.$mdpi) {
+        top: -5rem;
+      }
+
+      hr:first-of-type {
+        display: none;
+      }
+
+      hr {
+        height: 2px;
+        width: 85%;
+        display: block;
+        background: linear-gradient(
+          180deg,
+          rgb(var(--tertiary-dark)) 0%,
+          rgb(var(--tertiary-light)) 50%,
+          rgb(var(--tertiary-dark)) 100%
+        );
+      }
+
+      svg {
+        @media (min-width: v.$ldpi) {
+          width: 6rem;
+          height: 6rem;
+          padding: 1rem;
+          display: block;
+          border-radius: 50%;
+          border: 2px solid rgb(var(--tertiary-light));
+          background-color: rgba(var(--secondary-light), 1);
+        }
+
+        @media (min-width: v.$mdpi) {
+          width: 10rem;
+          height: 10rem;
+          padding: 2rem;
+        }
+      }
+    }
+
+    &__buttons {
+      min-width: 280px;
+      flex: 1 0 calc(45% - var(--sp-sm));
+      @include m.flex-center;
+      flex-wrap: wrap;
+      gap: var(--sp-xsm);
+    }
+
+    &__content {
+      min-width: 280px;
+      flex: 1 0 55%;
+
+      *:not(a) {
+        text-align: center;
+        color: rgb(var(--secondary));
+        font-size: 1.8rem;
+        line-height: 1.8;
+        @media (min-width: v.$tablet) {
+          text-align: left;
+        }
+      }
+    }
+  }
+}

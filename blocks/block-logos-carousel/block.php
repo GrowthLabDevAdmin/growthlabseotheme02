@@ -9,11 +9,18 @@ if (get_field('toggle_block')):
 
     <section
         id="<?= $block_id ?? "" ?>"
-        class="block logos-carousel <?php if (!$background_color) echo 'bg-bicolor'; ?>"
+        class="block logos-carousel"
         <?php
         if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'";
-        if ($background_color) "style='background-color: $background_color'";
         ?>>
+
+        <?php
+        if (isset($side_image) && $side_image) img_print_picture_tag(
+            img: $side_image,
+            max_size: "medium",
+            classes: "logos-carousel__image"
+        );
+        ?>
 
         <div class="logos-carousel__wrapper container tx-center">
             <?php print_title($title, $title_tag, "logos-carousel__title") ?>

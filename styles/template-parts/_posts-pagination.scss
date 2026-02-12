@@ -53,3 +53,39 @@
     }
   }
 }
+
+.splide__pagination {
+  &--ltr {
+    margin-block: var(--sp-sm);
+    @include m.flex-center;
+    gap: 1rem;
+
+    li {
+      width: 1.2rem;
+      height: 1.2rem;
+      @include m.flex-center;
+      border: 1.5px solid rgb(var(--primary));
+      border-radius: 50%;
+
+      &:has(.is-active) {
+        border: 1.5px solid rgb(var(--tertiary));
+      }
+
+      button {
+        width: 0.6rem;
+        height: 0.6rem;
+        display: block;
+        background-color: rgb(var(--primary));
+        border-radius: 50%;
+
+        &.is-active {
+          background-color: rgb(var(--tertiary));
+        }
+      }
+    }
+  }
+}
+
+.splide__arrow {
+  background: none;
+}
