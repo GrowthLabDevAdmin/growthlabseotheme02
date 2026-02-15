@@ -6,37 +6,46 @@ document.addEventListener("DOMContentLoaded", () => {
       let carouselType = carousel.dataset.type;
       let splideElement = carousel.querySelector(".splide");
 
-      if (splideElement) {
-        new Splide(splideElement, {
-          type: "loop",
-          perPage: 1,
-          perMove: 1,
-          arrows: true,
-          pagination: false,
-          mediaQuery: "min",
-          focus: "center",
-          trimSpace: false,
-          breakpoints: {
-            [tablet]: {
-              perPage:
-                carouselType === "team"
-                  ? 1
-                  : carouselType === "case-result" ||
-                      carouselType === "testimonial" ||
-                      carouselType === "post"
-                    ? 2
-                    : 3,
-            },
-            [ldpi]: {
-              perPage:
-                carouselType === "team"
-                  ? 1
-                  : carouselType === "testimonial" || carouselType === "post"
-                    ? 2
-                    : 3,
-            },
+      const perPageTablet =
+        carouselType === "testimonial" || carouselType === "team"
+          ? 1
+          : carouselType === "case-result" || carouselType === "post"
+            ? 2
+            : 3;
+
+      const perPageLdpi =
+        carouselType === "team"
+          ? 1
+          : carouselType === "testimonial" || carouselType === "post"
+            ? 2
+            : 3;
+
+      const focusFor = (n) => (n % 2 === 1 ? "center" : false);
+      const trimFor = (n) => (n % 2 === 1 ? true : false);
+
+      carouselObj = {
+        type: "loop",
+        perPage: 1,
+        perMove: 1,
+        arrows: true,
+        pagination: false,
+        mediaQuery: "min",
+        breakpoints: {
+          [tablet]: {
+            perPage: perPageTablet,
+            focus: focusFor(perPageTablet),
+            trimSpace: trimFor(perPageTablet),
           },
-        }).mount();
+          [ldpi]: {
+            perPage: perPageLdpi,
+            focus: focusFor(perPageLdpi),
+            trimSpace: trimFor(perPageLdpi),
+          },
+        },
+      };
+
+      if (splideElement) {
+        new Splide(splideElement, carouselObj).mount();
       }
     });
   }

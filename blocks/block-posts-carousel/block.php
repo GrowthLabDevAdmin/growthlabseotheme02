@@ -129,12 +129,9 @@ if (get_field('toggle_block')):
                                         case 'testimonial':
                                             get_template_part('template-parts/testimonial', 'card', array(
                                                 "classes" => "splide__slide posts-carousel__card",
-                                                "picture" => $author_picture,
                                                 "author" => $author_name,
                                                 "role" => $author_role,
                                                 "content" => $testimonial_content,
-                                                "source" => $testimonial_source,
-                                                "link_url" => $testimonial_source_link,
                                             ));
                                             break;
 

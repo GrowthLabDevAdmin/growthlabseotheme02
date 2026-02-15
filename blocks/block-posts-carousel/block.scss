@@ -65,6 +65,32 @@
     }
   }
 
+  &.testimonial {
+    padding-bottom: var(--sp-lg);
+
+    @media (min-width: v.$ldpi) {
+      padding-bottom: calc(2 * var(--sp-lg));
+    }
+
+    #{$parent}__carousel {
+      border-top: none;
+    }
+
+    #{$parent}__arrows {
+      width: fit-content;
+      margin-inline: auto;
+      margin-top: var(--sp-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+
+      @media (min-width: v.$ldpi) {
+        justify-content: center;
+        gap: var(--sp-xsm);
+      }
+    }
+  }
+
   &__wrapper {
     @include m.flex-center;
     flex-direction: column;
