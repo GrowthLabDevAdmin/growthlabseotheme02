@@ -51,7 +51,7 @@ if ($hero_title === null || $hero_title === "") {
             <?php print_title($hero_subtitle, $hero_subtitle_tag, "hero__subtitle", true); ?>
 
             <?php if ($cta_button): ?>
-                <a href="<?= $cta_button['url'] ?>" target="<?= $cta_button['target'] ?>" class="hero__btn btn btn--tertiary btn--arrow">
+                <a href="<?= $cta_button['url'] ?>" target="<?= $cta_button['target'] ?>" class="hero__btn btn btn--tertiary">
 
                     <span><?= $cta_button['title'] ?>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

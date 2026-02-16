@@ -8,7 +8,7 @@ global $post;
 $post_id =  $post->ID;
 ?>
 
-<section class="page__inner bg-gradient">
+<section class="page__inner">
 
     <div class="page__wrapper container">
 

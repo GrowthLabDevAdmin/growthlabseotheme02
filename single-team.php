@@ -3,7 +3,7 @@ foreach (get_fields() as $key => $value) $$key = $value;
 ?>
 <?php get_header(); ?>
 
-<section class="single__inner bg-gradient">
+<section class="single__inner">
 
     <div class="single__wrapper container">
 

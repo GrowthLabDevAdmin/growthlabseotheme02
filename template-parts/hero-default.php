@@ -50,7 +50,7 @@ if ($hero_title === null || $hero_title === "") {
             </div>
 
             <?php if ($cta_button): ?>
-                <a href="<?= $cta_button['url'] ?>" target="<?= $cta_button['target'] ?>" class="hero__btn btn btn--tertiary btn--arrow">
+                <a href="<?= $cta_button['url'] ?>" target="<?= $cta_button['target'] ?>" class="hero__btn btn btn--tertiary">
                     <span><?= $cta_button['title'] ?></span>
                 </a>
             <?php endif ?>

@@ -24,10 +24,6 @@ if (!defined('ABSPATH')) {
 
         <p class="default-card__title"><?= $args["title"] ?></p>
 
-        <?php if (isset($args["content"]) && $args["content"]): ?>
-            <p class="default-card__content"><?= $args["content"] ?></p>
-        <?php endif ?>
-
     </div>
 
     <?php

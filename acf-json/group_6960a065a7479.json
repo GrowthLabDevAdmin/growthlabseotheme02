@@ -106,7 +106,7 @@
                     "name": "top_callout_first_line",
                     "aria-label": "",
                     "type": "text",
-                    "instructions": "Enclose text in \"strong\" HTML tags to highlight it.",
+                    
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -148,7 +148,7 @@
                     "name": "top_callout_second_line",
                     "aria-label": "",
                     "type": "text",
-                    "instructions": "Enclose text in \"strong\" HTML tags to highlight it.",
+                    
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -747,7 +747,7 @@
                     "name": "form_section",
                     "aria-label": "",
                     "type": "group",
-                    "instructions": "Enclose text in \"strong\" HTML tags to highlight it.",
+                    
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -1347,7 +1347,7 @@
                             "name": "top_callout_first_line",
                             "aria-label": "",
                             "type": "text",
-                            "instructions": "Enclose text in \"strong\" HTML tags to highlight it.",
+                            
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -1389,7 +1389,7 @@
                             "name": "top_callout_second_line",
                             "aria-label": "",
                             "type": "text",
-                            "instructions": "Enclose text in \"strong\" HTML tags to highlight it.",
+                            
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -1984,7 +1984,7 @@
                             "name": "form_section",
                             "aria-label": "",
                             "type": "group",
-                            "instructions": "Enclose text in \"strong\" HTML tags to highlight it.",
+                            
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {

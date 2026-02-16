@@ -72,7 +72,6 @@ if (get_field('toggle_block')):
                                 "classes" => "posts-grid__card " . $grid_type,
                                 "picture" => $picture ?? '',
                                 "title" => $title ?? '',
-                                "content" => $content ?? '',
                                 "link_url" => $link['url'] ?? '',
                                 "link_target" => $link['target'] ?? '_self',
                             ));
@@ -98,7 +97,6 @@ if (get_field('toggle_block')):
                                         "classes" => "posts-grid__card grid " . $grid_type,
                                         "picture" => get_the_post_thumbnail_url(),
                                         "title" => get_the_title(),
-                                        "content" => $role,
                                         "link_url" => get_the_permalink(),
                                         "link_target" => '_blank',
                                     ));
@@ -133,7 +131,6 @@ if (get_field('toggle_block')):
                                         "classes" => "posts-grid__card grid " . $grid_type,
                                         "picture" => get_the_post_thumbnail_url(),
                                         "title" => get_the_title(),
-                                        "content" => get_the_excerpt(),
                                         "link_url" => get_the_permalink(),
                                         "link_target" => '_blank',
                                     ));

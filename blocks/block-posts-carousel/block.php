@@ -81,7 +81,6 @@ if (get_field('toggle_block')):
                                         "classes" => "splide__slide posts-carousel__card",
                                         "picture" => $picture ?? '',
                                         "title" => $title ?? '',
-                                        "content" => $content ?? '',
                                         "link_url" => $link['url'] ?? '',
                                         "link_target" => $link['target'] ?? '_self',
                                     ));

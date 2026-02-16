@@ -2,10 +2,9 @@
   "name": "acf/cta-box",
   "title": "CTA Box",
   "style": ["file:./block-min.css"],
-  "script": ["file:./block-min.js"],
   "category": "growthlabtheme02-blocks",
   "icon": "block-default",
-  "keywords": ["growthlabseo", "cta", "inset", "floating"],
+  "keywords": ["growthlabseo", "cta", "inset", "box"],
   "acf": {
     "mode": "edit",
     "renderTemplate": "block.php"

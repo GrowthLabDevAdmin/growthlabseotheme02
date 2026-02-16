@@ -6,7 +6,7 @@ get_header();
 $post_id = get_option('page_for_posts');
 ?>
 
-<section class="blog__inner bg-gradient">
+<section class="blog__inner">
 
     <div class="blog__wrapper container">
 

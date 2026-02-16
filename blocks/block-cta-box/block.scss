@@ -2,99 +2,32 @@
 @use "../../styles/globals/mixins" as m;
 
 .cta-box {
+  padding: var(--sp-md) 0;
   position: relative;
   overflow-y: visible;
   @include m.flex-center;
-  content-visibility: visible;
 
   $parent: &;
 
-  &.float {
-    padding: 0 !important;
-    z-index: 20;
+  &.full {
+    padding-top: calc(35rem + var(--sp-sm));
+    position: relative;
+    background-color: rgba(var(--primary-dark));
 
-    & + * {
-      transition: margin-top 0.2s ease, padding-top 0.2s ease;
-
-      & > section:first-child {
-        padding-top: 0;
-      }
-
-      &.site-footer {
-        margin-top: 0;
-        padding-top: 0;
-
-        .contact-form-footer {
-          &__wrapper {
-            margin-top: 0;
-            transition: padding-top 0.2s ease;
-          }
-
-          &__inner {
-            margin-top: 0;
-          }
-        }
-      }
+    @media (min-width: v.$ldpi) {
+      padding-top: var(--sp-md);
     }
 
     #{$parent}__wrapper {
-      padding: 0;
-      contain: layout style;
-      transition: margin-top 0.15s ease, padding-bottom 0.15s ease;
-      // Hide until positioned by JS
-      opacity: 0;
-    }
-
-    // Show after JS positions it
-    &.positioned #{$parent}__wrapper {
-      opacity: 1;
-      transition: opacity 0.2s ease, margin-top 0.15s ease,
-        padding-bottom 0.15s ease;
-    }
-  }
-
-  * + &.float {
-    ~ * {
-      transition: padding-bottom 0.2s ease, border-bottom 0.2s ease;
-    }
-  }
-
-  &.within,
-  &.float {
-    #{$parent}__wrapper {
-      padding: var(--sp-sm) 0;
-    }
-
-    #{$parent}__inner {
-      gap: var(--sp-xsm);
-    }
-
-    #{$parent}__heading {
-      flex-flow: row nowrap;
-      justify-content: space-between;
-      text-align: left;
-    }
-
-    #{$parent}__main {
-      flex-flow: row wrap;
-      justify-content: flex-start;
-      text-align: left;
-    }
-
-    #{$parent}__title {
-      @include m.title(rgb(var(--secondary)), 3.2rem, 3.333vw, 3.6rem);
-    }
-
-    #{$parent}__separator {
-      display: flex;
-      flex: 1;
-      hr:first-child {
-        display: none;
-      }
-    }
-
-    #{$parent}__btn {
-      width: fit-content;
+      max-width: 1400px;
+      position: static;
+      background-color: transparent;
+      border-image: none;
+      border-style: none;
+      @include m.flex-center;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: var(--sp-md);
 
       &::after,
       &::before {
@@ -102,151 +35,122 @@
       }
     }
 
-    &.light {
-      #{$parent}__wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: var(--sp-sm);
-      }
+    #{$parent}__side-img {
+      width: 100%;
+      min-width: 28rem;
+      height: 35rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      flex: 1 0 calc(35% - var(--sp-sm));
 
-      #{$parent}__decoration {
-        width: 24rem;
-        height: 24rem;
-        @include m.flex-center;
-        box-shadow: 8px 8px 0px rgb(var(--tertiary));
-        background-color: rgb(var(--primary));
+      @media (min-width: v.$ldpi) {
+        height: auto;
+        position: relative;
+        top: auto;
+        left: auto;
 
-        svg {
-          width: 10rem;
-          height: 10rem;
-          display: block;
-          path {
-            fill: rgb(var(--secondary-light));
-          }
+        &::after {
+          content: "";
+          width: 100%;
+          height: 90%;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          box-shadow: inset 0 0 15px 10px rgba(var(--primary-light), 0.6);
+          border-radius: 55%;
+          border: 1px solid rgba(var(--primary-dark), 0.6);
         }
       }
 
-      #{$parent}__box {
-        flex: 1 0 calc(100% - 24rem - var(--sp-sm));
-        background-color: rgb(var(--secondary-light));
-        box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.05);
-      }
+      img {
+        width: 100%;
+        height: 100%;
+        margin-top: auto;
+        object-fit: cover;
+        object-position: top center;
 
-      #{$parent}__inner {
-        min-height: 24rem;
-        justify-content: center;
-      }
-
-      #{$parent}__title {
-        color: rgb(var(--primary));
-      }
-
-      #{$parent}__content p {
-        color: rgb(var(--text)) x;
-      }
-
-      #{$parent}__separator {
-        display: none;
+        @media (min-width: v.$ldpi) {
+          height: 90%;
+          border-radius: 55%;
+          object-position: center center;
+        }
       }
     }
-  }
 
-  &__sidebg {
-    height: 120%;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: -1;
-    display: none;
-
-    @media (min-width: v.$ldpi) {
-      display: block;
+    #{$parent}__inner {
+      min-width: 28rem;
+      flex: 1 0 calc(65% - var(--sp-sm));
     }
 
-    img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: contain;
-      object-position: right bottom;
+    #{$parent}__pretitle {
+      margin-bottom: 4.5rem;
+      color: rgb(var(--secondary-light));
+    }
+
+    #{$parent}__title {
+      width: 80%;
+      font-size: clamp(3rem, 4vw, 8rem);
+      line-height: 1;
+      @include m.nice-corner("top-left", "top-right", -3rem, 8%);
+      &::after,
+      &::before {
+        width: calc(50% + 3rem);
+        height: 50px;
+        aspect-ratio: unset;
+      }
+    }
+
+    #{$parent}__content {
+      color: rgb(var(--secondary-light));
+
+      & > *:not(a) {
+        color: inherit;
+      }
+    }
+
+    #{$parent}__buttons {
+      margin-top: var(--sp-xsm);
     }
   }
 
   &__wrapper {
-    height: fit-content;
-    padding: 20rem 0;
-    @include m.flex-center;
-  }
-
-  &__box {
-    padding: var(--sp-xsm);
-    background-color: rgb(var(--primary));
-    contain: layout;
-  }
-
-  &__inner {
     padding: var(--sp-sm);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-sm);
+    background-color: rgba(var(--primary-dark));
+    border-image: linear-gradient(
+        152deg,
+        rgb(var(--tertiary-light)) 0%,
+        rgb(var(--tertiary)) 50%,
+        rgb(var(--tertiary-light)) 100%
+      )
+      1;
+    border-width: 4px;
+    border-style: solid;
+    @include m.nice-corner("bottom-left", "bottom-right", -1.5rem, 8%);
+
+    @media (min-width: v.$mdpi) {
+      @include m.nice-corner("bottom-left", "bottom-right", -2.2rem, 8%);
+    }
   }
 
-  &__heading {
-    width: 100%;
-    @include m.flex-center;
-    flex-direction: column;
-    text-align: center;
-    gap: var(--sp-xsm);
-  }
-
+  &__heading,
+  &__inner,
   &__main {
-    width: 100%;
     @include m.flex-center;
     flex-direction: column;
     gap: var(--sp-xsm);
-    text-align: center;
   }
 
   &__title {
-    min-width: 250px;
-    @include m.title(rgb(var(--secondary)), 9rem, 5.6vw, 4rem);
-  }
-
-  &__pretitle {
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    letter-spacing: 3px;
-    text-align: center;
     text-transform: uppercase;
-    color: rgb(var(--secondary));
+    font-family: var(--font-serif);
+    font-size: clamp(2.2rem, 2vw, 5.5rem);
+    color: rgb(var(--secondary-light));
   }
 
-  &__separator {
-    display: none;
-  }
-
-  &__content {
-    min-width: 300px;
-    flex: 1;
-    p {
-      color: rgb(var(--secondary));
-    }
-  }
-
-  &__btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 1.6rem;
-
-    &::after,
-    &::before {
-      content: "";
-      height: 1px;
-      background-color: rgb(var(--tertiary));
-      flex: 1;
-    }
+  &__buttons {
+    @include m.flex-center;
+    flex-wrap: wrap;
+    gap: var(--sp-xsm);
   }
 }

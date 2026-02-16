@@ -47,7 +47,6 @@
             "name": "",
             "aria-label": "",
             "type": "accordion",
-            "instructions": "Enclose text in \"strong\" HTML tags to highlight it.",
             "required": 0,
             "conditional_logic": [
                 [

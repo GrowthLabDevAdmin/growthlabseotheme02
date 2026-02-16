@@ -50,14 +50,14 @@ if (get_field('toggle_block')):
             </div>
 
             <?php foreach (get_field("cta_box") as $box => $data) $$box = $data; ?>
-            <div class="cta-box">
-                <?php get_template_part("template-parts/logo", "separator", ["classes" => "cta-box__separator"]); ?>
+            <div class="inner-cta-box">
+                <?php get_template_part("template-parts/logo", "separator", ["classes" => "inner-cta-box__separator"]); ?>
 
-                <div class="cta-box__content formatted-text">
+                <div class="inner-cta-box__content formatted-text">
                     <?= $content ?>
                 </div>
 
-                <div class="cta-box__buttons">
+                <div class="inner-cta-box__buttons">
                     <a href="<?= $cta_link["url"] ?>" target="<?= $cta_link["target"] ?>" class="btn btn--tertiary">
                         <span><?= $cta_link["title"] ?></span>
                     </a>
