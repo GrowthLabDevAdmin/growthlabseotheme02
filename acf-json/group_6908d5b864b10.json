@@ -567,8 +567,8 @@
         },
         {
             "key": "field_692530510aabb",
-            "label": "Hide Locations Section",
-            "name": "hide_locations_section",
+            "label": "Hide Content Section",
+            "name": "hide_content_section",
             "aria-label": "",
             "type": "true_false",
             "instructions": "",
@@ -634,5 +634,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770444440
+    "modified": 1771230197
 }

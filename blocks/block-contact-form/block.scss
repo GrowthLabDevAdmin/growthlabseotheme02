@@ -25,44 +25,6 @@ aside {
 
   $parent: &;
 
-  &--side-pic {
-    #{$parent}__inner {
-      padding: 0;
-      border: none;
-    }
-
-    &:not(:has(#{$parent}__title)):not(:has(#{$parent}__content)) {
-      overflow: visible;
-      content-visibility: inherit;
-
-      #{$parent}__layer {
-        margin-top: calc(-1 * (var(--sp-sm) + var(--sp-xsm)));
-        @media (min-width: v.$tablet) {
-          margin-top: calc(-1 * var(--sp-sm));
-        }
-
-        @media (min-width: v.$mdpi) {
-          margin-top: calc(-1 * var(--sp-lg));
-        }
-      }
-
-      #{$parent}__wrapper {
-        position: relative;
-      }
-
-      #{$parent}__inner {
-        margin-top: calc(-1 * (var(--sp-sm) + var(--sp-xsm)));
-        @media (min-width: v.$tablet) {
-          margin-top: calc(-1 * var(--sp-sm));
-        }
-
-        @media (min-width: v.$mdpi) {
-          margin-top: calc(-1 * var(--sp-lg));
-        }
-      }
-    }
-  }
-
   &__layer {
     position: relative;
     display: flex;
@@ -94,6 +56,11 @@ aside {
   &__title {
     text-align: center;
     @include m.title(null, 4rem, 4.2vw, 4.8rem);
+
+    &::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 
   &__inner {
@@ -111,40 +78,21 @@ aside {
       padding: var(--sp-sm);
     }
   }
-
-  &__side-pic {
-    min-width: 280px;
-    flex: 1 0 calc(50% - var(--sp-sm) / 2);
-    display: flex;
-
-    @media (min-width: v.$tablet) {
-      height: 75%;
-      margin: auto 0;
-    }
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
-  }
 }
 
 .form-box {
   padding: var(--sp-xsm);
-  background-color: rgb(var(--primary));
   flex: 1 0 calc(50% - var(--sp-sm) / 2);
   @include m.flex-center;
   flex-direction: column;
   gap: var(--sp-xsm);
 
   p {
-    color: rgb(var(--secondary));
+    color: rgb(var(--text));
   }
 
   &__title {
-    @include m.title(rgb(var(--secondary)), 3.6rem, 3.33vw, 3.6rem);
+    @include m.title(rgb(var(--text)), 3.6rem, 3.33vw, 3.6rem);
   }
 
   &__form {

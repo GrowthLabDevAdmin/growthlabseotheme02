@@ -7,6 +7,18 @@
 
   $card: &;
 
+  &.grid {
+    #{$card}__title {
+      transform: translateY(50%);
+    }
+
+    &:hover {
+      #{$card}__title {
+        transform: translateY(120%);
+      }
+    }
+  }
+
   &__wrapper {
     width: 100%;
     height: 250px;

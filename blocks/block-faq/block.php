@@ -17,23 +17,29 @@ if (get_field('toggle_block')):
         ?>
 
         <div class="faq__wrapper container">
-            <div class="faq__side-images">
-                <?php
-                if (isset($side_images) && !empty($side_images)) {
+            <?php
+            if (isset($side_images) && !empty($side_images)) :
+            ?>
+                <div class="faq__side-images">
+                    <?php
+
                     foreach ($side_images as $image) {
                         img_print_picture_tag(img: $image['image'], classes: "faq__side-image");
                     }
-                }
 
-                $options = get_field_options("options");
+                    $options = get_field_options("options");
 
-                if ($options["logo_symbol"]) {
-                    echo "<div class='faq__separator'>";
-                    img_print_picture_tag(img: $options["logo_symbol"], max_size: "medium");
-                    echo "</div>";
-                }
-                ?>
-            </div>
+                    if ($options["logo_symbol"]) {
+                        echo "<div class='faq__separator'>";
+                        img_print_picture_tag(img: $options["logo_symbol"], max_size: "medium");
+                        echo "</div>";
+                    }
+                    ?>
+                </div>
+
+            <?php
+            endif;
+            ?>
 
             <div class="faq__inner">
                 <?php

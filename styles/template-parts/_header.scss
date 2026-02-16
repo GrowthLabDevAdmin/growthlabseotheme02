@@ -82,7 +82,7 @@
     transition: 0.3s ease;
 
     @media (min-width: v.$tablet) {
-      grid-template-columns: 3fr 4fr 2fr 2fr;
+      grid-template-columns: 3fr 4fr 3fr 3fr;
     }
 
     @media (min-width: v.$mdpi) {
@@ -107,6 +107,7 @@
     @include m.flex-center;
 
     @media (min-width: v.$tablet) {
+      padding: 0;
       height: 6rem;
       grid-column: 1/2;
     }

@@ -103,7 +103,7 @@
     ?>
 
     <?php
-    if (!$content_section['hide_section'] && !get_field('hide_locations_section')):
+    if (!$content_section['hide_section'] && !get_field('hide_content_section')):
       foreach ($content_section as $form_field => $form_content) $$form_field = $form_content;
     ?>
 
