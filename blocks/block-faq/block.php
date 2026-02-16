@@ -25,7 +25,8 @@ if (get_field('toggle_block')):
                     }
                 }
 
-                $options = get_current_language_options();
+                $options = get_field_options("options");
+
                 if ($options["logo_symbol"]) {
                     echo "<div class='faq__separator'>";
                     img_print_picture_tag(img: $options["logo_symbol"], max_size: "medium");

@@ -2,8 +2,9 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-$options = get_current_language_options();
-?>
+    $options = get_field_options("options");
+
+    ?>
 <div class="team-card <?= $args["classes"] ?>">
     <div class="team-card__wrapper">
 

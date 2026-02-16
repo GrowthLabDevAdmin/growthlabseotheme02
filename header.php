@@ -41,6 +41,15 @@ if (!defined('ABSPATH')) {
                         img_print_picture_tag(img: $image[0], alt_text: get_bloginfo('name'), is_priority: true);
                     }
                     ?>
+
+                    <div class="site-logo__symbol">
+                        <?php
+                        $options = get_field_options("options");
+                        if ($options["logo_symbol"]) {
+                            img_print_picture_tag(img: $options["logo_symbol"], max_size: "medium");
+                        }
+                        ?>
+                    </div>
                     <span>Site Logo</span>
                 </a>
             </div>
