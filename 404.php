@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 get_header();
 ?>
 
-<section class="404 bg-bicolor" style="padding-block: 200px;">
+<section class="404 bg-gradient" style="padding-block: 200px;">
 
     <div class="container">
 

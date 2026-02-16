@@ -19,8 +19,12 @@ if (get_field('toggle_block')):
         'paged' => $paged,
     );
 
+    if ($grid_type === "testimonial") {
+        $args['posts_per_page'] = -1;
+    }
+
     if ($grid_type === "case-result") {
-        $args['posts_per_page'] = 9;
+        $args['posts_per_page'] = -1;
         $args['meta_key'] = 'numerical_amount';
         $args['orderby'] = 'meta_value_num';
     }
@@ -36,14 +40,14 @@ if (get_field('toggle_block')):
 
 
     <section
-        class="block posts-grid <?php if (!$background_image) echo "bg-bicolor"; ?>"
+        class="block posts-grid"
         <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
         <?php
         if (isset($background_image) && $background_image) img_print_picture_tag(img: $background_image, is_cover: true, classes: "posts-grid__bg bg-image gradient-overlay");
         ?>
 
-        <div class="posts-grid__wrapper container border-box">
+        <div class="posts-grid__wrapper container">
 
             <?php
             print_title($title, $title_tag, "posts-grid__title tx-center");
@@ -82,7 +86,7 @@ if (get_field('toggle_block')):
                             switch ($grid_type) {
                                 case 'case-result':
                                     get_template_part('template-parts/result', 'card', array(
-                                        "classes" => "posts-grid__card " . $grid_type,
+                                        "classes" => "posts-grid__card grid " . $grid_type,
                                         "numerical_amount" => $numerical_amount,
                                         "case_title" => $case_title,
                                         "case_description" => $case_description,
@@ -91,7 +95,7 @@ if (get_field('toggle_block')):
 
                                 case 'team':
                                     get_template_part('template-parts/default', 'card', array(
-                                        "classes" => "posts-grid__card " . $grid_type,
+                                        "classes" => "posts-grid__card grid " . $grid_type,
                                         "picture" => get_the_post_thumbnail_url(),
                                         "title" => get_the_title(),
                                         "content" => $role,
@@ -102,7 +106,7 @@ if (get_field('toggle_block')):
 
                                 case 'post':
                                     get_template_part('template-parts/post', 'card', array(
-                                        "classes" => "posts-grid__card " . $grid_type,
+                                        "classes" => "posts-grid__card grid " . $grid_type,
                                         "picture" => get_the_post_thumbnail_url(),
                                         "meta" => get_the_date(),
                                         "title" => get_the_title(),
@@ -114,7 +118,7 @@ if (get_field('toggle_block')):
 
                                 case 'testimonial':
                                     get_template_part('template-parts/testimonial', 'card', array(
-                                        "classes" => "posts-grid__card " . $grid_type,
+                                        "classes" => "posts-grid__card grid " . $grid_type,
                                         "picture" => $author_picture,
                                         "author" => $author_name,
                                         "role" => $author_role,
@@ -126,7 +130,7 @@ if (get_field('toggle_block')):
 
                                 default:
                                     get_template_part('template-parts/default', 'card', array(
-                                        "classes" => "posts-grid__card " . $grid_type,
+                                        "classes" => "posts-grid__card grid " . $grid_type,
                                         "picture" => get_the_post_thumbnail_url(),
                                         "title" => get_the_title(),
                                         "content" => get_the_excerpt(),

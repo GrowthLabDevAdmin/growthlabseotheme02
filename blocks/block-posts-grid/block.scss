@@ -28,21 +28,22 @@
     gap: var(--sp-xsm);
 
     @media (min-width: v.$ldpi) {
-      padding: var(--sp-sm);
+      padding: var(--sp-md);
     }
   }
 
   &__title {
-    @include m.title(null, 4rem, 4.2vw, 4.8rem);
-  }
-
-  &__separator {
-    max-width: 70%;
     margin-bottom: var(--sp-xsm);
+    @include m.title(null, 4rem, 4.2vw, 5.2rem);
+    &::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 
   &__content {
     max-width: 96rem;
+    margin-bottom: var(--sp-md);
   }
 
   &__feed {
@@ -59,13 +60,24 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: var(--sp-xsm);
+
+    &.case-result {
+      flex-direction: column;
+      column-gap: var(--sp-sm);
+
+      @media (min-width: v.$tablet) {
+        display: inline-block;
+        column-count: 2;
+        column-fill: balance;
+      }
+    }
   }
 
   &__card {
     &.case-result {
       min-width: 28rem;
-      max-width: 40.8rem;
-      flex: 1 0 calc((100% / 3) - (var(--sp-xsm) * 2 / 3));
+      max-width: 58rem;
+      height: fit-content;
     }
 
     &.post,

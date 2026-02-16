@@ -322,7 +322,7 @@ img.bg-image {
 }
 
 :where(.formatted-text) {
-  font-size: clamp(1.4rem, 2.2vw, 1.6rem);
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
   font-family: var(--font-sans);
   font-weight: 400;
   line-height: 1.5;
@@ -366,7 +366,7 @@ img.bg-image {
   }
 }
 
-.accordeon {
+.accordion {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -374,29 +374,12 @@ img.bg-image {
   &__content {
     width: 100%;
     max-height: 0;
-    padding-top: 0;
-    z-index: -1;
-    transform-origin: top;
-    transform: scaleY(0);
+    overflow: hidden;
     transition: 0.3s ease;
-
-    & > * {
-      opacity: 0;
-      transition: 0.3s ease;
-    }
   }
 
-  &.open {
-    .accordeon__content {
-      max-height: fit-content;
-      z-index: 0;
-      padding-top: calc(var(--sp-xsm) / 2);
-      transform: scaleY(1);
-
-      & > * {
-        opacity: 1;
-      }
-    }
+  &__inner {
+    padding-block: var(--sp-xsm);
   }
 }
 

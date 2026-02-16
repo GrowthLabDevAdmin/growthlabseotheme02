@@ -3,40 +3,47 @@
 
 .result-card {
   height: auto;
+  padding: var(--sp-xsm) !important;
   $card: &;
 
-  @keyframes descriptionOpacity {
-    from {
-      opacity: 0;
+  &.grid {
+    margin-bottom: var(--sp-xsm);
+    display: inline-block;
+
+    #{$card}__wrapper {
+      @include m.nice-corner(
+        "top-left",
+        "top-right",
+        -1.5rem,
+        12%,
+        $bw-lg: 6px
+      );
     }
-    to {
+
+    #{$card}__description {
+      position: static;
+      z-index: 1;
+      max-height: fit-content;
       opacity: 1;
     }
   }
 
-  svg {
-    width: 64px;
-    height: 64px;
-    z-index: 1;
-    opacity: 1;
-    transform: none;
-    transition: 0.4s ease;
-  }
-
   &__wrapper {
     width: 100%;
-    height: 100%;
+    max-height: 100%;
+    position: relative;
     padding: var(--sp-xsm);
     @include m.flex-center;
-    background-color: rgb(var(--secondary-light));
+    background-color: rgb(var(--primary));
     box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.05);
     transition: 0.4s ease;
+    @include m.nice-corner("top-left", "top-right", -1rem, 15%, $bw-lg: 5px);
   }
 
   &__inner {
     width: 100%;
     height: 100%;
-    padding: var(--sp-sm);
+    padding: var(--sp-xsm);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,54 +52,46 @@
   }
 
   &__amount {
+    position: static;
     @include m.flex-center;
     flex-direction: column;
-    @include m.title(rgb(var(--primary)), 4.8rem, 5vw, 6.4rem, 600, 1);
+    @include m.title(rgb(var(--secondary)), 4.8rem, 5vw, 4.8rem, 600, 1);
+    opacity: 1;
     transition: font-size 0.4s ease;
 
     &::after {
-      content: "";
       width: 48px;
-      height: 1px;
-      margin-top: var(--sp-xsm);
-      background-color: rgb(var(--tertiary));
+      height: 4px;
+      left: 50% !important;
+      transform: translateX(-50%);
     }
   }
 
   &__title {
-    color: rgb(var(--text));
-    font-family: var(--font-sans);
-    font-size: 1.6rem;
+    color: rgb(var(--secondary-light));
+    font-family: var(--font-serif);
+    font-size: 3rem;
     font-weight: 700;
     line-height: 1.5;
     transition: 0.4s linear;
   }
 
   &__description {
-    max-height: 72px;
+    max-height: 0;
+    padding-top: var(--sp-xsm);
+    position: absolute;
+    z-index: -2;
     overflow: hidden;
-    color: rgb(var(--text));
-    @extend .result-card__title;
+    opacity: 0;
+    border-top: 1px solid rgb(var(--tertiary));
+    color: rgb(var(--secondary-light));
     font-weight: 400;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    transition: 0.4s ease-out 0.4s;
-
-    @media (min-width: v.$tablet) {
-      transition-delay: 1s;
-    }
+    transition:
+      max-height 0.5s ease,
+      opacity 0.5s ease 0.6s;
   }
 
-  &:hover {
-    svg {
-      position: absolute;
-      z-index: -5;
-      opacity: 0;
-      transform: scale(0);
-    }
-
+  &:not(.grid):hover {
     #{$card}__wrapper {
       padding: 0;
     }
@@ -102,22 +101,17 @@
     }
 
     #{$card}__amount {
-      font-size: 4rem;
-    }
-
-    #{$card}__title {
-      animation-name: descriptionOpacity;
-      animation-timing-function: ease-in-out;
-      animation-duration: 1.2s;
+      position: absolute;
+      font-size: 0;
+      line-height: 0;
+      opacity: 0;
     }
 
     #{$card}__description {
+      position: static;
+      z-index: 1;
       max-height: 5000px;
-      overflow: visible;
-      -webkit-line-clamp: unset;
-      animation-name: descriptionOpacity;
-      animation-timing-function: ease-in-out;
-      animation-duration: 1.2s;
+      opacity: 1;
     }
   }
 }

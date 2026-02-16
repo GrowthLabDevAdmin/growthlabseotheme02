@@ -9,7 +9,7 @@ $post_id =  $post->ID;
 ?>
 
 <<<<<<< HEAD
-<section class="post__inner bg-bicolor">
+<section class="post__inner bg-gradient">
 
     <div class="post__wrapper container">
 
@@ -19,7 +19,7 @@ $post_id =  $post->ID;
                 the_post();
                 img_print_picture_tag(img: get_the_post_thumbnail_url(), max_size: 'large', is_cover: true, classes: "post__image");
 =======
-<section class="single__inner bg-bicolor">
+<section class="single__inner bg-gradient">
 
     <div class="single__wrapper container">
 

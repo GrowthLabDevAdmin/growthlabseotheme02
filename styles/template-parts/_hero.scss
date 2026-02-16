@@ -4,6 +4,7 @@
 .hero {
   min-height: 35rem;
   padding: 15rem 0 var(--sp-xsm);
+  border-bottom: 5px solid rgb(var(--tertiary-light));
 
   $hero: &;
 
@@ -12,7 +13,7 @@
   }
 
   @media (min-width: v.$mdpi) {
-    padding: 14rem 0 var(--sp-xsm);
+    padding: 20rem 0 var(--sp-md);
   }
 
   &__wrapper {
@@ -98,11 +99,23 @@
 
   &__title {
     margin: 0;
-    @include m.title(rgb(var(--secondary)), 4rem, 2.5vw, 4.8rem, $after: false);
+    @include m.title(
+      rgb(var(--secondary)),
+      4rem,
+      2.5vw,
+      6.5rem,
+      700,
+      $after: false
+    );
+
+    & > * {
+      all: inherit;
+    }
   }
 
   &--homepage {
     padding-bottom: 0;
+    border-bottom: none;
 
     @media (min-width: v.$mdpi) {
       padding-top: 30rem;

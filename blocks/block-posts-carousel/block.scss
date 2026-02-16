@@ -68,10 +68,6 @@
   &.testimonial {
     padding-bottom: var(--sp-lg);
 
-    @media (min-width: v.$ldpi) {
-      padding-bottom: calc(2 * var(--sp-lg));
-    }
-
     #{$parent}__carousel {
       border-top: none;
     }

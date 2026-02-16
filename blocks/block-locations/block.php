@@ -8,7 +8,7 @@ if (get_field('toggle_block')):
 ?>
 
     <section
-        class="block locations bg-bicolor"
+        class="block locations bg-gradient"
         <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
         <div class="locations__wrapper container border-box">

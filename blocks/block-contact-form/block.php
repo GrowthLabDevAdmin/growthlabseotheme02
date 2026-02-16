@@ -14,10 +14,10 @@ if (get_field('toggle_block')):
         if (isset($side_picture) && $side_picture && !$show_only_contact_form) {
             echo "contact-form--side-pic ";
             if (($title || $main_content) && !$background_image) {
-                echo "bg-bicolor";
+                echo "bg-gradient";
             }
         } else if (!isset($background_image) || !$background_image) {
-            echo "bg-bicolor";
+            echo "bg-gradient";
         }
         ?>"
         <?php if (isset($extract_block_from_content) && $extract_block_from_content && !$show_only_contact_form) echo "data-extract='$place'"; ?>>
@@ -26,7 +26,7 @@ if (get_field('toggle_block')):
 
             <div class="contact-form__wrapper
             <?php
-            if (isset($side_picture) && $side_picture && !$title && !$main_content && !$background_image) echo "bg-bicolor ";
+            if (isset($side_picture) && $side_picture && !$title && !$main_content && !$background_image) echo "bg-gradient ";
             ?>
             ">
                 <?php if (isset($background_image) && $background_image && !$show_only_contact_form) img_print_picture_tag(img: $background_image, is_cover: true, classes: "contact-form__bg bg-image gradient-overlay"); ?>

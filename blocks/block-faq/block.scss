@@ -13,7 +13,7 @@
 }
 
 .faq {
-  padding: var(--sp-xsm) 0;
+  padding: var(--sp-sm) 0;
 
   @media (min-width: v.$ldpi) {
     padding: var(--sp-lg) 0;
@@ -29,27 +29,101 @@
   }
 
   &__wrapper {
-    padding: var(--sp-xsm);
-    @include m.flex-center;
+    max-width: 1400px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: var(--sp-lg);
+  }
+
+  &__separator {
+    svg {
+      width: 8rem;
+      height: 8rem;
+      padding: 1rem;
+      display: block;
+      border-radius: 50%;
+      border: 2px solid rgb(var(--tertiary-light));
+      background-color: rgba(var(--secondary-light), 1);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+  }
+
+  &__side-images {
+    width: 80%;
+    height: 38rem;
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+
+    @media (min-width: v.$tablet) {
+      height: 60rem;
+    }
+    @media (min-width: v.$ldpi) {
+      height: auto;
+      flex: 0 0 calc(50% - (var(--sp-lg) / 2));
+    }
+  }
+
+  &__side-image {
+    width: 100%;
+    height: 90%;
+    flex: 0 0 calc(50% - 0.5rem);
+    display: block;
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    &:first-child {
+      align-self: start;
+      @include m.nice-corner("bottom-left", null, 0, 90%, $bw-lg: 5px);
+      &::before {
+        bottom: -1rem;
+        border-left: none;
+      }
+    }
+
+    &:nth-child(2) {
+      align-self: flex-end;
+      @include m.nice-corner("top-right", null, -1rem, 20%, $bw-lg: 5px);
+    }
+  }
+
+  &__inner {
+    display: flex;
     flex-direction: column;
     gap: var(--sp-xsm);
 
     @media (min-width: v.$ldpi) {
-      padding: var(--sp-sm);
+      flex: 0 0 calc(50% - (var(--sp-lg) / 2));
     }
   }
 
   &__content {
     max-width: 96rem;
+    & > *:not(a) {
+      color: rgb(var(--secondary-light));
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   &__title {
-    @include m.title(null, 4rem, 4.2vw, 4.8rem);
-  }
-
-  &__separator {
-    max-width: 70%;
-    margin-bottom: var(--sp-xsm);
+    font-family: var(--font-serif);
+    font-size: clamp(4rem, 2.2vw, 5.5rem);
+    color: rgb(var(--secondary-light));
   }
 
   &__sections {
@@ -61,7 +135,7 @@
 
   &__section {
     width: 100%;
-    @include m.flex-center;
+    display: flex;
     flex-direction: column;
     gap: var(--sp-xsm);
   }
@@ -72,15 +146,24 @@
 
   &__item {
     width: 100%;
-    padding: var(--sp-xsm);
-    background: rgb(var(--secondary-light));
-    border-left: 8px solid rgb(var(--tertiary));
-    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.05);
+    padding-block: var(--sp-xsm);
+
+    &:last-child {
+      #{$parent}__answer {
+        border-bottom: none;
+      }
+    }
 
     &.open {
       #{$parent}__question {
         &::after {
-          transform: rotate(-180deg);
+          content: "\2212";
+        }
+
+        & > * {
+          &::after {
+            display: block;
+          }
         }
       }
     }
@@ -88,27 +171,36 @@
 
   &__question {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
 
     & > * {
-      font-weight: 700;
+      @include m.title(rgba(var(--secondary-light)), 1.4rem, 2vw, 2rem);
+      text-transform: uppercase;
+      &::after {
+        display: none;
+      }
     }
 
     &::after {
-      content: url(../../assets/icons/icon-arrowhead-down.svg);
-      width: var(--sp-xsm);
-      height: var(--sp-xsm);
+      content: "\002B";
+      width: var(--sp-sm);
       display: block;
-      fill: rgb(var(--tertiary));
+      font-size: var(--sp-sm);
+      color: rgb(var(--tertiary));
       transition: all 0.3s ease-in-out;
     }
   }
 
   &__answer {
-    & > * {
-      &:last-child {
-        margin-bottom: 0;
+    border-bottom: 1px solid rgba(var(--secondary), 0.6);
+
+    .formatted-text {
+      & > *:not(a) {
+        color: rgb(var(--secondary-light));
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
   }
