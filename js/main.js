@@ -5,11 +5,9 @@ const mainMenu = document.querySelector(".site-header__navigation");
 const parentMenuItems = document.querySelectorAll(
   ".site-header .main-nav .menu-item-has-children",
 );
-const mainContent = document.querySelectorAll(
-  ".page-template-default .main-content",
-);
+const pageInner = document.querySelector(".page-template-default .page__inner");
 const blocksInContent = document.querySelectorAll(
-  ".page-template-default .main-content .block[data-extract]",
+  ".page-template-default .page__main .block[data-extract]",
 );
 const footerLocations = document.querySelector(
   ".locations-footer .locations-cards__carousel .splide",
@@ -24,12 +22,12 @@ const ldpi = 1024;
 const mdpi = 1200;
 const hdpi = 1440;
 
+blocksInContent && extractBlocks();
+
 document.addEventListener("DOMContentLoaded", () => {
   showMenus();
   footerOfficesSelector();
   eventListeners();
-
-  blocksInContent && extractBlocks();
 
   footerLocations && footerLocationsCarousel();
 
@@ -135,11 +133,12 @@ function fadeInHeader() {
 
 //Blocks
 function extractBlocks() {
+  console.log(pageInner);
   blocksInContent.forEach((item) => {
     if (item.getAttribute("data-extract") === "before") {
-      mainContent.insertAdjacentHTML("beforebegin", item.outerHTML);
+      pageInner.insertAdjacentHTML("beforebegin", item.outerHTML);
     } else {
-      mainContent.insertAdjacentHTML("afterend", item.outerHTML);
+      pageInner.insertAdjacentHTML("afterend", item.outerHTML);
     }
     item.remove();
   });
