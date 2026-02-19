@@ -24,8 +24,10 @@ $post_id =  $post->ID;
         </main>
 
         <?php
-        $args = array('ID' => $post_id, 'classes' => 'single__sidebar');
-        get_sidebar('blog', $args);
+        if (!get_field("hide_sidebar")) {
+            $args = array('ID' => $post_id, 'classes' => 'single__sidebar');
+            get_sidebar('blog', $args);
+        }
         ?>
 
     </div>

@@ -47,6 +47,7 @@
             "name": "",
             "aria-label": "",
             "type": "accordion",
+            "instructions": "Enclose text in \"strong\" HTML tags to highlight it.",
             "required": 0,
             "conditional_logic": [
                 [
@@ -154,6 +155,27 @@
             "allow_in_bindings": 0,
             "layout": "horizontal",
             "save_other_choice": 0
+        },
+        {
+            "key": "field_6996ad8c317c9",
+            "label": "Light\/Dark Background",
+            "name": "lightdark_background",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "Light",
+            "ui_off_text": "Dark",
+            "ui": 1
         },
         {
             "key": "field_691cb854d189c",
@@ -658,5 +680,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771190778
+    "modified": 1771482558
 }

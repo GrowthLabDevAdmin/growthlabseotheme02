@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const perPageLdpi =
         carouselType === "team"
           ? 1
-          : carouselType === "testimonial" || carouselType === "post"
+          : carouselType === "testimonial"
             ? 2
             : 3;
 

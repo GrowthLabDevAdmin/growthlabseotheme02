@@ -42,7 +42,7 @@ if (get_field('toggle_block')):
             <div class="col">
                 <?php
                 if (isset($pretitle) && $pretitle) print_title($pretitle, $pretitle_tag, "col__pretitle pretitle");
-                print_title($title, $title_tag, "col__title");
+                if (isset($title) && $title)  print_title($title, $title_tag, "col__title");
                 ?>
                 <div class="col__content">
                     <?= $content ?? "" ?>

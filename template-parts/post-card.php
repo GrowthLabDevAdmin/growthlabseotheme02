@@ -14,6 +14,8 @@ if (!defined('ABSPATH')) {
         }
         if (isset($args['picture']) && $args['picture']) {
             img_print_picture_tag(img: $args["picture"], max_size: "medium", classes: "post-card__pic");
+        } elseif (get_field_options("options")["posts_default_image"] && !empty(get_field_options("options")["posts_default_image"])) {
+            img_print_picture_tag(img: get_field_options("options")["posts_default_image"], max_size: "medium", classes: "post-card__pic");
         } else {
             include get_stylesheet_directory() . '/assets/icons/icon-file-image.svg';
         }
@@ -33,11 +35,11 @@ if (!defined('ABSPATH')) {
             <p class="post-card__content"><?= $args["excerpt"] ?></p>
 
             <?php if ($args['link_url']): ?>
-                <div class="post-card__btn">
-                    <a href="<?= $args['link_url'] ?>" target="<?= $args['link_target'] ?>" class="btn btn--secondary">
-                        <span>Read More</span>
-                    </a>
-                </div>
+                <a href="<?= $args['link_url'] ?>" target="<?= $args['link_target'] ?>" class="post-card__link">
+                    <span>Read More
+                        <?php include get_template_directory() . "\assets\icons\icon-circle-arrow.svg" ?>
+                    </span>
+                </a>
             <?php endif ?>
         </div>
     </div>

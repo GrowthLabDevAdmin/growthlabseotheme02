@@ -339,6 +339,21 @@ function growthlabtheme02_scripts()
     if (is_home() || is_archive()) {
         wp_enqueue_style('growthlabtheme02-template-default', get_template_directory_uri() . '/styles/page-templates/template-default-min.css', array(),  filemtime(get_template_directory() . '/styles/page-templates/template-default-min.css'));
         wp_enqueue_style('growthlabtheme02-blog', get_template_directory_uri() . '/styles/page-templates/template-blog-min.css', array(),  filemtime(get_template_directory() . '/styles/page-templates/template-blog-min.css'));
+        wp_enqueue_script(
+            'growthlabtheme02-posts-filters',
+            get_template_directory_uri() . '/js/posts-filters-min.js',
+            filemtime(get_template_directory() . '/js/posts-filters-min.js'),
+            ['strategy' => 'defer', 'in_footer' => true]
+        );
+        wp_localize_script(
+            'growthlabtheme02-posts-filters',
+            'postsFiltersData',
+            array(
+                'restUrl' => get_rest_url(null, 'wp/v2'),
+                'perPage' => 9,
+                'defaultImage' => get_field_options('options')['posts_default_image']["url"] ?? '',
+            )
+        );
     }
 }
 

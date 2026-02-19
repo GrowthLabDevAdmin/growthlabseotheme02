@@ -3,6 +3,27 @@
     "title": "Page - Sidebar",
     "fields": [
         {
+            "key": "field_699527462fc93",
+            "label": "Hide Sidebar",
+            "name": "hide_sidebar",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
             "key": "field_692d283da0bf6",
             "label": "Menus",
             "name": "menus",
@@ -10,7 +31,15 @@
             "type": "repeater",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_699527462fc93",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -121,5 +150,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1764616817
+    "modified": 1771385583
 }

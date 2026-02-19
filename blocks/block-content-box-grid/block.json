@@ -1,6 +1,6 @@
 {
-  "name": "acf/content-box",
-  "title": "Content Box",
+  "name": "acf/content-box-grid",
+  "title": "Content Box Grid",
   "style": ["file:./block-min.css"],
   "script": ["file:./block-min.js"],
   "category": "growthlabtheme02-blocks",

@@ -19,7 +19,7 @@ $post_id = get_option('page_for_posts');
                     the_post();
 
                     get_template_part('template-parts/post', 'card', array(
-                        "classes" => "blog__card ",
+                        "classes" => "blog__card post-card--horizontal",
                         "picture" => get_the_post_thumbnail_url(),
                         "meta" => get_the_date(),
                         "title" => get_the_title(),

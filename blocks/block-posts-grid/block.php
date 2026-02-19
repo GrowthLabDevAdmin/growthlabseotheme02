@@ -50,7 +50,8 @@ if (get_field('toggle_block')):
         <div class="posts-grid__wrapper container">
 
             <?php
-            print_title($title, $title_tag, "posts-grid__title tx-center");
+            if (isset($pretitle) && $pretitle) print_title($pretitle, $pretitle_tag, "posts-grid__pretitle pretitle");
+            if (isset($title) && $title) print_title($title, $title_tag, "posts-grid__title tx-center");
             ?>
 
             <?php if ($text_content): ?>
@@ -93,10 +94,11 @@ if (get_field('toggle_block')):
                                     break;
 
                                 case 'team':
-                                    get_template_part('template-parts/default', 'card', array(
+                                    get_template_part('template-parts/team', 'card-grid', array(
                                         "classes" => "posts-grid__card grid " . $grid_type,
                                         "picture" => get_the_post_thumbnail_url(),
-                                        "title" => get_the_title(),
+                                        "name" => get_the_title(),
+                                        "role" => $role,
                                         "link_url" => get_the_permalink(),
                                         "link_target" => '_blank',
                                     ));

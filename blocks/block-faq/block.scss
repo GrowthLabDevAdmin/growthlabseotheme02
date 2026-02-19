@@ -21,10 +21,15 @@
 
   $parent: &;
 
-  &:has(.bg-image) {
+  &:not(.bg-gradient) {
     #{$parent}__title,
-    #{$parent}__content > * {
-      color: rgb(var(--secondary));
+    #{$parent}__content > *,
+    #{$parent}__question > *,
+    #{$parent}__answer .formatted-text > *:not(a) {
+      color: rgb(var(--text));
+    }
+    #{$parent}__answer {
+      border-bottom-color: rgb(var(--tertiary));
     }
   }
 
@@ -67,7 +72,7 @@
     }
     @media (min-width: v.$ldpi) {
       height: auto;
-      flex: 0 0 calc(50% - (var(--sp-lg) / 2));
+      flex: 1 0 calc(50% - (var(--sp-lg) / 2));
     }
   }
 
@@ -106,7 +111,7 @@
     gap: var(--sp-xsm);
 
     @media (min-width: v.$ldpi) {
-      flex: 0 0 calc(50% - (var(--sp-lg) / 2));
+      flex: 1 0 calc(50% - (var(--sp-lg) / 2));
     }
   }
 

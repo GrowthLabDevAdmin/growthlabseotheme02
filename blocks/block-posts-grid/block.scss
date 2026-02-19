@@ -4,6 +4,7 @@
 @use "../../styles/template-parts/post-card";
 @use "../../styles/template-parts/default-card";
 @use "../../styles/template-parts/testimonial-card";
+@use "../../styles/template-parts/team-card-grid";
 
 .posts-grid {
   padding: var(--sp-xsm) 0;
@@ -27,7 +28,7 @@
     flex-direction: column;
     gap: var(--sp-xsm);
 
-   /*  @media (min-width: v.$ldpi) {
+    /*  @media (min-width: v.$ldpi) {
       padding: var(--sp-sm);
     } */
   }
@@ -59,8 +60,9 @@
     align-items: stretch;
     justify-content: flex-start;
     flex-wrap: wrap;
-    gap: var(--sp-xsm);
+    gap: var(--sp-sm);
 
+    &.testimonial,
     &.case-result {
       flex-direction: column;
       column-gap: var(--sp-sm);
@@ -84,14 +86,14 @@
     &.testimonial {
       min-width: 28rem;
       max-width: 62rem;
-      flex: 1 0 calc(50% - (var(--sp-xsm) / 2));
+      flex: 1 0 calc(50% - (var(--sp-sm) / 2));
     }
 
     &.team,
     &.custom {
       min-width: 28rem;
       max-width: 39.2rem;
-      flex: 1 0 calc((100% / 3) - (var(--sp-xsm) * 2 / 3));
+      flex: 1 0 calc((100% / 3) - (var(--sp-sm) * 2 / 3));
     }
   }
 

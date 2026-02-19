@@ -100,8 +100,8 @@ input[type="hidden"] {
   display: none;
 }
 
-button[type="submit"],
-input[type="submit"] {
+.gform_button[type="submit"],
+.gform_button[type="submit"] {
   min-width: fit-content;
   padding: 1.6rem 2.4rem;
   display: flex;

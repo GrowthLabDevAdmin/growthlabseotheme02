@@ -15,7 +15,6 @@ aside {
   .contact-form__inner {
     width: 100%;
     margin: 0 0;
-    padding: 0 8px 8px 0;
   }
 }
 
@@ -65,7 +64,6 @@ aside {
 
   &__inner {
     margin-bottom: var(--sp-md);
-    padding: var(--sp-xsm);
     position: relative;
     z-index: 5;
     display: flex;
@@ -73,15 +71,10 @@ aside {
     align-items: stretch;
     justify-content: space-evenly;
     gap: var(--sp-sm);
-
-    @media (min-width: v.$mdpi) {
-      padding: var(--sp-sm);
-    }
   }
 }
 
 .form-box {
-  padding: var(--sp-xsm);
   flex: 1 0 calc(50% - var(--sp-sm) / 2);
   @include m.flex-center;
   flex-direction: column;

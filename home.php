@@ -10,7 +10,9 @@ $post_id = get_option('page_for_posts');
 
     <div class="blog__wrapper container">
 
-        <main class="blog__main border-box">
+        <?php get_template_part("template-parts/posts", "filters", array("classes" => "blog__filters")) ?>
+
+        <main class="blog__main">
 
             <div class="blog__loop">
 
@@ -18,8 +20,10 @@ $post_id = get_option('page_for_posts');
 
                     the_post();
 
+                    $card_class = !get_field("hide_sidebar", $post_id) ? "blog__card--horizontal post-card--horizontal" : "";
+
                     get_template_part('template-parts/post', 'card', array(
-                        "classes" => "blog__card ",
+                        "classes" => "blog__card " . $card_class,
                         "picture" => get_the_post_thumbnail_url(),
                         "meta" => get_the_date(),
                         "title" => get_the_title(),
@@ -40,8 +44,10 @@ $post_id = get_option('page_for_posts');
         </main>
 
         <?php
-        $args = array('ID' => $post_id, 'classes' => 'blog__sidebar');
-        get_sidebar('blog', $args);
+        if (!get_field("hide_sidebar", $post_id)) {
+            $args = array('ID' => $post_id, 'classes' => 'blog__sidebar');
+            get_sidebar('blog', $args);
+        }
         ?>
 
     </div>

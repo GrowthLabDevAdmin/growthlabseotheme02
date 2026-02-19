@@ -2,6 +2,7 @@
 @use "../../styles/globals/mixins" as m;
 @use "../template-parts/post-card";
 @use "../template-parts/sidebar";
+@use "../template-parts/posts-filters";
 
 .blog,
 .archive {
@@ -17,25 +18,36 @@
 
   &__main {
     min-width: 280px;
-    padding: var(--sp-sm);
-    flex: 1 0 calc(60% - var(--sp-md));
+    flex: 1 0 calc(65% - var(--sp-md));
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--sp-xsm);
+    gap: var(--sp-sm);
   }
 
   &__loop {
     width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--sp-xsm);
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: var(--sp-sm);
+  }
+
+  &__card {
+    max-width: 39.2rem;
+    min-width: 28rem;
+    flex: 1 0 calc((100% / 3) - (var(--sp-sm) * 3) / 2);
+
+    &--horizontal {
+      max-width: 100%;
+      flex: 0 0 100%;
+    }
   }
 
   &__sidebar {
     min-width: 280px;
-    flex: 1 1 calc(40%);
+    flex: 1 1 calc(35%);
     display: flex;
     flex-direction: column;
     gap: var(--sp-xsm);

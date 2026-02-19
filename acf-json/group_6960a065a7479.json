@@ -106,7 +106,7 @@
                     "name": "top_callout_first_line",
                     "aria-label": "",
                     "type": "text",
-                    
+                    "instructions": "Enclose text in \"strong\" HTML tags to highlight it.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -148,7 +148,7 @@
                     "name": "top_callout_second_line",
                     "aria-label": "",
                     "type": "text",
-                    
+                    "instructions": "Enclose text in \"strong\" HTML tags to highlight it.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -724,6 +724,32 @@
                     "preview_size": "medium"
                 },
                 {
+                    "key": "field_69962f786e4bc",
+                    "label": "Posts Default Image",
+                    "name": "posts_default_image",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "allow_in_bindings": 0,
+                    "preview_size": "medium"
+                },
+                {
                     "key": "field_6960a06616700",
                     "label": "FOOTER",
                     "name": "",
@@ -747,7 +773,7 @@
                     "name": "form_section",
                     "aria-label": "",
                     "type": "group",
-                    
+                    "instructions": "Enclose text in \"strong\" HTML tags to highlight it.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -1347,7 +1373,7 @@
                             "name": "top_callout_first_line",
                             "aria-label": "",
                             "type": "text",
-                            
+                            "instructions": "Enclose text in \"strong\" HTML tags to highlight it.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -1389,7 +1415,7 @@
                             "name": "top_callout_second_line",
                             "aria-label": "",
                             "type": "text",
-                            
+                            "instructions": "Enclose text in \"strong\" HTML tags to highlight it.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -1984,7 +2010,7 @@
                             "name": "form_section",
                             "aria-label": "",
                             "type": "group",
-                            
+                            "instructions": "Enclose text in \"strong\" HTML tags to highlight it.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -2659,5 +2685,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770600460
+    "modified": 1771450251
 }

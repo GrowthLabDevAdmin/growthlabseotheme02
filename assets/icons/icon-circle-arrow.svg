@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="44" viewBox="-5 0 75 44">
+  <!-- Circle arc center at (35,22), radius 18 -->
+  <path d="M 19.41 13 A 18 18 0 1 1 19.41 31" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  
+  <!-- Arrow: tip moved 3px right → tip at x=38, tail at x=-18 -->
+  <line x1="-18" y1="22" x2="38" y2="22" stroke="currentColor" stroke-width="1.2"/>
+  
+  <!-- Arrow head, tip at x=38 -->
+  <polyline points="32,16 38,22 32,28" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>
