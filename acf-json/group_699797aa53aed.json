@@ -1,5 +1,5 @@
 {
-    "key": "group_6960a065a7479",
+    "key": "group_699797aa53aed",
     "title": "Site Options",
     "fields": [
         {
@@ -1211,9 +1211,9 @@
     "location": [
         [
             {
-                "param": "options_page",
+                "param": "post_type",
                 "operator": "==",
-                "value": "site_options"
+                "value": "post"
             }
         ]
     ],
@@ -1227,5 +1227,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771542343
+    "modified": 1771542468
 }

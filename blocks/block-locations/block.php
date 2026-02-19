@@ -39,7 +39,7 @@ if (get_field('toggle_block')):
                                 'card',
                                 array(
                                     'location' => $location,
-                                    'classes' => "locations__card bg-gradient"
+                                    'classes' => "locations-cards__card"
                                 )
                             );
                         }

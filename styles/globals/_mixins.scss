@@ -84,7 +84,7 @@
     width: $size;
     height: auto;
     position: absolute;
-    z-index: 3;
+    z-index: -1;
     display: block;
     aspect-ratio: 1/1;
     border-width: $bw-sm;

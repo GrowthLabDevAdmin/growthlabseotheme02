@@ -4,66 +4,53 @@ if (!defined('ABSPATH')) {
 }
 ?>
 <?php $location = $args['location']; ?>
-<div class="location-card <?= isset($args['classes']) ? $args['classes'] : '' ?>">
-    <div class="location-card__wrapper">
+<div class="location-card accordion <?= isset($args['classes']) ? $args['classes'] : '' ?>">
+    <?php
+    $tp_url = $location['target_page_url'];
+    $city = $tp_url ? "<a href='$tp_url' target='_blank'>" : '';
+    $city .= $location['city'];
+    $city .= $tp_url ? "</a>" : '';
+    ?>
 
-        <?php if ($location['google_maps_embed_code']): ?>
-            <?php
-            $args = array(
-                "iframe_src" => $location['google_maps_embed_code'],
-                "name" => $location['city'],
-                "classes" => "location-card__map"
-            );
-            get_template_part("template-parts/google", "maps", $args);
-            ?>
-        <?php endif ?>
-        <?php if ($location['picture']): ?>
-            <?php
-            if (isset($args['picture']) && $args['picture']) {
-                img_print_picture_tag(img: $args["picture"], max_size: "medium", classes: "post-card__pic");
-            } elseif (get_field_options("options")["posts_default_image"] && !empty(get_field_options("options")["posts_default_image"])) {
-                img_print_picture_tag(img: get_field_options("options")["posts_default_image"], max_size: "medium", classes: "post-card__pic");
-            }
-            ?>
-        <?php endif ?>
+    <div class="location-card__container">
+        <?= print_title($city, $location['city_tag'], "location-card__city accordion__heading"); ?>
 
-        <div class="location-card__inner tx-center">
+        <div class="location-card__wrapper accordion__content">
 
-            <?php
-            $tp_url = $location['target_page_url'];
-            $city = $tp_url ? "<a href='$tp_url' target='_blank'>" : '';
-            $city .= $location['city'];
-            $city .= $tp_url ? "</a>" : '';
-            ?>
+            <div class="location-card__inner accordion__inner">
+                <div class="location-card__col">
+                    <?php if ($location['google_maps_embed_code']): ?>
+                        <?php
+                        $args = array(
+                            "iframe_src" => $location['google_maps_embed_code'],
+                            "name" => $location['city'],
+                            "classes" => "location-card__map"
+                        );
+                        get_template_part("template-parts/google", "maps", $args);
+                        ?>
+                    <?php endif ?>
+                </div>
 
-            <?= print_title($city, $location['city_tag'], "location-card__city"); ?>
+                <div class="location-card__col">
 
-            <p class="location-card__address"><?= $location['address'] ?></p>
+                    <p class="location-card__address"><?= $location['address'] ?></p>
 
-            <?php if ($location['phone']): ?>
-                <a href="tel:+1<?= get_flat_number($location['phone']) ?>" class="location-card__btn btn btn--secondary">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_4735_5808)">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.88498 0.511147C2.05996 0.336436 2.27006 0.200905 2.50138 0.113537C2.7327 0.0261686 2.97994 -0.0110424 3.22672 0.00436978C3.47351 0.019782 3.7142 0.0874655 3.93285 0.202935C4.15149 0.318404 4.34311 0.479023 4.49498 0.674147L6.28998 2.98015C6.61898 3.40315 6.73498 3.95415 6.60498 4.47415L6.05798 6.66415C6.0297 6.77758 6.03123 6.89639 6.06242 7.00906C6.09361 7.12172 6.1534 7.22441 6.23598 7.30715L8.69298 9.76415C8.77582 9.8469 8.87868 9.90679 8.99153 9.93798C9.10439 9.96918 9.22341 9.97061 9.33698 9.94215L11.526 9.39515C11.7826 9.33099 12.0504 9.326 12.3093 9.38057C12.5681 9.43514 12.8111 9.54784 13.02 9.71015L15.326 11.5041C16.155 12.1491 16.231 13.3741 15.489 14.1151L14.455 15.1491C13.715 15.8891 12.609 16.2141 11.578 15.8511C8.93917 14.9227 6.54325 13.412 4.56798 11.4311C2.58727 9.45616 1.07659 7.06061 0.147983 4.42215C-0.214017 3.39215 0.110983 2.28515 0.850983 1.54515L1.88498 0.511147Z" fill="#BC9061" />
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_4735_5808">
-                                <rect width="16" height="16" fill="white" />
-                            </clipPath>
-                        </defs>
-                    </svg>
-                    <span>
-                        <?= $location['phone'] ?>
-                    </span>
-                </a>
-            <?php endif ?>
+                    <?php if ($location['cta_button']['url']): ?>
+                        <a href="<?= $location['cta_button']['url'] ?>" class="location-card__cta">
+                            <?= $location['cta_button']['title'] ?>
+                        </a>
+                    <?php endif ?>
 
-            <?php if ($location['cta_button']['url']): ?>
-                <a href="<?= $location['cta_button']['url'] ?>" class="location-card__cta">
-                    <?= $location['cta_button']['title'] ?>
-                </a>
-            <?php endif ?>
+                    <?php if ($location['phone']): ?>
+                        <a href="tel:+1<?= get_flat_number($location['phone']) ?>" class="location-card__btn btn btn--tertiary">
+                            <span>
+                                <?= $location['phone'] ?>
+                            </span>
+                        </a>
+                    <?php endif ?>
 
+                </div>
+            </div>
         </div>
     </div>
 </div>

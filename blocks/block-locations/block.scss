@@ -2,114 +2,48 @@
 @use "../../styles/globals/mixins" as m;
 
 .locations {
-  padding: var(--sp-xsm) 0;
+  padding: var(--sp-sm) 0;
 
   @media (min-width: v.$ldpi) {
-    padding: var(--sp-lg) 0;
+    padding: var(--sp-lg) 0 var(--sp-md);
   }
 
   $parent: &;
 
   &__wrapper {
-    padding: var(--sp-xsm);
     @include m.flex-center;
     flex-direction: column;
-    gap: var(--sp-xsm);
-
-    @media (min-width: v.$ldpi) {
-      padding: var(--sp-sm);
-    }
-  }
-
-  &__title {
-    @include m.title(null, 4rem, 4.2vw, 4.8rem);
-  }
-
-  &__separator {
-    max-width: 70%;
-    margin-bottom: var(--sp-xsm);
+    gap: var(--sp-sm);
   }
 
   &__content {
     max-width: 96rem;
     @include m.flex-center;
     flex-direction: column;
+    gap: var(--sp-xsm);
   }
 
-  &__card {
-    padding: 0 calc(var(--sp-xsm) / 2);
+  &__pretitle {
+    margin-bottom: 0;
   }
 
-  &__arrows {
-    margin-top: var(--sp-xsm);
+  &__title {
+    margin-bottom: var(--sp-xsm);
+    @include m.title(null, 4rem, 4.2vw, 4.8rem);
+
+    &::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 }
 
 .locations-cards {
   max-width: 100%;
-  margin-bottom: 7.4rem;
   display: flex;
   align-items: stretch;
   justify-content: center;
   gap: calc(var(--sp-xsm) / 2);
-
-  @media (min-width: v.$mdpi) {
-    margin-bottom: 9rem;
-  }
-
-  &:has(.location-card:only-child) {
-    width: 100%;
-    margin-bottom: 0 !important;
-    flex-wrap: wrap;
-    align-items: stretch;
-    row-gap: var(--sp-sm);
-
-    & > *:not(.btn) {
-      min-width: 280px;
-      margin-bottom: 0;
-      width: calc(50% - var(--sp-xsm) / 4) !important;
-      flex: 0 0 calc(50% - var(--sp-xsm) / 4) !important;
-    }
-    & > .btn {
-      min-width: 280px;
-      display: block;
-      flex: 0;
-      text-align: center;
-    }
-  }
-
-  &__carousel {
-    width: calc(50% - var(--sp-xsm) / 4);
-    flex: 0 0 calc(50% - var(--sp-xsm) / 4);
-
-    @media (min-width: v.$tablet) {
-      width: calc((2 * (100% / 3)) - var(--sp-xsm) / 4);
-      flex: 0 0 calc((2 * (100% / 3)) - var(--sp-xsm) / 4);
-    }
-
-    @media (min-width: v.$mdpi) {
-      width: calc((4 * (100% / 5)) - var(--sp-xsm) / 4);
-      flex: 0 0 calc((4 * (100% / 5)) - var(--sp-xsm) / 4);
-    }
-  }
-
-  &__arrows {
-    width: calc((100% * 2) + var(--sp-xsm));
-    position: absolute;
-    top: calc(100% + var(--sp-xsm));
-    right: 0;
-
-    @media (min-width: v.$tablet) {
-      width: calc((3 * (100% / 2)) + var(--sp-xsm) / 4);
-      flex: 0 0 calc((3 * (100% / 2)) + var(--sp-xsm) / 4);
-    }
-
-    @media (min-width: v.$mdpi) {
-      width: calc((5 * (100% / 4)) + var(--sp-xsm) / 4);
-      flex: 0 0 calc((5 * (100% / 4)) + var(--sp-xsm) / 4);
-      top: calc(100% + var(--sp-sm));
-    }
-  }
 
   &__grid {
     width: 100%;
@@ -118,13 +52,12 @@
     align-items: stretch;
     justify-content: flex-start;
     gap: var(--sp-xsm);
+  }
 
-    & > * {
-      width: auto;
-      min-width: 235px;
-      margin-bottom: 0;
-      padding: 0 0;
-      flex: 1 0 calc(20% - ((var(--sp-xsm) * 4) / 5)) !important;
-    }
+  &__card {
+    width: auto;
+    min-width: 235px;
+    margin-bottom: 0;
+    flex: 1 0 calc(50% - var(--sp-xsm) / 2);
   }
 }

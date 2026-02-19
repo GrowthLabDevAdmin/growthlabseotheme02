@@ -187,7 +187,7 @@ function toggleAccordion(e) {
   const content = header.nextElementSibling;
   const inner = content.querySelector(".accordion__inner");
 
-  header.parentNode.classList.toggle("open");
+  header.closest(".accordion").classList.toggle("open");
 
   if (content.style.maxHeight) {
     // Cerrar
@@ -198,7 +198,7 @@ function toggleAccordion(e) {
   }
 
   new ResizeObserver((inner) => {
-    const content = inner.target.closest(".accordion-content");
+    const content = inner.target.closest(".accordion__content");
     if (content && content.classList.contains("active")) {
       content.style.maxHeight = entry.target.scrollHeight + "px";
     }
