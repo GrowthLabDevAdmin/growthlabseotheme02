@@ -12,7 +12,7 @@ $post_id =  $post->ID;
 
     <div class="page__wrapper container">
 
-        <main class="page__main border-box formatted-text">
+        <main class="page__main formatted-text">
 
             <?php while (have_posts()) {
                 the_post();

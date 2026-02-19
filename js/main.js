@@ -133,7 +133,6 @@ function fadeInHeader() {
 
 //Blocks
 function extractBlocks() {
-  console.log(pageInner);
   blocksInContent.forEach((item) => {
     if (item.getAttribute("data-extract") === "before") {
       pageInner.insertAdjacentHTML("beforebegin", item.outerHTML);

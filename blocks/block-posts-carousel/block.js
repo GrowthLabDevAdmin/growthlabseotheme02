@@ -3,25 +3,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (postsCarousels.length > 0) {
     postsCarousels.forEach((carousel) => {
+
       let carouselType = carousel.dataset.type;
       let splideElement = carousel.querySelector(".splide");
 
-      const perPageTablet =
+      let perPageTablet =
         carouselType === "testimonial" || carouselType === "team"
           ? 1
           : carouselType === "case-result" || carouselType === "post"
             ? 2
             : 3;
 
-      const perPageLdpi =
-        carouselType === "team"
-          ? 1
-          : carouselType === "testimonial"
-            ? 2
-            : 3;
+      let perPageLdpi =
+        carouselType === "team" ? 1 : carouselType === "testimonial" ? 2 : 3;
 
       const focusFor = (n) => (n % 2 === 1 ? "center" : false);
       const trimFor = (n) => (n % 2 === 1 ? true : false);
+
+      if (carousel.closest(".sidebar")) {
+        perPageTablet = 1;
+        perPageLdpi = 1;
+      }
 
       carouselObj = {
         type: "loop",

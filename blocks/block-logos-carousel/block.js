@@ -13,10 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
         mediaQuery: "min",
         breakpoints: {
           [tablet]: {
-            perPage: 3,
+            perPage: logosCarousels[i].closest(".sidebar") ? 2 : 3,
           },
           [ldpi]: {
-            perPage: 5,
+            perPage: logosCarousels[i].closest(".sidebar") ? 3 : 5,
             pagination: false,
           },
         },
