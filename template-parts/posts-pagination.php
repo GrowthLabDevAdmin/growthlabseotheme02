@@ -64,7 +64,7 @@ $container_classes = esc_attr($args['classes']);
                 $page_link = str_replace('page-numbers', 'page-numbers pagination__link', $page_link);
 
                 // Determine li class based on link type
-                $li_class = 'pagination__item btn btn--tertiary';
+                $li_class = 'pagination__item';
 
                 if (strpos($page_link, 'prev') !== false) {
                     $li_class .= ' pagination__item--prev arrow arrow--prev';

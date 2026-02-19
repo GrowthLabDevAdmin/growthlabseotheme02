@@ -19,13 +19,6 @@
         $bw-lg: 6px
       );
     }
-
-    #{$card}__description {
-      position: static;
-      z-index: 1;
-      max-height: fit-content;
-      opacity: 1;
-    }
   }
 
   &__wrapper {
@@ -52,12 +45,9 @@
   }
 
   &__amount {
-    position: static;
     @include m.flex-center;
     flex-direction: column;
     @include m.title(rgb(var(--secondary)), 4.8rem, 5vw, 4.8rem, 600, 1);
-    opacity: 1;
-    transition: font-size 0.4s ease;
 
     &::after {
       width: 48px;
@@ -73,45 +63,12 @@
     font-size: 3rem;
     font-weight: 700;
     line-height: 1.5;
-    transition: 0.4s linear;
   }
 
   &__description {
-    max-height: 0;
     padding-top: var(--sp-xsm);
-    position: absolute;
-    z-index: -2;
-    overflow: hidden;
-    opacity: 0;
     border-top: 1px solid rgb(var(--tertiary));
     color: rgb(var(--secondary-light));
     font-weight: 400;
-    transition:
-      max-height 0.5s ease,
-      opacity 0.4s ease-in 0.6s;
-  }
-
-  &:not(.grid):hover {
-    #{$card}__wrapper {
-      padding: 0;
-    }
-
-    #{$card}__inner {
-      padding: var(--sp-xsm);
-    }
-
-    #{$card}__amount {
-      position: absolute;
-      font-size: 0;
-      line-height: 0;
-      opacity: 0;
-    }
-
-    #{$card}__description {
-      position: static;
-      z-index: 1;
-      max-height: 5000px;
-      opacity: 1;
-    }
   }
 }

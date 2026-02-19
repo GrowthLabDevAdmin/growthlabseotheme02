@@ -96,7 +96,7 @@ if (get_field('toggle_block')):
                                 case 'team':
                                     get_template_part('template-parts/team', 'card-grid', array(
                                         "classes" => "posts-grid__card grid " . $grid_type,
-                                        "picture" => get_the_post_thumbnail_url(),
+                                        "picture" => $headshot,
                                         "name" => get_the_title(),
                                         "role" => $role,
                                         "link_url" => get_the_permalink(),

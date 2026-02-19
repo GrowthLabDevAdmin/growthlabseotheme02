@@ -9,10 +9,10 @@ foreach (get_fields() as $key => $value) $$key = $value;
 
         <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-                <aside class="single__sidebar single-team__sidebar border-box formatted-text">
+                <aside class="single__sidebar single-team__sidebar formatted-text">
                     <?php
                     if (has_post_thumbnail()) {
-                        img_print_picture_tag(img: get_the_post_thumbnail_url(), max_size: "cover-mobile", classes: "single-team__picture");
+                        img_print_picture_tag(img: $headshot, max_size: "cover-mobile", classes: "single-team__picture");
                     }
                     ?>
 
@@ -29,12 +29,14 @@ foreach (get_fields() as $key => $value) $$key = $value;
                     </ul>
                 </aside>
 
-                <main class="single__main border-box formatted-text">
+                <main class="single__main">
                     <div class="single-team__heading">
-                        <p class="single-team__title h3"><?php the_title(); ?></p>
-                        <p class="single-team__role h5"><?= $role; ?></p>
+                        <p class="single-team__role pretitle"><?= $role; ?></p>
+                        <p class="single-team__title"><?php the_title(); ?></p>
                     </div>
-                    <?php the_content(); ?>
+                    <div class="single-team__content formatted-text">
+                        <?php the_content(); ?>
+                    </div>
                 </main>
         <?php endwhile;
         endif; ?>

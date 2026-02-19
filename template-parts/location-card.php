@@ -16,9 +16,16 @@ if (!defined('ABSPATH')) {
             );
             get_template_part("template-parts/google", "maps", $args);
             ?>
-        <?php
-        endif
-        ?>
+        <?php endif ?>
+        <?php if ($location['picture']): ?>
+            <?php
+            if (isset($args['picture']) && $args['picture']) {
+                img_print_picture_tag(img: $args["picture"], max_size: "medium", classes: "post-card__pic");
+            } elseif (get_field_options("options")["posts_default_image"] && !empty(get_field_options("options")["posts_default_image"])) {
+                img_print_picture_tag(img: get_field_options("options")["posts_default_image"], max_size: "medium", classes: "post-card__pic");
+            }
+            ?>
+        <?php endif ?>
 
         <div class="location-card__inner tx-center">
 
@@ -51,9 +58,9 @@ if (!defined('ABSPATH')) {
                 </a>
             <?php endif ?>
 
-            <?php if ($location['google_map_url']): ?>
-                <a href="<?= $location['google_map_url'] ?>" class="location-card__cta">
-                    <?= filterContentByLanguage() ? "Obetner Direcciones" : "Get Directions" ?>
+            <?php if ($location['cta_button']['url']): ?>
+                <a href="<?= $location['cta_button']['url'] ?>" class="location-card__cta">
+                    <?= $location['cta_button']['title'] ?>
                 </a>
             <?php endif ?>
 

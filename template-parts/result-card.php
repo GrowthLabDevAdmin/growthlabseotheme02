@@ -11,7 +11,9 @@ if (!defined('ABSPATH')) {
 
             <p class="result-card__title"><?= $args["case_title"] ?></p>
 
-            <p class="result-card__description"><?= $args["case_description"] ?></p>
+            <?php if (isset($args["case_description"]) && $args["case_description"]): ?>
+                <p class="result-card__description"><?= $args["case_description"] ?></p>
+            <?php endif ?>
         </div>
     </div>
 </div>

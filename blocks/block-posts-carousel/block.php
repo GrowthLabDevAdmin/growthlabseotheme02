@@ -97,7 +97,6 @@ if (get_field('toggle_block')):
                                                 "classes" => "splide__slide posts-carousel__card",
                                                 "numerical_amount" => $numerical_amount,
                                                 "case_title" => $case_title,
-                                                "case_description" => $case_description,
                                             ));
                                             break;
 

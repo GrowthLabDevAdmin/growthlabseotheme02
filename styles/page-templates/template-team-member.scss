@@ -2,12 +2,22 @@
 @use "../../styles/globals/mixins" as m;
 
 .single-team {
-  &__title.h3 {
-    color: rgb(var(--tertiary));
+  &__title {
+    margin-bottom: var(--sp-sm);
+
+    @include m.title(
+      rgba(var(--primary-dark)),
+      2.1rem,
+      2vw,
+      3.5rem,
+      500,
+      1.5,
+      true
+    );
   }
 
-  &__role.h5 {
-    color: rgb(var(--primary-light));
+  &__role {
+    margin-bottom: var(--sp-xsm);
   }
 
   &__sidebar {
@@ -33,7 +43,6 @@
   }
 
   &__points {
-
     & > li {
       &::before {
         content: none;
