@@ -30,7 +30,7 @@ if (!defined('ABSPATH')) {
                         ?>
                     <?php endif ?>
                 </div>
-
+                CholerBasteWhysHomier
                 <div class="location-card__col">
 
                     <p class="location-card__address"><?= $location['address'] ?></p>
