@@ -283,13 +283,13 @@ function inline_main_critical_css()
     $color_scheme = theme_get_customizer_css();
 
     $critical_css = file_get_contents(get_template_directory() . "/styles/main-min.css");
+    $critical_css .= file_get_contents(get_stylesheet_uri());
     $critical_css = preg_replace('/\{theme-path\}/', get_template_directory_uri(), $critical_css);
     $critical_css =  $color_scheme . $critical_css;
 
     echo '<style id="main-css">' . $critical_css . '</style>';
 }
-add_action('wp_head', 'inline_main_critical_css', 1);
-
+add_action('wp_head', 'inline_main_critical_css', 20);
 
 function growthlabtheme02_scripts()
 {
