@@ -23,20 +23,6 @@ if (!$bg_mobile) $bg_mobile = [];
 
 //Title Values
 $hero_title_tag = $hero_title_tag ?? null;
-$hero_title = $hero_title ?? null;
-
-if ($hero_title === null || $hero_title === "") {
-    if (is_home()) {
-        $hero_title = get_the_title(get_option('page_for_posts'));
-    } elseif (is_page() || is_single()) {
-        $hero_title = get_the_title($id);
-    } elseif (is_post_type_archive()) {
-        $hero_title = post_type_archive_title('', false);
-    } elseif (is_tax()) {
-        $hero_title = single_term_title('', false);
-    }
-}
-
 ?>
 <section id="hero" class="hero hero--v5">
 
@@ -46,7 +32,7 @@ if ($hero_title === null || $hero_title === "") {
         <div class="hero__content tx-center">
             <?php print_title($hero_tagline, $hero_tagline_tag, "content-box__tagline"); ?>
             <div class="hero__title">
-                <?= $hero_title ?>
+                <?= $args["hero_title"] ?>
             </div>
             <?php print_title($hero_subtitle, $hero_subtitle_tag, "hero__subtitle", true); ?>
 

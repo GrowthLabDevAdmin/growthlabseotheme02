@@ -34,10 +34,10 @@ if (!$bg_mobile) $bg_mobile = [];
 
     <div class="hero__wrapper container">
         <?php if ($side_portrait) img_print_picture_tag(img: $side_portrait, classes: "hero__side-portrait", is_priority: false, is_cover: true); ?>
-        
+
         <div class="hero__content">
             <div class="hero__title">
-                <?= $hero_title ?>
+                <?= $args["hero_title"] ?>
             </div>
 
             <?php if (isset($badges) && $badges && !empty($badges)): ?>

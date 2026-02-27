@@ -134,7 +134,22 @@ if (!defined('ABSPATH')) {
     </header>
 
     <?php
+    $hero_title = $hero_title ?? null;
+
+    if ($hero_title === null || $hero_title === "") {
+        if (is_home()) {
+            $hero_title = get_the_title(get_option('page_for_posts'));
+        } elseif (is_page() || is_single()) {
+            $hero_title = get_the_title($id);
+        } elseif (is_post_type_archive()) {
+            $hero_title = post_type_archive_title('', false);
+        } elseif (is_tax()) {
+            $hero_title = single_term_title('', false);
+        }
+    }
+
     $args = array(
+        "hero_title" => $hero_title,
         "hero_image_desktop_default" => $hero_image_desktop,
         "hero_image_tablet_default" => $hero_image_tablet,
         "hero_image_mobile_default" => $hero_image_mobile,
