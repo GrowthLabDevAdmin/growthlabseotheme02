@@ -122,6 +122,19 @@
   }
 }
 
+.page__main,
+.single__main {
+  .content-box-grid {
+    &__wrapper {
+      padding: 0;
+    }
+  }
+
+  .content-box {
+    max-width: 100%;
+  }
+}
+
 .sidebar {
   .content-box-grid {
     &__wrapper {
