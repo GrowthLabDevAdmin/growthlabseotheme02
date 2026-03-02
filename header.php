@@ -134,7 +134,7 @@ if (!defined('ABSPATH')) {
     </header>
 
     <?php
-    $hero_title = $hero_title ?? null;
+    $hero_title = get_field("hero_properties", $post_id)["hero_title"] ?? null;
 
     if ($hero_title === null || $hero_title === "") {
         if (is_home()) {
