@@ -121,3 +121,11 @@
     }
   }
 }
+
+.sidebar{
+  .content-box-grid{
+    &__wrapper{
+      padding: 0;
+    }
+  }
+}
