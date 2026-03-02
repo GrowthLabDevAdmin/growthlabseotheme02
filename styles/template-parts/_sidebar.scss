@@ -12,8 +12,11 @@
     display: none;
   }
 
-  .block .container {
-    width: 100%;
+  .block {
+    padding: 0;
+    .container {
+      width: 100%;
+    }
   }
 }
 
