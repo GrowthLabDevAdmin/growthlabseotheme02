@@ -122,10 +122,17 @@
   }
 }
 
-.sidebar{
-  .content-box-grid{
-    &__wrapper{
+.sidebar {
+  .content-box-grid {
+    &__wrapper {
+      width: 100%;
+      margin: 0 0;
       padding: 0;
     }
+  }
+
+  .content-box {
+    max-width: 100%;
+    flex: 1 0 100%;
   }
 }
