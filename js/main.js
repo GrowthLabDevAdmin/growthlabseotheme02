@@ -9,9 +9,6 @@ const pageInner = document.querySelector(".page-template-default .page__inner");
 const blocksInContent = document.querySelectorAll(
   ".page-template-default .page__main .block[data-extract]",
 );
-const footerLocations = document.querySelector(
-  ".locations-footer .locations-cards__carousel .splide",
-);
 
 const accordionItems = document.querySelectorAll(".accordion");
 
@@ -28,8 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
   showMenus();
   footerOfficesSelector();
   eventListeners();
-
-  footerLocations && footerLocationsCarousel();
 
   document.querySelectorAll(".sidebar").forEach((el) => {
     if (!el.querySelector("*")) el.classList.add("is-empty");
