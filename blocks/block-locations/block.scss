@@ -61,3 +61,10 @@
     flex: 1 0 calc(50% - var(--sp-xsm) / 2);
   }
 }
+
+.sidebar {
+  .location-card {
+    width: 100%;
+    flex: 0 0 100%;
+  }
+}
