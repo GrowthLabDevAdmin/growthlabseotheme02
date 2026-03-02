@@ -1,2 +1,0 @@
-document.addEventListener("DOMContentLoaded",()=>{let e=document.querySelectorAll(".locations .locations-cards__carousel");e.length>0&&e.forEach(e=>{let o=e.querySelector(".splide");if(o){new Splide(o,{type:"loop",perMove:1,perPage:4,arrows:!0,pagination:!1,breakpoints:{[tablet]:{perPage:1},[ldpi]:{perPage:2}}}).mount()}})});
-//# sourceMappingURL=block-min.js.map
