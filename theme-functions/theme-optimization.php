@@ -121,11 +121,13 @@ add_action('wp_head', function () {
 
     $fonts = array(
         // Roboto Serif fonts
-        'fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-400.woff2',
+        'fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-regular.woff2',
+        'fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-100.woff2',
+        'fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-500.woff2',
         'fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-600.woff2',
         'fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-700.woff2',
         // Mona Sans fonts
-        'fonts/mona-sans-v4-latin/mona-sans-v4-latin-400.woff2',
+        'fonts/mona-sans-v4-latin/mona-sans-v4-latin-regular.woff2',
         'fonts/mona-sans-v4-latin/mona-sans-v4-latin-600.woff2',
         'fonts/mona-sans-v4-latin/mona-sans-v4-latin-700.woff2',
     );
