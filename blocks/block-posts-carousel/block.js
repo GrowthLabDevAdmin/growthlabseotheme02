@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+(() => {
   let postsCarousels = document.querySelectorAll(".posts-carousel__carousel");
 
   if (postsCarousels.length > 0) {
@@ -51,4 +51,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-});
+})();
