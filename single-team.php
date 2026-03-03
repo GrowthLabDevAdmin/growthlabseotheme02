@@ -9,7 +9,7 @@ foreach (get_fields() as $key => $value) $$key = $value;
 
         <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-                <aside class="single__sidebar single-team__sidebar formatted-text">
+                <aside role="complementary" class="single__sidebar single-team__sidebar formatted-text">
                     <?php
                     if (has_post_thumbnail()) {
                         img_print_picture_tag(img: $headshot, max_size: "cover-mobile", classes: "single-team__picture");
@@ -29,7 +29,7 @@ foreach (get_fields() as $key => $value) $$key = $value;
                     </ul>
                 </aside>
 
-                <main class="single__main">
+                <main role="main" class="single__main">
                     <div class="single-team__heading">
                         <p class="single-team__role pretitle"><?= $role; ?></p>
                         <p class="single-team__title"><?php the_title(); ?></p>

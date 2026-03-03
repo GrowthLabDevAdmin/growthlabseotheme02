@@ -12,7 +12,7 @@ $post_id = get_option('page_for_posts');
 
         <?php get_template_part("template-parts/posts", "filters", array("classes" => "blog__filters")) ?>
 
-        <main class="blog__main">
+        <main role="main" class="blog__main">
 
             <div class="blog__loop">
 

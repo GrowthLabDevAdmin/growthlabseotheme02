@@ -12,7 +12,7 @@ $post_id =  $post->ID;
 
     <div class="single__wrapper container">
 
-        <main class="single__main">
+        <main role="main" class="single__main">
 
             <?php while (have_posts()) {
                 the_post();

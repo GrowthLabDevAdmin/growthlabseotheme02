@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+(() => {
   const logosCarousels = document.querySelectorAll(
     ".logos-carousel__carousel .splide",
   );
@@ -23,4 +23,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }).mount();
     }
   }
-});
+})();

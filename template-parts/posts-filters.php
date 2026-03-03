@@ -47,7 +47,7 @@ $extra_classes = isset($args['classes']) ? esc_attr($args['classes']) : '';
 
 <section class="posts-filters <?= $extra_classes ?>" id="postsFilters">
 
-    <form class="posts-filters__form" id="postsFiltersForm" novalidate>
+    <form role="search" class="posts-filters__form" id="postsFiltersForm" novalidate>
 
         <!-- Search -->
         <div class="posts-filters__group posts-filters__group--search">

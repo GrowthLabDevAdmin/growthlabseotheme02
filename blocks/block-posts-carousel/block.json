@@ -2,7 +2,7 @@
   "name": "acf/posts-carousel",
   "title": "Posts Carousel",
   "style": ["file:./block-min.css"],
-  "script": ["file:./block-min.js", "splide-js"],
+  "script": ["splide-js", "file:./block-min.js"],
   "category": "growthlabtheme02-blocks",
   "icon": "block-default",
   "keywords": [

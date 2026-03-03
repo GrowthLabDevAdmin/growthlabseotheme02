@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 ?>
 
-<aside class="sidebar sidebar--blog <?= $args["classes"] ?>">
+<aside role="complementary" class="sidebar sidebar--blog <?= $args["classes"] ?>">
 
     <?php dynamic_sidebar("sidebar-blog" . get_current_language()["slug"] !== "" ? "-" . get_current_language()["slug"] : "") ?>
 

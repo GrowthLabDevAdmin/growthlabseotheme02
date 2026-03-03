@@ -107,18 +107,17 @@ add_action('wp_enqueue_scripts', function () {
 add_action('wp_enqueue_scripts', function () {
     global $wp_scripts;
 
-    if (empty($wp_scripts->registered)) {
-        return;
-    }
+    if (empty($wp_scripts->registered)) return;
 
     foreach ($wp_scripts->registered as $handle => $script) {
-        // Move block scripts to footer
         if (
             !empty($script->src)
             && str_contains($script->src, '/blocks/')
-            && empty($script->extra['group'])
         ) {
-            $wp_scripts->registered[$handle]->extra['group'] = 1; // 1 = footer
+            // Mover al footer
+            $wp_scripts->registered[$handle]->extra['group'] = 1;
+            // Agregar defer
+            $wp_scripts->registered[$handle]->extra['strategy'] = 'defer';
         }
     }
 }, 999);

@@ -4,7 +4,7 @@
   }
   ?>
 
-  <footer id="site-footer" class="site-footer">
+  <footer id="site-footer" role="contentinfo" class="site-footer">
 
     <?php
     global $post;

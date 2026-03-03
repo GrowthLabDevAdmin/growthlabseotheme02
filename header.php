@@ -28,7 +28,7 @@ if (!defined('ABSPATH')) {
     $phone_number = $contact_phone ?: $main_phone_number;
     ?>
 
-    <header class="site-header <?= !is_404() && get_field('hero_style') !== "nohero" && $sticky_header ? "site-header--sticky" : "" ?>">
+    <header role="banner" class="site-header <?= !is_404() && get_field('hero_style') !== "nohero" && $sticky_header ? "site-header--sticky" : "" ?>">
 
         <div class="site-header__wrapper">
 
@@ -38,7 +38,7 @@ if (!defined('ABSPATH')) {
                     if (function_exists('the_custom_logo') && has_custom_logo()) {
                         $custom_logo_id = get_theme_mod('custom_logo');
                         $image = wp_get_attachment_image_src($custom_logo_id, 'full');
-                        img_print_picture_tag(img: $image[0], alt_text: get_bloginfo('name'), is_priority: true);
+                        img_print_picture_tag(img: $image[0], max_size: "medium", alt_text: get_bloginfo('name'), is_priority: true);
                     }
                     ?>
 
@@ -71,17 +71,18 @@ if (!defined('ABSPATH')) {
 
                 <?php
                 if (has_nav_menu('main')) {
+                    echo '<nav class="main-nav" role="navigation">';
                     wp_nav_menu(
                         array(
                             'theme_location'  => 'main' . get_current_language_suffix(),
-                            'container'          => 'nav',
-                            'container_class' => 'main-nav',
+                            'container'          => false,
                             'menu_class'      => 'main-nav__menu',
                             'items_wrap'      => '<ul class="%2$s">%3$s</ul>',
                             'link_before'          => '<span>',
                             'link_after'              => '</span>'
                         )
                     );
+                    echo '</nav>';
                 }
                 ?>
 
