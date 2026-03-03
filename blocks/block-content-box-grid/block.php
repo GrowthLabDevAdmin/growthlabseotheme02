@@ -43,7 +43,7 @@ if (get_field('toggle_block')):
 
                                             <<?= $title_tag ?> class="content-box__title">
                                                 <?php
-                                                if ($title_link) echo "<a href='" . $title_link['url'] . "' target='" . $title_link['target'] . "'>";
+                                                if ($title_link) echo "<a href='" . $title_link['url'] . "' target='" . $title_link['target'] . "' aria-label='" . esc_attr($title) . "'>";
                                                 echo $title;
                                                 if ($title_link) echo "</a>";
                                                 ?>
@@ -67,7 +67,7 @@ if (get_field('toggle_block')):
                     ?>
 
                         <li class="content-box content-box--menu-item">
-                            <a href="<?= $menu_item->url ?>" target="<?= $menu_item->target ?>" class="content-box__wrapper">
+                            <a href="<?= $menu_item->url ?>" target="<?= $menu_item->target ?>" class="content-box__wrapper" aria-label="<?= esc_attr($menu_item->title) ?>">
                                 <div class="content-box__inner">
 
                                     <div class="content-box__content formatted-text">

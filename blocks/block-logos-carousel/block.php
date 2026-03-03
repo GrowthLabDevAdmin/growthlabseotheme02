@@ -40,7 +40,8 @@ if (get_field('toggle_block')):
                                         <?php if ($has_link): ?>
                                             <a href="<?= esc_url($logo['link']['url']); ?>"
                                                 target="<?= esc_attr($logo['link']['target']); ?>"
-                                                class="logo__link">
+                                                class="logo__link"
+                                                aria-label="<?= esc_attr($logo['link']['title']); ?>">
                                             <?php endif; ?>
 
                                             <?= img_generate_picture_tag(

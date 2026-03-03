@@ -24,7 +24,7 @@
      </button>
 
      <?php if ($args['nav_link']): ?>
-         <a href="<?= $args['nav_link']['url'] ?>" target="<?= $args['nav_link']['target'] ?>" class="cta-btn btn btn--tertiary">
+         <a href="<?= $args['nav_link']['url'] ?>" target="<?= $args['nav_link']['target'] ?>" class="cta-btn btn btn--tertiary" aria-label="<?= esc_attr($args['nav_link']['title']) ?>">
              <span><?= $args['nav_link']['title'] ?></span>
          </a>
      <?php endif ?>

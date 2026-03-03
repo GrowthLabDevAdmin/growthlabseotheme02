@@ -58,10 +58,10 @@ if (get_field('toggle_block')):
                 </div>
 
                 <div class="inner-cta-box__buttons">
-                    <a href="<?= $cta_link["url"] ?>" target="<?= $cta_link["target"] ?>" class="btn btn--tertiary">
+                    <a href="<?= $cta_link["url"] ?>" target="<?= $cta_link["target"] ?>" class="btn btn--tertiary" aria-label="<?= esc_attr($cta_link["title"]) ?>">
                         <span><?= $cta_link["title"] ?></span>
                     </a>
-                    <a href="<?= $cta_link_2["url"] ?>" target="<?= $cta_link_2["target"] ?>" class="btn btn--primary">
+                    <a href="<?= $cta_link_2["url"] ?>" target="<?= $cta_link_2["target"] ?>" class="btn btn--primary" aria-label="<?= esc_attr($cta_link_2["title"]) ?>">
                         <span><?= $cta_link_2["title"] ?></span>
                     </a>
                 </div>

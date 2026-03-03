@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 <div class="location-card accordion <?= isset($args['classes']) ? $args['classes'] : '' ?>">
     <?php
     $tp_url = $location['target_page_url'];
-    $city = $tp_url ? "<a href='$tp_url' target='_blank'>" : '';
+    $city = $tp_url ? "<a href='$tp_url' target='_blank' aria-label='" . esc_attr($location['city']) . "'>" : '';
     $city .= $location['city'];
     $city .= $tp_url ? "</a>" : '';
     ?>
@@ -35,13 +35,13 @@ if (!defined('ABSPATH')) {
                     <p class="location-card__address"><?= $location['address'] ?></p>
 
                     <?php if ($location['cta_button']['url']): ?>
-                        <a href="<?= $location['cta_button']['url'] ?>" class="location-card__cta">
+                        <a href="<?= $location['cta_button']['url'] ?>" class="location-card__cta" aria-label="<?= esc_attr($location['cta_button']['title']) ?>">
                             <?= $location['cta_button']['title'] ?>
                         </a>
                     <?php endif ?>
 
                     <?php if ($location['phone']): ?>
-                        <a href="tel:+1<?= get_flat_number($location['phone']) ?>" class="location-card__btn btn btn--tertiary">
+                        <a href="tel:+1<?= get_flat_number($location['phone']) ?>" class="location-card__btn btn btn--tertiary" aria-label="Call us at <?= esc_attr($location['phone']) ?>">
                             <span>
                                 <?= $location['phone'] ?>
                             </span>

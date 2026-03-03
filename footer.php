@@ -47,7 +47,7 @@
                     <address class="footer-office__info">
 
                       <<?= $office["city_tag"] ?> class="footer-office__city">
-                        <a href="<?= $office['target_page_url'] ?>">
+                        <a href="<?= $office['target_page_url'] ?>" aria-label="<?= esc_attr($office['city']); ?>">
                           <?= esc_html($office['city']); ?>
                         </a>
                       </<?= $office["city_tag"] ?>>
@@ -59,10 +59,10 @@
 
                       <p class="footer-office__item">
                         <?php include get_stylesheet_directory() . '/assets/icons/icon-phone.svg'; ?>
-                        <a href="<?= get_flat_number($office['phone']) ?>"><?= esc_html($office['phone']); ?></a>
+                        <a href="<?= get_flat_number($office['phone']) ?>" aria-label="<?= esc_attr($office['phone']); ?>"><?= esc_html($office['phone']); ?></a>
                       </p>
 
-                      <a href="<?= $office['cta_button']['url'] ?>" class="footer-office__cta btn btn--tertiary" target="<?= $office['cta_button']['target'] ?>">
+                      <a href="<?= $office['cta_button']['url'] ?>" class="footer-office__cta btn btn--tertiary" target="<?= $office['cta_button']['target'] ?>" aria-label="<?= esc_attr($office['cta_button']['title']); ?>">
                         <span>
                           <?= esc_html($office['cta_button']['title']); ?>
                         </span>
@@ -119,7 +119,7 @@
             <div class="content-info-footer__social">
               <?php get_template_part('template-parts/social', 'networks'); ?>
             </div>
-            <a href="<?= $cta_button['url'] ?>" class="btn btn--primary" target="<?= $cta_button['target'] ?>">
+            <a href="<?= $cta_button['url'] ?>" class="btn btn--primary" target="<?= $cta_button['target'] ?>" aria-label="<?= esc_attr($cta_button['title']) ?>">
               <span>
                 <?= esc_html($cta_button['title']) ?>
               </span>
@@ -159,7 +159,7 @@
             )
           );
           ?>
-          <a href="https://growthlabseo.com/" target="_blank" class="copyright-footer__logo">
+          <a href="https://growthlabseo.com/" target="_blank" class="copyright-footer__logo" aria-label="Growth Lab SEO">
             <img src="<?= get_stylesheet_directory_uri() . "/assets/img/Growth-Lab-Logo.png" ?>" alt="Growth Lab SEO Logo" width="270" height="50">
           </a>
 

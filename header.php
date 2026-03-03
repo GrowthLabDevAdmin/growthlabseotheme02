@@ -33,7 +33,7 @@ if (!defined('ABSPATH')) {
         <div class="site-header__wrapper">
 
             <div class="site-header__logo">
-                <a href="<?php echo esc_url(home_url('/' . get_current_language()['slug'])); ?>" class="site-logo">
+                <a href="<?php echo esc_url(home_url('/' . get_current_language()['slug'])); ?>" class="site-logo" aria-label="<?= esc_attr(get_bloginfo('name')); ?>">
                     <?php
                     if (function_exists('the_custom_logo') && has_custom_logo()) {
                         $custom_logo_id = get_theme_mod('custom_logo');
@@ -91,11 +91,11 @@ if (!defined('ABSPATH')) {
                         <div class="callout">
                             <?php if (!empty(get_languages_map())): ?>
                                 <div class="callout__languages">
-                                    <a href="<?= get_site_url() ?>" class="language">
+                                    <a href="<?= get_site_url() ?>" class="language" aria-label="Select English language">
                                         EN
                                     </a>
                                     <?php foreach (get_languages_map() as $lang => $data): ?>
-                                        <a href="<?= get_site_url() . '/' . $lang ?>" class="language">
+                                        <a href="<?= get_site_url() . '/' . $lang ?>" class="language" aria-label="<?= 'Select ' . esc_attr($lang) . ' language' ?>">
                                             <?= $lang ?>
                                         </a>
                                     <?php endforeach; ?>
@@ -108,7 +108,7 @@ if (!defined('ABSPATH')) {
                             <?php if ($top_callout_second_line): ?>
                                 <span><?= $top_callout_second_line ?></span>
                             <?php endif; ?>
-                            <a href="tel:+1<?= get_flat_number($phone_number) ?>" class="callout__phone">
+                            <a href="tel:+1<?= get_flat_number($phone_number) ?>" class="callout__phone" aria-label="Call us at <?= esc_attr($phone_number) ?>">
                                 <?php include(get_template_directory() . "/assets/icons/icon-phone.svg") ?>
                                 <?= $phone_number ?>
                             </a>
@@ -120,7 +120,7 @@ if (!defined('ABSPATH')) {
 
             <?php if ($cta_button): ?>
                 <div class="site-header__cta">
-                    <a href="<?= $cta_button['url'] ?>" class="cta-button btn btn--tertiary" target="<?= $cta_button['target'] ?>">
+                    <a href="<?= $cta_button['url'] ?>" class="cta-button btn btn--tertiary" target="<?= $cta_button['target'] ?>" aria-label="<?= esc_attr($cta_button['title']) ?>">
 
                         <span class="cta-button__text">
                             <?= $cta_button['title'] ?>

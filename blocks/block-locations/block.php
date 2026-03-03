@@ -50,7 +50,7 @@ if (get_field('toggle_block')):
                 ?>
 
                 <?php if ($cta_link && count($locations) === 1): ?>
-                    <a href="<?= $cta_link['url'] ?>" target="<?= $cta_link['target'] ?>" class="cta-btn btn btn--secondary">
+                    <a href="<?= $cta_link['url'] ?>" target="<?= $cta_link['target'] ?>" class="cta-btn btn btn--secondary" aria-label="<?= esc_attr($cta_link['title']) ?>">
                         <span><?= $cta_link['title'] ?></span>
                     </a>
                 <?php endif; ?>

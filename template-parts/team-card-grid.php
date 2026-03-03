@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 
 <div class="team-card-grid <?= $args["classes"] ?>">
     <?php if ($args['link_url'] && $args['link_url'] !== ''): ?>
-        <a href="<?= $args['link_url'] ?>" target="<?= $args['link_target'] ?>" class="team-card-grid__wrapper">
+        <a href="<?= $args['link_url'] ?>" target="<?= $args['link_target'] ?>" class="team-card-grid__wrapper" aria-label="<?= esc_attr($args['name']) ?>">
             <?php
             if (isset($args['picture']) && $args['picture'] && $args['picture'] !== '') {
                 img_print_picture_tag(img: $args["picture"], max_size: "medium", classes: "team-card-grid__pic");

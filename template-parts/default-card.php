@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
 
     <?php
     if ($args['link_url'] && $args['link_url'] !== '') {
-        echo "<a href=" . $args['link_url'] . " class='default-card__wrapper' target=" . $args['link_target'] . ">";
+        echo "<a href=" . $args['link_url'] . " class='default-card__wrapper' target=" . $args['link_target'] . " aria-label='" . esc_attr($args['title']) . "'>";
     } else {
         echo "<div class='default-card__wrapper'>";
     }
