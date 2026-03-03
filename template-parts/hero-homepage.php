@@ -33,7 +33,7 @@ if (!$bg_mobile) $bg_mobile = [];
     ); ?>
 
     <div class="hero__wrapper container">
-        <?php if ($side_portrait) img_print_picture_tag(img: $side_portrait, classes: "hero__side-portrait", is_priority: false, is_cover: true); ?>
+        <?php if ($side_portrait) img_print_picture_tag(img: $side_portrait, classes: "hero__side-portrait", is_priority: true, is_cover: true); ?>
 
         <div class="hero__content">
             <div class="hero__title">
@@ -44,7 +44,7 @@ if (!$bg_mobile) $bg_mobile = [];
                 <div class="hero__badges">
                     <?php foreach ($badges as $badge) {
                         $pic = $badge['badge'];
-                        img_print_picture_tag(img: $pic, classes: "hero__badge", is_priority: true, max_size: "thumbnail");
+                        img_print_picture_tag(img: $pic, classes: "hero__badge", is_priority: false, max_size: "thumbnail");
                     } ?>
                 </div>
             <?php endif ?>
