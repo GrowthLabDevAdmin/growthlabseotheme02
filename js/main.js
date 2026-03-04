@@ -20,6 +20,7 @@ const mdpi = 1200;
 const hdpi = 1440;
 
 blocksInContent && extractBlocks();
+findConsecutiveGroups();
 
 document.addEventListener("DOMContentLoaded", () => {
   showMenus();
@@ -139,7 +140,7 @@ function extractBlocks() {
 }
 
 //Find Blocks with Bg-gradient class
-(function findConsecutiveGroups() {
+function findConsecutiveGroups() {
   const blocks = document.querySelectorAll("body>section");
 
   if (!blocks) return;
@@ -174,7 +175,7 @@ function extractBlocks() {
       wrapper.appendChild(el);
     });
   });
-})();
+}
 
 //Accordion Items
 function toggleAccordion(e) {
