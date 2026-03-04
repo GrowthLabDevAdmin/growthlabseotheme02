@@ -37,8 +37,8 @@ if (!defined('ABSPATH')) {
                     <?php
                     if (function_exists('the_custom_logo') && has_custom_logo()) {
                         $custom_logo_id = get_theme_mod('custom_logo');
-                        $image = wp_get_attachment_image_src($custom_logo_id, 'full');
-                        img_print_picture_tag(img: $image[0], max_size: "medium", alt_text: get_bloginfo('name'), is_priority: true);
+                        $image = wp_get_attachment_image_url($custom_logo_id, 'full');
+                        img_print_picture_tag(img: $image, max_size: "medium", alt_text: get_bloginfo('name'), is_priority: true);
                     }
                     ?>
 

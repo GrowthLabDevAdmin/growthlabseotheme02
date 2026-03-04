@@ -206,6 +206,27 @@ function po_get_preferred_size_for_breakpoint(string $breakpoint): ?string
 }
 
 /**
+ * Return all registered WP size names that map to a given breakpoint,
+ * ordered from largest → smallest (so callers can pick the best that fits).
+ *
+ * @param string $breakpoint Breakpoint key (mobile, tablet, ldpi, mdpi, hdpi)
+ * @return string[] Ordered list of size names
+ */
+function po_get_sizes_for_breakpoint(string $breakpoint): array
+{
+    $sizes = array_reverse($GLOBALS['sizes']);
+    $matches = [];
+
+    foreach ($sizes as $size) {
+        if (po_map_size_to_breakpoint($size) === $breakpoint) {
+            $matches[] = $size;
+        }
+    }
+
+    return $matches;
+}
+
+/**
  * Detect registered sizes whose name contains 'cover'.
  * Returns an array sorted by width descending (largest cover first).
  * Each entry: ['name' => string, 'width' => int, 'breakpoint' => string]
@@ -692,6 +713,10 @@ function img_generate_picture_tag(
     $sources    = [];
     $used_sizes = []; // Tracks WP size names already emitted to prevent duplicates
 
+    // Determine maximum allowed width based on requested max_size.
+    $max_width = $img_fields['sizes'][$max_size]['width'] ?? 0;
+    $allow_full = ($max_size === 'full');
+
     foreach ($order as $bp) {
         // mobile has no lower bound, so it needs no media query
         $media = ($bp === 'mobile') ? null : "(min-width: {$GLOBALS['breakpoints'][$bp]})";
@@ -726,29 +751,41 @@ function img_generate_picture_tag(
             continue;
         }
 
-        // Find the best registered WP size for this breakpoint
-        $preferred = po_get_preferred_size_for_breakpoint($bp);
+        // Get candidate registered sizes for this breakpoint (largest → smallest)
+        $candidates = po_get_sizes_for_breakpoint($bp);
+        $preferred = null;
 
-        if (!$preferred) {
-            continue;
+        foreach ($candidates as $candidate) {
+            // Skip if we've already emitted this registered size
+            if (in_array($candidate, $used_sizes, true)) {
+                continue;
+            }
+
+            // Never use 'full' if caller requested a smaller max_size
+            if (!$allow_full && $candidate === 'full') {
+                continue;
+            }
+
+            $candidate_width = $img_fields['sizes'][$candidate]['width'] ?? 0;
+
+            // If max width is known, skip candidates larger than the requested max.
+            if ($max_width > 0 && $candidate_width > 0 && $candidate_width > $max_width) {
+                continue;
+            }
+
+            // Accept the first candidate that passes all checks
+            $preferred = $candidate;
+            break;
         }
 
-        // SKIP this breakpoint if we already emitted sources for the same WP size.
-        // This prevents identical <source> pairs when multiple breakpoints resolve
-        // to the same registered size (most commonly 'full').
-        if (in_array($preferred, $used_sizes, true)) {
+        if (!$preferred) {
             continue;
         }
 
         $used_sizes[] = $preferred;
 
         // WebP source for this breakpoint.
-        // We check whether a .webp sidecar exists specifically for this size's URL,
-        // not just for the 'full' size. Each resized file (e.g. image-571x720.png)
-        // may have its own .webp counterpart (image-571x720.png.webp) generated
-        // independently by the WebP conversion plugin.
         if (!empty($img_fields['urls'][$preferred]) && img_evaluate_webp($img_fields['urls'][$preferred])) {
-            // Build the WebP URL by appending .webp to this specific size's URL
             $webp_url  = $img_fields['urls'][$preferred] . '.webp';
             $webp_type = 'image/webp';
             $sources[] = img_create_source_tag($webp_url, $webp_type, $media);
