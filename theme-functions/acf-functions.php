@@ -171,47 +171,89 @@ add_action('init', function () {
 });
 
 
-//Synchronize Fields after theme updates
-add_action('admin_init', function () {
+/**
+ * Synchronize ACF Fields after theme updates (CI/CD Integration)
+ * 
+ * Importa campos ACF del tema padre automáticamente respetando:
+ * - Overrides del tema hijo (si existe)
+ * - Cambios realizados en el repositorio
+ * - El hash MD5 de los archivos JSON para detectar cambios
+ */
+add_action('admin_notices', function () {
+    if (wp_doing_ajax() || wp_doing_cron()) return;
+    if (!current_user_can('manage_options')) return;
+    if (defined('ACF_DOING_SYNC')) return;
     if (!function_exists('acf_get_field_groups')) return;
 
-    $child_json_path  = get_stylesheet_directory() . '/acf-json';
+    $memory_start = memory_get_usage();
+
     $parent_json_path = get_template_directory() . '/acf-json';
+    $child_json_path  = get_stylesheet_directory() . '/acf-json';
+    $is_child_theme   = $child_json_path !== $parent_json_path;
 
-    // Get the latest modified time of JSON files in the parent theme
-    $latest_file_mod = 0;
-    foreach (glob($parent_json_path . '/*.json') ?: [] as $file) {
-        $latest_file_mod = max($latest_file_mod, filemtime($file));
-    }
+    $parent_json_files = array_filter(
+        glob($parent_json_path . '/group_*.json') ?: [],
+        fn($f) => is_readable($f)
+    );
+    if (empty($parent_json_files)) return;
 
-    // If there are no JSON files in the parent or we've already synced with the latest ones, do nothing
-    $last_synced = get_option('acf_json_last_synced', 0);
-    if ($latest_file_mod <= $last_synced) return;
+    try {
+        $content_hash = md5(implode('', array_map('md5_file', $parent_json_files)));
+        if (get_option('acf_json_parent_sync_hash', '') === $content_hash) return;
 
-    // There are new/updated JSON files in the parent theme, let's sync them
-    $groups = acf_get_field_groups();
-
-    foreach ($groups as $group) {
-        if (!isset($group['local']) || $group['local'] !== 'json') continue;
-
-        // Respect child overrides: if there's a child JSON file for this group, skip it
-        $child_file = $child_json_path . '/' . $group['key'] . '.json';
-        if (file_exists($child_file)) continue;
-
-        if (
-            isset($group['modified'], $group['local_modified']) &&
-            $group['modified'] < $group['local_modified']
-        ) {
-            $local_field_group = acf_get_local_field_group($group['key']);
-            $local_field_group['fields'] = acf_get_local_fields($group['key']);
-            acf_import_field_group($local_field_group);
+        if (get_transient('acf_sync_lock')) {
+            error_log('[ACF sync] skipped — mutex active, another sync is running');
+            return;
         }
+        set_transient('acf_sync_lock', true, 30);
+
+        define('ACF_DOING_SYNC', true);
+        update_option('acf_json_parent_sync_hash', $content_hash, false);
+
+        error_log('[ACF sync] starting at ' . current_time('mysql'));
+        error_log('[ACF sync] files: ' . count($parent_json_files) . ' | mode: ' . ($is_child_theme ? 'child theme' : 'parent only'));
+
+        $groups   = acf_get_field_groups();
+        $synced   = 0;
+        $skipped  = 0;
+        $warnings = 0;
+
+        foreach ($groups as $group) {
+            if (empty($group['local']) || $group['local'] !== 'json') continue;
+            if (empty($group['local_modified']) || $group['local_modified'] <= $group['modified']) continue;
+
+            if ($is_child_theme && file_exists($child_json_path . '/' . $group['key'] . '.json')) {
+                error_log('[ACF sync] skipped (child override): ' . ($group['title'] ?? $group['key']));
+                $skipped++;
+                continue;
+            }
+
+            $local = acf_get_local_field_group($group['key']);
+            if (empty($local)) {
+                error_log('[ACF sync] WARNING — group not found: ' . $group['key']);
+                $warnings++;
+                continue;
+            }
+
+            $local['fields'] = acf_get_local_fields($group['key']);
+            acf_import_field_group($local);
+            error_log('[ACF sync] imported: ' . ($group['title'] ?? $group['key']));
+            $synced++;
+        }
+
+        $memory_used = round((memory_get_usage() - $memory_start) / 1024 / 1024, 2);
+        $memory_peak = round(memory_get_peak_usage(true) / 1024 / 1024, 2);
+
+        delete_transient('acf_sync_lock');
+
+        $status = $warnings === 0 ? 'OK' : 'COMPLETED WITH WARNINGS';
+        error_log('[ACF sync] ' . $status . ' — synced: ' . $synced . ', skipped: ' . $skipped . ', warnings: ' . $warnings);
+        error_log('[ACF sync] memory: ' . $memory_used . 'MB used | ' . $memory_peak . 'MB peak');
+    } catch (Throwable $e) {
+        delete_transient('acf_sync_lock');
+        error_log('[ACF sync] ERROR — ' . $e->getMessage() . ' in ' . $e->getFile() . ' line ' . $e->getLine());
     }
-
-    // Save the timestamp of the latest parent JSON file we synced with
-    update_option('acf_json_last_synced', $latest_file_mod, false);
 });
-
 
 // Allow HTML in ACF fields
 add_filter('acf/shortcode/allow_unsafe_html', function () {
