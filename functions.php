@@ -393,6 +393,24 @@ function growthlabtheme02_scripts()
 
 add_action('wp_enqueue_scripts', 'growthlabtheme02_scripts');
 
+// Add theme and parent/child theme classes to body
+add_filter('body_class', function ($classes) {
+    if (is_child_theme()) {
+        $theme = wp_get_theme();
+        $classes[] = 'theme-child-' . sanitize_html_class($theme->get_stylesheet());
+        $classes[] = 'theme-parent-' . sanitize_html_class($theme->get_template());
+    }
+    return $classes;
+});
+
+// add aria-label to navigation menu links using the menu item title
+add_filter('nav_menu_link_attributes', function ($atts, $item, $args, $depth) {
+    if (empty($atts['aria-label'])) {
+        $atts['aria-label'] = esc_attr($item->title);
+    }
+    return $atts;
+}, 10, 4);
+
 /**
  * Register widget area.
  *
