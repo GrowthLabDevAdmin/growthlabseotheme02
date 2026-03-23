@@ -114,17 +114,34 @@ function image_to_svg($image)
     }
 }
 
-// SVG in content
+// SVG in content - OPTIMIZED
 function check_content_images($content)
 {
-    if (!has_blocks($content) && !preg_match('/<img/', $content)) {
+    // Quick early return for content without images
+    if (strpos($content, '<img') === false) {
         return $content;
     }
 
     $pattern = '/<img\s[^>]*src=["\']([^"\']+)["\'][^>]*>/i';
+    $matches = [];
+    
+    // Count matches to avoid processing too many
+    if (preg_match_all($pattern, $content, $matches, PREG_OFFSET_CAPTURE) === false) {
+        return $content;
+    }
+
+    // Limit to first 20 images to prevent excessive processing
+    if (count($matches[0]) > 20) {
+        return $content;
+    }
 
     return preg_replace_callback($pattern, function ($match) {
         $src = $match[1];
+
+        // Quick check: skip non-SVG URLs
+        if (strpos($src, '.svg') === false) {
+            return $match[0];
+        }
 
         // Convert URL to local path: remove query and map uploads
         $upload_dir = wp_get_upload_dir();
@@ -135,27 +152,24 @@ function check_content_images($content)
         } elseif (strpos($src_trim, home_url('/')) !== false) {
             $src_local = str_replace(home_url('/'), ABSPATH, $src_trim);
         } else {
-            $src_local = $src_trim;
+            return $match[0]; // Skip external URLs
         }
 
         $src_local = wp_normalize_path($src_local);
 
         try {
             if (!file_exists($src_local) || !is_readable($src_local)) {
-                error_log('check_content_images: file missing or unreadable: ' . $src_local . ' (original src: ' . $src . ')');
                 return $match[0];
             }
 
-            $mime_type = mime_content_type($src_local);
-
-            if ($mime_type !== 'image/svg+xml') {
+            // Use extension check instead of mime_content_type (faster)
+            if (pathinfo($src_local, PATHINFO_EXTENSION) !== 'svg') {
                 return $match[0];
             }
 
             $svg_content = file_get_contents($src_local);
             return $svg_content !== false ? $svg_content : $match[0];
         } catch (Exception $e) {
-            error_log('SVG Content Processing Error: ' . $e->getMessage());
             return $match[0];
         }
     }, $content);
