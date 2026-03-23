@@ -284,6 +284,13 @@ function growthlabtheme02_custom_excerpt_length($length)
 }
 add_filter('excerpt_length', 'growthlabtheme02_custom_excerpt_length', 999);
 
+/*custom excerpt more*/
+function wpdocs_excerpt_more($more)
+{
+    return '...';
+}
+add_filter('excerpt_more', 'wpdocs_excerpt_more');
+
 /**
  * Add scripts and styles.
  *

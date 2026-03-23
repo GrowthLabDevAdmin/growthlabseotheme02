@@ -213,10 +213,15 @@ p {
     left: 0;
     z-index: -1;
     display: block;
-    background-image: url("{theme-path}/assets/img/transparent-bg.webp");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  }
+
+  &--loaded {
+    &::after {
+      background-image: url("{theme-path}/assets/img/transparent-bg.webp");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
   }
 
   .bg-gradient {

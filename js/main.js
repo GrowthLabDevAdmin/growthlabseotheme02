@@ -177,6 +177,41 @@ function findConsecutiveGroups() {
   });
 }
 
+//Lazy Load Background Images for .bg-gradient
+(function lazyLoadBgGradient() {
+  "use strict";
+
+  const bgGradientElements = document.querySelectorAll(".bg-gradient");
+  if (!bgGradientElements.length) return;
+
+  let pageLoaded = false;
+
+  window.addEventListener("load", () => {
+    pageLoaded = true;
+    initBgGradientLazyLoad();
+  });
+
+  function initBgGradientLazyLoad() {
+    bgGradientElements.forEach((element) => {
+      observer.observe(element);
+    });
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && pageLoaded) {
+          entry.target.classList.add("bg-gradient--loaded");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      rootMargin: "100px",
+    },
+  );
+})();
+
 //Accordion Items
 function toggleAccordion(e) {
   const header = e.target;
