@@ -24,27 +24,30 @@ function cleanup_wordpress()
 }
 add_action('init', 'cleanup_wordpress');
 
-// Remove Translation Scripts
+// Remove Translation Scripts - OPTIMIZED
 add_action('wp_enqueue_scripts', function () {
     global $post;
 
     // Only load if page actually has blocks that need i18n
     $needs_i18n = false;
 
-    if (is_singular() && has_blocks($post->post_content)) {
-        // Parse blocks and check if any need translation
-        $blocks = parse_blocks($post->post_content);
+    if (is_singular() && !empty($post->post_content)) {
+        // Fast string check instead of full parsing
+        if (strpos($post->post_content, '<!-- wp:') !== false) {
+            // Parse blocks and check if any need translation
+            $blocks = parse_blocks($post->post_content);
 
-        foreach ($blocks as $block) {
-            // Check if block is a dynamic/interactive block that needs i18n
-            if (in_array($block['blockName'], [
-                'core/search',
-                'core/query',
-                'core/navigation',
-                // Add your custom blocks that need translation
-            ])) {
-                $needs_i18n = true;
-                break;
+            foreach ($blocks as $block) {
+                // Check if block is a dynamic/interactive block that needs i18n
+                if (in_array($block['blockName'], [
+                    'core/search',
+                    'core/query',
+                    'core/navigation',
+                    // Add your custom blocks that need translation
+                ])) {
+                    $needs_i18n = true;
+                    break;
+                }
             }
         }
     }
