@@ -412,6 +412,10 @@ function growthlabtheme02_acf_sync_run()
 add_action('wppusher_theme_was_updated',   'growthlabtheme02_acf_sync_run');
 add_action('wppusher_theme_was_installed', 'growthlabtheme02_acf_sync_run');
 
+add_action('wppusher_theme_was_updated', function ($event) {
+    error_log('[WP Pusher event] ' . print_r($event, true));
+});
+
 // Allow HTML in ACF fields
 add_filter('acf/shortcode/allow_unsafe_html', function () {
     return true;
