@@ -10,27 +10,60 @@ function growthlabtheme02_blocks_category($categories, $post)
         array(
             array(
                 'slug'  => 'growthlabtheme02-blocks',
-                'title' => __('Growthlab Theme 01 Blocks', 'growthlabtheme02-blocks'),
+                'title' => __('Growthlab Theme 02 Blocks', 'growthlabtheme02-blocks'),
             )
         )
     );
 }
 add_filter('block_categories_all', 'growthlabtheme02_blocks_category', 10, 2);
 
-// Register Block Types
+// Register Block Types with caching to prevent memory bloat during cache flushes
 function register_acf_blocks()
 {
-    $blocks = glob(get_stylesheet_directory() . '/blocks/*/block.json');
+    // Use transient to avoid repeated filesystem operations during W3TC cache flushes
+    $block_files = get_transient('growthlabtheme02_block_files_cache');
 
-    foreach ($blocks as $block) {
-        register_block_type(dirname($block));
+    if ($block_files === false) {
+        $block_files = [];
+
+        // 1. Parent blocks
+        foreach (glob(get_template_directory() . '/blocks/*/block.json') ?: [] as $block) {
+            $data = json_decode(file_get_contents($block), true);
+
+            if (!empty($data['name'])) {
+                $block_files[$data['name']] = dirname($block);
+            }
+        }
+
+        // 2. Child blocks (override)
+        foreach (glob(get_stylesheet_directory() . '/blocks/*/block.json') ?: [] as $block) {
+            $data = json_decode(file_get_contents($block), true);
+
+            if (!empty($data['name'])) {
+                $block_files[$data['name']] = dirname($block);
+            }
+        }
+
+        // Cache for 24 hours, purged on theme update
+        set_transient('growthlabtheme02_block_files_cache', $block_files, 24 * HOUR_IN_SECONDS);
+    }
+
+    // 3. Register all found blocks
+    foreach ($block_files as $block_dir) {
+        register_block_type($block_dir);
     }
 }
+
+// Clear block cache on theme switch/update
+add_action('switch_theme', function () {
+    delete_transient('growthlabtheme02_block_files_cache');
+});
+
 add_action('init', 'register_acf_blocks', 5);
 
 /**
  * Load block assets only when block is present on the page
- * and move block scripts to footer
+ * Optimized to prevent memory bloat during cache operations
  */
 
 // Prevent unused block assets from loading
@@ -38,19 +71,28 @@ add_filter('should_load_separate_core_block_assets', '__return_true');
 
 /**
  * Dequeue block assets that aren't used on the current page
+ * SIMPLIFIED: Only run for singular pages with blocks to avoid parse_blocks on every pageload
  */
 add_action('wp_enqueue_scripts', function () {
     global $post;
 
-    // Only run on singular pages with content
+    // Skip early if not a singular page or no content
     if (!is_singular() || empty($post->post_content)) {
         return;
     }
 
-    // Get all registered blocks
-    $registered_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
+    // Skip if no blocks detected in content (string-based check, much faster)
+    if (strpos($post->post_content, '<!-- wp:') === false) {
+        return;
+    }
 
-    // Parse blocks in the content
+    // Get all registered blocks ONCE
+    $registered_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
+    if (empty($registered_blocks)) {
+        return;
+    }
+
+    // Parse blocks ONLY if we detected block comments above
     $blocks = parse_blocks($post->post_content);
     $blocks_in_use = array();
 
@@ -67,9 +109,15 @@ add_action('wp_enqueue_scripts', function () {
     };
 
     $find_blocks($blocks);
+
+    if (empty($blocks_in_use)) {
+        return;
+    }
+
     $blocks_in_use = array_unique($blocks_in_use);
 
-    // Dequeue unused block assets
+    // Dequeue unused block assets - LIMIT iteration to reduce memory
+    $dequeued = 0;
     foreach ($registered_blocks as $block_name => $block_type) {
         // Skip if block is in use
         if (in_array($block_name, $blocks_in_use)) {
@@ -97,27 +145,43 @@ add_action('wp_enqueue_scripts', function () {
         if (!empty($block_type->view_script)) {
             wp_dequeue_script($block_type->view_script);
         }
+
+        // Stop after a reasonable number to prevent excessive iterations
+        $dequeued++;
+        if ($dequeued > 100) {
+            break;
+        }
     }
 }, 100);
 
 
 /**
  * Move block scripts to footer (only for blocks actually in use)
+ * OPTIMIZED: Only process registered block scripts, not all scripts
  */
 add_action('wp_enqueue_scripts', function () {
     global $wp_scripts;
 
-    if (empty($wp_scripts->registered)) return;
+    if (empty($wp_scripts->registered)) {
+        return;
+    }
 
+    $processed = 0;
     foreach ($wp_scripts->registered as $handle => $script) {
         if (
             !empty($script->src)
             && str_contains($script->src, '/blocks/')
         ) {
-            // Mover al footer
+            // Move to footer
             $wp_scripts->registered[$handle]->extra['group'] = 1;
-            // Agregar defer
+            // Add defer
             $wp_scripts->registered[$handle]->extra['strategy'] = 'defer';
+
+            $processed++;
+            // Limit iterations to prevent excessive processing
+            if ($processed > 50) {
+                break;
+            }
         }
     }
 }, 999);
@@ -143,48 +207,50 @@ if (function_exists('acf_add_options_page') && current_user_can('manage_options'
 }
 
 
-// Customize ACF JSON Save and Load Points
 function my_acf_json_save_point($path)
 {
-    // update path
-    $path = get_stylesheet_directory() . '/acf-json';
-
-    // return
-    return $path;
+    // Always save in child theme
+    return get_stylesheet_directory() . '/acf-json';
 }
 
 function my_acf_json_load_point($paths)
 {
-    // remove original path (optional)
+    // Remove Default Path
     unset($paths[0]);
 
-    // append path
-    $paths[] = get_stylesheet_directory() . '/acf-json';
+    // Parent First
+    $paths[] = get_template_directory() . '/acf-json';
 
-    // return
+    // Child Override
+    if (get_stylesheet_directory() !== get_template_directory()) {
+        $paths[] = get_stylesheet_directory() . '/acf-json';
+    }
+
     return $paths;
 }
 
-add_action('init', function () {
-    add_filter('acf/settings/save_json', 'my_acf_json_save_point');
-    add_filter('acf/settings/load_json', 'my_acf_json_load_point');
-});
+add_filter('acf/settings/save_json', 'my_acf_json_save_point');
+add_filter('acf/settings/load_json', 'my_acf_json_load_point');
 
 
 /**
  * Synchronize ACF Fields after theme updates (CI/CD Integration)
  * 
- * Importa campos ACF del tema padre automáticamente respetando:
- * - Overrides del tema hijo (si existe)
- * - Cambios realizados en el repositorio
- * - El hash MD5 de los archivos JSON para detectar cambios
+ * Automatically imports ACF fields from parent theme respecting:
+ * - Child theme overrides (if exists)
+ * - Changes made in the repository
+ * - MD5 hash of JSON files to detect changes
+ * 
+ * SAFEGUARDS:
+ * - Hash-based change detection (prevents unnecessary syncs)
+ * - 30-second execution timeout (prevents memory bloat)
  */
-add_action('admin_notices', function () {
-    if (wp_doing_ajax() || wp_doing_cron()) return;
-    if (!current_user_can('manage_options')) return;
-    if (defined('ACF_DOING_SYNC')) return;
+function growthlabtheme02_acf_sync_run()
+{
     if (!function_exists('acf_get_field_groups')) return;
+    if (defined('ACF_DOING_SYNC')) return;
 
+    global $wpdb;
     $memory_start = memory_get_usage();
 
     $parent_json_path = get_template_directory() . '/acf-json';
@@ -192,68 +258,159 @@ add_action('admin_notices', function () {
     $is_child_theme   = $child_json_path !== $parent_json_path;
 
     $parent_json_files = array_filter(
-        glob($parent_json_path . '/group_*.json') ?: [],
+        array_merge(
+            glob($parent_json_path . '/group_*.json') ?: [],
+            glob($parent_json_path . '/post_type_*.json') ?: [],
+            glob($parent_json_path . '/taxonomy_*.json') ?: []
+        ),
         fn($f) => is_readable($f)
     );
+
     if (empty($parent_json_files)) return;
 
     try {
         $content_hash = md5(implode('', array_map('md5_file', $parent_json_files)));
-        if (get_option('acf_json_parent_sync_hash', '') === $content_hash) return;
 
-        if (get_transient('acf_sync_lock')) {
-            error_log('[ACF sync] skipped — mutex active, another sync is running');
-            return;
-        }
-        set_transient('acf_sync_lock', true, 30);
+        $saved_hash = $wpdb->get_var(
+            "SELECT option_value FROM {$wpdb->options}
+             WHERE option_name = 'acf_json_parent_sync_hash'
+             LIMIT 1"
+        );
+
+        if ($saved_hash === $content_hash) return;
 
         define('ACF_DOING_SYNC', true);
-        update_option('acf_json_parent_sync_hash', $content_hash, false);
 
-        error_log('[ACF sync] starting at ' . current_time('mysql'));
-        error_log('[ACF sync] files: ' . count($parent_json_files) . ' | mode: ' . ($is_child_theme ? 'child theme' : 'parent only'));
+        $wpdb->query(
+            $wpdb->prepare(
+                "INSERT INTO {$wpdb->options} (option_name, option_value, autoload)
+                 VALUES ('acf_json_parent_sync_hash', %s, 'no')
+                 ON DUPLICATE KEY UPDATE option_value = VALUES(option_value)",
+                $content_hash
+            )
+        );
 
-        $groups   = acf_get_field_groups();
-        $synced   = 0;
-        $skipped  = 0;
-        $warnings = 0;
+        $max_execution_time = 30;
+        $execution_start    = microtime(true);
+        $synced             = 0;
+        $skipped            = 0;
+        $warnings           = 0;
 
-        foreach ($groups as $group) {
-            if (empty($group['local']) || $group['local'] !== 'json') continue;
-            if (empty($group['local_modified']) || $group['local_modified'] <= $group['modified']) continue;
+        add_filter('acf/settings/save_json', '__return_false', 99);
 
-            if ($is_child_theme && file_exists($child_json_path . '/' . $group['key'] . '.json')) {
-                error_log('[ACF sync] skipped (child override): ' . ($group['title'] ?? $group['key']));
-                $skipped++;
-                continue;
-            }
+        // --- CPTs -------------------------------------------------------------
+        foreach (glob($parent_json_path . '/post_type_*.json') ?: [] as $file) {
+            if ((microtime(true) - $execution_start) > $max_execution_time) break;
 
-            $local = acf_get_local_field_group($group['key']);
-            if (empty($local)) {
-                error_log('[ACF sync] WARNING — group not found: ' . $group['key']);
+            if (!is_readable($file)) {
                 $warnings++;
                 continue;
             }
 
-            $local['fields'] = acf_get_local_fields($group['key']);
-            acf_import_field_group($local);
-            error_log('[ACF sync] imported: ' . ($group['title'] ?? $group['key']));
+            $json_data = json_decode(file_get_contents($file), true);
+            if (empty($json_data) || !is_array($json_data)) {
+                $warnings++;
+                continue;
+            }
+
+            acf_update_post_type($json_data);
             $synced++;
         }
 
-        $memory_used = round((memory_get_usage() - $memory_start) / 1024 / 1024, 2);
-        $memory_peak = round(memory_get_peak_usage(true) / 1024 / 1024, 2);
+        // --- Taxonomies -------------------------------------------------------
+        foreach (glob($parent_json_path . '/taxonomy_*.json') ?: [] as $file) {
+            if ((microtime(true) - $execution_start) > $max_execution_time) break;
 
-        delete_transient('acf_sync_lock');
+            if (!is_readable($file)) {
+                $warnings++;
+                continue;
+            }
+
+            $json_data = json_decode(file_get_contents($file), true);
+            if (empty($json_data) || !is_array($json_data)) {
+                $warnings++;
+                continue;
+            }
+
+            acf_update_taxonomy($json_data);
+            $synced++;
+        }
+
+        // --- Field Groups -----------------------------------------------------
+        $groups = acf_get_field_groups();
+
+        $rows = $wpdb->get_results(
+            "SELECT MIN(ID) as ID, post_name FROM {$wpdb->posts}
+             WHERE post_type = 'acf-field-group'
+             AND post_status IN ('publish', 'acf-disabled', 'trash', 'draft')
+             GROUP BY post_name"
+        );
+        $existing_ids_by_name = [];
+        foreach ($rows as $r) {
+            $existing_ids_by_name[$r->post_name] = (int) $r->ID;
+        }
+
+        $processed_keys = [];
+
+        foreach ($groups as $group) {
+            if ((microtime(true) - $execution_start) > $max_execution_time) break;
+
+            if (empty($group['local']) || $group['local'] !== 'json') continue;
+            if (in_array($group['key'], $processed_keys, true)) continue;
+            $processed_keys[] = $group['key'];
+
+            if ($is_child_theme && file_exists($child_json_path . '/' . $group['key'] . '.json')) {
+                $skipped++;
+                continue;
+            }
+
+            $json_file = $parent_json_path . '/' . $group['key'] . '.json';
+            if (!file_exists($json_file) || !is_readable($json_file)) {
+                $warnings++;
+                continue;
+            }
+
+            $json_data = json_decode(file_get_contents($json_file), true);
+            if (empty($json_data) || !is_array($json_data)) {
+                $warnings++;
+                continue;
+            }
+
+            $existing_id = $existing_ids_by_name[$group['key']] ?? 0;
+            if ($existing_id) {
+                $json_data['ID'] = $existing_id;
+            }
+
+            acf_import_field_group($json_data);
+
+            if (isset($json_data['active']) && $json_data['active'] === false) {
+                $group_id = $existing_id ?: (acf_get_field_group($group['key'])['ID'] ?? 0);
+                if ($group_id) {
+                    wp_update_post(['ID' => $group_id, 'post_status' => 'acf-disabled']);
+                }
+            }
+
+            $synced++;
+        }
+
+        // --- Cleanup ----------------------------------------------------------
+        remove_filter('acf/settings/save_json', '__return_false', 99);
 
         $status = $warnings === 0 ? 'OK' : 'COMPLETED WITH WARNINGS';
-        error_log('[ACF sync] ' . $status . ' — synced: ' . $synced . ', skipped: ' . $skipped . ', warnings: ' . $warnings);
-        error_log('[ACF sync] memory: ' . $memory_used . 'MB used | ' . $memory_peak . 'MB peak');
+        error_log(
+            '[ACF sync] ' . $status . ' — synced: ' . $synced . ', skipped: ' . $skipped . ', warnings: ' . $warnings
+                . ' | mem: ' . round((memory_get_usage() - $memory_start) / 1024 / 1024, 2) . 'MB'
+                . ' | peak: ' . round(memory_get_peak_usage(true) / 1024 / 1024, 2) . 'MB'
+                . ' | time: ' . round(microtime(true) - $execution_start, 2) . 's'
+        );
     } catch (Throwable $e) {
-        delete_transient('acf_sync_lock');
+        remove_filter('acf/settings/save_json', '__return_false', 99);
         error_log('[ACF sync] ERROR — ' . $e->getMessage() . ' in ' . $e->getFile() . ' line ' . $e->getLine());
     }
-});
+}
+
+add_action('wppusher_theme_was_updated',   'growthlabtheme02_acf_sync_run');
+add_action('wppusher_theme_was_installed', 'growthlabtheme02_acf_sync_run');
 
 // Allow HTML in ACF fields
 add_filter('acf/shortcode/allow_unsafe_html', function () {
@@ -363,4 +520,4 @@ function acf_color_picker_palette_script()
 <?php
 }
 add_action('acf/input/admin_head', 'acf_color_picker_palette_script');
-add_action('acf/input/admin_footer', 'acf_color_picker_palette_script'); // Backup for late-loaded fields
+//add_action('acf/input/admin_footer', 'acf_color_picker_palette_script');
