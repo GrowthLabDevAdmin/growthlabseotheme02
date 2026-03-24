@@ -10,25 +10,24 @@
  * 
  */
 
-// Interceptar webhook de WP Pusher para el tema 2
-add_action('init', function () use ($_theme_dir) {
+add_action('init', function () {
     if (!isset($_GET['wppusher-hook'])) return;
 
-    $package = base64_decode($_GET['package'] ?? '');
-    if ($package !== $_theme_dir) return;
+    $package   = base64_decode($_GET['package'] ?? '');
+    $theme_dir = basename(get_stylesheet_directory());
+
+    if ($package !== $theme_dir) return;
 
     error_log('[ACF sync] webhook intercepted for theme: ' . $package);
 
-    // Buscar el sitio correcto y correr el sync
     global $wpdb;
     $blog_ids = $wpdb->get_col("SELECT blog_id FROM {$wpdb->blogs}");
 
     foreach ($blog_ids as $blog_id) {
         switch_to_blog($blog_id);
 
-        if (get_stylesheet() === $_theme_dir || get_template() === $_theme_dir) {
+        if (get_stylesheet() === $theme_dir || get_template() === $theme_dir) {
             error_log('[ACF sync] switching to blog_id: ' . $blog_id);
-            // Aquí llamamos directamente al sync
             do_action('growthlabtheme02_run_acf_sync');
             restore_current_blog();
             break;
