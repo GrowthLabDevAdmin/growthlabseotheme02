@@ -198,15 +198,20 @@ add_filter('acf/settings/load_json', 'my_acf_json_load_point');
  * SAFEGUARDS:
  * - Hash-based change detection (prevents unnecessary syncs)
  * - 30-second execution timeout (prevents memory bloat)
- * - Multisite safe — only runs for the active theme of each site
+ * - Multisite safe — runs for active theme of each site, including child themes
  */
 $_theme_dir = basename(dirname(__FILE__));
 
 $acf_sync = function () use ($_theme_dir) {
-    error_log('[ACF sync debug] _theme_dir: ' . $_theme_dir . ' | get_stylesheet(): ' . get_stylesheet());
+    error_log('[ACF sync debug] _theme_dir: ' . $_theme_dir . ' | get_stylesheet(): ' . get_stylesheet() . ' | get_template(): ' . get_template());
     if (!function_exists('acf_get_field_groups')) return;
     if (defined('ACF_DOING_SYNC')) return;
-    if ($_theme_dir !== get_stylesheet()) return;
+    
+    // Verifica que sea el tema activo o el tema parent del tema activo (soporta child themes)
+    $current_stylesheet = get_stylesheet();
+    $current_template   = get_template();
+    
+    if ($_theme_dir !== $current_stylesheet && $_theme_dir !== $current_template) return;
 
     global $wpdb;
     $memory_start = memory_get_usage();
