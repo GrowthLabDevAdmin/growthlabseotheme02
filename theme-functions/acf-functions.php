@@ -203,6 +203,7 @@ add_filter('acf/settings/load_json', 'my_acf_json_load_point');
 $_theme_dir = basename(dirname(__FILE__));
 
 $acf_sync = function () use ($_theme_dir) {
+    error_log('[ACF sync debug] _theme_dir: ' . $_theme_dir . ' | get_stylesheet(): ' . get_stylesheet());
     if (!function_exists('acf_get_field_groups')) return;
     if (defined('ACF_DOING_SYNC')) return;
     if ($_theme_dir !== get_stylesheet()) return;
