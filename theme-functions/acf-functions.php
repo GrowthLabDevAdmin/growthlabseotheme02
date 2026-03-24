@@ -388,10 +388,28 @@ $acf_sync = function () use ($_theme_dir) {
     }
 };
 
-error_log('[ACF sync debug] registering hooks — theme_dir: ' . $_theme_dir);
+$acf_sync_with_context = function () use ($acf_sync, $_theme_dir) {
+    global $wpdb;
 
-add_action('wppusher_theme_was_updated',   $acf_sync);
-add_action('wppusher_theme_was_installed', $acf_sync);
+    // Buscar en qué sitio de la red está activo este tema
+    $blog_ids = $wpdb->get_col("SELECT blog_id FROM {$wpdb->blogs}");
+
+    foreach ($blog_ids as $blog_id) {
+        switch_to_blog($blog_id);
+
+        if (get_stylesheet() === $_theme_dir || get_template() === $_theme_dir) {
+            error_log('[ACF sync] switching to blog_id: ' . $blog_id . ' for theme: ' . $_theme_dir);
+            call_user_func($acf_sync);
+            restore_current_blog();
+            break;
+        }
+
+        restore_current_blog();
+    }
+};
+
+add_action('wppusher_theme_was_updated',   $acf_sync_with_context);
+add_action('wppusher_theme_was_installed', $acf_sync_with_context);
 
 // Allow HTML in ACF fields
 add_filter('acf/shortcode/allow_unsafe_html', function () {
