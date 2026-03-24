@@ -200,9 +200,8 @@ add_filter('acf/settings/load_json', 'my_acf_json_load_point');
  * - 30-second execution timeout (prevents memory bloat)
  * - Multisite safe — runs for active theme of each site, including child themes
  */
-error_log('[ACF sync debug] acf-functions.php loaded — theme_dir: ' . basename(dirname(__FILE__)) . ' | stylesheet: ' . get_stylesheet());
-
-$_theme_dir = basename(dirname(__FILE__));
+error_log('[ACF sync debug] acf-functions.php loaded — theme_dir: ' . basename(dirname(__FILE__, 2)) . ' | stylesheet: ' . get_stylesheet());
+$_theme_dir = basename(dirname(__FILE__, 2));
 
 $acf_sync = function () use ($_theme_dir) {
     // Evitar ejecución múltiple durante la misma sesión de actualización
