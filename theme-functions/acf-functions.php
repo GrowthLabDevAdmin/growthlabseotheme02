@@ -364,8 +364,35 @@ $acf_sync = function () use ($_theme_dir) {
     }
 };
 
-add_action('wppusher_theme_was_updated',   $acf_sync);
-add_action('wppusher_theme_was_installed', $acf_sync);
+add_action('wppusher_theme_was_updated', function () {
+    if (!is_multisite()) {
+        $acf_sync();
+        return;
+    }
+    
+    // En multisitio, ejecutar sync en todos los sitios
+    $sites = get_sites(['fields' => 'ids']);
+    foreach ($sites as $site_id) {
+        switch_to_blog($site_id);
+        $acf_sync();
+        restore_current_blog();
+    }
+});
+
+add_action('wppusher_theme_was_installed', function () {
+    if (!is_multisite()) {
+        $acf_sync();
+        return;
+    }
+    
+    // En multisitio, ejecutar sync en todos los sitios
+    $sites = get_sites(['fields' => 'ids']);
+    foreach ($sites as $site_id) {
+        switch_to_blog($site_id);
+        $acf_sync();
+        restore_current_blog();
+    }
+});
 
 // Allow HTML in ACF fields
 add_filter('acf/shortcode/allow_unsafe_html', function () {
