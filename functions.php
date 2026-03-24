@@ -9,8 +9,10 @@
  * @subpackage growthlabtheme02
  * 
  */
+error_log('[ACF sync] functions.php webhook interceptor registered');
 
 add_action('init', function () {
+    error_log('[ACF sync] init fired — GET: ' . print_r($_GET, true));
     if (!isset($_GET['wppusher-hook'])) return;
 
     $package   = base64_decode($_GET['package'] ?? '');
