@@ -10,13 +10,21 @@
  * 
  */
 
-add_action('wppusher_theme_was_updated', function () {
-    error_log('[WP Pusher] wppusher_theme_was_updated fired');
-}, 1);
+// Capturar TODOS los hooks de WP Pusher
+$all_wppusher_hooks = [
+    'wppusher_theme_was_updated',
+    'wppusher_theme_was_installed',
+    'wppusher_plugin_was_updated',
+    'wppusher_plugin_was_installed',
+    'wppusher_theme_was_unlinked',
+    'wppusher_plugin_was_unlinked',
+];
 
-add_action('wppusher_theme_was_installed', function () {
-    error_log('[WP Pusher] wppusher_theme_was_installed fired');
-}, 1);
+foreach ($all_wppusher_hooks as $hook) {
+    add_action($hook, function () use ($hook) {
+        error_log('[WP Pusher] hook fired: ' . $hook);
+    }, 1);
+}
 
 // Definir breakpoints personalizados para este tema
 $GLOBALS['breakpoints'] = [
