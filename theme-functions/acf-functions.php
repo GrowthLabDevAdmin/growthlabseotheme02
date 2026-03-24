@@ -203,16 +203,26 @@ add_filter('acf/settings/load_json', 'my_acf_json_load_point');
 $_theme_dir = basename(dirname(__FILE__));
 
 $acf_sync = function () use ($_theme_dir) {
-    error_log('[ACF sync debug] _theme_dir: ' . $_theme_dir . ' | get_stylesheet(): ' . get_stylesheet() . ' | get_template(): ' . get_template());
-    if (!function_exists('acf_get_field_groups')) return;
-    if (defined('ACF_DOING_SYNC')) return;
+    error_log('[ACF sync debug] START - _theme_dir: ' . $_theme_dir . ' | get_stylesheet(): ' . get_stylesheet() . ' | get_template(): ' . get_template() . ' | is_multisite(): ' . (is_multisite() ? 'yes' : 'no') . ' | blog_id: ' . get_current_blog_id());
+    if (!function_exists('acf_get_field_groups')) {
+        error_log('[ACF sync debug] ACF not available, exiting');
+        return;
+    }
+    if (defined('ACF_DOING_SYNC')) {
+        error_log('[ACF sync debug] ACF_DOING_SYNC defined, exiting');
+        return;
+    }
     
     // Verifica que sea el tema activo o el tema parent del tema activo (soporta child themes)
     $current_stylesheet = get_stylesheet();
     $current_template   = get_template();
     
-    if ($_theme_dir !== $current_stylesheet && $_theme_dir !== $current_template) return;
+    if ($_theme_dir !== $current_stylesheet && $_theme_dir !== $current_template) {
+        error_log('[ACF sync debug] Theme not active, exiting - current_stylesheet: ' . $current_stylesheet . ' | current_template: ' . $current_template);
+        return;
+    }
 
+    error_log('[ACF sync debug] Proceeding with sync');
     global $wpdb;
     $memory_start = memory_get_usage();
 
@@ -364,35 +374,8 @@ $acf_sync = function () use ($_theme_dir) {
     }
 };
 
-add_action('wppusher_theme_was_updated', function () {
-    if (!is_multisite()) {
-        $acf_sync();
-        return;
-    }
-    
-    // En multisitio, ejecutar sync en todos los sitios
-    $sites = get_sites(['fields' => 'ids']);
-    foreach ($sites as $site_id) {
-        switch_to_blog($site_id);
-        $acf_sync();
-        restore_current_blog();
-    }
-});
-
-add_action('wppusher_theme_was_installed', function () {
-    if (!is_multisite()) {
-        $acf_sync();
-        return;
-    }
-    
-    // En multisitio, ejecutar sync en todos los sitios
-    $sites = get_sites(['fields' => 'ids']);
-    foreach ($sites as $site_id) {
-        switch_to_blog($site_id);
-        $acf_sync();
-        restore_current_blog();
-    }
-});
+add_action('wppusher_theme_was_updated',   $acf_sync);
+add_action('wppusher_theme_was_installed', $acf_sync);
 
 // Allow HTML in ACF fields
 add_filter('acf/shortcode/allow_unsafe_html', function () {
