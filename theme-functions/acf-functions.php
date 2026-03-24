@@ -388,6 +388,8 @@ $acf_sync = function () use ($_theme_dir) {
     }
 };
 
+error_log('[ACF sync debug] registering hooks — theme_dir: ' . $_theme_dir);
+
 add_action('wppusher_theme_was_updated',   $acf_sync);
 add_action('wppusher_theme_was_installed', $acf_sync);
 
