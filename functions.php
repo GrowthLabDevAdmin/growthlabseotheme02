@@ -9,35 +9,6 @@
  * @subpackage growthlabtheme02
  * 
  */
-error_log('[ACF sync] functions.php webhook interceptor registered');
-
-add_action('init', function () {
-    error_log('[ACF sync] init fired — GET: ' . print_r($_GET, true));
-    if (!isset($_GET['wppusher-hook'])) return;
-
-    $package   = base64_decode($_GET['package'] ?? '');
-    $theme_dir = basename(get_stylesheet_directory());
-
-    if ($package !== $theme_dir) return;
-
-    error_log('[ACF sync] webhook intercepted for theme: ' . $package);
-
-    global $wpdb;
-    $blog_ids = $wpdb->get_col("SELECT blog_id FROM {$wpdb->blogs}");
-
-    foreach ($blog_ids as $blog_id) {
-        switch_to_blog($blog_id);
-
-        if (get_stylesheet() === $theme_dir || get_template() === $theme_dir) {
-            error_log('[ACF sync] switching to blog_id: ' . $blog_id);
-            do_action('growthlabtheme02_run_acf_sync');
-            restore_current_blog();
-            break;
-        }
-
-        restore_current_blog();
-    }
-}, 5);
 
 // Definir breakpoints personalizados para este tema
 $GLOBALS['breakpoints'] = [

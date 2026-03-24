@@ -198,43 +198,17 @@ add_filter('acf/settings/load_json', 'my_acf_json_load_point');
  * SAFEGUARDS:
  * - Hash-based change detection (prevents unnecessary syncs)
  * - 30-second execution timeout (prevents memory bloat)
- * - Multisite safe — runs for active theme of each site, including child themes
+ *
+ * NOTE: Multisite not supported — sync only runs when this theme
+ * is the active theme in the current WordPress context.
  */
-error_log('[ACF sync debug] acf-functions.php loaded — theme_dir: ' . basename(dirname(__FILE__, 2)) . ' | stylesheet: ' . get_stylesheet());
 $_theme_dir = basename(dirname(__FILE__, 2));
 
 $acf_sync = function () use ($_theme_dir) {
-    // Evitar ejecución múltiple durante la misma sesión de actualización
-    $lock_key = 'acf_sync_lock_' . $_theme_dir;
-    if (get_transient($lock_key)) {
-        error_log('[ACF sync debug] Lock active, skipping execution');
-        return;
-    }
-    set_transient($lock_key, true, 300); // 5 min lock
+    if (!function_exists('acf_get_field_groups')) return;
+    if (defined('ACF_DOING_SYNC')) return;
+    if ($_theme_dir !== get_stylesheet() && $_theme_dir !== get_template()) return;
 
-    error_log('[ACF sync debug] START - _theme_dir: ' . $_theme_dir . ' | get_stylesheet(): ' . get_stylesheet() . ' | get_template(): ' . get_template());
-    if (!function_exists('acf_get_field_groups')) {
-        error_log('[ACF sync debug] ACF not available, exiting');
-        delete_transient($lock_key);
-        return;
-    }
-    if (defined('ACF_DOING_SYNC')) {
-        error_log('[ACF sync debug] ACF_DOING_SYNC defined, exiting');
-        delete_transient($lock_key);
-        return;
-    }
-    
-    // Verifica que sea el tema activo o el tema parent del tema activo (soporta child themes)
-    $current_stylesheet = get_stylesheet();
-    $current_template   = get_template();
-    
-    if ($_theme_dir !== $current_stylesheet && $_theme_dir !== $current_template) {
-        error_log('[ACF sync debug] Theme not active, exiting - current_stylesheet: ' . $current_stylesheet . ' | current_template: ' . $current_template);
-        delete_transient($lock_key);
-        return;
-    }
-
-    error_log('[ACF sync debug] Proceeding with sync');
     global $wpdb;
     $memory_start = memory_get_usage();
 
@@ -380,16 +354,14 @@ $acf_sync = function () use ($_theme_dir) {
                 . ' | peak: ' . round(memory_get_peak_usage(true) / 1024 / 1024, 2) . 'MB'
                 . ' | time: ' . round(microtime(true) - $execution_start, 2) . 's'
         );
-        delete_transient($lock_key);
     } catch (Throwable $e) {
         remove_filter('acf/settings/save_json', '__return_false', 99);
         error_log('[ACF sync:' . $_theme_dir . '] ERROR — ' . $e->getMessage() . ' in ' . $e->getFile() . ' line ' . $e->getLine());
-        delete_transient($lock_key);
     }
 };
 
-add_action('growthlabtheme02_run_acf_sync', $acf_sync);
-
+add_action('wppusher_theme_was_updated',   $acf_sync);
+add_action('wppusher_theme_was_installed', $acf_sync);
 
 // Allow HTML in ACF fields
 add_filter('acf/shortcode/allow_unsafe_html', function () {
