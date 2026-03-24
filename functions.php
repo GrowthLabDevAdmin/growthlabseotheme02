@@ -10,6 +10,14 @@
  * 
  */
 
+add_action('wppusher_theme_was_updated', function () {
+    error_log('[WP Pusher] wppusher_theme_was_updated fired');
+}, 1);
+
+add_action('wppusher_theme_was_installed', function () {
+    error_log('[WP Pusher] wppusher_theme_was_installed fired');
+}, 1);
+
 // Definir breakpoints personalizados para este tema
 $GLOBALS['breakpoints'] = [
     'mobile' => '0px',
