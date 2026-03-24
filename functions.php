@@ -10,6 +10,16 @@
  * 
  */
 
+// Definir breakpoints personalizados para este tema
+$GLOBALS['breakpoints'] = [
+    'mobile' => '0px',
+    'tablet' => '768px',   // diferente al default
+    'ldpi'   => '1024px',
+    'mdpi'   => '1280px',  // diferente al default
+    'hdpi'   => '1600px',  // diferente al default
+];
+
+
 // Include Theme Functions
 $includes = [
     'theme-functions/theme-optimization.php',
@@ -247,12 +257,14 @@ if (!function_exists('growthlabtheme02_setup')) {
             )
         );
 
-        foreach (get_languages_map() as $slug => $language) {
-            register_nav_menus(
-                array(
-                    'main_' . $slug => esc_html__("Main Menu $language", 'growthlabtheme02')
-                )
-            );
+        if (function_exists('get_languages_map')) {
+            foreach (get_languages_map() as $slug => $language) {
+                register_nav_menus(
+                    array(
+                        'main_' . $slug => esc_html__("Main Menu $language", 'growthlabtheme02')
+                    )
+                );
+            }
         }
     }
 }
@@ -385,7 +397,9 @@ function growthlabtheme02_scripts()
             array(
                 'restUrl' => get_rest_url(null, 'wp/v2'),
                 'perPage' => 9,
-                'defaultImage' => get_field_options('options')['posts_default_image']["url"] ?? '',
+                'defaultImage' => function_exists('get_field_options')
+                    ? (get_field_options('options')['posts_default_image']['url'] ?? '')
+                    : '',
             )
         );
     }
@@ -445,30 +459,32 @@ function growthlabtheme02_widgets_init()
         )
     );
 
-    foreach (get_languages_map() as $slug => $language) {
-        register_sidebar(
-            array(
-                'name'          => esc_html__("{$language} Sidebar", 'growthlabtheme02'),
-                'id'            => "sidebar-default-{$slug}",
-                'description'   => esc_html__('Add widgets here to appear in the page sidebar.', 'growthlabtheme02'),
-                'before_widget' => '<div id="%1$s" class="widget %2$s">',
-                'after_widget'  => '</div>',
-                'before_title'  => '<p class="widget-title">',
-                'after_title'   => '</p>',
-            )
-        );
+    if (function_exists('get_languages_map')) {
+        foreach (get_languages_map() as $slug => $language) {
+            register_sidebar(
+                array(
+                    'name'          => esc_html__("{$language} Sidebar", 'growthlabtheme02'),
+                    'id'            => "sidebar-default-{$slug}",
+                    'description'   => esc_html__('Add widgets here to appear in the page sidebar.', 'growthlabtheme02'),
+                    'before_widget' => '<div id="%1$s" class="widget %2$s">',
+                    'after_widget'  => '</div>',
+                    'before_title'  => '<p class="widget-title">',
+                    'after_title'   => '</p>',
+                )
+            );
 
-        register_sidebar(
-            array(
-                'name'          => esc_html__("{$language} Blog Sidebar", 'growthlabtheme02'),
-                'id'            => "sidebar-blog-{$slug}",
-                'description'   => esc_html__('Add widgets here to appear in the Blog sidebar.', 'growthlabtheme02'),
-                'before_widget' => '<div id="%1$s" class="widget %2$s">',
-                'after_widget'  => '</div>',
-                'before_title'  => '<p class="widget-title">',
-                'after_title'   => '</p>',
-            )
-        );
+            register_sidebar(
+                array(
+                    'name'          => esc_html__("{$language} Blog Sidebar", 'growthlabtheme02'),
+                    'id'            => "sidebar-blog-{$slug}",
+                    'description'   => esc_html__('Add widgets here to appear in the Blog sidebar.', 'growthlabtheme02'),
+                    'before_widget' => '<div id="%1$s" class="widget %2$s">',
+                    'after_widget'  => '</div>',
+                    'before_title'  => '<p class="widget-title">',
+                    'after_title'   => '</p>',
+                )
+            );
+        }
     }
 }
 
