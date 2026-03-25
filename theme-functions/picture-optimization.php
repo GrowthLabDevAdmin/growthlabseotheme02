@@ -60,6 +60,14 @@ if (!isset($GLOBALS['preferred_size_map'])) {
     $GLOBALS['preferred_size_map'] = [];
 }
 
+// Ensure theme custom add_image_size values are mapped to breakpoints
+$GLOBALS['preferred_size_map'] = array_merge($GLOBALS['preferred_size_map'], [
+    'cover-desktop'  => 'hdpi',
+    'cover-tablet'   => 'mdpi',
+    'cover-mobile'   => 'ldpi',
+    'featured-small' => 'mobile',
+]);
+
 if (!isset($GLOBALS['img_metadata_cache'])) {
     $GLOBALS['img_metadata_cache'] = [];
 }
@@ -217,6 +225,16 @@ if (!function_exists('po_get_sizes_for_breakpoint')) {
             }
         }
 
+        if (empty($matches)) {
+            // Fallback para imágenes verticales / que no generen tamaños medianos o grandes
+            foreach (['large', 'medium_large', 'medium', 'thumbnail', 'full'] as $fallback_size) {
+                if (in_array($fallback_size, $GLOBALS['sizes'], true)) {
+                    $matches[] = $fallback_size;
+                }
+            }
+            $matches = array_unique($matches);
+        }
+
         return $matches;
     }
 }
@@ -372,7 +390,25 @@ if (!function_exists('img_parse_url_image')) {
         $sizes_dimensions = [];
 
         foreach ($GLOBALS['sizes'] as $size) {
-            $sizes_urls[$size] = wp_get_attachment_image_url($img_id, $size) . $img_extension;
+            $source = wp_get_attachment_image_url($img_id, $size);
+
+            if (!$source) {
+                // Fallback a la imagen completa si el tamaño no existe para imágenes no estándar (verticales, recortes especiales, etc.).
+                $source = wp_get_attachment_url($img_id);
+            }
+
+            if (!$source) {
+                continue;
+            }
+
+            if ($is_webp) {
+                $webp_path = str_replace(home_url('/'), ABSPATH, $source) . '.webp';
+                if (file_exists($webp_path)) {
+                    $source .= '.webp';
+                }
+            }
+
+            $sizes_urls[$size] = $source;
 
             if ($size === 'full') {
                 $sizes_dimensions[$size] = [
@@ -619,9 +655,10 @@ if (!function_exists('img_generate_picture_tag')) {
         }
 
         // ── Standard mode ─────────────────────────────────────────────────────
-        $order      = ['hdpi', 'mdpi', 'ldpi', 'tablet', 'mobile'];
-        $sources    = [];
-        $used_sizes = [];
+        $order       = ['hdpi', 'mdpi', 'ldpi', 'tablet', 'mobile'];
+        $sources     = [];
+        $used_sizes  = [];
+        $seen_urls   = [];
 
         $max_width  = $img_fields['sizes'][$max_size]['width'] ?? 0;
         $allow_full = ($max_size === 'full');
@@ -636,11 +673,15 @@ if (!function_exists('img_generate_picture_tag')) {
                     ? img_get_fields($device_fields['urls']['full'], true)
                     : null;
 
-                if ($device_webp) {
+                if ($device_webp && !in_array($device_webp['urls']['full'], $seen_urls, true)) {
                     $sources[] = img_create_source_tag($device_webp['urls']['full'], $device_webp['type'], $media);
+                    $seen_urls[] = $device_webp['urls']['full'];
                 }
 
-                $sources[] = img_create_source_tag($device_fields['urls']['full'], $device_fields['type'], $media);
+                if (!in_array($device_fields['urls']['full'], $seen_urls, true)) {
+                    $sources[] = img_create_source_tag($device_fields['urls']['full'], $device_fields['type'], $media);
+                    $seen_urls[] = $device_fields['urls']['full'];
+                }
                 continue;
             }
 
@@ -650,11 +691,15 @@ if (!function_exists('img_generate_picture_tag')) {
                     ? img_get_fields($device_fields['urls']['full'], true)
                     : null;
 
-                if ($device_webp) {
+                if ($device_webp && !in_array($device_webp['urls']['full'], $seen_urls, true)) {
                     $sources[] = img_create_source_tag($device_webp['urls']['full'], $device_webp['type'], $media);
+                    $seen_urls[] = $device_webp['urls']['full'];
                 }
 
-                $sources[] = img_create_source_tag($device_fields['urls']['full'], $device_fields['type'], $media);
+                if (!in_array($device_fields['urls']['full'], $seen_urls, true)) {
+                    $sources[] = img_create_source_tag($device_fields['urls']['full'], $device_fields['type'], $media);
+                    $seen_urls[] = $device_fields['urls']['full'];
+                }
                 continue;
             }
 
@@ -663,12 +708,18 @@ if (!function_exists('img_generate_picture_tag')) {
 
             foreach ($candidates as $candidate) {
                 if (in_array($candidate, $used_sizes, true)) continue;
-                if (!$allow_full && $candidate === 'full') continue;
+
+                // Evitar full repetido si hay otro tamaño usable en el mismo breakpoint
+                if (!$allow_full && $candidate === 'full' && count(array_filter($candidates, fn($s) => $s !== 'full')) > 0) {
+                    continue;
+                }
 
                 $candidate_width = $img_fields['sizes'][$candidate]['width'] ?? 0;
 
                 if ($max_width > 0 && $candidate_width > 0 && $candidate_width > $max_width) continue;
                 if ($min_width > 0 && $candidate_width > 0 && $candidate_width < $min_width) continue;
+
+                if (empty($img_fields['urls'][$candidate])) continue;
 
                 $preferred = $candidate;
                 break;
@@ -678,16 +729,19 @@ if (!function_exists('img_generate_picture_tag')) {
 
             $used_sizes[] = $preferred;
 
-            if (!empty($img_fields['urls'][$preferred]) && img_evaluate_webp($img_fields['urls'][$preferred])) {
-                $sources[] = img_create_source_tag(
-                    $img_fields['urls'][$preferred] . '.webp',
-                    'image/webp',
-                    $media
-                );
+            $candidate_url = $img_fields['urls'][$preferred];
+
+            if (!empty($candidate_url) && img_evaluate_webp($candidate_url)) {
+                $webp_url = $candidate_url . '.webp';
+                if (!in_array($webp_url, $seen_urls, true)) {
+                    $sources[] = img_create_source_tag($webp_url, 'image/webp', $media);
+                    $seen_urls[] = $webp_url;
+                }
             }
 
-            if (!empty($img_fields['urls'][$preferred])) {
-                $sources[] = img_create_source_tag($img_fields['urls'][$preferred], $img_fields['type'], $media);
+            if (!in_array($candidate_url, $seen_urls, true)) {
+                $sources[] = img_create_source_tag($candidate_url, $img_fields['type'], $media);
+                $seen_urls[] = $candidate_url;
             }
         }
 
