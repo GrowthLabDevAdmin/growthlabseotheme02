@@ -42,7 +42,8 @@ if (get_field('toggle_block')):
                 <?php
                 if (isset($image) && $image) img_print_picture_tag(
                     img: $image,
-                    max_size: "medium",
+                    max_size: "large",
+                    min_size: "medium",
                     classes: "two-columns__image $reverse"
                 );
                 ?>

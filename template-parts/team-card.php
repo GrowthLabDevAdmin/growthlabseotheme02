@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
             <?php
             if (isset($args['picture']) && $args['picture']) {
                 img_print_picture_tag(img: $options["logo_symbol"], classes: "team-card__symbol");
-                img_print_picture_tag(img: $args["picture"], classes: "team-card__pic");
+                img_print_picture_tag(img: $args["picture"], max_size: "large", min_size: "medium", classes: "team-card__pic");
             } else {
                 include get_stylesheet_directory() . '/assets/icons/icon-file-image.svg';
             }

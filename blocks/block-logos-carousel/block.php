@@ -17,7 +17,8 @@ if (get_field('toggle_block')):
         <?php
         if (isset($side_image) && $side_image) img_print_picture_tag(
             img: $side_image,
-            max_size: "medium",
+            max_size: "large",
+            min_size: "medium",
             classes: "logos-carousel__image"
         );
         ?>

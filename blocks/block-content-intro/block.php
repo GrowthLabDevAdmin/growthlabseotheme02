@@ -33,7 +33,8 @@ if (get_field('toggle_block')):
                 <?php
                 if (isset($featured_image) && $featured_image) img_print_picture_tag(
                     img: $featured_image,
-                    max_size: "medium",
+                    max_size: "large",
+                    min_size: "medium",
                     classes: "col__image"
                 );
                 ?>
