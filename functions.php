@@ -333,7 +333,9 @@ add_action('init', function () {
         get_template_directory_uri() . '/js/vendor/splide/splide-min.js',
         [],
         '4.1.4',
-        ['strategy' => 'defer', 'in_footer' => true]
+        ['strategy' => 'async', 
+        //'in_footer' => true
+        ]
     );
 }, 1);
 
