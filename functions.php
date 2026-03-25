@@ -314,8 +314,6 @@ add_filter('excerpt_more', 'wpdocs_excerpt_more');
 // Comment this function while working on Dev Environment
 function inline_main_critical_css()
 {
-    global $block_critical_css;
-
     // Dynamic Color Scheme
     $color_scheme = theme_get_customizer_css();
 
@@ -324,14 +322,9 @@ function inline_main_critical_css()
     $critical_css = preg_replace('/\{theme-path\}/', get_template_directory_uri(), $critical_css);
     $critical_css =  $color_scheme . $critical_css;
 
-    // Add block critical CSS if any
-    if (!empty($block_critical_css)) {
-        $critical_css .= "\n/* Block Critical CSS */\n" . $block_critical_css;
-    }
-
     echo '<style id="main-css">' . $critical_css . '</style>';
 }
-add_action('wp_head', 'inline_main_critical_css', 1);
+add_action('wp_head', 'inline_main_critical_css', 5);
 
 // Register third-party scripts early to ensure they are available as dependencies
 add_action('init', function () {
@@ -340,11 +333,9 @@ add_action('init', function () {
         get_template_directory_uri() . '/js/vendor/splide/splide-min.js',
         [],
         '4.1.4',
-        ['strategy' => 'async', 
-        //'in_footer' => true
-        ]
+        ['strategy' => 'defer', 'in_footer' => true]
     );
-}, 1);
+}, 5);
 
 function growthlabtheme02_scripts()
 {
