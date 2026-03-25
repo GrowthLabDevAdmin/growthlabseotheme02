@@ -78,6 +78,7 @@ add_filter('should_load_separate_core_block_assets', '__return_true');
 /**
  * Dequeue block assets that aren't used on the current page
  * SIMPLIFIED: Only run for singular pages with blocks to avoid parse_blocks on every pageload
+ * MODIFIED: Inline critical CSS for used blocks instead of enqueuing separate files
  */
 add_action('wp_enqueue_scripts', function () {
     global $post;
@@ -108,6 +109,48 @@ add_action('wp_enqueue_scripts', function () {
 
     $blocks_in_use = array_unique($blocks_in_use);
 
+    // Store for later use in filters
+    global $blocks_in_use_css;
+    $blocks_in_use_css = $blocks_in_use;
+
+    // Group blocks by type (e.g., 'posts-carousel' for 'acf/posts-carousel')
+    $blocks_by_type = array();
+    foreach ($blocks_in_use as $block_name) {
+        $type = str_replace('acf/', '', $block_name); // Extract type from 'acf/type-name'
+        if (!isset($blocks_by_type[$type])) {
+            $blocks_by_type[$type] = array();
+        }
+        $blocks_by_type[$type][] = $block_name;
+    }
+
+    // Generate combined CSS per type
+    global $block_critical_css;
+    $block_critical_css = '';
+
+    foreach ($blocks_by_type as $type => $block_names) {
+        $type_css = '';
+        foreach ($block_names as $block_name) {
+            if (!isset($registered_blocks[$block_name])) continue;
+
+            $block_type = $registered_blocks[$block_name];
+            if (!empty($block_type->style)) {
+                // Dequeue the style
+                wp_dequeue_style($block_type->style);
+
+                // Read and combine CSS
+                $style_src = wp_styles()->registered[$block_type->style]->src ?? '';
+                $css_file = str_replace(get_template_directory_uri(), get_template_directory(), $style_src);
+                if (file_exists($css_file)) {
+                    $type_css .= file_get_contents($css_file) . "\n";
+                }
+            }
+        }
+        // Wrap type CSS in a comment for debugging
+        if (!empty($type_css)) {
+            $block_critical_css .= "/* Block type: {$type} */\n" . $type_css;
+        }
+    }
+
     $dequeued = 0;
     foreach ($registered_blocks as $block_name => $block_type) {
         if (in_array($block_name, $blocks_in_use)) continue;
@@ -122,6 +165,26 @@ add_action('wp_enqueue_scripts', function () {
         if ($dequeued > 100) break;
     }
 }, 100);
+
+/**
+ * Remove style links for blocks that have CSS inlined
+ */
+add_filter('style_loader_tag', function ($tag, $handle) {
+    global $blocks_in_use_css;
+    if (empty($blocks_in_use_css)) return $tag;
+
+    // Convert handle back to block name (e.g., 'acf-posts-carousel-style' -> 'acf/posts-carousel')
+    if (str_starts_with($handle, 'acf-') && str_ends_with($handle, '-style')) {
+        $block_name = str_replace(['acf-', '-style'], '', $handle);
+        $block_name = 'acf/' . $block_name;
+
+        if (in_array($block_name, $blocks_in_use_css)) {
+            return ''; // Remove the <link> tag
+        }
+    }
+
+    return $tag;
+}, 10, 2);
 
 /**
  * Move block scripts to footer
