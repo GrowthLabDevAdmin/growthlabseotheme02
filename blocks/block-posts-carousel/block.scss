@@ -1,10 +1,10 @@
+@use "../../styles/template-parts/team-card";
+@use "../../styles/template-parts/post-card";
+@use "../../styles/template-parts/testimonial-card";
+@use "../../styles/template-parts/default-card";
+@use "../../styles/template-parts/result-card";
 @use "../../styles/globals/variables" as v;
 @use "../../styles/globals/mixins" as m;
-@use "../../styles/template-parts/result-card";
-@use "../../styles/template-parts/post-card";
-@use "../../styles/template-parts/default-card";
-@use "../../styles/template-parts/testimonial-card";
-@use "../../styles/template-parts/team-card";
 
 .posts-carousel {
   padding: var(--sp-xsm) 0;
