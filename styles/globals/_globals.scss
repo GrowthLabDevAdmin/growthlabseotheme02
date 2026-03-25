@@ -213,6 +213,7 @@ p {
     left: 0;
     z-index: -1;
     display: block;
+    transition: opacity 0.3s ease-in-out;
   }
 
   &--loaded {
@@ -221,6 +222,7 @@ p {
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      opacity: 1;
     }
   }
 
