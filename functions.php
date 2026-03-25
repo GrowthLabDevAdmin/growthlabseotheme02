@@ -314,6 +314,8 @@ add_filter('excerpt_more', 'wpdocs_excerpt_more');
 // Comment this function while working on Dev Environment
 function inline_main_critical_css()
 {
+    global $block_critical_css;
+
     // Dynamic Color Scheme
     $color_scheme = theme_get_customizer_css();
 
@@ -321,6 +323,11 @@ function inline_main_critical_css()
     $critical_css .= file_get_contents(get_stylesheet_uri());
     $critical_css = preg_replace('/\{theme-path\}/', get_template_directory_uri(), $critical_css);
     $critical_css =  $color_scheme . $critical_css;
+
+    // Add block critical CSS if any
+    if (!empty($block_critical_css)) {
+        $critical_css .= "\n/* Block Critical CSS */\n" . $block_critical_css;
+    }
 
     echo '<style id="main-css">' . $critical_css . '</style>';
 }
