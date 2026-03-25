@@ -33,7 +33,7 @@ if (!$bg_mobile) $bg_mobile = [];
     ); ?>
 
     <div class="hero__wrapper container">
-        <?php if ($side_portrait) img_print_picture_tag(img: $side_portrait, classes: "hero__side-portrait", is_priority: true, is_cover: true); ?>
+        <?php if ($side_portrait) img_print_picture_tag(img: $side_portrait, max_size: "large", min_size: "medium", classes: "hero__side-portrait", is_priority: true); ?>
 
         <div class="hero__content">
             <div class="hero__title">
