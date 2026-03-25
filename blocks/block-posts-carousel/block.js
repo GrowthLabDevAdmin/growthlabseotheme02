@@ -47,7 +47,9 @@
       };
 
       if (splideElement) {
-        new Splide(splideElement, carouselObj).mount();
+        requestAnimationFrame(() => {
+          new Splide(splideElement, carouselObj).mount();
+        });
       }
     });
   }
