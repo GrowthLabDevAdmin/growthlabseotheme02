@@ -16,7 +16,7 @@ $GLOBALS['breakpoints'] = [
     'tablet' => '768px',   // diferente al default
     'ldpi'   => '1024px',
     'mdpi'   => '1280px',  // diferente al default
-    'hdpi'   => '1600px',  // diferente al default
+    'hdpi'   => '1921px',  // diferente al default
 ];
 
 
@@ -321,14 +321,22 @@ function inline_main_critical_css()
 
     $critical_css = file_get_contents(get_template_directory() . "/styles/main-min.css");
     $critical_css .= file_get_contents(get_stylesheet_uri());
-    $critical_css = preg_replace('/\{theme-path\}/', get_template_directory_uri(), $critical_css);
     $critical_css =  $color_scheme . $critical_css;
+
+    // Add Splide critical CSS only when carousels are present
+    if (function_exists('has_block') && (has_block('acf/posts-carousel') || has_block('acf/logos-carousel'))) {
+        $splide_css_file = get_template_directory() . '/styles/vendor/splide/splide-core.min.css';
+        if (file_exists($splide_css_file)) {
+            $critical_css .= "\n/* Splide Critical CSS */\n" . file_get_contents($splide_css_file);
+        }
+    }
 
     // Add block critical CSS if any
     if (!empty($block_critical_css)) {
         $critical_css .= "\n/* Block Critical CSS */\n" . $block_critical_css;
     }
 
+    $critical_css = preg_replace('/\{theme-path\}/', get_template_directory_uri(), $critical_css);
     // Minify CSS: remove comments, extra spaces, and newlines
     $critical_css = preg_replace('/\/\*.*?\*\//s', '', $critical_css); // Remove CSS comments
     $critical_css = preg_replace('/\s+/', ' ', $critical_css); // Replace multiple spaces with single space
@@ -376,13 +384,21 @@ function growthlabtheme02_scripts()
     wp_dequeue_script('gform_gravityforms_maps');
 
     // Third party JS scripts.
-    wp_enqueue_script('splide-js');
+    $load_splide = false;
+
+    if (is_singular() && function_exists('has_block')) {
+        $load_splide = has_block('acf/posts-carousel') || has_block('acf/logos-carousel');
+    }
+
+    if ($load_splide) {
+        wp_enqueue_script('splide-js');
+    }
 
     // Main JS scripts.
     wp_enqueue_script(
         'growthlabtheme02-main-scripts',
         get_template_directory_uri() . '/js/main-min.js',
-        array('splide-js'),
+        array(),
         filemtime(get_template_directory() . '/js/main-min.js'),
         true
     );

@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
             <div class=" testimonial-card__stars">
                 <?php
                 $i = 1;
-                $star_url = get_template_directory_uri() . '/assets/icons/icon-star.svg';
+                $star_url = get_template_directory() . '/assets/icons/icon-star.svg';
                 while ($i <= 5) {
                     echo '<span class="star">';
                     include $star_url;

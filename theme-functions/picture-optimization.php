@@ -62,9 +62,9 @@ if (!isset($GLOBALS['preferred_size_map'])) {
 
 // Ensure theme custom add_image_size values are mapped to breakpoints
 $GLOBALS['preferred_size_map'] = array_merge($GLOBALS['preferred_size_map'], [
-    'cover-desktop'  => 'hdpi',
-    'cover-tablet'   => 'mdpi',
-    'cover-mobile'   => 'ldpi',
+    'cover-desktop'  => 'mdpi',
+    'cover-tablet'   => 'tablet',
+    'cover-mobile'   => 'mobile',
     'featured-small' => 'mobile',
 ]);
 
@@ -269,6 +269,57 @@ if (!function_exists('po_detect_cover_sizes')) {
         usort($cover_sizes, fn($a, $b) => $b['width'] - $a['width']);
 
         return $cover_sizes;
+    }
+}
+
+if (!function_exists('po_get_media_for_breakpoint')) {
+    function po_get_media_for_breakpoint(string $breakpoint): ?string
+    {
+        if ($breakpoint === 'mobile') {
+            return null;
+        }
+
+        $bps = $GLOBALS['breakpoints'];
+        $min = $bps[$breakpoint];
+
+        $order = ['mobile', 'tablet', 'ldpi', 'mdpi', 'hdpi'];
+        $idx = array_search($breakpoint, $order);
+
+        if ($idx !== false && $idx < count($order) - 1) {
+            $next_bp = $order[$idx + 1];
+            $max = ((int) $bps[$next_bp] - 1) . 'px';
+            return "(min-width: {$min}) and (max-width: {$max})";
+        } else {
+            return "(min-width: {$min})";
+        }
+    }
+}
+
+if (!function_exists('po_get_safe_size')) {
+    function po_get_safe_size(array $img_fields, string $desired_size, int $max_width = PHP_INT_MAX): ?string
+    {
+        // Si el tamaño deseado existe, usarlo siempre que no sea más ancho que max_width.
+        if (!empty($img_fields['urls'][$desired_size]) && ($img_fields['sizes'][$desired_size]['width'] ?? 0) > 0) {
+            if (($img_fields['sizes'][$desired_size]['width'] ?? 0) <= $max_width || $max_width === PHP_INT_MAX) {
+                return $desired_size;
+            }
+        }
+
+        $candidates = [];
+
+        foreach ($img_fields['sizes'] as $size_key => $dim) {
+            $width = $dim['width'] ?? 0;
+            if ($width > 0 && $width <= $max_width && !empty($img_fields['urls'][$size_key])) {
+                $candidates[$size_key] = $width;
+            }
+        }
+
+        if (empty($candidates)) {
+            return null;
+        }
+
+        arsort($candidates);
+        return array_key_first($candidates);
     }
 }
 
@@ -593,65 +644,83 @@ if (!function_exists('img_generate_picture_tag')) {
         }
 
         // ── Cover mode ────────────────────────────────────────────────────────
-        if ($is_cover && empty($tablet_img) && empty($mobile_img)) {
-            $cover_sizes = po_detect_cover_sizes();
+        if ($is_cover) {
+            $sources = [];
+            $desktop_fields = $img_fields;
+            $tablet_fields = !empty($tablet_img) ? img_get_fields($tablet_img) : null;
+            $mobile_fields = !empty($mobile_img) ? img_get_fields($mobile_img) : null;
 
-            if (!empty($cover_sizes)) {
-                $sources        = [];
-                $smallest_cover = null;
-
-                foreach ($cover_sizes as $cover_info) {
-                    $size_name  = $cover_info['name'];
-                    $breakpoint = $cover_info['breakpoint'];
-
-                    if (
-                        $smallest_cover === null ||
-                        $cover_info['width'] < $smallest_cover['width']
-                    ) {
-                        if (
-                            strpos(strtolower($size_name), 'mobile') !== false ||
-                            $breakpoint === 'mobile'
-                        ) {
-                            $smallest_cover = $cover_info;
-                        }
-                    }
-
-                    $media = ($breakpoint === 'mobile')
-                        ? null
-                        : "(min-width: {$GLOBALS['breakpoints'][$breakpoint]})";
-
-                    if (empty($img_fields['urls'][$size_name])) continue;
-
-                    if (img_evaluate_webp($img_fields['urls'][$size_name])) {
-                        $sources[] = img_create_source_tag(
-                            $img_fields['urls'][$size_name] . '.webp',
-                            'image/webp',
-                            $media
-                        );
-                    }
-
-                    $sources[] = img_create_source_tag(
-                        $img_fields['urls'][$size_name],
-                        $img_fields['type'],
-                        $media
-                    );
+            $pick_size = function(?array $fields, array $preferred) {
+                if (!$fields) {
+                    return null;
                 }
 
-                $fallback_size = $smallest_cover ? $smallest_cover['name'] : 'cover-mobile';
-
-                if (empty($img_fields['urls'][$fallback_size])) {
-                    $fallback_size = 'full';
+                foreach ($preferred as $size) {
+                    if (!empty($fields['urls'][$size])) {
+                        return $size;
+                    }
                 }
 
-                $img_tag = img_create_img_tag(
-                    $img_fields['urls'][$fallback_size],
-                    $img_fields['sizes'][$fallback_size]['width']  ?? 0,
-                    $img_fields['sizes'][$fallback_size]['height'] ?? 0,
-                    $attrs
-                );
+                foreach ($fields['urls'] as $size => $url) {
+                    if (!empty($url)) {
+                        return $size;
+                    }
+                }
 
-                return img_wrap_picture($sources, $img_tag, $attrs);
+                return null;
+            };
+
+            $ranges = [
+                'hdpi' => ['fields' => $desktop_fields, 'sizes' => ['full']],
+                'mdpi' => ['fields' => $desktop_fields, 'sizes' => ['cover-desktop', 'cover-tablet', 'full']],
+                'ldpi' => ['fields' => $desktop_fields, 'sizes' => ['cover-tablet', 'cover-desktop', 'full']],
+                'tablet' => ['fields' => $tablet_fields ?: $desktop_fields, 'sizes' => ['cover-tablet', 'cover-mobile', 'full']],
+                'mobile' => ['fields' => $mobile_fields ?: $tablet_fields ?: $desktop_fields, 'sizes' => ['cover-mobile', 'cover-tablet', 'full']],
+            ];
+
+            $seen_urls = [];
+
+            foreach ($ranges as $range => $config) {
+                $field_set = $config['fields'];
+                $size = $pick_size($field_set, $config['sizes']);
+
+                if (!$size || empty($field_set['urls'][$size])) {
+                    continue;
+                }
+
+                $media = $range === 'mobile' ? null : po_get_media_for_breakpoint($range);
+                $url = $field_set['urls'][$size];
+
+                if (in_array($url, $seen_urls, true)) {
+                    continue;
+                }
+
+                if (img_evaluate_webp($url)) {
+                    $webp_url = $url . '.webp';
+                    if (!in_array($webp_url, $seen_urls, true)) {
+                        $sources[] = img_create_source_tag($webp_url, 'image/webp', $media);
+                        $seen_urls[] = $webp_url;
+                    }
+                }
+
+                $sources[] = img_create_source_tag($url, $field_set['type'], $media);
+                $seen_urls[] = $url;
             }
+
+            $fallback_fields = $mobile_fields ?: $tablet_fields ?: $desktop_fields;
+            $fallback_size = $pick_size($fallback_fields, ['cover-mobile', 'cover-tablet', 'cover-desktop', 'full']);
+            if (!$fallback_size) {
+                $fallback_size = 'full';
+            }
+
+            $img_tag = img_create_img_tag(
+                $fallback_fields['urls'][$fallback_size] ?? $fallback_fields['urls']['full'],
+                $fallback_fields['sizes'][$fallback_size]['width'] ?? 0,
+                $fallback_fields['sizes'][$fallback_size]['height'] ?? 0,
+                $attrs
+            );
+
+            return img_wrap_picture($sources, $img_tag, $attrs);
         }
 
         // ── Standard mode ─────────────────────────────────────────────────────

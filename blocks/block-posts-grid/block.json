@@ -2,7 +2,7 @@
   "name": "acf/posts-grid",
   "title": "Posts Grid",
   "style": ["file:./block-min.css"],
-  "script": ["file:./block-min.js", "splide-js"],
+  "script": ["file:./block-min.js"],
   "category": "growthlabtheme02-blocks",
   "icon": "block-default",
   "keywords": [
