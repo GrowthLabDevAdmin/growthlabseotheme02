@@ -24,7 +24,9 @@
       perPageLdpi = 1;
     }
 
-    if (splideElement) {
+    if (!splideElement) return;
+
+    loadSplide(() => {
       new Splide(splideElement, {
         type: "loop",
         perPage: 1,
@@ -45,7 +47,7 @@
           },
         },
       }).mount();
-    }
+    });
   };
 
   const observer = new IntersectionObserver(
@@ -53,10 +55,10 @@
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         initCarousel(entry.target);
-        obs.unobserve(entry.target); // init solo una vez
+        obs.unobserve(entry.target);
       });
     },
-    { rootMargin: "200px 0px" }, // empieza a cargar 200px antes de entrar al viewport
+    { rootMargin: "200px 0px" },
   );
 
   postsCarousels.forEach((carousel) => observer.observe(carousel));

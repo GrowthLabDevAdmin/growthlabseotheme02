@@ -5,27 +5,27 @@
   if (!logosCarousels.length) return;
 
   const initCarousel = (splideElement) => {
-    if (typeof Splide === "undefined") return;
-
     const inSidebar = !!splideElement.closest(".sidebar");
 
-    new Splide(splideElement, {
-      type: "loop",
-      perPage: 1,
-      perMove: 1,
-      arrows: false,
-      pagination: true,
-      mediaQuery: "min",
-      breakpoints: {
-        [tablet]: {
-          perPage: inSidebar ? 2 : 3,
+    loadSplide(() => {
+      new Splide(splideElement, {
+        type: "loop",
+        perPage: 1,
+        perMove: 1,
+        arrows: false,
+        pagination: true,
+        mediaQuery: "min",
+        breakpoints: {
+          [tablet]: {
+            perPage: inSidebar ? 2 : 3,
+          },
+          [ldpi]: {
+            perPage: inSidebar ? 3 : 5,
+            pagination: false,
+          },
         },
-        [ldpi]: {
-          perPage: inSidebar ? 3 : 5,
-          pagination: false,
-        },
-      },
-    }).mount();
+      }).mount();
+    });
   };
 
   const observer = new IntersectionObserver(

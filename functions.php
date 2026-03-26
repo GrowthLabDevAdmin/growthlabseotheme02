@@ -362,18 +362,6 @@ function inline_main_critical_css()
 }
 add_action('wp_head', 'inline_main_critical_css', 1);
 
-// Register third-party scripts early to ensure they are available as dependencies
-add_action('init', function () {
-    wp_register_script(
-        'splide-js',
-        get_template_directory_uri() . '/js/vendor/splide/splide-min.js',
-        [],
-        '4.1.4',
-        true
-    );
-    wp_script_add_data('splide-js', 'defer', true);
-}, 1);
-
 function growthlabtheme02_scripts()
 {
     if (is_admin()) return;
