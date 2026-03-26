@@ -186,38 +186,32 @@ function findConsecutiveGroups() {
 function lazyLoadBgGradient() {
   "use strict";
 
-  // Filter to only observe top-level .bg-gradient elements (not nested inside another .bg-gradient)
-  const bgGradientElements = Array.from(document.querySelectorAll(".bg-gradient")).filter(el => !el.parentElement?.closest('.bg-gradient'));
-  if (!bgGradientElements.length) return;
+  const bgGradientElements = Array.from(
+    document.querySelectorAll(".bg-gradient"),
+  ).filter((el) => !el.parentElement?.closest(".bg-gradient"));
 
-  let pageLoaded = false;
+  if (!bgGradientElements.length) return;
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting && pageLoaded) {
-          entry.target.classList.add("bg-gradient--loaded");
-          observer.unobserve(entry.target);
-        }
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("bg-gradient--loaded");
+        observer.unobserve(entry.target);
       });
     },
-    {
-      rootMargin: "100px",
-    },
+    { rootMargin: "100px" },
   );
 
-  function initBgGradientLazyLoad() {
-    bgGradientElements.forEach((element) => {
-      observer.observe(element);
-    });
+  const init = () => bgGradientElements.forEach((el) => observer.observe(el));
+
+  // Si load ya disparó (script defer), init directo
+  if (document.readyState === "complete") {
+    init();
+  } else {
+    window.addEventListener("load", init, { once: true });
   }
-
-  window.addEventListener("load", () => {
-    pageLoaded = true;
-    initBgGradientLazyLoad();
-  });
 }
-
 
 //Accordion Items
 function toggleAccordion(e) {
