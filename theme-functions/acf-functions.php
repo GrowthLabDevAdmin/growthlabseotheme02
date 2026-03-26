@@ -53,6 +53,10 @@ if (!function_exists('register_acf_blocks')) {
             set_transient($cache_key, $block_files, 24 * HOUR_IN_SECONDS);
         }
 
+        // Store block folder map globally for later critical CSS extraction.
+        global $acf_block_dirs;
+        $acf_block_dirs = $block_files;
+
         // 3. Register all found blocks
         foreach ($block_files as $block_dir) {
             register_block_type($block_dir);
@@ -72,7 +76,8 @@ add_action('init', 'register_acf_blocks', 5);
  * Optimized to prevent memory bloat during cache operations
  */
 
-// Prevent unused block assets from loading
+// Allow WordPress core block assets flow, so block scripts still enqueue correctly.
+// Block CSS is handled by manual inlining/dequeue logic below.
 add_filter('should_load_separate_core_block_assets', '__return_true');
 
 /**
@@ -134,13 +139,28 @@ add_action('wp_enqueue_scripts', function () {
 
             $block_type = $registered_blocks[$block_name];
             if (!empty($block_type->style)) {
-                // Dequeue the style
+                // Dequeue the style and the related inline CSS if present.
                 wp_dequeue_style($block_type->style);
+                wp_deregister_style($block_type->style);
 
-                // Read and combine CSS
-                $style_src = wp_styles()->registered[$block_type->style]->src ?? '';
-                $css_file = str_replace(get_template_directory_uri(), get_template_directory(), $style_src);
-                if (file_exists($css_file)) {
+                $inline_handle = $block_type->style . '-inline-css';
+                wp_dequeue_style($inline_handle);
+                wp_deregister_style($inline_handle);
+
+                // Read and combine CSS from block folder file (block JSON declares file:./block-min.css)
+                $css_file = null;
+                global $acf_block_dirs;
+                if (!empty($acf_block_dirs[$block_name])) {
+                    $css_file = trailingslashit($acf_block_dirs[$block_name]) . 'block-min.css';
+                }
+
+                if (empty($css_file) || !file_exists($css_file)) {
+                    // fallback: try from registered style source URL
+                    $style_src = wp_styles()->registered[$block_type->style]->src ?? '';
+                    $css_file  = str_replace(get_template_directory_uri(), get_template_directory(), $style_src);
+                }
+
+                if (!empty($css_file) && file_exists($css_file)) {
                     $type_css .= file_get_contents($css_file) . "\n";
                 }
             }
@@ -171,14 +191,40 @@ add_action('wp_enqueue_scripts', function () {
  */
 add_filter('style_loader_tag', function ($tag, $handle) {
     global $blocks_in_use_css;
-    if (empty($blocks_in_use_css)) return $tag;
+
+    // Skip inline <style> for core block CSS handles (already covered in critical CSS)
+    $core_block_styles = array(
+        'wp-block-library',
+        'wp-block-library-theme',
+        'global-styles',
+        'wc-blocks-style',
+    );
+
+    if (in_array($handle, $core_block_styles, true)) {
+        return '';
+    }
+
+    if (empty($blocks_in_use_css)) {
+        return $tag;
+    }
+
+    // Inline ACF block CSS handles can be named as '*-style-inline-css'.
+    if (str_ends_with($handle, '-inline-css')) {
+        $base_handle = substr($handle, 0, -strlen('-inline-css'));
+        if (str_starts_with($base_handle, 'acf-')) {
+            $block_name = 'acf/' . str_replace(['acf-', '-style'], '', $base_handle);
+            if (in_array($block_name, $blocks_in_use_css, true)) {
+                return ''; // Remove the inline <style> block
+            }
+        }
+    }
 
     // Convert handle back to block name (e.g., 'acf-posts-carousel-style' -> 'acf/posts-carousel')
     if (str_starts_with($handle, 'acf-') && str_ends_with($handle, '-style')) {
         $block_name = str_replace(['acf-', '-style'], '', $handle);
         $block_name = 'acf/' . $block_name;
 
-        if (in_array($block_name, $blocks_in_use_css)) {
+        if (in_array($block_name, $blocks_in_use_css, true)) {
             return ''; // Remove the <link> tag
         }
     }

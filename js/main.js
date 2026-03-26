@@ -181,7 +181,8 @@ function findConsecutiveGroups() {
 (function lazyLoadBgGradient() {
   "use strict";
 
-  const bgGradientElements = document.querySelectorAll(".bg-gradient");
+  // Filter to only observe top-level .bg-gradient elements (not nested inside another .bg-gradient)
+  const bgGradientElements = Array.from(document.querySelectorAll(".bg-gradient")).filter(el => !el.parentElement?.closest('.bg-gradient'));
   if (!bgGradientElements.length) return;
 
   let pageLoaded = false;

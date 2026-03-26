@@ -329,6 +329,12 @@ function inline_main_critical_css()
         $critical_css .= "\n/* Block Critical CSS */\n" . $block_critical_css;
     }
 
+    // Minify CSS: remove comments, extra spaces, and newlines
+    $critical_css = preg_replace('/\/\*.*?\*\//s', '', $critical_css); // Remove CSS comments
+    $critical_css = preg_replace('/\s+/', ' ', $critical_css); // Replace multiple spaces with single space
+    $critical_css = preg_replace('/\s*([{}:;,])\s*/', '$1', $critical_css); // Remove spaces around braces, colons, semicolons, commas
+    $critical_css = trim($critical_css); // Trim leading/trailing whitespace
+
     echo '<style id="main-css">' . $critical_css . '</style>';
 }
 add_action('wp_head', 'inline_main_critical_css', 5);
@@ -340,8 +346,9 @@ add_action('init', function () {
         get_template_directory_uri() . '/js/vendor/splide/splide-min.js',
         [],
         '4.1.4',
-        ['strategy' => 'defer', 'in_footer' => true]
+        true
     );
+    wp_script_add_data('splide-js', 'defer', true);
 }, 5);
 
 function growthlabtheme02_scripts()
@@ -377,8 +384,9 @@ function growthlabtheme02_scripts()
         get_template_directory_uri() . '/js/main-min.js',
         array('splide-js'),
         filemtime(get_template_directory() . '/js/main-min.js'),
-        ['strategy' => 'defer', 'in_footer' => true]
+        true
     );
+    wp_script_add_data('growthlabtheme02-main-scripts', 'defer', true);
 
     // Load specific template stylesheet
     if (is_page() || is_single()) {
@@ -395,9 +403,11 @@ function growthlabtheme02_scripts()
         wp_enqueue_script(
             'growthlabtheme02-posts-filters',
             get_template_directory_uri() . '/js/posts-filters-min.js',
+            array(),
             filemtime(get_template_directory() . '/js/posts-filters-min.js'),
-            ['strategy' => 'defer', 'in_footer' => true]
+            true
         );
+        wp_script_add_data('growthlabtheme02-posts-filters', 'defer', true);
         wp_localize_script(
             'growthlabtheme02-posts-filters',
             'postsFiltersData',
