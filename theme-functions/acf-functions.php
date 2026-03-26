@@ -184,7 +184,7 @@ add_action('wp_enqueue_scripts', function () {
         $dequeued++;
         if ($dequeued > 100) break;
     }
-}, 20);
+}, 5);
 
 /**
  * Remove style links for blocks that have CSS inlined

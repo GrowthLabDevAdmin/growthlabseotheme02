@@ -175,10 +175,13 @@ function findConsecutiveGroups() {
       wrapper.appendChild(el);
     });
   });
+
+  // Defer lazy-load init until after grouping is done, avoiding CLS from child/parent .bg-gradient.
+  lazyLoadBgGradient();
 }
 
-//Lazy Load Background Images for .bg-gradient
-(function lazyLoadBgGradient() {
+// Lazy Load Background Images for .bg-gradient
+function lazyLoadBgGradient() {
   "use strict";
 
   // Filter to only observe top-level .bg-gradient elements (not nested inside another .bg-gradient)
@@ -186,17 +189,6 @@ function findConsecutiveGroups() {
   if (!bgGradientElements.length) return;
 
   let pageLoaded = false;
-
-  window.addEventListener("load", () => {
-    pageLoaded = true;
-    initBgGradientLazyLoad();
-  });
-
-  function initBgGradientLazyLoad() {
-    bgGradientElements.forEach((element) => {
-      observer.observe(element);
-    });
-  }
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -211,7 +203,19 @@ function findConsecutiveGroups() {
       rootMargin: "100px",
     },
   );
-})();
+
+  function initBgGradientLazyLoad() {
+    bgGradientElements.forEach((element) => {
+      observer.observe(element);
+    });
+  }
+
+  window.addEventListener("load", () => {
+    pageLoaded = true;
+    initBgGradientLazyLoad();
+  });
+}
+
 
 //Accordion Items
 function toggleAccordion(e) {

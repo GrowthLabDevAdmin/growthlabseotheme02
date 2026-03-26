@@ -337,7 +337,7 @@ function inline_main_critical_css()
 
     echo '<style id="main-css">' . $critical_css . '</style>';
 }
-add_action('wp_head', 'inline_main_critical_css', 5);
+add_action('wp_head', 'inline_main_critical_css', 1);
 
 // Register third-party scripts early to ensure they are available as dependencies
 add_action('init', function () {
@@ -349,7 +349,7 @@ add_action('init', function () {
         true
     );
     wp_script_add_data('splide-js', 'defer', true);
-}, 5);
+}, 1);
 
 function growthlabtheme02_scripts()
 {
