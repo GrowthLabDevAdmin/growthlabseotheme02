@@ -19,24 +19,6 @@ const ldpi = 1024;
 const mdpi = 1200;
 const hdpi = 1440;
 
-const loadSplide = (callback) => {
-  if (typeof Splide !== "undefined") return callback();
-  if (window.__splideLoading) {
-    window.__splideCallbacks = window.__splideCallbacks || [];
-    window.__splideCallbacks.push(callback);
-    return;
-  }
-  window.__splideLoading = true;
-  window.__splideCallbacks = [callback];
-  const script = document.createElement("script");
-  script.src = splideData.url;
-  script.onload = () => {
-    window.__splideCallbacks.forEach((fn) => fn());
-    window.__splideCallbacks = [];
-  };
-  document.head.appendChild(script);
-};
-
 requestAnimationFrame(() => {
   findConsecutiveGroups();
 });
