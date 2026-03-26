@@ -195,16 +195,17 @@ p {
 
 .bg-gradient {
   position: relative;
-  background: linear-gradient(
-    135deg,
-    rgba(var(--primary), 1) 0%,
-    rgba(var(--primary-dark), 1) 25%,
-    rgba(var(--primary-light), 1) 50%,
-    rgba(var(--primary), 1) 75%,
-    rgba(var(--primary-dark), 1) 100%
-  );
 
   &--loaded {
+    background: linear-gradient(
+      135deg,
+      rgba(var(--primary), 1) 0%,
+      rgba(var(--primary-dark), 1) 25%,
+      rgba(var(--primary-light), 1) 50%,
+      rgba(var(--primary), 1) 75%,
+      rgba(var(--primary-dark), 1) 100%
+    );
+
     &::after {
       content: "";
       width: 100%;
