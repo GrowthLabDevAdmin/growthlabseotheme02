@@ -359,11 +359,16 @@ if (!function_exists('img_create_img_tag')) {
 }
 
 if (!function_exists('img_wrap_picture')) {
-    function img_wrap_picture(array $sources, string $img_tag, array $attrs): string
+    function img_wrap_picture(array $sources, string $img_tag, array $attrs, int $width = 0, int $height = 0): string
     {
         $id_attr       = !empty($attrs['id'])    ? "id='"    . esc_attr($attrs['id'])    . "'" : '';
         $class_attr    = !empty($attrs['class']) ? "class='" . esc_attr($attrs['class']) . "'" : '';
-        $picture_attrs = trim($id_attr . ' ' . $class_attr);
+
+        $style_attr = ($width && $height)
+            ? "style='aspect-ratio: {$width} / {$height};'"
+            : '';
+
+        $picture_attrs = trim("{$id_attr} {$class_attr} {$style_attr}");
 
         $picture  = $picture_attrs ? "<picture {$picture_attrs}>" : "<picture>";
         $picture .= implode('', $sources);
@@ -650,7 +655,7 @@ if (!function_exists('img_generate_picture_tag')) {
             $tablet_fields = !empty($tablet_img) ? img_get_fields($tablet_img) : null;
             $mobile_fields = !empty($mobile_img) ? img_get_fields($mobile_img) : null;
 
-            $pick_size = function(?array $fields, array $preferred) {
+            $pick_size = function (?array $fields, array $preferred) {
                 if (!$fields) {
                     return null;
                 }
@@ -843,7 +848,10 @@ if (!function_exists('img_generate_picture_tag')) {
             $attrs
         );
 
-        return img_wrap_picture($sources, $img_tag, $attrs);
+        $fallback_w = $img_fields['sizes'][$fallback_size]['width']  ?? 0;
+        $fallback_h = $img_fields['sizes'][$fallback_size]['height'] ?? 0;
+
+        return img_wrap_picture($sources, $img_tag, $attrs, $fallback_w, $fallback_h);
     }
 }
 
