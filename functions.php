@@ -310,9 +310,22 @@ add_filter('excerpt_more', 'wpdocs_excerpt_more');
  * @return void
  */
 
-// Inline critical CSS
-// Comment this function while working on Dev Environment
-function inline_main_critical_css()
+// Function to check if Splide should be loaded
+function should_load_splide() {
+    if (!is_singular() || !function_exists('parse_blocks')) return false;
+
+    global $post;
+    if (!$post) return false;
+
+    $content = $post->post_content;
+    $blocks = parse_blocks($content);
+    foreach ($blocks as $block) {
+        if ($block['blockName'] === 'acf/posts-carousel' || $block['blockName'] === 'acf/logos-carousel') {
+            return true;
+        }
+    }
+    return false;
+}
 {
     global $block_critical_css;
 
@@ -324,19 +337,7 @@ function inline_main_critical_css()
     $critical_css =  $color_scheme . $critical_css;
 
     // Add Splide critical CSS only when carousels are present
-    $load_splide_css = false;
-    if (is_singular() && function_exists('parse_blocks')) {
-        global $post;
-        $content = $post->post_content;
-        $blocks = parse_blocks($content);
-        foreach ($blocks as $block) {
-            if ($block['blockName'] === 'acf/posts-carousel' || $block['blockName'] === 'acf/logos-carousel') {
-                $load_splide_css = true;
-                break;
-            }
-        }
-    }
-    if ($load_splide_css) {
+    if (should_load_splide()) {
         $splide_css_file = get_template_directory() . '/styles/vendor/splide/splide-core.min.css';
         if (file_exists($splide_css_file)) {
             $critical_css .= "\n/* Splide Critical CSS */\n" . file_get_contents($splide_css_file);
@@ -398,21 +399,7 @@ function growthlabtheme02_scripts()
     wp_script_add_data('growthlabtheme02-main-scripts', 'defer', true);
 
     // Third party JS scripts.
-    $load_splide = false;
-
-    if (is_singular() && function_exists('parse_blocks')) {
-        global $post;
-        $content = $post->post_content;
-        $blocks = parse_blocks($content);
-        foreach ($blocks as $block) {
-            if ($block['blockName'] === 'acf/posts-carousel' || $block['blockName'] === 'acf/logos-carousel') {
-                $load_splide = true;
-                break;
-            }
-        }
-    }
-
-    if ($load_splide) {
+    if (should_load_splide()) {
         wp_enqueue_script('splide-js');
     }
 
@@ -456,6 +443,16 @@ add_action('wp_enqueue_scripts', 'growthlabtheme02_scripts');
 add_action('wp_head', function () {
     $image_path = get_template_directory_uri() . '/assets/img/transparent-bg.webp';
     echo '<link rel="preload" as="image" href="' . esc_url($image_path) . '" />';
+
+    // Preload main.js
+    $main_js_url = get_template_directory_uri() . '/js/main-min.js';
+    echo '<link rel="preload" as="script" href="' . esc_url($main_js_url) . '" />';
+
+    // Preload splide.js if needed
+    if (should_load_splide()) {
+        $splide_js_url = get_template_directory_uri() . '/js/vendor/splide/splide-min.js';
+        echo '<link rel="preload" as="script" href="' . esc_url($splide_js_url) . '" />';
+    }
 }, 1);
 
 // Add theme and parent/child theme classes to body
