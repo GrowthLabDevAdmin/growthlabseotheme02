@@ -311,7 +311,8 @@ add_filter('excerpt_more', 'wpdocs_excerpt_more');
  */
 
 // Function to check if Splide should be loaded
-function should_load_splide() {
+function should_load_splide()
+{
     if (!is_singular() || !function_exists('parse_blocks')) return false;
 
     global $post;
@@ -326,6 +327,7 @@ function should_load_splide() {
     }
     return false;
 }
+function inline_main_critical_css()
 {
     global $block_critical_css;
 
