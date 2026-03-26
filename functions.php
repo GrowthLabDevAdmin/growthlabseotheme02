@@ -386,7 +386,7 @@ function growthlabtheme02_scripts()
         filemtime(get_template_directory() . '/js/main-min.js'),
         true
     );
-    wp_script_add_data('growthlabtheme02-main-scripts', 'defer', true);
+    wp_script_add_data('growthlabtheme02-main-scripts', 'strategy', 'defer');
 
     // Third party JS scripts.
     if (should_load_splide()) {
