@@ -324,7 +324,19 @@ function inline_main_critical_css()
     $critical_css =  $color_scheme . $critical_css;
 
     // Add Splide critical CSS only when carousels are present
-    if (function_exists('has_block') && (has_block('acf/posts-carousel') || has_block('acf/logos-carousel'))) {
+    $load_splide_css = false;
+    if (is_singular() && function_exists('parse_blocks')) {
+        global $post;
+        $content = $post->post_content;
+        $blocks = parse_blocks($content);
+        foreach ($blocks as $block) {
+            if ($block['blockName'] === 'acf/posts-carousel' || $block['blockName'] === 'acf/logos-carousel') {
+                $load_splide_css = true;
+                break;
+            }
+        }
+    }
+    if ($load_splide_css) {
         $splide_css_file = get_template_directory() . '/styles/vendor/splide/splide-core.min.css';
         if (file_exists($splide_css_file)) {
             $critical_css .= "\n/* Splide Critical CSS */\n" . file_get_contents($splide_css_file);
@@ -365,14 +377,6 @@ function growthlabtheme02_scripts()
 
     // Global stylesheet.
 
-    // Uncomment this while working on Dev Environment
-    /* wp_enqueue_style(
-        'growthlabtheme02-main-stylesheet',
-        get_template_directory_uri() . "/styles/main-min.css",
-        array(),
-        filemtime(get_template_directory() . '/styles/main-min.css') 
-    ); */
-
     // Move jQuery to footer (safe for GF)
     wp_scripts()->add_data('jquery', 'group', 1);
     wp_scripts()->add_data('jquery-core', 'group', 1);
@@ -383,17 +387,6 @@ function growthlabtheme02_scripts()
     // Gravity Forms - remove maps
     wp_dequeue_script('gform_gravityforms_maps');
 
-    // Third party JS scripts.
-    $load_splide = false;
-
-    if (is_singular() && function_exists('has_block')) {
-        $load_splide = has_block('acf/posts-carousel') || has_block('acf/logos-carousel');
-    }
-
-    if ($load_splide) {
-        wp_enqueue_script('splide-js');
-    }
-
     // Main JS scripts.
     wp_enqueue_script(
         'growthlabtheme02-main-scripts',
@@ -403,6 +396,25 @@ function growthlabtheme02_scripts()
         true
     );
     wp_script_add_data('growthlabtheme02-main-scripts', 'defer', true);
+
+    // Third party JS scripts.
+    $load_splide = false;
+
+    if (is_singular() && function_exists('parse_blocks')) {
+        global $post;
+        $content = $post->post_content;
+        $blocks = parse_blocks($content);
+        foreach ($blocks as $block) {
+            if ($block['blockName'] === 'acf/posts-carousel' || $block['blockName'] === 'acf/logos-carousel') {
+                $load_splide = true;
+                break;
+            }
+        }
+    }
+
+    if ($load_splide) {
+        wp_enqueue_script('splide-js');
+    }
 
     // Load specific template stylesheet
     if (is_page() || is_single()) {

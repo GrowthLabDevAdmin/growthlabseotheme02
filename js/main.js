@@ -19,7 +19,9 @@ const ldpi = 1024;
 const mdpi = 1200;
 const hdpi = 1440;
 
-findConsecutiveGroups();
+requestAnimationFrame(() => {
+  findConsecutiveGroups();
+});
 blocksInContent && extractBlocks();
 
 document.addEventListener("DOMContentLoaded", () => {
