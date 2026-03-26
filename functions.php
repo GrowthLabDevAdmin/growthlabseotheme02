@@ -402,9 +402,11 @@ function growthlabtheme02_scripts()
 
     // Third party JS scripts.
     if (should_load_splide()) {
-        wp_enqueue_script('splide-js');
+        wp_localize_script('growthlabtheme02-main-scripts', 'splideData', [
+            'url' => get_template_directory_uri() . '/js/vendor/splide/splide-min.js',
+        ]);
     }
-
+    
     // Load specific template stylesheet
     if (is_page() || is_single()) {
         if (!is_page_template('page-templates/template-full-width.php')) {
@@ -453,7 +455,7 @@ add_action('wp_head', function () {
     // Preload splide.js if needed
     if (should_load_splide()) {
         $splide_js_url = get_template_directory_uri() . '/js/vendor/splide/splide-min.js';
-        echo '<link rel="preload" as="script" href="' . esc_url($splide_js_url) . '" />';
+        echo '<link rel="preload" as="script" fetchpriority="low" href="' . esc_url($splide_js_url) . '" />';
     }
 }, 1);
 

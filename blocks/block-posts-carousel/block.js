@@ -1,31 +1,31 @@
 (() => {
-  let postsCarousels = document.querySelectorAll(".posts-carousel__carousel");
+  const postsCarousels = document.querySelectorAll(".posts-carousel__carousel");
+  if (!postsCarousels.length) return;
 
-  if (postsCarousels.length > 0) {
-    postsCarousels.forEach((carousel) => {
+  const initCarousel = (carousel) => {
+    const carouselType = carousel.dataset.type;
+    const splideElement = carousel.querySelector(".splide");
 
-      let carouselType = carousel.dataset.type;
-      let splideElement = carousel.querySelector(".splide");
+    let perPageTablet =
+      carouselType === "testimonial" || carouselType === "team"
+        ? 1
+        : carouselType === "case-result" || carouselType === "post"
+          ? 2
+          : 3;
 
-      let perPageTablet =
-        carouselType === "testimonial" || carouselType === "team"
-          ? 1
-          : carouselType === "case-result" || carouselType === "post"
-            ? 2
-            : 3;
+    let perPageLdpi =
+      carouselType === "team" ? 1 : carouselType === "testimonial" ? 2 : 3;
 
-      let perPageLdpi =
-        carouselType === "team" ? 1 : carouselType === "testimonial" ? 2 : 3;
+    const focusFor = (n) => (n % 2 === 1 ? "center" : false);
+    const trimFor = (n) => (n % 2 === 1 ? true : false);
 
-      const focusFor = (n) => (n % 2 === 1 ? "center" : false);
-      const trimFor = (n) => (n % 2 === 1 ? true : false);
+    if (carousel.closest(".sidebar")) {
+      perPageTablet = 1;
+      perPageLdpi = 1;
+    }
 
-      if (carousel.closest(".sidebar")) {
-        perPageTablet = 1;
-        perPageLdpi = 1;
-      }
-
-      carouselObj = {
+    if (splideElement) {
+      new Splide(splideElement, {
         type: "loop",
         perPage: 1,
         perMove: 1,
@@ -44,11 +44,20 @@
             trimSpace: trimFor(perPageLdpi),
           },
         },
-      };
+      }).mount();
+    }
+  };
 
-      if (splideElement) {
-        new Splide(splideElement, carouselObj).mount();
-      }
-    });
-  }
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        initCarousel(entry.target);
+        obs.unobserve(entry.target); // init solo una vez
+      });
+    },
+    { rootMargin: "200px 0px" }, // empieza a cargar 200px antes de entrar al viewport
+  );
+
+  postsCarousels.forEach((carousel) => observer.observe(carousel));
 })();
