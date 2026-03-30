@@ -265,6 +265,7 @@ if (!function_exists('po_select_candidate')) {
                 $index = array_search($max_size, $available_keys, true);
                 $prevKey = $available_keys[$index - 1] ?? null;
 
+                if ($breakpoint !== $prelast_bp && $available[$max_size] < $bp_min) return null;
                 if ($min_reg_w > 0 && $available[$prevKey] === $available[$min_size] && $breakpoint !== $prelast_bp) return null;
 
                 return $max_size;
