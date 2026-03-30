@@ -16,7 +16,7 @@ $GLOBALS['breakpoints'] = [
     'tablet' => '768px',   // diferente al default
     'ldpi'   => '1024px',
     'mdpi'   => '1280px',  // diferente al default
-    'hdpi'   => '1921px',  // diferente al default
+    'hdpi'   => '1920px',  // diferente al default
 ];
 
 
@@ -77,20 +77,35 @@ if (!function_exists('growthlabtheme02_setup')) {
 
         add_theme_support('custom-logo', $defaults);
 
-        //Add custom sized images
-        add_image_size('cover-desktop', 1920, 1080, false);
-        add_image_size('cover-tablet', 1280, 720, false);
-        add_image_size('cover-mobile', 800, 533, false);
-        add_image_size('featured-small', 400, 267, false);
+        // Disable hard cropping for all image sizes
+        update_option('thumbnail_crop', 0);
 
-        // Disable Cropped Pictures
+
+        //Remove Sizes from default WordPress Image Sizes
+        add_filter('intermediate_image_sizes', function ($sizes) {
+            return array_diff($sizes, [
+                'medium_large',
+                '1536x1536',
+                '2048x2048'
+            ]);
+        });
+
         add_filter('intermediate_image_sizes_advanced', function ($sizes) {
-
-            foreach ($sizes as $key => &$size) {
-                update_option("{$key}_crop", 0);
-            }
+            unset($sizes['medium_large']);
             return $sizes;
-        }, 999);
+        });
+
+        //Add custom sized images
+        // Covers
+        add_image_size('cover-desktop', 1920, 1080, false);
+        add_image_size('cover-tablet', 1280, 600, false);
+        add_image_size('cover-mobile', 768, 432, false);
+
+        // Content
+        add_image_size('content', 800, 600, false);
+
+        // Cards
+        add_image_size('featured-small', 400, 267, false);
 
         // Add custom image sizes to the media selector
         add_filter('image_size_names_choose', function ($sizes) {
@@ -100,7 +115,6 @@ if (!function_exists('growthlabtheme02_setup')) {
                 'medium_large' => __('Mediano grande'),
                 'large'        => __('Grande'),
                 'full'         => __('Tamaño completo'),
-                // Tus tamaños personalizados:
                 'cover-desktop'  => __('Cover Desktop (1920×1080)'),
                 'cover-tablet'   => __('Cover Tablet (1280×720)'),
                 'cover-mobile'   => __('Cover Mobile (800×533)'),
