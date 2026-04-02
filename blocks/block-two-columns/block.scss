@@ -17,8 +17,16 @@
 
   $parent: &;
 
-  &.separator {
+  &[data-visible="true"].separator {
     content-visibility: visible;
+
+    .two-columns__image,
+    .two-columns__separator {
+      opacity: 1;
+    }
+  }
+
+  &.separator {
     border-top: 4px solid rgb(var(--tertiary));
 
     @media (min-width: v.$ldpi) {
@@ -47,6 +55,8 @@
       display: flex;
       justify-content: flex-start;
       align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     @media (min-width: v.$mdpi) {
@@ -146,6 +156,9 @@
           }
         }
         #{$parent}__image {
+          opacity: 0;
+          transition: opacity 0.3s ease;
+
           img {
             width: 100%;
             max-height: none;
