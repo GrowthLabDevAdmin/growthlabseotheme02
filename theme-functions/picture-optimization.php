@@ -266,6 +266,9 @@ if (!function_exists('po_select_candidate')) {
                 $prevKey = $available_keys[$index - 1] ?? null;
 
                 if ($breakpoint !== $prelast_bp && $available[$max_size] < $bp_min) return null;
+
+                // If the previous size is the same real width as max_size, it means max_size is not actually larger than the min_size floor (or there is no floor). 
+                //In this case, we skip emitting a source for this breakpoint to avoid redundancy, since the same image will be emitted for the next breakpoint anyway.
                 if ($min_reg_w > 0 && $available[$prevKey] === $available[$min_size] && $breakpoint !== $prelast_bp) return null;
 
                 return $max_size;
@@ -293,7 +296,7 @@ if (!function_exists('po_select_candidate')) {
                 }
 
                 // Candidate must be >= bp min (always).
-                if ($compare_w < $bp_min) continue;
+                if ($breakpoint !== $prelast_bp && $compare_w < $bp_min) continue;
                 // Candidate must be <= ceiling (next bp min) when ceiling exists.
                 if ($ceiling !== null && $compare_w > $ceiling) continue;
 
@@ -960,9 +963,13 @@ if (!function_exists('img_generate_cover_picture')) {
         $mobile_fields = $has_mobile ? img_get_fields($mobile_img) : null;
 
         // ── Available cover sizes per image ───────────────────────────────
-        $cover_sizes = ['cover-desktop', 'cover-tablet', 'cover-mobile', 'full'];
+        $cover_sizes = ['full', 'cover-desktop', 'cover-tablet', 'cover-mobile'];
 
         $img_available    = img_get_available_sizes($img_fields['meta'],    $img_fields['id']);
+        $img_available = array_diff_key(
+            $img_available,
+            array_flip(array_diff(array_keys($img_available), $cover_sizes))
+        );
         $tablet_available = $tablet_fields ? img_get_available_sizes($tablet_fields['meta'], $tablet_fields['id']) : [];
         $mobile_available = $mobile_fields ? img_get_available_sizes($mobile_fields['meta'], $mobile_fields['id']) : [];
 
@@ -976,25 +983,33 @@ if (!function_exists('img_generate_cover_picture')) {
         ) use ($cover_sizes): ?array {
             $bp_min  = po_get_breakpoint_ranges()[$bp] ?? 0;
             $ceiling = po_get_next_breakpoint_min($bp);
+            $prelast_bp = po_get_breakpoint_order()[array_key_last(po_get_breakpoint_order()) - 1] ?? null;
 
             $candidates = [];
             foreach ($cover_sizes as $size) {
                 if (!isset($available[$size])) continue;
                 if (in_array($size, $already_used, true)) continue;
 
-                $reg_w   = po_get_registered_width($size);
+                //$reg_w   = po_get_registered_width($size);
                 $real_w  = $available[$size];
-                $compare = ($reg_w > 0) ? $reg_w : $real_w;
+                //$compare = ($reg_w > 0) ? $reg_w : $real_w;
 
-                if ($compare < $bp_min) continue;
-                if ($ceiling !== null && $compare > $ceiling) continue;
+                if ($real_w <= $bp_min) continue;
+                if ($ceiling !== null && $real_w > $ceiling) continue;
 
-                $candidates[$size] = $compare;
+                $candidates[$size] = $real_w;
+            }
+
+            if ($bp === $prelast_bp && empty($candidates) && !empty($already_used)) {
+                $best = array_last($already_used);
+                return ['size' => $best, 'fields' => $fields];
             }
 
             if (empty($candidates)) return null;
+
             arsort($candidates);
             $best = array_key_first($candidates);
+
             return ['size' => $best, 'fields' => $fields];
         };
 
@@ -1101,11 +1116,17 @@ if (!function_exists('img_generate_cover_picture')) {
         if ($pending_size !== null) {
             $url              = $pending_fields['urls'][$pending_size] ?? $pending_fields['url'];
             $last_emitted_url = $url;
-            $last_emitted_mime = $pending_mime;
 
             if ($pending_min_bp === 'tablet') {
-                // Emit without media query — covers tablet and mobile together.
-                img_push_source($sources, $url, $pending_mime, null);
+                $prev_emitted_url =  $bp_resolution[$pending_min_bp]['fields']['urls'][array_last($img_already_used)];
+                if ($pending_size === 'full' || $prev_emitted_url === $url) {
+                    // Same URL as previous (desktop) source — emit again with tablet media query to avoid mobile sharing it.
+                    $media = po_get_media_query($pending_min_bp);
+                    img_push_source($sources, $url, $pending_mime, $media);
+                } else {
+                    // Emit without media query — covers tablet and mobile together.
+                    img_push_source($sources, $url, $pending_mime, null);
+                }
             } else {
                 $media = po_get_media_query($pending_min_bp);
                 img_push_source($sources, $url, $pending_mime, $media);
@@ -1113,7 +1134,6 @@ if (!function_exists('img_generate_cover_picture')) {
             }
         } else {
             $last_emitted_url  = null;
-            $last_emitted_mime = null;
         }
 
         // ── Mobile <source> (no media query) ─────────────────────────────
