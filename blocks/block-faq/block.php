@@ -24,7 +24,7 @@ if (get_field('toggle_block')):
                     <?php
 
                     foreach ($side_images as $image) {
-                        img_print_picture_tag(img: $image['image'], max_size: "large", min_size: "medium", classes: "faq__side-image");
+                        img_print_picture_tag(img: $image['image'], max_size: "content", min_size: "medium", classes: "faq__side-image");
                     }
 
                     $options = get_field_options("options");

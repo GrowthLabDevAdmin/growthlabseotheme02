@@ -16,7 +16,7 @@ if (get_field('toggle_block')):
         <div class="cta-box__wrapper container">
 
             <?php
-            if ($box_style === "full" && $side_image) img_print_picture_tag(img: $side_image, is_cover: false, classes: "cta-box__side-img");
+            if ($box_style === "full" && $side_image) img_print_picture_tag(img: $side_image, max_size: "large", min_size: "medium", classes: "cta-box__side-img");
             ?>
 
             <div class="cta-box__inner">
