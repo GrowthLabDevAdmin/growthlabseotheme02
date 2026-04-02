@@ -18,7 +18,7 @@ if (get_field('toggle_block')):
         if (isset($side_image) && $side_image) img_print_picture_tag(
             img: $side_image,
             max_size: "cover-mobile",
-            min_size: "medium",
+            min_size: "featured-small",
             classes: "logos-carousel__image"
         );
         ?>

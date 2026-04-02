@@ -105,7 +105,7 @@ if (!function_exists('growthlabtheme02_setup')) {
         add_image_size('content', 800, 600, false);
 
         // Cards
-        add_image_size('featured-small', 400, 267, false);
+        add_image_size('featured-small', 480, 360, false);
 
         // Add custom image sizes to the media selector
         add_filter('image_size_names_choose', function ($sizes) {
