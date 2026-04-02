@@ -8,11 +8,29 @@ if (!window.loadSplide) {
     }
     window.__splideLoading = true;
     window.__splideCallbacks = [callback];
+    if (!window.splideData || !window.splideData.url) {
+      console.error("Splide data not available");
+      return;
+    }
     const script = document.createElement("script");
     script.src = splideData.url;
     script.onload = () => {
-      window.__splideCallbacks.forEach((fn) => fn());
-      window.__splideCallbacks = [];
+      const checkSplide = (attempts = 0) => {
+        if (typeof Splide !== "undefined") {
+          window.__splideCallbacks.forEach((fn) => fn());
+          window.__splideCallbacks = [];
+          return;
+        }
+        if (attempts < 10) { // Retry up to 10 times
+          setTimeout(() => checkSplide(attempts + 1), 100); // Check every 100ms
+        } else {
+          console.error("Splide failed to load after retries");
+        }
+      };
+      checkSplide();
+    };
+    script.onerror = () => {
+      console.error("Failed to load Splide script");
     };
     document.head.appendChild(script);
   };
