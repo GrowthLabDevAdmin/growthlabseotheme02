@@ -173,13 +173,32 @@ function findConsecutiveGroups() {
 
     firstEl.parentNode.insertBefore(wrapper, firstEl);
 
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          wrapper.appendChild(entry.target);
+          observer.unobserve(entry.target);
+
+          // Una vez movido, si el wrapper tiene ya el resto de elementos, podemos activar la carga diferencial.
+          if (wrapper.children.length === group.length) {
+            lazyLoadBgGradient();
+          }
+        });
+      },
+      { rootMargin: "100px" }
+    );
+
     group.forEach((el) => {
-      wrapper.appendChild(el);
+      observer.observe(el);
     });
   });
 
-  // Defer lazy-load init until after grouping is done, avoiding CLS from child/parent .bg-gradient.
-  lazyLoadBgGradient();
+  // Si no hay grupos o no se completa el proceso de observación, ejecuta fallback
+  if (groups.length === 0) {
+    lazyLoadBgGradient();
+  }
 }
 
 // Lazy Load Background Images for .bg-gradient

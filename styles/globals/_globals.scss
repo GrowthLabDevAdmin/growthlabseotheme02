@@ -205,21 +205,27 @@ p {
     rgba(var(--primary-dark), 1) 100%
   );
 
+  &::after {
+    content: "";
+    display: block;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
   &--loaded {
     // Solo agrega el ::after con la imagen de textura
     &::after {
-      content: "";
       width: 100%;
       height: 100%;
       position: absolute;
       top: 0;
       left: 0;
       z-index: -1;
-      display: block;
       background-image: url("{theme-path}/assets/img/transparent-bg.webp");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      opacity: 1;
     }
   }
 
