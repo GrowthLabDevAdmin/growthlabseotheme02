@@ -88,7 +88,7 @@
     }
 
     &:first-child {
-      align-self: start;
+      align-self: flex-start;
       @include m.nice-corner("bottom-left", null, 0, 90%, $bw-lg: 5px);
       &::before {
         bottom: -1rem;
@@ -96,7 +96,7 @@
       }
     }
 
-    &:nth-child(2) {
+    &:nth-of-type(2) {
       align-self: flex-end;
       @include m.nice-corner("top-right", null, -1rem, 20%, $bw-lg: 5px);
     }
