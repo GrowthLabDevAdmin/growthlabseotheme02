@@ -508,7 +508,7 @@ if (!function_exists('img_get_webp_url')) {
 if (!function_exists('img_create_source')) {
     function img_create_source(string $url, string $mime_type, ?string $media = null): string
     {
-        $srcset = "srcset='" . esc_url($url) . "'";
+        $srcset = "data-srcset='" . esc_url($url) . "'";
         $type   = "type='"   . esc_attr($mime_type) . "'";
         $media  = $media ? " media='" . esc_attr($media) . "'" : '';
 
@@ -588,7 +588,15 @@ if (!function_exists('img_create_img_tag')) {
         $loading       = $is_priority ? 'eager' : 'lazy';
         $fetchpriority = $is_priority ? " fetchpriority='high'" : '';
 
-        $src_attr    = "src='"     . esc_url($src)       . "'";
+        // For priority images, use src directly; for lazy, use data-src
+        if ($is_priority) {
+            $src_attr = "src='" . esc_url($src) . "'";
+            $class_attr = '';
+        } else {
+            $src_attr = "data-src='" . esc_url($src) . "'";
+            $class_attr = "class='lazy-image'";
+        }
+
         $width_attr  = $width  ? "width='"  . (int) $width  . "'" : '';
         $height_attr = $height ? "height='" . (int) $height . "'" : '';
         $alt_attr    = "alt='"     . esc_attr($alt)      . "'";
@@ -615,6 +623,7 @@ if (!function_exists('img_create_img_tag')) {
             $alt_attr,
             $loading_attr . $fetchpriority,
             $decoding_attr,
+            $class_attr,
         ]);
 
         return '<img ' . implode(' ', $parts) . $aspect_ratio . $extra_attr . '>';
@@ -639,15 +648,37 @@ if (!function_exists('img_wrap_picture')) {
         array  $sources,
         string $img_tag,
         string $classes = '',
-        string $id      = ''
+        string $id      = '',
+        bool   $is_priority = false,
     ): string {
         $id_attr    = $id      ? " id='"    . esc_attr($id)      . "'" : '';
         $class_attr = $classes ? " class='" . esc_attr($classes) . "'" : '';
 
+        // For priority images, use srcset directly instead of data-srcset, and skip noscript
+        if ($is_priority) {
+            $sources = array_map(function($source) {
+                return str_replace('data-srcset=', 'srcset=', $source);
+            }, $sources);
+            $noscript = '';
+        } else {
+            // Generate fallback sources and img for noscript (without data-)
+            $fallback_sources = [];
+            foreach ($sources as $source) {
+                $fallback_sources[] = str_replace('data-srcset=', 'srcset=', $source);
+            }
+            $fallback_img = str_replace(['data-src=', "class='lazy-image'"], ['src=', ''], $img_tag);
+
+            $noscript = '<noscript><picture' . $id_attr . $class_attr . '>'
+                . implode('', $fallback_sources)
+                . $fallback_img
+                . '</picture></noscript>';
+        }
+
         return '<picture' . $id_attr . $class_attr . '>'
             . implode('', $sources)
             . $img_tag
-            . '</picture>';
+            . '</picture>'
+            . $noscript;
     }
 }
 
@@ -907,7 +938,7 @@ if (!function_exists('img_generate_standard_picture')) {
             img_push_source($sources, $url, $mime_type, $media);
         }
 
-        return img_wrap_picture($sources, $img_tag ?? '', $classes, $id);
+        return img_wrap_picture($sources, $img_tag ?? '', $classes, $id, $is_priority);
     }
 }
 
@@ -1170,7 +1201,7 @@ if (!function_exists('img_generate_cover_picture')) {
             extra: $extra
         );
 
-        return img_wrap_picture($sources, $img_tag, $classes, $id);
+        return img_wrap_picture($sources, $img_tag, $classes, $id, $is_priority);
     }
 }
 
@@ -1273,7 +1304,7 @@ if (!function_exists('img_generate_picture_tag')) {
                 extra: $img_attr
             );
 
-            return img_wrap_picture($sources, $img_tag, $classes, $id);
+            return img_wrap_picture($sources, $img_tag, $classes, $id, $is_priority);
         }
 
         // ── Standard mode ─────────────────────────────────────────────────
