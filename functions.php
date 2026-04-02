@@ -664,3 +664,59 @@ add_action('customize_controls_print_footer_scripts', function () {
     </script>
 <?php
 }, 999);
+
+// Add dynamic versioning to theme scripts and styles
+add_filter('script_loader_src', 'add_dynamic_version_to_theme_scripts', 10, 2);
+add_filter('style_loader_src', 'add_dynamic_version_to_theme_styles', 10, 2);
+
+function add_dynamic_version_to_theme_scripts($src, $handle) {
+    $theme_dir_uri = get_template_directory_uri();
+    
+    // Remove scheme for comparison
+    $src_normalized = preg_replace('(^https?:)', '', $src);
+    $theme_dir_normalized = preg_replace('(^https?:)', '', $theme_dir_uri);
+    
+    if (strpos($src_normalized, $theme_dir_normalized) === 0) {
+        // Extract path without query string
+        $path_parts = parse_url($src);
+        $path = $path_parts['path'] ?? '';
+        
+        // Remove the theme directory from path to get relative path
+        $relative_path = str_replace(parse_url($theme_dir_uri, PHP_URL_PATH), '', $path);
+        $file_path = get_template_directory() . $relative_path;
+        
+        if (file_exists($file_path)) {
+            $version = filemtime($file_path);
+            // Remove existing ver parameter and add new one
+            $src = remove_query_arg('ver', $src);
+            $src = add_query_arg('ver', $version, $src);
+        }
+    }
+    return $src;
+}
+
+function add_dynamic_version_to_theme_styles($src, $handle) {
+    $theme_dir_uri = get_template_directory_uri();
+    
+    // Remove scheme for comparison
+    $src_normalized = preg_replace('(^https?:)', '', $src);
+    $theme_dir_normalized = preg_replace('(^https?:)', '', $theme_dir_uri);
+    
+    if (strpos($src_normalized, $theme_dir_normalized) === 0) {
+        // Extract path without query string
+        $path_parts = parse_url($src);
+        $path = $path_parts['path'] ?? '';
+        
+        // Remove the theme directory from path to get relative path
+        $relative_path = str_replace(parse_url($theme_dir_uri, PHP_URL_PATH), '', $path);
+        $file_path = get_template_directory() . $relative_path;
+        
+        if (file_exists($file_path)) {
+            $version = filemtime($file_path);
+            // Remove existing ver parameter and add new one
+            $src = remove_query_arg('ver', $src);
+            $src = add_query_arg('ver', $version, $src);
+        }
+    }
+    return $src;
+}
