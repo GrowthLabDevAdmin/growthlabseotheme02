@@ -362,6 +362,8 @@ function inline_main_critical_css()
 
     // Add block critical CSS if any
     if (!empty($block_critical_css)) {
+        // Remove duplicate :root variables from block critical CSS
+        $block_critical_css = str_replace(':root{--font-sans: "Mona Sans", sans-serif;--font-serif: "Roboto Serif", serif;--container: 1240px;--sp-xsm: 1.6rem;--sp-sm: 3.2rem;--sp-md: 4.8rem;--sp-lg: 6.4rem}', '', $block_critical_css);
         $critical_css .= "\n/* Block Critical CSS */\n" . $block_critical_css;
     }
 

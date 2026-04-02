@@ -22,6 +22,7 @@ const hdpi = 1440;
 requestAnimationFrame(() => {
   findConsecutiveGroups();
 });
+
 blocksInContent && extractBlocks();
 
 document.addEventListener("DOMContentLoaded", () => {
