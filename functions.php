@@ -325,7 +325,7 @@ add_filter('excerpt_more', 'wpdocs_excerpt_more');
  */
 
 // Function to check if Splide should be loaded
-function should_load_splide()
+/* function should_load_splide()
 {
     if (!is_singular() || !function_exists('parse_blocks')) return false;
 
@@ -341,6 +341,7 @@ function should_load_splide()
     }
     return false;
 }
+ */
 function inline_main_critical_css()
 {
     global $block_critical_css;
@@ -353,11 +354,9 @@ function inline_main_critical_css()
     $critical_css =  $color_scheme . $critical_css;
 
     // Add Splide critical CSS only when carousels are present
-    if (should_load_splide()) {
-        $splide_css_file = get_template_directory() . '/styles/vendor/splide/splide-core.min.css';
-        if (file_exists($splide_css_file)) {
-            $critical_css .= "\n/* Splide Critical CSS */\n" . file_get_contents($splide_css_file);
-        }
+    $splide_css_file = get_template_directory() . '/styles/vendor/splide/splide-core.min.css';
+    if (file_exists($splide_css_file)) {
+        $critical_css .= "\n/* Splide Critical CSS */\n" . file_get_contents($splide_css_file);
     }
 
     // Add block critical CSS if any
@@ -403,11 +402,9 @@ function growthlabtheme02_scripts()
     wp_script_add_data('growthlabtheme02-main-scripts', 'strategy', 'defer');
 
     // Third party JS scripts.
-    if (should_load_splide()) {
-        wp_localize_script('growthlabtheme02-main-scripts', 'splideData', [
-            'url' => get_template_directory_uri() . '/js/vendor/splide/splide-min.js',
-        ]);
-    }
+    wp_localize_script('growthlabtheme02-main-scripts', 'splideData', [
+        'url' => get_template_directory_uri() . '/js/vendor/splide/splide-min.js',
+    ]);
 
     // Load specific template stylesheet
     if (is_page() || is_single()) {
@@ -667,22 +664,23 @@ add_action('customize_controls_print_footer_scripts', function () {
 add_filter('script_loader_src', 'add_dynamic_version_to_theme_scripts', 10, 2);
 add_filter('style_loader_src', 'add_dynamic_version_to_theme_styles', 10, 2);
 
-function add_dynamic_version_to_theme_scripts($src, $handle) {
+function add_dynamic_version_to_theme_scripts($src, $handle)
+{
     $theme_dir_uri = get_template_directory_uri();
-    
+
     // Remove scheme for comparison
     $src_normalized = preg_replace('(^https?:)', '', $src);
     $theme_dir_normalized = preg_replace('(^https?:)', '', $theme_dir_uri);
-    
+
     if (strpos($src_normalized, $theme_dir_normalized) === 0) {
         // Extract path without query string
         $path_parts = parse_url($src);
         $path = $path_parts['path'] ?? '';
-        
+
         // Remove the theme directory from path to get relative path
         $relative_path = str_replace(parse_url($theme_dir_uri, PHP_URL_PATH), '', $path);
         $file_path = get_template_directory() . $relative_path;
-        
+
         if (file_exists($file_path)) {
             $version = filemtime($file_path);
             // Remove existing ver parameter and add new one
@@ -693,22 +691,23 @@ function add_dynamic_version_to_theme_scripts($src, $handle) {
     return $src;
 }
 
-function add_dynamic_version_to_theme_styles($src, $handle) {
+function add_dynamic_version_to_theme_styles($src, $handle)
+{
     $theme_dir_uri = get_template_directory_uri();
-    
+
     // Remove scheme for comparison
     $src_normalized = preg_replace('(^https?:)', '', $src);
     $theme_dir_normalized = preg_replace('(^https?:)', '', $theme_dir_uri);
-    
+
     if (strpos($src_normalized, $theme_dir_normalized) === 0) {
         // Extract path without query string
         $path_parts = parse_url($src);
         $path = $path_parts['path'] ?? '';
-        
+
         // Remove the theme directory from path to get relative path
         $relative_path = str_replace(parse_url($theme_dir_uri, PHP_URL_PATH), '', $path);
         $file_path = get_template_directory() . $relative_path;
-        
+
         if (file_exists($file_path)) {
             $version = filemtime($file_path);
             // Remove existing ver parameter and add new one
