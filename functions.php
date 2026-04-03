@@ -112,13 +112,13 @@ if (!function_exists('growthlabtheme02_setup')) {
             return array_merge([
                 'thumbnail'    => __('Miniatura'),
                 'medium'       => __('Mediano'),
-                'medium_large' => __('Mediano grande'),
                 'large'        => __('Grande'),
                 'full'         => __('Tamaño completo'),
                 'cover-desktop'  => __('Cover Desktop (1920×1080)'),
-                'cover-tablet'   => __('Cover Tablet (1280×720)'),
-                'cover-mobile'   => __('Cover Mobile (800×533)'),
-                'featured-small' => __('Featured Small (400×267)'),
+                'cover-tablet'   => __('Cover Tablet (1280×600)'),
+                'cover-mobile'   => __('Cover Mobile (768×432)'),
+                'content'   => __('Contenido (800×600)'),
+                'featured-small' => __('Featured Small (480×360)'),
             ], $sizes);
         });
 
@@ -381,8 +381,6 @@ add_action('wp_head', 'inline_main_critical_css', 1);
 function growthlabtheme02_scripts()
 {
     if (is_admin()) return;
-
-    // Global stylesheet.
 
     // Move jQuery to footer (safe for GF)
     wp_scripts()->add_data('jquery', 'group', 1);
