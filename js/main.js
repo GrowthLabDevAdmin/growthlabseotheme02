@@ -196,10 +196,10 @@ function findConsecutiveGroups() {
     });
   });
 
-  // Si no hay grupos o no se completa el proceso de observación, ejecuta fallback
-  if (groups.length === 0) {
-    lazyLoadBgGradient();
-  }
+  // Always execute lazy load for:
+  // - Non-consecutive bg-gradient sections
+  // - Groups that haven't entered viewport yet
+  lazyLoadBgGradient();
 }
 
 // Lazy Load Background Images for .bg-gradient
