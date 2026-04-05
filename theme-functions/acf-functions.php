@@ -135,6 +135,7 @@ add_action('wp_enqueue_scripts', function () {
     foreach ($blocks_by_type as $type => $block_names) {
         $type_css = '';
         foreach ($block_names as $block_name) {
+            if (str_starts_with($block_name, 'core/')) continue;
             if (!isset($registered_blocks[$block_name])) continue;
 
             $block_type = $registered_blocks[$block_name];
@@ -174,6 +175,7 @@ add_action('wp_enqueue_scripts', function () {
     $dequeued = 0;
     foreach ($registered_blocks as $block_name => $block_type) {
         if (in_array($block_name, $blocks_in_use)) continue;
+        if (str_starts_with($block_name, 'core/')) continue;
 
         if (!empty($block_type->style))         wp_dequeue_style($block_type->style);
         if (!empty($block_type->editor_style))  wp_dequeue_style($block_type->editor_style);
@@ -194,9 +196,6 @@ add_filter('style_loader_tag', function ($tag, $handle) {
 
     // Skip inline <style> for core block CSS handles (already covered in critical CSS)
     $core_block_styles = array(
-        'wp-block-library',
-        'wp-block-library-theme',
-        'global-styles',
         'wc-blocks-style',
     );
 

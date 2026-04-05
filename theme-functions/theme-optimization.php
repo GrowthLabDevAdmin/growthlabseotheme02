@@ -103,10 +103,10 @@ function disable_emojis()
 function dequeue_core_blocks_styles()
 {
     // Remove core block library CSS
-    wp_dequeue_style('wp-block-library');
-    wp_dequeue_style('wp-block-library-theme');
+    //wp_dequeue_style('wp-block-library');
+    //wp_dequeue_style('wp-block-library-theme');
     wp_dequeue_style('wc-blocks-style'); // WooCommerce blocks
-    wp_dequeue_style('global-styles'); // Global styles
+    //wp_dequeue_style('global-styles'); // Global styles
 }
 
 
