@@ -247,6 +247,8 @@ if (!function_exists('po_select_candidate')) {
         $min_reg_w   = ($min_size !== '')  ? po_get_registered_width($min_size) : 0;
         $prelast_bp = po_get_breakpoint_order()[array_key_last(po_get_breakpoint_order()) - 1] ?? null;
 
+        $available[$min_size] = isset($available[$min_size]) ?: null;
+
         $reference = $min_reg_w !== 0 ? $available[$min_size] : null;
 
         if ($reference !== null) {
@@ -656,7 +658,7 @@ if (!function_exists('img_wrap_picture')) {
 
         // For priority images, use srcset directly instead of data-srcset, and skip noscript
         if ($is_priority) {
-            $sources = array_map(function($source) {
+            $sources = array_map(function ($source) {
                 return str_replace('data-srcset=', 'srcset=', $source);
             }, $sources);
             $noscript = '';

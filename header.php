@@ -46,7 +46,7 @@ if (!defined('ABSPATH')) {
                         <?php
                         $options = get_field_options("options");
                         if ($options["logo_symbol"]) {
-                            img_print_picture_tag(img: $options["logo_symbol"], max_size: "medium");
+                            img_print_picture_tag(img: $options["logo_symbol"], max_size: "medium", min_size:"medium");
                         }
                         ?>
                     </div>
