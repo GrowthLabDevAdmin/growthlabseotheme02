@@ -38,7 +38,7 @@
     background: rgb(var(--secondary-light));
 
     #{$parent}__title,
-    #{$parent}__content > * {
+    #{$parent}__content * {
       color: rgb(var(--text));
     }
   }
