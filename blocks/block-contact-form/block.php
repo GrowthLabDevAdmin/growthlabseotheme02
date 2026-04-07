@@ -9,12 +9,14 @@ if (get_field('toggle_block')):
 
     <section
         id="<?= $block_id ?? "" ?>"
-        class="block contact-form "
+        class="block contact-form <?= $background_style ?>"
         <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
         <div class="contact-form__layer">
 
-            <div class="contact-form__wrapper">
+            <div class="contact-form__wrapper <?= $reverse_columns ? "reverse" : "" ?>">
+
+                <?php img_print_picture_tag(img: $side_image, is_cover: true, classes: "contact-form__side-img") ?>
 
                 <div class="contact-form__inner container">
 
