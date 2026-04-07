@@ -52,23 +52,22 @@ if (get_field('toggle_block')):
 
             <?php foreach (get_field("cta_box") as $box => $data) $$box = $data; ?>
             <div class="inner-cta-box">
-                <?php if ($content && isset($content)): ?>
 
+                <?php if ($content && isset($content)): ?>
                     <?php get_template_part("template-parts/logo", "separator", ["classes" => "inner-cta-box__separator"]); ?>
 
                     <div class="inner-cta-box__content formatted-text">
                         <?= $content ?>
                     </div>
-
                 <?php endif ?>
 
                 <div class="inner-cta-box__buttons">
-                    <?php if ($cta_link["url"]): ?>
+                    <?php if ($cta_link && isset($cta_link) && $cta_link["url"]): ?>
                         <a href="<?= $cta_link["url"] ?>" target="<?= $cta_link["target"] ?>" class="btn btn--tertiary" aria-label="<?= esc_attr($cta_link["title"]) ?>">
                             <span><?= $cta_link["title"] ?></span>
                         </a>
                     <?php endif ?>
-                    <?php if ($cta_link_2["url"]): ?>
+                    <?php if ($cta_link_2 && isset($cta_link_2) && $cta_link_2["url"]): ?>
                         <a href="<?= $cta_link_2["url"] ?>" target="<?= $cta_link_2["target"] ?>" class="btn btn--primary" aria-label="<?= esc_attr($cta_link_2["title"]) ?>">
                             <span><?= $cta_link_2["title"] ?></span>
                         </a>
