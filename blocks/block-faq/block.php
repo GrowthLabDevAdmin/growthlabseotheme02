@@ -9,7 +9,7 @@ if (get_field('toggle_block')):
 
     <section
         id="<?= $block_id ?? "" ?>"
-        class="block faq <?php if (!$background_image && isset($$background_image) && !$lightdark_background) echo "bg-gradient"; ?>"
+        class="block faq <?php if (!$background_image && !isset($$background_image) && !$lightdark_background) echo "bg-gradient"; ?>"
         <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
         <?php
