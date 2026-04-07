@@ -8,6 +8,20 @@
   flex-wrap: wrap;
   gap: var(--sp-md);
 
+  $parent: &;
+
+  &:not(:has(#{$parent}__image)) {
+    #{$parent}__title {
+      align-self: center;
+      text-align: center;
+      
+      &::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+
   &__image {
     width: 100%;
     height: auto;
