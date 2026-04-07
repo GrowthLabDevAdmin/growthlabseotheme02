@@ -272,7 +272,7 @@
             "name": "text_content",
             "aria-label": "",
             "type": "wysiwyg",
-            "instructions": "To apply the 'Callout Box' look to a paragraph, switch to Text Mode and enclose the paragraph in \"blockquote\" HTML tags, OR select the paragraph and click the 'b-quote' button.",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -483,5 +483,7 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771481472
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1775534027
 }
