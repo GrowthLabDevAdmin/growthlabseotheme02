@@ -104,7 +104,13 @@
 
     <?php
     if (!$content_section['hide_section'] && !get_field('hide_content_section')):
-      foreach ($content_section as $form_field => $form_content) $$form_field = $form_content;
+      foreach ($content_section as $content_field => $content_data) $$content_field = $content_data;
+
+      $first_column_content = get_field("first_column_content", $post_id) ?: $first_column_content;
+      $last_column_content = get_field("last_column_content", $post_id) ?: $last_column_content;
+      $cta_button = get_field("cta_button", $post_id) ?: $cta_button;
+      $logo = get_field("logo", $post_id) ?: $logo;
+
     ?>
 
       <section class="content-info-footer">
@@ -116,15 +122,20 @@
           </div>
           <div class="content-info-footer__col">
             <?= img_print_picture_tag(img: $logo, classes: "footer-logo", max_size: "thumbnail") ?>
-            <div class="content-info-footer__social">
-              <?php get_template_part('template-parts/social', 'networks'); ?>
-            </div>
+
+            <?php if (get_field("hide_social_networks", $post_id)): ?>
+              <div class="content-info-footer__social">
+                <?php get_template_part('template-parts/social', 'networks'); ?>
+              </div>
+            <?php endif ?>
+
             <a href="<?= $cta_button['url'] ?>" class="btn btn--primary" target="<?= $cta_button['target'] ?>" aria-label="<?= esc_attr($cta_button['title']) ?>">
               <span>
                 <?= esc_html($cta_button['title']) ?>
               </span>
             </a>
           </div>
+          
           <div class="content-info-footer__col">
             <div class="formatted-text">
               <?= $last_column_content ?>

@@ -25,7 +25,17 @@ if (!defined('ABSPATH')) {
 
     $options = get_current_language_options();
     foreach ($options as $key => $value) $$key = $value;
+
+    $logo_link = home_url('/' . get_current_language()['slug']);
     $phone_number = $contact_phone ?: $main_phone_number;
+
+    if (get_field('custom_header', $post_id)) {
+        $logo_link = get_field('logo_link', $post_id) ?? '#';
+        $phone_number = get_field("contact_phone", $post_id) ?? null;
+        $top_callout_first_line = get_field("top_callout_first_line", $post_id) ?: '';
+        $top_callout_second_line = get_field("top_callout_second_line", $post_id) ?: '';
+        $cta_button = get_field("cta_button", $post_id) ?? null;
+    }
     ?>
 
     <header role="banner" class="site-header <?= !is_404() && get_field('hero_style') !== "nohero" && $sticky_header ? "site-header--sticky" : "" ?>">
@@ -33,7 +43,7 @@ if (!defined('ABSPATH')) {
         <div class="site-header__wrapper">
 
             <div class="site-header__logo">
-                <a href="<?php echo esc_url(home_url('/' . get_current_language()['slug'])); ?>" class="site-logo" aria-label="<?= esc_attr(get_bloginfo('name')); ?>">
+                <a href="<?= esc_url($logo_link); ?>" class="site-logo" aria-label="<?= esc_attr(get_bloginfo('name')); ?>">
                     <?php
                     if (function_exists('the_custom_logo') && has_custom_logo()) {
                         $custom_logo_id = get_theme_mod('custom_logo');
@@ -46,7 +56,7 @@ if (!defined('ABSPATH')) {
                         <?php
                         $options = get_field_options("options");
                         if ($options["logo_symbol"]) {
-                            img_print_picture_tag(img: $options["logo_symbol"], max_size: "medium", min_size:"medium");
+                            img_print_picture_tag(img: $options["logo_symbol"], max_size: "medium", min_size: "medium");
                         }
                         ?>
                     </div>
@@ -54,37 +64,54 @@ if (!defined('ABSPATH')) {
                 </a>
             </div>
 
-            <button class="site-header__mobile-btn" role="button" aria-label="Mobile Menu Button">
-                <div>
-                    <hr>
-                    <hr>
-                    <hr>
-                </div>
-                <span>Menu</span>
-            </button>
+            <?php
+            if (get_field("custom_header", $post_id) || has_nav_menu('main')) {
+                $menu_args = array(
+                    'container'          => 'nav',
+                    'container_role'     => 'navigation',
+                    'container_class' => 'main-nav',
+                    'menu_class'      => 'main-nav__menu',
+                    'items_wrap'      => '<ul class="%2$s">%3$s</ul>',
+                    'link_before'          => '<span>',
+                    'link_after'              => '</span>'
+                );
+
+                if (get_field("custom_header", $post_id)) {
+                    if (get_field("menu", $post_id)) {
+                        $menu_args['menu'] = get_field("menu", $post_id);
+                    } else {
+                        $menu_args = [];
+                    }
+                } else {
+                    $menu_args['theme_location'] = 'main' . get_current_language_suffix();
+                }
+            }
+            ?>
+
+            <?php if (!empty($menu_args)) : ?>
+                <button class="site-header__mobile-btn" role="button" aria-label="Mobile Menu Button">
+                    <div>
+                        <hr>
+                        <hr>
+                        <hr>
+                    </div>
+                    <span>Menu</span>
+                </button>
+            <?php endif ?>
 
             <div class="site-header__navigation">
-                <div class="site-header__close-btn hide-on-desktop" role="button" aria-label="Close Menu Button">
-                    <hr>
-                    <hr>
-                </div>
 
-                <?php
-                if (has_nav_menu('main')) {
-                    echo '<nav class="main-nav" role="navigation">';
-                    wp_nav_menu(
-                        array(
-                            'theme_location'  => 'main' . get_current_language_suffix(),
-                            'container'          => false,
-                            'menu_class'      => 'main-nav__menu',
-                            'items_wrap'      => '<ul class="%2$s">%3$s</ul>',
-                            'link_before'          => '<span>',
-                            'link_after'              => '</span>'
-                        )
-                    );
-                    echo '</nav>';
-                }
-                ?>
+                <?php if (!empty($menu_args)) : ?>
+
+                    <div class="site-header__close-btn hide-on-desktop" role="button" aria-label="Close Menu Button">
+                        <hr>
+                        <hr>
+                    </div>
+
+                    <nav class="main-nav" role="navigation">
+                        <?php wp_nav_menu($menu_args); ?>
+                    </nav>
+                <?php endif ?>
 
                 <?php if ($phone_number): ?>
                     <div class="site-header__callout">
