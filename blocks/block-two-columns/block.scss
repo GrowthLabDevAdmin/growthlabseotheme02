@@ -127,11 +127,6 @@
       &.reverse {
         grid-template-columns: 45% 52%;
 
-        & > *:first-child {
-          justify-self: end;
-          text-align: right;
-        }
-
         & > *:nth-child(2) {
           grid-column: 2/3;
         }
