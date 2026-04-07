@@ -89,9 +89,8 @@ aside {
     z-index: 5;
     flex: 1 0 calc(55%);
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: stretch;
-    justify-content: space-evenly;
     gap: var(--sp-sm);
 
     @media (min-width: v.$tablet) {
