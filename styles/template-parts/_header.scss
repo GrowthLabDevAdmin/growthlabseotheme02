@@ -20,7 +20,11 @@
   @media (min-width: v.$mdpi) {
     &:not(:has(#{$header}__cta)) {
       #{$header}__callout {
-        grid-column-end: none;
+        justify-items: end;
+      }
+
+      #{$header}__callout {
+        grid-column-end: none !important;
       }
     }
   }
