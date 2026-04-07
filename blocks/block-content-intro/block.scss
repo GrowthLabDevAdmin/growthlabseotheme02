@@ -14,7 +14,7 @@
   $parent: &;
 
   &:not(:has(.inner-cta-box__content)) {
-    .col__image {
+    .col__image img {
       mask-image: none;
     }
   }
