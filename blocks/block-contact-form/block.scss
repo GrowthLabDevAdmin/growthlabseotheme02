@@ -28,8 +28,11 @@ aside {
 
   $parent: &;
 
-  &:not(.light) {
+  &.dark {
     background-color: rgb(var(--primary));
+  }
+
+  &:not(.light) {
     * {
       color: rgb(var(--secondary));
     }
