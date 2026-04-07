@@ -19,7 +19,7 @@
 
   @media (min-width: v.$mdpi) {
     &:not(:has(#{$header}__cta)) {
-      #{$header}__callout {
+      #{$header}__navigation {
         justify-items: end;
       }
 
