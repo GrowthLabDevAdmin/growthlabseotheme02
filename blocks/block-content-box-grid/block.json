@@ -3,7 +3,7 @@
   "title": "Content Box Grid",
   "style": ["file:./block-min.css"],
   "script": ["file:./block-min.js"],
-  "category": "growthlabtheme02-blocks",
+  "category": "gorwthlabseotheme02-blocks",
   "icon": "block-default",
   "keywords": ["growthlabseo", "content", "grid", "menu", "boxes"],
   "acf": {

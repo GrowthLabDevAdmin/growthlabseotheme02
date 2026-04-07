@@ -136,16 +136,16 @@ if (!function_exists('my_wp_editor_formats')) {
         add_editor_style(get_template_directory_uri() . '/styles/vendor/tiny-mce/tiny-mce-styles-min.css?ver=' . time());
 
         add_theme_support('editor-color-palette', [
-            ['name' => __('Primary Color',         'growthlabtheme02'), 'slug' => 'primary',        'color' => sanitize_hex_color(get_theme_mod('primary_color',         '#15253f')) ?: '#15253f'],
-            ['name' => __('Primary Dark',          'growthlabtheme02'), 'slug' => 'primary-dark',   'color' => sanitize_hex_color(get_theme_mod('primary_color_dark',    '#08182f')) ?: '#08182f'],
-            ['name' => __('Primary Light',         'growthlabtheme02'), 'slug' => 'primary-light',  'color' => sanitize_hex_color(get_theme_mod('primary_color_light',   '#2C3D5B')) ?: '#2C3D5B'],
-            ['name' => __('Secondary Color',       'growthlabtheme02'), 'slug' => 'secondary',      'color' => sanitize_hex_color(get_theme_mod('secondary_color',       '#F4F3EE')) ?: '#F4F3EE'],
-            ['name' => __('Secondary Dark',        'growthlabtheme02'), 'slug' => 'secondary-dark', 'color' => sanitize_hex_color(get_theme_mod('secondary_color_dark',  '#E7E5DF')) ?: '#E7E5DF'],
-            ['name' => __('Secondary Light',       'growthlabtheme02'), 'slug' => 'secondary-light', 'color' => sanitize_hex_color(get_theme_mod('secondary_color_light', '#FFFFFF')) ?: '#FFFFFF'],
-            ['name' => __('Tertiary Color',        'growthlabtheme02'), 'slug' => 'tertiary',       'color' => sanitize_hex_color(get_theme_mod('tertiary_color',        '#BC9061')) ?: '#BC9061'],
-            ['name' => __('Tertiary Dark',         'growthlabtheme02'), 'slug' => 'tertiary-dark',  'color' => sanitize_hex_color(get_theme_mod('tertiary_color_dark',   '#9D7A55')) ?: '#9D7A55'],
-            ['name' => __('Tertiary Light',        'growthlabtheme02'), 'slug' => 'tertiary-light', 'color' => sanitize_hex_color(get_theme_mod('tertiary_color_light',  '#DCAB77')) ?: '#DCAB77'],
-            ['name' => __('Text Color',            'growthlabtheme02'), 'slug' => 'text',           'color' => sanitize_hex_color(get_theme_mod('text_color',            '#15253f')) ?: '#15253f'],
+            ['name' => __('Primary Color',         'gorwthlabseotheme02'), 'slug' => 'primary',        'color' => sanitize_hex_color(get_theme_mod('primary_color',         '#15253f')) ?: '#15253f'],
+            ['name' => __('Primary Dark',          'gorwthlabseotheme02'), 'slug' => 'primary-dark',   'color' => sanitize_hex_color(get_theme_mod('primary_color_dark',    '#08182f')) ?: '#08182f'],
+            ['name' => __('Primary Light',         'gorwthlabseotheme02'), 'slug' => 'primary-light',  'color' => sanitize_hex_color(get_theme_mod('primary_color_light',   '#2C3D5B')) ?: '#2C3D5B'],
+            ['name' => __('Secondary Color',       'gorwthlabseotheme02'), 'slug' => 'secondary',      'color' => sanitize_hex_color(get_theme_mod('secondary_color',       '#F4F3EE')) ?: '#F4F3EE'],
+            ['name' => __('Secondary Dark',        'gorwthlabseotheme02'), 'slug' => 'secondary-dark', 'color' => sanitize_hex_color(get_theme_mod('secondary_color_dark',  '#E7E5DF')) ?: '#E7E5DF'],
+            ['name' => __('Secondary Light',       'gorwthlabseotheme02'), 'slug' => 'secondary-light', 'color' => sanitize_hex_color(get_theme_mod('secondary_color_light', '#FFFFFF')) ?: '#FFFFFF'],
+            ['name' => __('Tertiary Color',        'gorwthlabseotheme02'), 'slug' => 'tertiary',       'color' => sanitize_hex_color(get_theme_mod('tertiary_color',        '#BC9061')) ?: '#BC9061'],
+            ['name' => __('Tertiary Dark',         'gorwthlabseotheme02'), 'slug' => 'tertiary-dark',  'color' => sanitize_hex_color(get_theme_mod('tertiary_color_dark',   '#9D7A55')) ?: '#9D7A55'],
+            ['name' => __('Tertiary Light',        'gorwthlabseotheme02'), 'slug' => 'tertiary-light', 'color' => sanitize_hex_color(get_theme_mod('tertiary_color_light',  '#DCAB77')) ?: '#DCAB77'],
+            ['name' => __('Text Color',            'gorwthlabseotheme02'), 'slug' => 'text',           'color' => sanitize_hex_color(get_theme_mod('text_color',            '#15253f')) ?: '#15253f'],
         ]);
     }
 }
