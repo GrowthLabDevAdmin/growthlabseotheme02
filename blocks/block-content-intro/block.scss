@@ -13,6 +13,12 @@
 
   $parent: &;
 
+  &:not(:has(.inner-cta-box)) {
+    .col__image {
+      mask-image: none;
+    }
+  }
+
   &__wrapper {
     @include m.flex-center;
     flex-wrap: wrap;
