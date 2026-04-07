@@ -135,7 +135,7 @@
               </span>
             </a>
           </div>
-          
+
           <div class="content-info-footer__col">
             <div class="formatted-text">
               <?= $last_column_content ?>
@@ -150,26 +150,32 @@
 
     <?php
     if (!$copyright_section['hide_section'] && !get_field("hide_copyright_section")):
-      foreach ($copyright_section as $form_field => $form_content) $$form_field = $form_content;
+      foreach ($copyright_section as $copy_field => $copy_content) $$copy_field = $copy_content;
     ?>
       <section class="copyright-footer">
         <div class="copyright-footer__wrapper container">
           <p class="copyright-footer__advertisement">
             <?= $copyright ?>
           </p>
+          
           <?php
-          wp_nav_menu(
-            array(
-              'menu'  => $footer_links_menu,
-              'container'          => 'nav',
-              'container_class' => 'footer-nav',
-              'menu_class'      => 'footer-nav__menu',
-              'items_wrap'      => '<ul class="%2$s">%3$s</ul>',
-              'link_before'          => '<span>',
-              'link_after'              => '</span>'
-            )
-          );
+          $footer_links_menu = get_field("footer_links_menu", $post_id) ?: $footer_links_menu;
+
+          if (isset($footer_links_menu) && $footer_links_menu && !get_field("hide_menu")) {
+            wp_nav_menu(
+              array(
+                'menu'  => $footer_links_menu,
+                'container'          => 'nav',
+                'container_class' => 'footer-nav',
+                'menu_class'      => 'footer-nav__menu',
+                'items_wrap'      => '<ul class="%2$s">%3$s</ul>',
+                'link_before'          => '<span>',
+                'link_after'              => '</span>'
+              )
+            );
+          }
           ?>
+
           <a href="https://growthlabseo.com/" target="_blank" class="copyright-footer__logo" aria-label="Growth Lab SEO">
             <img src="<?= get_stylesheet_directory_uri() . "/assets/img/Growth-Lab-Logo.png" ?>" alt="Growth Lab SEO Logo" width="270" height="50">
           </a>
