@@ -16,6 +16,15 @@
   @media (min-width: v.$tablet) {
     border-bottom: none;
   }
+
+  @media (min-width: v.$mdpi) {
+    &:not(:has(#{$header}__cta)) {
+      #{$header}__callout {
+        grid-column-end: none;
+      }
+    }
+  }
+
   &--sticky {
     position: fixed;
     top: 0;
