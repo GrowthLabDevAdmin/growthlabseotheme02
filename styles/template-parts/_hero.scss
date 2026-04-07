@@ -423,8 +423,20 @@
   }
 
   &--v6 {
+    #{$hero}__wrapper {
+      @media (min-width: v.$ldpi) {
+        align-items: center;
+      }
+    }
+
     #{$hero}__content {
       padding: 0;
+    }
+
+    #{$hero}__side-portrait {
+      @media (min-width: v.$ldpi) {
+        height: 55rem;
+      }
     }
 
     .content-box {
@@ -472,6 +484,12 @@
         }
       }
 
+      &__tagline {
+        margin-bottom: var(--sp-xsm);
+        color: rgba(var(--secondary));
+        font-size: clamp(2.2rem, 2.4vw, 2.8rem);
+      }
+
       &__title {
         margin-bottom: var(--sp-xsm);
         @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 4.8rem, null, 1);
@@ -484,6 +502,7 @@
       }
 
       &__btn {
+        margin-block: var(--sp-md);
         flex-wrap: wrap;
         justify-content: center;
 
