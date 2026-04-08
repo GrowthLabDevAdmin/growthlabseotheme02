@@ -1,5 +1,5 @@
 {
-  "name": "gorwthlabseotheme02",
+  "name": "growthlabseotheme02",
   "version": "1.0.0",
   "description": "GrowthLab WordPress Theme",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GrowthLabDevAdmin/gorwthlabseotheme01.git"
+    "url": "git+https://github.com/GrowthLabDevAdmin/growthlabseotheme01.git"
   },
   "keywords": [
     "wordpress",
@@ -24,9 +24,9 @@
   "author": "Growth Lab SEO Development Team",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/GrowthLabDevAdmin/gorwthlabseotheme01/issues"
+    "url": "https://github.com/GrowthLabDevAdmin/growthlabseotheme01/issues"
   },
-  "homepage": "https://github.com/GrowthLabDevAdmin/gorwthlabseotheme01#readme",
+  "homepage": "https://github.com/GrowthLabDevAdmin/growthlabseotheme01#readme",
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "gulp": "^5.0.1",

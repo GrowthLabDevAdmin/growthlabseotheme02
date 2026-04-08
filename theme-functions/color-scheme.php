@@ -100,7 +100,7 @@ if (!function_exists('hex_to_rgb')) {
 /* function theme_enqueue_styles()
 {
     $color_scheme = theme_get_customizer_css();
-    wp_add_inline_style('gorwthlabseotheme02-main-stylesheet', $color_scheme);
+    wp_add_inline_style('growthlabseotheme02-main-stylesheet', $color_scheme);
 }
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles'); */
 

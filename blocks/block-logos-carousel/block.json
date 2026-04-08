@@ -3,7 +3,7 @@
   "title": "Logos Carousel",
   "style": ["file:./block-min.css"],
   "script": ["file:./block-min.js"],
-  "category": "gorwthlabseotheme02-blocks",
+  "category": "growthlabseotheme02-blocks",
   "icon": "block-default",
   "keywords": ["growthlabseo", "carousel", "logos"],
   "acf": {
