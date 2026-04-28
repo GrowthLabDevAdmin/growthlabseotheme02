@@ -47,6 +47,7 @@
             "name": "",
             "aria-label": "",
             "type": "accordion",
+            "instructions": "Enclose text in \"strong\" HTML tags to highlight it.",
             "required": 0,
             "conditional_logic": [
                 [
@@ -818,5 +819,7 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770778918
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1776217286
 }

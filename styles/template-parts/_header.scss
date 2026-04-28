@@ -59,7 +59,7 @@
         }
 
         .site-logo {
-          picture {
+          &:has(.site-logo__symbol) picture {
             opacity: 0;
           }
 
