@@ -86,11 +86,13 @@
         }
       }
 
-      #{$header}__callout {
-        width: 100%;
-        grid-column: 2/4;
+      &:has(.main-nav) {
+        #{$header}__callout {
+          width: 100%;
+          grid-column: 2/4;
+        }
       }
-
+      
       .main-nav__menu {
         justify-content: center;
         column-gap: 2rem;
