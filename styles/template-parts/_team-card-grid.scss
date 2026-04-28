@@ -69,7 +69,7 @@
   &__title {
     position: relative;
     text-transform: uppercase;
-    font-family: var(--font-serif);
+    font-family: var(--font-secondary);
     font-size: clamp(2.2rem, 2vw, 3rem);
     font-weight: 700;
     color: rgb(var(--text));
@@ -78,7 +78,7 @@
 
   &__role {
     text-transform: uppercase;
-    font-family: var(--font-serif);
+    font-family: var(--font-secondary);
     font-size: clamp(1.6rem, 1.8vw, 1.8rem);
     color: rgb(var(--text));
     font-weight: 400;

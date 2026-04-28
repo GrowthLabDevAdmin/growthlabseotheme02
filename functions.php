@@ -24,6 +24,7 @@ $GLOBALS['breakpoints'] = [
 $includes = [
     'theme-functions/theme-optimization.php',
     'theme-functions/color-scheme.php',
+    'theme-functions/fonts-selector.php',
     'theme-functions/acf-functions.php',
     'theme-functions/helpers.php',
     'theme-functions/svg-support.php',
@@ -346,12 +347,15 @@ function inline_main_critical_css()
 {
     global $block_critical_css;
 
+    // Dynamic Fonts
+    $fonts_css = theme_get_fonts_css();
+
     // Dynamic Color Scheme
     $color_scheme = theme_get_customizer_css();
 
     $critical_css = file_get_contents(get_template_directory() . "/styles/main-min.css");
     $critical_css .= file_get_contents(get_stylesheet_uri());
-    $critical_css =  $color_scheme . $critical_css;
+    $critical_css = $fonts_css . $color_scheme . $critical_css;
 
     // Add Splide critical CSS only when carousels are present
     $splide_css_file = get_template_directory() . '/styles/vendor/splide/splide-core.min.css';
@@ -362,7 +366,7 @@ function inline_main_critical_css()
     // Add block critical CSS if any
     if (!empty($block_critical_css)) {
         // Remove duplicate :root variables from block critical CSS
-        $block_critical_css = str_replace(':root{--font-sans: "Mona Sans", sans-serif;--font-serif: "Roboto Serif", serif;--container: 1240px;--sp-xsm: 1.6rem;--sp-sm: 3.2rem;--sp-md: 4.8rem;--sp-lg: 6.4rem}', '', $block_critical_css);
+        $block_critical_css = str_replace(':root{--font-primary: "Mona Sans", sans-serif;--font-secondary: "Roboto Serif", serif;--container: 1240px;--sp-xsm: 1.6rem;--sp-sm: 3.2rem;--sp-md: 4.8rem;--sp-lg: 6.4rem}', '', $block_critical_css);
         $critical_css .= "\n/* Block Critical CSS */\n" . $block_critical_css;
     }
 

@@ -30,7 +30,7 @@ body {
   position: relative;
   font-size: 1.6rem;
   line-height: 1.5;
-  font-family: var(--font-sans);
+  font-family: var(--font-primary);
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -72,7 +72,7 @@ h6 *,
 .h6 * {
   margin: 0;
   margin-bottom: 2rem;
-  font-family: var(--font-serif);
+  font-family: var(--font-secondary);
   color: rgba(var(--primary));
   font-weight: 600;
   line-height: 1.5;
@@ -138,7 +138,7 @@ h6 * {
 /*Links*/
 a {
   text-decoration: none;
-  font-family: var(--font-sans);
+  font-family: var(--font-primary);
   color: rgb(var(--tertiary));
   font-size: 1.6rem;
   font-weight: 400;
@@ -170,7 +170,7 @@ li a {
 li {
   p,
   span {
-    font-family: var(--font-sans);
+    font-family: var(--font-primary);
     color: rgb(var(--text));
     font-size: 1.6rem;
     font-weight: 400;
@@ -180,7 +180,7 @@ li {
 
 /* Paragraphs */
 p {
-  font-family: var(--font-sans);
+  font-family: var(--font-primary);
   color: rgb(var(--text));
   font-size: clamp(1.5rem, 1.7vw, 1.8rem);
   font-weight: 400;
@@ -334,7 +334,7 @@ img.bg-image {
 
 :where(.formatted-text) {
   font-size: clamp(1.4rem, 2.2vw, 1.8rem);
-  font-family: var(--font-sans);
+  font-family: var(--font-primary);
   font-weight: 400;
   line-height: 1.5;
   color: rgba(var(--text), 1);
@@ -449,7 +449,7 @@ img.bg-image {
   }
 
   & > * {
-    font-family: var(--font-sans);
+    font-family: var(--font-primary);
     font-size: clamp(1.6rem, 2.2vw, 2rem);
     line-height: 1.5;
     font-weight: 700;

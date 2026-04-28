@@ -261,7 +261,7 @@
 
       &__city {
         a {
-          font-family: var(--font-serif);
+          font-family: var(--font-secondary);
           font-size: clamp(1.8rem, 1.8rem + 0.5vw, 3rem);
           font-weight: 700;
           color: rgb(var(--tertiary));
@@ -281,7 +281,7 @@
         }
 
         p {
-          font-family: var(--font-sans);
+          font-family: var(--font-primary);
           font-size: clamp(1.4rem, 1.6rem + 0.5vw, 1.8rem);
           font-weight: 500;
         }

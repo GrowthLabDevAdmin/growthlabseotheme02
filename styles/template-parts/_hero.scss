@@ -232,7 +232,7 @@
       }
 
       & > * {
-        font-family: var(--font-serif);
+        font-family: var(--font-secondary);
         font-size: clamp(2.5rem, 4vw, 5.5rem);
         font-weight: normal;
         line-height: 1.5;
@@ -285,7 +285,7 @@
 
     #{$hero}__subtitle {
       margin-bottom: var(--sp-xsm);
-      font-family: var(--font-sans);
+      font-family: var(--font-primary);
       color: rgb(var(--secondary-light));
     }
   }
@@ -323,7 +323,7 @@
 
       &__subtitle {
         color: rgb(var(--secondary-light));
-        font-family: var(--font-sans);
+        font-family: var(--font-primary);
         font-size: 2rem;
       }
     }
@@ -364,7 +364,7 @@
 
       &__subtitle {
         color: rgb(var(--secondary-light));
-        font-family: var(--font-sans);
+        font-family: var(--font-primary);
       }
 
       &__btn {
@@ -437,7 +437,7 @@
     #{$hero}__subtitle {
       max-width: 700px;
       margin-bottom: var(--sp-xsm);
-      font-family: var(--font-sans);
+      font-family: var(--font-primary);
       color: rgb(var(--secondary-light));
     }
   }
@@ -522,7 +522,7 @@
       &__subtitle {
         color: rgb(var(--secondary-light));
         font-size: 2rem;
-        font-family: var(--font-sans);
+        font-family: var(--font-primary);
       }
 
       &__btn {

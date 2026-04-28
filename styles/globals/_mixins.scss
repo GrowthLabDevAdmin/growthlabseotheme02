@@ -5,7 +5,7 @@
  * Title Mixin with Customizable Parameters
  * @param {color} $color - Main title color (default: --primary)
  * @param {color} $strong-color - Strong text color (default: --tertiary)
- * @param {string} $font-family - Font family (default: --font-serif)
+ * @param {string} $font-family - Font family (default: --font-secondary)
  * @param {number} $font-weight - Font weight (default: 600)
  * @param {string} $font-size - Font size with clamp (default: clamp(3.2rem, 3.33vw, 3.6rem))
  * @param {number} $line-height - Line height (default: 1.25)
@@ -27,7 +27,7 @@
 
   position: relative;
   color: if($color != null, $color, rgb(var(--primary)));
-  font-family: var(--font-serif);
+  font-family: var(--font-secondary);
   font-style: normal;
   font-weight: $font-weight;
   line-height: $line-height;
