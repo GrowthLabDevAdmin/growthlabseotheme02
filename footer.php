@@ -12,12 +12,17 @@
 
     $options = get_current_language_options();
     foreach ($options as $key => $value) $$key = $value;
+
     $phone_number = $contact_phone ?: $main_phone_number;
+    if (get_field('custom_footer')) $form_section = get_field('form_section');
+    if (get_field('custom_footer')) $content_section = get_field('content_section');
+    if (get_field('custom_footer')) $copyright_section = get_field('copyright_section');
     ?>
 
     <?php
-    if (!$form_section['hide_section'] && !get_field('hide_form_section')):
+    if (!$form_section['hide_section']):
       foreach ($form_section as $form_field => $form_content) $$form_field = $form_content;
+      $offices = $show_offices === "custom" ? $offices : $options['offices'];
     ?>
       <section class="contact-form-footer">
 
@@ -103,42 +108,38 @@
     ?>
 
     <?php
-    if (!$content_section['hide_section'] && !get_field('hide_content_section')):
+    if (!$content_section['hide_section']):
       foreach ($content_section as $content_field => $content_data) $$content_field = $content_data;
-
-      $first_column_content = get_field("first_column_content", $post_id) ?: $first_column_content;
-      $last_column_content = get_field("last_column_content", $post_id) ?: $last_column_content;
-      $cta_button = get_field("cta_button", $post_id) ?: $cta_button;
-      $logo = get_field("logo", $post_id) ?: $logo;
-
     ?>
 
       <section class="content-info-footer">
         <div class="content-info-footer__wrapper container">
+
           <div class="content-info-footer__col">
             <div class="formatted-text">
-              <?= $first_column_content ?>
+              <?= $first_column_content && isset($first_column_content) ? $first_column_content : '' ?>
             </div>
           </div>
+
           <div class="content-info-footer__col">
-            <?= img_print_picture_tag(img: $logo, classes: "footer-logo", max_size: "thumbnail") ?>
+            <?php if ($logo && isset($logo)) img_print_picture_tag(img: $logo, classes: "footer-logo", max_size: "thumbnail") ?>
 
-            <?php if (get_field("hide_social_networks", $post_id)): ?>
-              <div class="content-info-footer__social">
-                <?php get_template_part('template-parts/social', 'networks'); ?>
-              </div>
-            <?php endif ?>
+            <div class="content-info-footer__social">
+              <?php get_template_part('template-parts/social', 'networks', ["social_networks" => $select_social_networks]); ?>
+            </div>
 
-            <a href="<?= $cta_button['url'] ?>" class="btn btn--primary" target="<?= $cta_button['target'] ?>" aria-label="<?= esc_attr($cta_button['title']) ?>">
-              <span>
-                <?= esc_html($cta_button['title']) ?>
-              </span>
-            </a>
+            <?php if ($cta_button && isset($cta_button)): ?>
+              <a href="<?= $cta_button['url'] ?>" class="btn btn--primary" target="<?= $cta_button['target'] ?>" aria-label="<?= esc_attr($cta_button['title']) ?>">
+                <span>
+                  <?= esc_html($cta_button['title']) ?>
+                </span>
+              </a>
+            <?php endif; ?>
           </div>
 
           <div class="content-info-footer__col">
             <div class="formatted-text">
-              <?= $last_column_content ?>
+              <?= $last_column_content && isset($last_column_content) ? $last_column_content : '' ?>
             </div>
           </div>
         </div>
@@ -149,19 +150,17 @@
     ?>
 
     <?php
-    if (!$copyright_section['hide_section'] && !get_field("hide_copyright_section")):
+    if (!$copyright_section['hide_section']):
       foreach ($copyright_section as $copy_field => $copy_content) $$copy_field = $copy_content;
     ?>
       <section class="copyright-footer">
         <div class="copyright-footer__wrapper container">
           <p class="copyright-footer__advertisement">
-            <?= $copyright ?>
+            <?= $copyright && isset($copyright) ? $copyright : '' ?>
           </p>
-          
-          <?php
-          $footer_links_menu = get_field("footer_links_menu", $post_id) ?: $footer_links_menu;
 
-          if (isset($footer_links_menu) && $footer_links_menu && !get_field("hide_menu")) {
+          <?php
+          if (isset($footer_links_menu) && $footer_links_menu) {
             wp_nav_menu(
               array(
                 'menu'  => $footer_links_menu,

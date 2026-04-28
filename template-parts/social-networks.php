@@ -4,6 +4,7 @@ if (!defined('ABSPATH')) {
 }
 
 $options = get_current_language_options();
+$selected_social_networks = $args['social_networks'] ?? array();
 
 $social_networks = array(
     'facebook_url'   => 'icon-facebook.svg',
@@ -13,6 +14,14 @@ $social_networks = array(
     'instagram_url'  => 'icon-instagram.svg',
     'linkedin_url'   => 'icon-linkedin.svg',
 );
+
+if (!empty($selected_social_networks)) {
+    $social_networks = array_filter($social_networks, function ($key) use ($selected_social_networks) {
+        return in_array($key, $selected_social_networks);
+    }, ARRAY_FILTER_USE_KEY);
+} else {
+    $social_networks = array();
+}
 
 $icon_dir = get_template_directory() . '/assets/icons/';
 ?>
