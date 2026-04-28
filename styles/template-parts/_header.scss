@@ -59,7 +59,7 @@
         }
 
         .site-logo {
-          &:has(.site-logo__symbol) picture {
+          &:has(.site-logo__symbol) > picture {
             opacity: 0;
           }
 
