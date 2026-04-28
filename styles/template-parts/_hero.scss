@@ -273,6 +273,11 @@
       margin-bottom: var(--sp-xsm);
       @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 6.4rem, null, 1);
 
+      &::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
       & > * {
         all: inherit;
       }
