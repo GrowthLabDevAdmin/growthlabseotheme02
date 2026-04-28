@@ -27,6 +27,17 @@
         grid-column-end: none !important;
       }
     }
+
+    &:not(:has(.main-nav)) {
+      #{$header}__callout {
+        grid-column: 2/4;
+
+        .callout span:last-of-type {
+          grid-column: 1/3;
+          justify-self: end;
+        }
+      }
+    }
   }
 
   &--sticky {
