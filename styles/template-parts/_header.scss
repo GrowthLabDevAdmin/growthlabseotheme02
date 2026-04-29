@@ -55,7 +55,7 @@
   }
 
   &:not(:has(#{$header}__cta)) {
-    @media (min-width: v.$mdpi) {
+    @media (min-width: v.$tablet) {
       #{$header}__navigation {
         justify-items: end;
       }
