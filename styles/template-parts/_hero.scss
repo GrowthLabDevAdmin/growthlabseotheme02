@@ -443,6 +443,8 @@
   }
 
   &--v6 {
+    overflow-x: hidden;
+
     #{$hero}__wrapper {
       @media (min-width: v.$ldpi) {
         align-items: center;
