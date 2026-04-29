@@ -18,16 +18,18 @@
   }
 
   &:not(:has(.main-nav)) {
-    #{$header}__navigation {
-      width: 100%;
-      height: auto;
-      position: static;
-      grid-column: 1/-1;
-      grid-row: 2/3;
+    @media (max-width: calc(v.$tablet - 1px)) {
+      #{$header}__navigation {
+        width: 100%;
+        height: auto;
+        position: static;
+        grid-column: 1/-1;
+        grid-row: 2/3;
 
-      .callout {
-        span:first-of-type {
-          display: none;
+        .callout {
+          span:first-of-type {
+            display: none;
+          }
         }
       }
     }
