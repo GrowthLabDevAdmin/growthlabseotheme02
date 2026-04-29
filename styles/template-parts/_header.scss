@@ -38,12 +38,11 @@
         position: static;
         grid-column: 1/-1;
         grid-row: 2/3;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
 
-        span:first-of-type {
-          display: none;
+        .callout {
+          span:first-of-type {
+            display: none;
+          }
         }
       }
     }
@@ -70,12 +69,24 @@
       #{$header}__navigation {
         background-color: transparent;
         transition: 0.3s ease;
+
+        .callout {
+          &__phone {
+            color: rgb(var(--secondary-light));
+          }
+        }
       }
 
       &.scrolling {
         #{$header}__navigation {
           background-color: rgb(var(--primary));
           transition: 0.3s ease;
+
+          .callout {
+            &__phone {
+              color: rgb(var(--tertiary-light));
+            }
+          }
         }
       }
     }
