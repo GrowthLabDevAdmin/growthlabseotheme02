@@ -22,7 +22,7 @@
     <?php
     if (!$form_section['hide_section']):
       foreach ($form_section as $form_field => $form_content) $$form_field = $form_content;
-      $offices = $show_offices === "custom" ? $offices : $options['offices'];
+      $offices =  isset($show_offices) && $show_offices === "custom" ? $offices : $options['offices'];
     ?>
       <section class="contact-form-footer">
 
@@ -125,7 +125,7 @@
             <?php if ($logo && isset($logo)) img_print_picture_tag(img: $logo, classes: "footer-logo", max_size: "thumbnail") ?>
 
             <div class="content-info-footer__social">
-              <?php get_template_part('template-parts/social', 'networks', ["social_networks" => $select_social_networks]); ?>
+              <?php get_template_part('template-parts/social', 'networks', ["social_networks" => $select_social_networks ?? null]); ?>
             </div>
 
             <?php if ($cta_button && isset($cta_button)): ?>
