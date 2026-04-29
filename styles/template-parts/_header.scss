@@ -20,6 +20,7 @@
   &:not(:has(.main-nav)) {
     @media (min-width: v.$tablet) {
       #{$header}__logo {
+        height: 100%;
         grid-row: 1/4;
       }
     }
