@@ -80,9 +80,6 @@
 
       &.scrolling {
         #{$header}__navigation {
-          background-color: rgb(var(--primary));
-          transition: 0.3s ease;
-
           .callout {
             &__phone {
               color: rgb(var(--tertiary-light));
