@@ -18,6 +18,12 @@
   }
 
   &:not(:has(.main-nav)) {
+    @media (min-width: v.$tablet) {
+      #{$header}__logo {
+        grid-row: 1/4;
+      }
+    }
+
     #{$header}__navigation {
       position: static;
       width: 100%;
