@@ -22,6 +22,8 @@
       position: static;
       width: 100%;
       height: auto;
+      background-color: transparent;
+      transition: 0.3s ease;
 
       @media (max-width: calc(v.$tablet - 1px)) {
         grid-column: 1/-1;
@@ -35,7 +37,12 @@
       }
     }
 
-    @media (min-width: v.$mdpi) {
+    @media (min-width: v.$tablet) {
+      grid-column: 2/5;
+      grid-row: 1/4;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+
       #{$header}__callout {
         grid-column: 2/4;
 
@@ -68,23 +75,16 @@
     transition: 0.3s ease;
 
     &:not(:has(.main-nav)) {
-      #{$header}__navigation {
-        background-color: transparent;
-        transition: 0.3s ease;
-
-        .callout {
-          &__phone {
-            color: rgb(var(--secondary-light));
-          }
+      .callout {
+        &__phone {
+          color: rgb(var(--secondary-light));
         }
       }
 
       &.scrolling {
-        #{$header}__navigation {
-          .callout {
-            &__phone {
-              color: rgb(var(--tertiary-light));
-            }
+        .callout {
+          &__phone {
+            color: rgb(var(--tertiary-light));
           }
         }
       }
