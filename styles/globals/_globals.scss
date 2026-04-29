@@ -188,6 +188,10 @@ p {
 }
 
 //Utilities
+&:has([data-visible="true"]) {
+  content-visibility: visible;
+}
+
 .container {
   max-width: var(--container);
   width: calc(100% - var(--sp-sm));
