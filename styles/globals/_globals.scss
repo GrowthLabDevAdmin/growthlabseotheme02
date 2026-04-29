@@ -188,7 +188,7 @@ p {
 }
 
 //Utilities
-&:has([data-visible="true"]) {
+[data-visible="true"] {
   content-visibility: visible;
 }
 
