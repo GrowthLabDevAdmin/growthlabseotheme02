@@ -33,10 +33,18 @@
   &:not(:has(#{$header}__cta)) {
     &:not(:has(.main-nav)) {
       #{$header}__navigation {
+        width: 100%;
         height: auto;
         position: static;
         grid-column: 1/-1;
         grid-row: 2/3;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        span:first-of-type {
+          display: none;
+        }
       }
     }
 
