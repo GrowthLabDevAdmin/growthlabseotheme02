@@ -405,6 +405,16 @@ function growthlabseotheme02_scripts()
     );
     wp_script_add_data('growthlabseotheme02-main-scripts', 'strategy', 'defer');
 
+    // Picture Optimization scripts.
+    wp_enqueue_script(
+        'growthlabseotheme02-picture-optimization',
+        get_template_directory_uri() . '/js/picture-optimization-min.js',
+        array(),
+        filemtime(get_template_directory() . '/js/picture-optimization-min.js'),
+        true
+    );
+    wp_script_add_data('growthlabseotheme02-picture-optimization', 'strategy', 'defer');
+
     // Third party JS scripts.
     wp_localize_script('growthlabseotheme02-main-scripts', 'splideData', [
         'url' => get_template_directory_uri() . '/js/vendor/splide/splide-min.js',

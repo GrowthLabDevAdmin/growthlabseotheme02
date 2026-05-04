@@ -1,0 +1,79 @@
+// =============================================================================
+// _picture-optimization.scss
+//
+// Responsive Image Aspect Ratio Management
+//
+// Consumes CSS custom properties emitted by img_create_img_tag() to assign
+// the correct aspect-ratio to <img> elements at each breakpoint, without
+// requiring width/height attributes in HTML.
+//
+// CSS custom properties format in the <img> style attribute:
+//   --ar-mobile-w: 480; --ar-mobile-h: 320;
+//   --ar-tablet-w: 800; --ar-tablet-h: 533;
+//   --ar-ldpi-w:  1024; --ar-ldpi-h:   683;
+//   --ar-mdpi-w:  1200; --ar-mdpi-h:   800;
+//   --ar-hdpi-w:  1920; --ar-hdpi-h:  1280;
+//
+// Breakpoint widths MUST match $GLOBALS['breakpoints'] defined in
+// picture-optimization.php to ensure proper responsive behavior.
+// =============================================================================
+
+/**
+ * Lazy-loaded image aspect ratio management
+ * 
+ * Applies ONLY to lazy-loaded images (priority images use width/height directly).
+ * Responsive aspect ratios are applied via CSS custom properties per breakpoint.
+ */
+picture img[loading="lazy"] {
+  // Mobile base (no media query): uses --ar-mobile-w / --ar-mobile-h
+  // If properties don't exist, aspect-ratio: auto is the default behavior
+  aspect-ratio: var(--ar-mobile-w) / var(--ar-mobile-h);
+
+  // Tablet breakpoint — min-width: 600px
+  @media (min-width: 600px) {
+    // If --ar-tablet-w is not defined (breakpoint has no selected image),
+    // browser cascades to inherited mobile value via fallback function.
+    // This ensures there's always an aspect-ratio defined.
+    aspect-ratio: var(--ar-tablet-w, var(--ar-mobile-w)) /
+      var(--ar-tablet-h, var(--ar-mobile-h));
+  }
+
+  // Low DPI screens — min-width: 1024px
+  @media (min-width: 1024px) {
+    // Cascade chain: ldpi > tablet > mobile
+    // Ensures aspect ratio is always available even if image not selected for this breakpoint
+    aspect-ratio: var(--ar-ldpi-w, var(--ar-tablet-w, var(--ar-mobile-w))) /
+      var(--ar-ldpi-h, var(--ar-tablet-h, var(--ar-mobile-h)));
+  }
+
+  // Medium DPI screens — min-width: 1200px
+  @media (min-width: 1200px) {
+    // Cascade chain: mdpi > ldpi > tablet > mobile
+    // Provides smooth fallback if image not optimized for this specific breakpoint
+    aspect-ratio: var(
+        --ar-mdpi-w,
+        var(--ar-ldpi-w, var(--ar-tablet-w, var(--ar-mobile-w)))
+      ) /
+      var(--ar-mdpi-h, var(--ar-ldpi-h, var(--ar-tablet-h, var(--ar-mobile-h))));
+  }
+
+  // High DPI screens — min-width: 1440px (4K, retina displays)
+  @media (min-width: 1440px) {
+    // Cascade chain: hdpi > mdpi > ldpi > tablet > mobile
+    // Maximum fallback depth ensures compatibility even with minimal image optimization
+    aspect-ratio: var(
+        --ar-hdpi-w,
+        var(
+          --ar-mdpi-w,
+          var(--ar-ldpi-w, var(--ar-tablet-w, var(--ar-mobile-w)))
+        )
+      ) /
+      var(
+        --ar-hdpi-h,
+        var(
+          --ar-mdpi-h,
+          var(--ar-ldpi-h, var(--ar-tablet-h, var(--ar-mobile-h)))
+        )
+      );
+  }
+}
