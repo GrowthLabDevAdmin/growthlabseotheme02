@@ -219,9 +219,12 @@
   }
 
   &__content {
+    * {
+      color: rgb(var(--secondary-dark));
+    }
+
     p {
       font-size: clamp(1.7rem, 2.4vw, 2.2rem);
-      color: rgb(var(--secondary-dark));
 
       a,
       span,
@@ -238,6 +241,10 @@
           color: rgb(var(--tertiary-light));
         }
       }
+    }
+
+    li{
+      font-size: clamp(1.7rem, 2.4vw, 2rem);
     }
   }
 
