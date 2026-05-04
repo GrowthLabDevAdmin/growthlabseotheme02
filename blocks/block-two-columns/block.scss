@@ -219,9 +219,17 @@
   }
 
   &__content {
-    * {
+    p {
       font-size: clamp(1.7rem, 2.4vw, 2.2rem);
       color: rgb(var(--secondary-dark));
+
+      a,
+      span,
+      strong,
+      i,
+      b {
+        font-size: inherit;
+      }
 
       a {
         color: rgb(var(--tertiary));
