@@ -1138,7 +1138,7 @@ if (!function_exists('img_generate_picture_tag')) {
 
         // Handle SVG images separately (delegate to SVG function if available)
         if (in_array($fields['mime_type'], ['image/svg+xml', 'image/svg'], true)) {
-            if (function_exists('image_to_svg')) return image_to_svg($img);
+            if (function_exists('image_to_svg')) return image_to_svg($img, $classes);
             return '';
         }
 

@@ -53,7 +53,8 @@ function wp_check_svg($file)
 add_filter('wp_handle_upload_prefilter', 'wp_check_svg');
 
 // Image to SVG
-function image_to_svg($image)
+// Image to SVG
+function image_to_svg($image, $classes = '')
 {
     if (empty($image) || !isset($image['url'], $image['mime_type'])) {
         return '';
@@ -96,7 +97,8 @@ function image_to_svg($image)
                 error_log('Could not read SVG file: ' . $image_path);
                 return '';
             }
-            return $svg_content;
+
+            return "<div class='$classes'>$svg_content</div>";
         }
 
         // Build img tag with escaped attributes
@@ -106,7 +108,7 @@ function image_to_svg($image)
             esc_attr($image['width'] ?? ''),
             esc_attr($image['height'] ?? ''),
             esc_attr($image['alt'] ?? ''),
-            esc_attr($image['title'] ?? '')
+            esc_attr($image['title'] ?? ''),
         );
     } catch (Exception $e) {
         error_log('SVG Processing Error: ' . $e->getMessage());
@@ -124,7 +126,7 @@ function check_content_images($content)
 
     $pattern = '/<img\s[^>]*src=["\']([^"\']+)["\'][^>]*>/i';
     $matches = [];
-    
+
     // Count matches to avoid processing too many
     if (preg_match_all($pattern, $content, $matches, PREG_OFFSET_CAPTURE) === false) {
         return $content;
