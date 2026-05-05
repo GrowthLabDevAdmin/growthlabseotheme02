@@ -122,7 +122,7 @@
           </div>
 
           <div class="content-info-footer__col">
-            <?php if ($logo && isset($logo)) img_print_picture_tag(img: $logo, classes: "footer-logo", max_size: "thumbnail") ?>
+            <?php if ($logo && isset($logo)) img_print_picture_tag(img: $logo, classes: "footer-logo", max_size: "medium") ?>
 
             <div class="content-info-footer__social">
               <?php get_template_part('template-parts/social', 'networks', ["social_networks" => $select_social_networks ?? null]); ?>
