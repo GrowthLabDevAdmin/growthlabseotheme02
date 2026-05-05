@@ -160,8 +160,7 @@
           </p>
 
           <?php
-          echo $footer_links_menu;
-          if (isset($footer_links_menu) && $footer_links_menu) {
+          if (isset($footer_links_menu) && $footer_links_menub && !empty(wp_get_nav_menus())) {
             wp_nav_menu(
               array(
                 'menu'  => $footer_links_menu,
