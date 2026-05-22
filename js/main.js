@@ -144,7 +144,7 @@ function extractBlocks() {
 
 //Find Blocks with Bg-gradient class
 function findConsecutiveGroups() {
-  const blocks = document.querySelectorAll("body>section");
+  const blocks = document.querySelectorAll("body>.block");
 
   if (!blocks) return;
 
