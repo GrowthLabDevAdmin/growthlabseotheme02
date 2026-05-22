@@ -67,11 +67,13 @@
                         <a href="<?= get_flat_number($office['phone']) ?>" aria-label="<?= esc_attr($office['phone']); ?>"><?= esc_html($office['phone']); ?></a>
                       </p>
 
-                      <a href="<?= $office['cta_button']['url'] ?>" class="footer-office__cta btn btn--tertiary" target="<?= $office['cta_button']['target'] ?>" aria-label="<?= esc_attr($office['cta_button']['title']); ?>">
-                        <span>
-                          <?= esc_html($office['cta_button']['title']); ?>
-                        </span>
-                      </a>
+                      <?php if ($office['cta_button'] && isset($office['cta_button'])): ?>
+                        <a href="<?= $office['cta_button']['url'] ?>" class="footer-office__cta btn btn--tertiary" target="<?= $office['cta_button']['target'] ?>" aria-label="<?= esc_attr($office['cta_button']['title']); ?>">
+                          <span>
+                            <?= esc_html($office['cta_button']['title']); ?>
+                          </span>
+                        </a>
+                      <?php endif; ?>
                     </address>
                   </div>
                 </div>

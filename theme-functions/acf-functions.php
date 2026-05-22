@@ -6,9 +6,9 @@
 if (!function_exists('theme_blocks_category')) {
     function theme_blocks_category($categories, $post)
     {
-        $theme      = wp_get_theme();
-        $theme_name = $theme->get('Name');
-        $theme_slug = get_stylesheet();
+        $parent     = wp_get_theme(get_template());
+        $theme_name = $parent->get('Name');
+        $theme_slug = get_template();
 
         return array_merge(
             $categories,
