@@ -25,6 +25,16 @@
       }
     }
 
+    @media (min-width: v.$mdpi) {
+      #{$header}__wrapper {
+        grid-template-rows: auto;
+      }
+
+      #{$header}__cta {
+        grid-row: 1/4;
+      }
+    }
+
     #{$header}__navigation {
       position: static;
       width: 100%;
@@ -78,16 +88,6 @@
               }
             }
           }
-        }
-      }
-
-      @media (min-width: v.$mdpi) {
-        #{$header}__wrapper {
-          grid-template-rows: auto;
-        }
-
-        #{$header}__cta {
-          grid-row: 1/4;
         }
       }
     }
