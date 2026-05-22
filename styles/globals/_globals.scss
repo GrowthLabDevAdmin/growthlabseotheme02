@@ -453,6 +453,7 @@ img.bg-image {
   }
 
   & > * {
+    text-align: center;
     font-family: var(--font-primary);
     font-size: clamp(1.6rem, 2.2vw, 2rem);
     line-height: 1.5;
