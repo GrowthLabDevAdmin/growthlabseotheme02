@@ -108,8 +108,12 @@
       $after: false
     );
 
-    & > * {
-      all: inherit;
+    * {
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      color: currentColor;
+      line-height: inherit;
     }
   }
 
@@ -224,24 +228,23 @@
     #{$hero}__title {
       margin: 0;
       text-align: center;
-      text-transform: uppercase;
+      font-family: var(--font-secondary);
+      font-size: clamp(2.5rem, 4vw, 5.5rem);
+      font-weight: normal;
+      line-height: 1.5;
+      color: rgb(var(--secondary-light));
 
       @media (min-width: v.$ldpi) {
         margin-top: 3rem;
         text-align: left;
       }
 
-      & > * {
-        font-family: var(--font-secondary);
-        font-size: clamp(2.5rem, 4vw, 5.5rem);
-        font-weight: normal;
-        line-height: 1.5;
-        color: rgb(var(--secondary-light));
-
-        * {
-          font-size: inherit;
-          color: currentColor;
-        }
+      * {
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        color: currentColor;
+        line-height: inherit;
       }
     }
   }
@@ -278,8 +281,12 @@
         transform: translateX(-50%);
       }
 
-      & > * {
-        all: inherit;
+      * {
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        color: currentColor;
+        line-height: inherit;
       }
     }
 
@@ -316,8 +323,12 @@
 
       &__title {
         @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 8rem, null, 1);
-        & > * {
-          all: inherit;
+        * {
+          font-family: inherit;
+          font-size: inherit;
+          font-weight: inherit;
+          color: currentColor;
+          line-height: inherit;
         }
       }
 
@@ -356,9 +367,12 @@
       &__title {
         margin-bottom: var(--sp-xsm);
         @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 7rem, null, 1);
-
-        & > * {
-          all: inherit;
+        * {
+          font-family: inherit;
+          font-size: inherit;
+          font-weight: inherit;
+          color: currentColor;
+          line-height: inherit;
         }
       }
 
@@ -520,8 +534,12 @@
         margin-bottom: var(--sp-xsm);
         @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 4.8rem, null, 1);
 
-        & > * {
-          all: inherit;
+        * {
+          font-family: inherit;
+          font-size: inherit;
+          font-weight: inherit;
+          color: currentColor;
+          line-height: inherit;
         }
       }
 

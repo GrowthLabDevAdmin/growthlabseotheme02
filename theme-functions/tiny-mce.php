@@ -206,7 +206,7 @@ if (!function_exists('my_wp_editor_default_settings')) {
         $init['toolbar2']         = '';
         $init['textcolor_map']    = $init['textcolor_map']  ?? [];
         $init['textcolor_cols']   = 5;
-        $init['plugins']          = ($init['plugins'] ?? '') . ' textcolor';
+        $init['plugins']          = ($init['plugins'] ?? '') . ' textcolor lineheight';
         return $init;
     }
 }
