@@ -43,10 +43,14 @@
     }
 
     strong {
+      line-height: inherit;
+      font-family: inherit;
       font-size: inherit;
       color: currentColor;
 
       * {
+        line-height: inherit;
+        font-family: inherit;
         font-size: inherit;
         font-weight: inherit;
       }
@@ -390,7 +394,7 @@
           rgb(var(--secondary)),
           4rem,
           6.2vw,
-          7rem,
+          5.8rem,
           null,
           1,
           $after: false
