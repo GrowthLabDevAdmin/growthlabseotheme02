@@ -112,6 +112,16 @@
     & > * {
       all: inherit;
     }
+
+    strong {
+      font-size: inherit;
+      color: currentColor;
+
+      * {
+        font-size: inherit;
+        font-weight: inherit;
+      }
+    }
   }
 
   &--homepage {
