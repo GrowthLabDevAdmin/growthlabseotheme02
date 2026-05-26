@@ -896,7 +896,7 @@ if (!function_exists('img_generate_cover_picture')) {
         $mobile_fields = $has_mobile ? img_get_fields($mobile_img) : null;
 
         // Cover images use specific optimized sizes
-        $cover_sizes = ['full', 'cover-desktop', 'cover-tablet', 'cover-mobile'];
+        $cover_sizes = ['full', 'cover-desktop', 'cover-tablet-portrait', 'cover-mobile-portrait'];
 
         // Get available sizes, filtered to only cover sizes
         $img_available    = img_get_available_sizes($img_fields['meta'], $img_fields['id']);
@@ -947,7 +947,7 @@ if (!function_exists('img_generate_cover_picture')) {
             $ranges        = po_get_breakpoint_ranges();
             foreach (array_reverse(array_keys($ranges)) as $bp) {
                 if ($bp === 'mobile') continue;
-                if (isset($tablet_available['cover-tablet']) || $tablet_full_w >= $ranges[$bp]) {
+                if (isset($tablet_available['cover-tablet-portrait']) || $tablet_full_w >= $ranges[$bp]) {
                     $tablet_coverage_bp = $bp;
                     break;
                 }
@@ -1054,7 +1054,7 @@ if (!function_exists('img_generate_cover_picture')) {
             : ($tablet_fields ? $tablet_available : $img_available);
 
         $mobile_size = null;
-        foreach (['cover-mobile', 'cover-tablet', 'full'] as $s) {
+        foreach (['cover-mobile-portrait', 'cover-tablet-portrait', 'full'] as $s) {
             if (isset($mobile_available_map[$s])) {
                 $mobile_size = $s;
                 break;
