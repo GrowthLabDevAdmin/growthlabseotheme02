@@ -72,7 +72,7 @@ if (!function_exists('my_acf_wysiwyg_custom_settings')) {
     {
         $init['font_formats']     = 'Mona Sans=Mona Sans,sans-serif;Roboto Serif=Roboto Serif,serif;Arial=Arial,Helvetica,sans-serif;Times New Roman=Times New Roman,Times,serif';
         $init['fontsize_formats'] = '8px 10px 12px 14px 16px 18px 20px 24px 28px 32px 36px 40px 48px 56px 64px 72px 80px 88px 96px 104px 124px 148px 156px 168px';
-        $init['lineheight_formats'] = '.9 .95 1 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 2 2.5 3';
+        $init['lineheight_formats'] = '.8 .85 .9 .95 1 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 2 2.5 3';
         return $init;
     }
 }
@@ -84,7 +84,7 @@ if (!function_exists('my_acf_tinymce_settings')) {
     {
         $init['font_formats']     = 'Mona Sans=Mona Sans,sans-serif;Roboto Serif=Roboto Serif,serif;Arial=Arial,Helvetica,sans-serif;Times New Roman=Times New Roman,Times,serif';
         $init['fontsize_formats'] = '8px 10px 12px 14px 16px 18px 20px 24px 28px 32px 36px 40px 48px 56px 64px 72px 80px 88px 96px 104px 124px 148px 156px 168px';
-        $init['lineheight_formats'] = '.9 .95 1 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 2 2.5 3';
+        $init['lineheight_formats'] = '.8 .85 .9 .95 1 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 2 2.5 3';
         return $init;
     }
 }
@@ -201,7 +201,7 @@ if (!function_exists('my_wp_editor_default_settings')) {
     {
         $init['font_formats']     = 'Mona Sans=Mona Sans,sans-serif;Roboto Serif=Roboto Serif,serif;Arial=Arial,Helvetica,sans-serif;Times New Roman=Times New Roman,Times,serif';
         $init['fontsize_formats'] = '8px 10px 12px 14px 16px 18px 20px 24px 28px 32px 36px 40px 48px 56px 64px 72px 80px 88px 96px 104px 124px 148px 156px 168px';
-        $init['lineheight_formats'] = '.9 .95 1 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 2 2.5 3';
+        $init['lineheight_formats'] = '.8 .85 .9 .95 1 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 2 2.5 3';
         $init['toolbar1']         = 'formatselect,fontselect,fontsizeselect,lineheightselect,bold,italic,underline,forecolor,backcolor,bullist,numlist,alignleft,aligncenter,alignright,link,unlink,removeformat,undo,redo';
         $init['toolbar2']         = '';
         $init['textcolor_map']    = $init['textcolor_map']  ?? [];
