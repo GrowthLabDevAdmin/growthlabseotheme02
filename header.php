@@ -47,8 +47,8 @@ if (!defined('ABSPATH')) {
                     <?php
                     if (function_exists('the_custom_logo') && has_custom_logo()) {
                         $custom_logo_id = get_theme_mod('custom_logo');
-                        $image = wp_get_attachment_image_url($custom_logo_id, 'full');
-                        img_print_picture_tag(img: $image, max_size: "medium", alt_text: get_bloginfo('name'), is_priority: true);
+                        $image = wp_get_attachment_image_url($custom_logo_id, "full");
+                        echo img_generate_picture_tag(img: $image, max_size: "medium", alt_text: get_bloginfo('name'), is_priority: true);
                     }
                     ?>
 
@@ -56,7 +56,7 @@ if (!defined('ABSPATH')) {
                         <?php
                         $options = get_field_options("options");
                         if ($options["logo_symbol"]) {
-                            img_print_picture_tag(img: $options["logo_symbol"], max_size: "medium", min_size: "medium");
+                            echo img_generate_picture_tag(img: $options["logo_symbol"], max_size: "medium", min_size: "medium");
                         }
                         ?>
                     </div>
