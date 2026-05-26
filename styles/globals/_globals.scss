@@ -187,6 +187,10 @@ p {
   line-height: 1.5;
 }
 
+strong {
+  font-weight: 600;
+}
+
 //Utilities
 [data-visible="true"] {
   content-visibility: visible;
@@ -378,7 +382,8 @@ img.bg-image {
       content: "\25AA";
       margin-block: auto;
       margin-right: 8px;
-      color: rgb(var(--tertiary));
+      font-size: inherit;
+      color: inherit;
     }
   }
 }
@@ -398,7 +403,7 @@ img.bg-image {
     }
   }
 
-  &__heading {
+  & &__heading {
     &::after {
       content: "\002B";
       width: var(--sp-sm);
@@ -409,14 +414,14 @@ img.bg-image {
     }
   }
 
-  &__content {
+  & &__content {
     width: 100%;
     max-height: 0;
     overflow: hidden;
     transition: 0.3s ease;
   }
 
-  &__inner {
+  & &__inner {
     padding-block: var(--sp-xsm);
   }
 }

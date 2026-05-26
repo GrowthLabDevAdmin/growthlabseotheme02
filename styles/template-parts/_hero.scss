@@ -429,8 +429,12 @@
       margin-bottom: var(--sp-xsm);
       @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 8rem, null, 1);
 
-      & > * {
-        all: inherit;
+      * {
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        color: currentColor;
+        line-height: inherit;
       }
     }
 
