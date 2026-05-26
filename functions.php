@@ -180,7 +180,7 @@ if (!function_exists('growthlabseotheme02_setup')) {
                     'growthlabseotheme02'
                 ),
                 'size' => 32,
-                'slug' => 'xl'
+                'slug' => 'xxl'
             )
         ));
 
