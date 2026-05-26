@@ -112,6 +112,7 @@
   }
 
   &__inner {
+    height: fit-content;
     display: flex;
     flex-direction: column;
     gap: var(--sp-xsm);
