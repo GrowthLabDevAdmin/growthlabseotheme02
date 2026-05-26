@@ -308,8 +308,10 @@
       background-color: rgba(var(--primary), 0.75);
 
       &__title {
-        & > * {
           @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 8rem, null, 1);
+
+        & > * {
+          @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 8rem, null, 1, $after: false);
         }
       }
 
@@ -347,9 +349,10 @@
 
       &__title {
         margin-bottom: var(--sp-xsm);
+          @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 7rem, null, 1);
 
         & > * {
-          @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 7rem, null, 1);
+          @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 7rem, null, 1, $after: false);
         }
       }
 
@@ -504,9 +507,10 @@
 
       &__title {
         margin-bottom: var(--sp-xsm);
+          @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 4.8rem, null, 1);
 
         & > * {
-          @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 4.8rem, null, 1);
+          @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 4.8rem, null, 1, $after: false);
         }
       }
 
