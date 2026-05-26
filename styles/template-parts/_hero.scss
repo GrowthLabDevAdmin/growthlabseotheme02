@@ -345,7 +345,8 @@
     }
 
     #{$hero}__side-portrait {
-      &::after {
+      &::after,
+      &::before {
         content: none;
       }
 
