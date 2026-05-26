@@ -42,6 +42,7 @@
       flex: 1 0 calc(65% - (var(--sp-xsm) / 2));
     }
 
+    em,
     strong {
       line-height: inherit;
       font-family: inherit;
@@ -127,6 +128,7 @@
       all: inherit;
     }
 
+    em,
     strong {
       font-size: inherit;
       color: currentColor;
