@@ -27,7 +27,23 @@ add_filter('block_categories_all', 'theme_blocks_category', 10, 2);
 if (!function_exists('register_acf_blocks')) {
     function register_acf_blocks()
     {
-        $cache_key   = 'theme_block_files_cache_' . get_stylesheet();
+        $cache_key = 'theme_block_files_cache_' . get_stylesheet();
+        $hash_key  = 'theme_block_files_hash_'  . get_stylesheet();
+
+        $block_json_files = array_merge(
+            glob(get_template_directory()   . '/blocks/*/block.json') ?: [],
+            glob(get_stylesheet_directory() . '/blocks/*/block.json') ?: []
+        );
+
+        $current_hash = md5(implode('|', array_map(
+            fn($f) => $f . ':' . filemtime($f),
+            $block_json_files
+        )));
+
+        if (get_transient($hash_key) !== $current_hash) {
+            delete_transient($cache_key);
+        }
+
         $block_files = get_transient($cache_key);
 
         if ($block_files === false) {
@@ -49,8 +65,8 @@ if (!function_exists('register_acf_blocks')) {
                 }
             }
 
-            // Cache for 24 hours, purged on theme update
-            set_transient($cache_key, $block_files, 24 * HOUR_IN_SECONDS);
+            set_transient($cache_key,  $block_files,   24 * HOUR_IN_SECONDS);
+            set_transient($hash_key,   $current_hash,  24 * HOUR_IN_SECONDS);
         }
 
         // Store block folder map globally for later critical CSS extraction.
@@ -67,6 +83,7 @@ if (!function_exists('register_acf_blocks')) {
 // Clear block cache on theme switch/update
 add_action('switch_theme', function () {
     delete_transient('theme_block_files_cache_' . get_stylesheet());
+    delete_transient('theme_block_files_hash_'  . get_stylesheet());
 });
 
 add_action('init', 'register_acf_blocks', 5);
@@ -366,6 +383,19 @@ $acf_sync = function () use ($_theme_dir) {
         add_filter('acf/settings/save_json', '__return_false', 99);
 
         // ─── CPTs ─────────────────────────────────────────────────────────────
+        $cpt_rows = $wpdb->get_results(
+            "SELECT MIN(ID) as ID, post_name FROM {$wpdb->posts}
+             WHERE post_type = 'acf-post-type'
+             AND post_status IN ('publish', 'acf-disabled', 'trash', 'draft')
+             GROUP BY post_name"
+        );
+        $existing_cpt_ids  = [];
+        foreach ($cpt_rows as $r) {
+            $existing_cpt_ids[$r->post_name] = (int) $r->ID;
+        }
+
+        $processed_cpt_keys = [];
+
         foreach (glob($parent_json_path . '/post_type_*.json') ?: [] as $file) {
             if ((microtime(true) - $execution_start) > $max_execution_time) break;
             if (!is_readable($file)) {
@@ -377,11 +407,32 @@ $acf_sync = function () use ($_theme_dir) {
                 $warnings++;
                 continue;
             }
+
+            $cpt_key = $json_data['key'] ?? null;
+            if (!$cpt_key || in_array($cpt_key, $processed_cpt_keys, true)) continue;
+            $processed_cpt_keys[] = $cpt_key;
+
+            $existing_id = $existing_cpt_ids[$cpt_key] ?? 0;
+            if ($existing_id) $json_data['ID'] = $existing_id;
+
             acf_update_post_type($json_data);
             $synced++;
         }
 
         // ─── Taxonomías ───────────────────────────────────────────────────────
+        $tax_rows = $wpdb->get_results(
+            "SELECT MIN(ID) as ID, post_name FROM {$wpdb->posts}
+             WHERE post_type = 'acf-taxonomy'
+             AND post_status IN ('publish', 'acf-disabled', 'trash', 'draft')
+             GROUP BY post_name"
+        );
+        $existing_tax_ids  = [];
+        foreach ($tax_rows as $r) {
+            $existing_tax_ids[$r->post_name] = (int) $r->ID;
+        }
+
+        $processed_tax_keys = [];
+
         foreach (glob($parent_json_path . '/taxonomy_*.json') ?: [] as $file) {
             if ((microtime(true) - $execution_start) > $max_execution_time) break;
             if (!is_readable($file)) {
@@ -393,6 +444,14 @@ $acf_sync = function () use ($_theme_dir) {
                 $warnings++;
                 continue;
             }
+
+            $tax_key = $json_data['key'] ?? null;
+            if (!$tax_key || in_array($tax_key, $processed_tax_keys, true)) continue;
+            $processed_tax_keys[] = $tax_key;
+
+            $existing_id = $existing_tax_ids[$tax_key] ?? 0;
+            if ($existing_id) $json_data['ID'] = $existing_id;
+
             acf_update_taxonomy($json_data);
             $synced++;
         }
