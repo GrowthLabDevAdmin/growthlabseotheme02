@@ -41,6 +41,16 @@
     @media (min-width: v.$mdpi) {
       flex: 1 0 calc(65% - (var(--sp-xsm) / 2));
     }
+
+    strong {
+      font-size: inherit;
+      color: currentColor;
+
+      * {
+        font-size: inherit;
+        font-weight: inherit;
+      }
+    }
   }
 
   &__badges {
