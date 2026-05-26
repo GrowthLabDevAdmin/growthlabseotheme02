@@ -164,7 +164,7 @@
             }
           }
 
-          &:has(.site-logo__symbol) > &__image {
+          &:has(.site-logo__symbol) .site-logo__image {
             opacity: 0;
           }
 
