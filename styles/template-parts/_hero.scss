@@ -105,6 +105,7 @@
       2.5vw,
       6.5rem,
       700,
+      1,
       $after: false
     );
 
@@ -235,7 +236,7 @@
         font-family: var(--font-secondary);
         font-size: clamp(2.5rem, 4vw, 5.5rem);
         font-weight: normal;
-        line-height: 1.5;
+        line-height: 1;
         color: rgb(var(--secondary-light));
 
         * {
@@ -334,10 +335,23 @@
       @media (min-width: v.$tablet) {
         flex-direction: row-reverse;
       }
+      @media (min-width: v.$ldpi) {
+        flex-direction: row-reverse;
+      }
     }
 
     #{$hero}__content {
       padding: 0;
+    }
+
+    #{$hero}__side-portrait {
+      &::after {
+        content: none;
+      }
+
+      @media (min-width: v.$ldpi) {
+        height: 55rem;
+      }
     }
 
     .content-box {
@@ -355,7 +369,15 @@
 
       &__title {
         margin-bottom: var(--sp-xsm);
-        @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 7rem, null, 1);
+        @include m.title(
+          rgb(var(--secondary)),
+          4rem,
+          6.2vw,
+          7rem,
+          null,
+          1,
+          $after: false
+        );
 
         & > * {
           all: inherit;
