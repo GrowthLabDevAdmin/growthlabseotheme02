@@ -159,7 +159,7 @@
 
         .site-logo {
           @media (min-width: v.$mdpi) {
-            & > picture img {
+            &__image {
               object-position: right center;
             }
           }
@@ -397,7 +397,7 @@
     @include m.flex-center;
     cursor: pointer;
 
-    picture {
+    &__image {
       width: 100%;
       height: 100%;
       position: static;
@@ -407,7 +407,7 @@
       transition: 0.3s ease-in;
     }
 
-    img {
+    img,svg {
       width: 100%;
       height: 100%;
       object-fit: contain;
