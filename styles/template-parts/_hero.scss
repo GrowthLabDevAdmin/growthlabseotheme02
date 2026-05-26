@@ -349,10 +349,6 @@
       &::before {
         content: none;
       }
-
-      @media (min-width: v.$ldpi) {
-        height: 55rem;
-      }
     }
 
     .content-box {
