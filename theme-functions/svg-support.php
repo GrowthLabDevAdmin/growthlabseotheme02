@@ -53,18 +53,27 @@ function wp_check_svg($file)
 add_filter('wp_handle_upload_prefilter', 'wp_check_svg');
 
 // Image to SVG
-// Image to SVG
-function image_to_svg($image, $classes = '')
+function image_to_svg(array|string $image, string $classes = '')
 {
-    if (empty($image) || !isset($image['url'], $image['mime_type'])) {
+    if (is_array($image) && (empty($image) || !isset($image['url'], $image['mime_type']))) {
         return '';
+    }
+
+    if (is_string($image) && $image === '') {
+        return '';
+    }
+
+    if (is_array($image)) {
+        $img_url = $image['url'];
+    } else {
+        $img_url = $image;
     }
 
     try {
         $upload_dir = wp_get_upload_dir();
 
         // Remove query string/URL fragments
-        $img_url = preg_replace('/\?.*$/', '', $image['url']);
+        $img_url = preg_replace('/\?.*$/', '', $img_url);
 
         // Try mapping from uploads baseurl to basedir
         $baseurl = untrailingslashit($upload_dir['baseurl']);
@@ -84,14 +93,14 @@ function image_to_svg($image, $classes = '')
         $image_path = wp_normalize_path($image_path);
 
         // Detailed debug log
-        error_log(sprintf('image_to_svg: url="%s" baseurl="%s" basedir="%s" path="%s"', $image['url'], $baseurl, $basedir, $image_path));
+        error_log(sprintf('image_to_svg: url="%s" baseurl="%s" basedir="%s" path="%s"', $img_url, $baseurl, $basedir, $image_path));
 
         if (!file_exists($image_path) || !is_readable($image_path)) {
             error_log('SVG Image path is missing or not readable: ' . $image_path);
             return '';
         }
 
-        if ($image['mime_type'] === "image/svg+xml") {
+        if (mime_content_type($image_path) === "image/svg+xml") {
             $svg_content = @file_get_contents($image_path);
             if ($svg_content === false) {
                 error_log('Could not read SVG file: ' . $image_path);
