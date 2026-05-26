@@ -33,15 +33,15 @@ if (get_field('toggle_block')):
                         foreach ($item as $item_key => $item_value) $$item_key = $item_value;
                 ?>
 
-                        <li class="content-box">
-                            <div class="content-box__wrapper">
-                                <div class="content-box__inner">
+                        <li class="box">
+                            <div class="box__wrapper">
+                                <div class="box__inner">
 
                                     <?php if ($title || $text_content): ?>
 
-                                        <div class="content-box__content formatted-text">
+                                        <div class="box__content formatted-text">
 
-                                            <<?= $title_tag ?> class="content-box__title">
+                                            <<?= $title_tag ?> class="box__title">
                                                 <?php
                                                 if ($title_link) echo "<a href='" . $title_link['url'] . "' target='" . $title_link['target'] . "' aria-label='" . esc_attr($title) . "'>";
                                                 echo $title;
@@ -66,13 +66,13 @@ if (get_field('toggle_block')):
                     foreach ($menu_items as $menu_item):
                     ?>
 
-                        <li class="content-box content-box--menu-item">
-                            <a href="<?= $menu_item->url ?>" target="<?= $menu_item->target ?>" class="content-box__wrapper" aria-label="<?= esc_attr($menu_item->title) ?>">
-                                <div class="content-box__inner">
+                        <li class="box box--menu-item">
+                            <a href="<?= $menu_item->url ?>" target="<?= $menu_item->target ?>" class="box__wrapper" aria-label="<?= esc_attr($menu_item->title) ?>">
+                                <div class="box__inner">
 
-                                    <div class="content-box__content formatted-text">
+                                    <div class="box__content formatted-text">
 
-                                        <strong class="content-box__title">
+                                        <strong class="box__title">
                                             <?= $menu_item->title ?>
                                         </strong>
 
