@@ -102,6 +102,10 @@ if (!function_exists('growthlabseotheme02_setup')) {
         add_image_size('cover-tablet', 1280, 600, false);
         add_image_size('cover-mobile', 768, 432, false);
 
+        // Covers portrait
+        add_image_size('cover-tablet-portrait', 960, 1280, true);
+        add_image_size('cover-mobile-portrait', 768, 1100, true);
+
         // Content
         add_image_size('content', 800, 600, false);
 
@@ -118,6 +122,8 @@ if (!function_exists('growthlabseotheme02_setup')) {
                 'cover-desktop'  => __('Cover Desktop (1920×1080)'),
                 'cover-tablet'   => __('Cover Tablet (1280×600)'),
                 'cover-mobile'   => __('Cover Mobile (768×432)'),
+                'cover-tablet-portrait'  => __('Cover Tablet Portrait (960×1280)'),
+                'cover-mobile-portrait'  => __('Cover Mobile Portrait (768×1100)'),
                 'content'   => __('Contenido (800×600)'),
                 'featured-small' => __('Featured Small (480×360)'),
             ], $sizes);
@@ -179,6 +185,23 @@ if (!function_exists('growthlabseotheme02_setup')) {
         ));
 
         // Color Palette support
+        // Default values sourced from color-scheme.php via $default_colors global
+        global $default_colors;
+
+        $primary_default = $default_colors['primary']['default'];
+        $primary_dark    = $default_colors['primary']['dark'];
+        $primary_light   = $default_colors['primary']['light'];
+
+        $secondary_default = $default_colors['secondary']['default'];
+        $secondary_dark    = $default_colors['secondary']['dark'];
+        $secondary_light   = $default_colors['secondary']['light'];
+
+        $tertiary_default = $default_colors['tertiary']['default'];
+        $tertiary_dark    = $default_colors['tertiary']['dark'];
+        $tertiary_light   = $default_colors['tertiary']['light'];
+
+        $text_default = $default_colors['text'];
+
         add_theme_support(
             'editor-color-palette',
             array(
@@ -188,7 +211,7 @@ if (!function_exists('growthlabseotheme02_setup')) {
                         'growthlabseotheme02'
                     ),
                     'slug'  => 'primary-color',
-                    'color' => get_theme_mod('primary_color', '#15253f'),
+                    'color' => get_theme_mod('primary_color', $primary_default),
                 ),
                 array(
                     'name'  => __(
@@ -196,7 +219,7 @@ if (!function_exists('growthlabseotheme02_setup')) {
                         'growthlabseotheme02'
                     ),
                     'slug'  => 'primary-color-dark',
-                    'color' => get_theme_mod('primary_color_dark', '#08182f'),
+                    'color' => get_theme_mod('primary_color_dark', $primary_dark),
                 ),
                 array(
                     'name'  => __(
@@ -204,7 +227,7 @@ if (!function_exists('growthlabseotheme02_setup')) {
                         'growthlabseotheme02'
                     ),
                     'slug'  => 'primary-color-light',
-                    'color' => get_theme_mod('primary_color_light', '#2C3D5B'),
+                    'color' => get_theme_mod('primary_color_light', $primary_light),
                 ),
                 array(
                     'name'  => __(
@@ -212,7 +235,7 @@ if (!function_exists('growthlabseotheme02_setup')) {
                         'growthlabseotheme02'
                     ),
                     'slug'  => 'secondary-color',
-                    'color' => get_theme_mod('secondary_color', '#F4F3EE'),
+                    'color' => get_theme_mod('secondary_color', $secondary_default),
                 ),
                 array(
                     'name'  => __(
@@ -220,7 +243,7 @@ if (!function_exists('growthlabseotheme02_setup')) {
                         'growthlabseotheme02'
                     ),
                     'slug'  => 'secondary-color-dark',
-                    'color' => get_theme_mod('secondary_color_dark', '#E7E5DF'),
+                    'color' => get_theme_mod('secondary_color_dark', $secondary_dark),
                 ),
                 array(
                     'name'  => __(
@@ -228,7 +251,7 @@ if (!function_exists('growthlabseotheme02_setup')) {
                         'growthlabseotheme02'
                     ),
                     'slug'  => 'secondary-color-light',
-                    'color' => get_theme_mod('secondary_color_light', '#FFFFFF'),
+                    'color' => get_theme_mod('secondary_color_light', $secondary_light),
                 ),
                 array(
                     'name'  => __(
@@ -236,7 +259,7 @@ if (!function_exists('growthlabseotheme02_setup')) {
                         'growthlabseotheme02'
                     ),
                     'slug'  => 'tertiary-color',
-                    'color' => get_theme_mod('tertiary_color', '#BC9061'),
+                    'color' => get_theme_mod('tertiary_color', $tertiary_default),
                 ),
                 array(
                     'name'  => __(
@@ -244,7 +267,7 @@ if (!function_exists('growthlabseotheme02_setup')) {
                         'growthlabseotheme02'
                     ),
                     'slug'  => 'tertiary-color-dark',
-                    'color' => get_theme_mod('tertiary_color_dark', '#9D7A55'),
+                    'color' => get_theme_mod('tertiary_color_dark', $tertiary_dark),
                 ),
                 array(
                     'name'  => __(
@@ -252,15 +275,15 @@ if (!function_exists('growthlabseotheme02_setup')) {
                         'growthlabseotheme02'
                     ),
                     'slug'  => 'tertiary-color-light',
-                    'color' => get_theme_mod('tertiary_color_light', '#DCAB77'),
+                    'color' => get_theme_mod('tertiary_color_light', $tertiary_light),
                 ),
                 array(
                     'name'  => __(
                         'Text Color',
-                        'growthlabseotheme02 '
+                        'growthlabseotheme02'
                     ),
                     'slug'  => 'text-color',
-                    'color' => get_theme_mod('text_color', '#15253f'),
+                    'color' => get_theme_mod('text_color', $text_default),
                 ),
             )
         );
@@ -325,24 +348,6 @@ add_filter('excerpt_more', 'wpdocs_excerpt_more');
  * @return void
  */
 
-// Function to check if Splide should be loaded
-/* function should_load_splide()
-{
-    if (!is_singular() || !function_exists('parse_blocks')) return false;
-
-    global $post;
-    if (!$post) return false;
-
-    $content = $post->post_content;
-    $blocks = parse_blocks($content);
-    foreach ($blocks as $block) {
-        if ($block['blockName'] === 'acf/posts-carousel' || $block['blockName'] === 'acf/logos-carousel') {
-            return true;
-        }
-    }
-    return false;
-}
- */
 function inline_main_critical_css()
 {
     global $block_critical_css;
@@ -614,12 +619,6 @@ function import_theme_images_to_folder()
         wp_update_attachment_metadata($attach_id, $attach_data);
     }
 }
-
-// Run once by visiting: yoursite.com/?import_theme_images=1
-/* if (isset($_GET['import_theme_images']) && current_user_can('manage_options')) {
-    import_theme_images_to_folder();
-    wp_die('Images imported to /uploads/theme-icons/!');
-} */
 
 // Forzar que las secciones de widgets permanezcan disponibles
 add_action('customize_register', function ($wp_customize) {
