@@ -216,6 +216,7 @@ strong {
   );
 
   &::after {
+    /* content: url("{theme-path}/assets/img/transparent-bg.svg"); */
     content: "";
     display: block;
     opacity: 0;
@@ -231,7 +232,7 @@ strong {
       top: 0;
       left: 0;
       z-index: -1;
-      background-image: url("{theme-path}/assets/img/transparent-bg.webp");
+      background-image: url("{theme-path}/assets/img/transparent-bg.svg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;

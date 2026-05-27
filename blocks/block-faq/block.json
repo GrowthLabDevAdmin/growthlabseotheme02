@@ -11,7 +11,13 @@
   },
   "supports": {
     "mode": false,
-    "customClassName": true
+    "customClassName": true,
+    "alignWide": true,
+    "spacing": {
+      "padding": true,
+      "margin": true,
+      "blockGap": true
+    }
   },
   "align": "full"
 }
