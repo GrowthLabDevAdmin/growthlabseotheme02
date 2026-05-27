@@ -10,6 +10,7 @@ if (get_field('toggle_block')):
     <section
         id="<?= esc_attr($block_id ?? '') ?>"
         class="block logos-carousel<?= !empty($block['className']) ? ' ' . esc_attr($block['className']) : '' ?>"
+        style="<?= esc_attr($block['style'] ?? '') ?>"
         <?php
         if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'";
         ?>>
