@@ -19,7 +19,7 @@ if (get_field('toggle_block')):
         <?php if ($show_top_separator) echo "separator" ?>
         <?= !empty($block['className']) ? ' ' . esc_attr($block['className']) : '' ?>
         "
-        style="<?= esc_attr($block['style'] ?? '') ?>"
+       <?= block_style_attribute($block); ?>
         <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
         <?php

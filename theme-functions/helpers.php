@@ -17,6 +17,127 @@ if (!function_exists('get_field_options')) {
     }
 }
 
+if (!function_exists('block_style_attribute')) {
+    function block_style_attribute($block = [])
+    {
+        if (empty($block['style'])) {
+            return '';
+        }
+
+        $style_attr = '';
+
+        if (is_string($block['style'])) {
+            $style_attr = $block['style'];
+        } elseif (is_array($block['style'])) {
+            if (!empty($block['style']['spacing'])) {
+                $s = $block['style']['spacing'];
+                if (is_string($s)) {
+                    $style_attr .= $s . ' ';
+                } elseif (is_array($s)) {
+                    if (!empty($s['padding'])) {
+                        $style_attr .= 'padding: ' . normalize_block_spacing($s['padding']) . '; ';
+                    }
+                    if (!empty($s['margin'])) {
+                        $style_attr .= 'margin: ' . normalize_block_spacing($s['margin']) . '; ';
+                    }
+                    if (!empty($s['blockGap'])) {
+                        $style_attr .= 'gap: ' . normalize_block_spacing($s['blockGap']) . '; ';
+                    }
+                }
+            }
+
+            foreach ($block['style'] as $k => $v) {
+                if ($k === 'spacing') {
+                    continue;
+                }
+                if (is_string($v) || is_numeric($v)) {
+                    $style_attr .= "$k: " . normalize_block_spacing($v) . '; ';
+                }
+            }
+        }
+
+        $style_attr = trim($style_attr);
+        if (!$style_attr) {
+            return '';
+        }
+
+        return ' style="' . esc_attr($style_attr) . '"';
+    }
+}
+
+if (!function_exists('normalize_block_spacing')) {
+    function normalize_block_spacing($value)
+    {
+        if (is_string($value) && $value !== '' && preg_match('/^\d+$/', $value)) {
+            return $value . 'px';
+        }
+
+        if (is_string($value) && preg_match('/^\d+(\.\d+)?$/', $value)) {
+            return $value . 'px';
+        }
+
+        if (is_string($value)) {
+            return $value;
+        }
+
+        if (is_numeric($value)) {
+            return $value . 'px';
+        }
+
+        if (is_array($value)) {
+            $unit = $value['unit'] ?? $value['unitType'] ?? '';
+
+            if (isset($value['top']) || isset($value['right']) || isset($value['bottom']) || isset($value['left'])) {
+                $t = format_spacing_item($value['top'] ?? $value[0] ?? null, $unit);
+                $r = format_spacing_item($value['right'] ?? $value[1] ?? $t, $unit);
+                $b = format_spacing_item($value['bottom'] ?? $value[2] ?? $t, $unit);
+                $l = format_spacing_item($value['left'] ?? $value[3] ?? $r, $unit);
+
+                if ($t === $r && $t === $b && $t === $l) {
+                    return $t;
+                }
+                if ($t === $b && $r === $l) {
+                    return "$t $r";
+                }
+                if ($r === $l) {
+                    return "$t $r $b";
+                }
+
+                return "$t $r $b $l";
+            }
+
+            if (!empty($value['size'])) {
+                return format_spacing_item($value['size'], $unit);
+            }
+
+            return implode(' ', array_filter(array_map(function ($item) use ($unit) {
+                return format_spacing_item($item, $unit);
+            }, $value)));
+        }
+
+        return '';
+    }
+}
+
+if (!function_exists('format_spacing_item')) {
+    function format_spacing_item($value, $unit = '')
+    {
+        if ($value === null || $value === '') {
+            return '';
+        }
+
+        if (is_string($value) && preg_match('/^\d+(\.\d+)?$/', $value)) {
+            return $value . ($unit ?: 'px');
+        }
+
+        if (is_numeric($value)) {
+            return $value . ($unit ?: 'px');
+        }
+
+        return (string) $value;
+    }
+}
+
 if (!function_exists('filterContentByLanguage')) {
     function filterContentByLanguage($lang = 'es')
     {

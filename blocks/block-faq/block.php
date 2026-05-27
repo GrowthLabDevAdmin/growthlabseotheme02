@@ -10,7 +10,7 @@ if (get_field('toggle_block')):
     <section
         id="<?= esc_attr($block_id ?? '') ?>"
         class="block faq <?php if (!$background_image && !isset($$background_image) && !$lightdark_background) echo "bg-gradient"; ?><?= !empty($block['className']) ? ' ' . esc_attr($block['className']) : '' ?>"
-        style="<?= esc_attr($block['style'] ?? '') ?>"
+       <?= block_style_attribute($block); ?>
         <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
         <?php
