@@ -18,7 +18,8 @@
     "renderTemplate": "block.php"
   },
   "supports": {
-    "mode": false
+    "mode": false,
+    "customClassName": true
   },
   "align": "full"
 }

@@ -8,8 +8,8 @@ if (get_field('toggle_block')):
 ?>
 
     <section
-        id="<?= $block_id ?? "" ?>"
-        class="block cta-box <?= $box_style ?>"
+        id="<?= esc_attr($block_id ?? '') ?>"
+        class="block cta-box <?= esc_attr($box_style) ?><?= !empty($block['className']) ? ' ' . esc_attr($block['className']) : '' ?>"
         <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
 

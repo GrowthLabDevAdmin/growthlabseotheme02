@@ -41,12 +41,12 @@ if (get_field('toggle_block')):
 ?>
 
     <section
-        id="<?= $block_id ?? "" ?>"
+        id="<?= esc_attr($block_id ?? '') ?>"
         class="
         block 
         posts-carousel
         <?php if ($carousel_type === "team") echo " bg-gradient"; ?>
-        <?= $carousel_type ?>
+        <?= esc_attr($carousel_type) ?><?= !empty($block['className']) ? ' ' . esc_attr($block['className']) : '' ?>
         "
         <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 

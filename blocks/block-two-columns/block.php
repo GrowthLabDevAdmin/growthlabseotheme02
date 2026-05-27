@@ -9,14 +9,15 @@ if (get_field('toggle_block')):
 ?>
 
     <section
-        id="<?= $block_id ?? "" ?>"
+        id="<?= esc_attr($block_id ?? '') ?>"
         class="
         block 
         two-columns
-        <?= $background_type ?>
+        <?= esc_attr($background_type) ?>
         <?= $background_type === "dark" ? "bg-gradient" : "" ?>
         <?php if ($reverse_order) echo "reverse" ?> 
         <?php if ($show_top_separator) echo "separator" ?>
+        <?= !empty($block['className']) ? ' ' . esc_attr($block['className']) : '' ?>
         "
         <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
