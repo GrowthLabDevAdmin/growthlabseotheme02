@@ -76,6 +76,7 @@
       }
     }
 
+    picture,
     svg,
     hr:last-of-type {
       display: none;
@@ -92,7 +93,7 @@
         rgb(var(--tertiary-dark)) 100%
       );
     }
-
+    picture,
     svg {
       @media (min-width: v.$ldpi) {
         width: 6rem;
