@@ -1,7 +1,7 @@
 {
   "name": "acf/two-columns",
   "title": "Two Columns",
-  "style": ["file:./block-min.css"],
+  "viewStyle": ["file:./block-min.css"],
   "script": ["file:./block-min.js"],
   "category": "growthlabseotheme02-blocks",
   "icon": "block-default",
@@ -22,9 +22,9 @@
     "customClassName": true,
     "alignWide": true,
     "spacing": {
-      "padding": true,
       "margin": true,
-      "blockGap": true
+      "padding": true,
+      "blockGap":  ["horizontal", "vertical"]
     }
   },
   "align": "full"

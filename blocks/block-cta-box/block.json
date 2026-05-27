@@ -1,7 +1,7 @@
 {
   "name": "acf/cta-box",
   "title": "CTA Box",
-  "style": ["file:./block-min.css"],
+  "viewStyle": ["file:./block-min.css"],
   "category": "growthlabseotheme02-blocks",
   "icon": "block-default",
   "keywords": ["growthlabseo", "cta", "inset", "box"],
@@ -14,9 +14,9 @@
     "customClassName": true,
     "alignWide": true,
     "spacing": {
-      "padding": true,
       "margin": true,
-      "blockGap": true
+      "padding": true,
+      "blockGap":  ["horizontal", "vertical"]
     }
   },
   "align": "full"

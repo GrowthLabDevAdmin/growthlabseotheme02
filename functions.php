@@ -132,162 +132,6 @@ if (!function_exists('growthlabseotheme02_setup')) {
         // Tipography and Color Support
         add_theme_support('appearance-tools');
 
-        // Font Sizes support
-        add_theme_support('editor-font-sizes', array(
-            array(
-                'name' => esc_attr__(
-                    'Small',
-                    'growthlabseotheme02'
-                ),
-                'size' => 12,
-                'slug' => 'small'
-            ),
-            array(
-                'name' => esc_attr__(
-                    'Regular',
-                    'growthlabseotheme02'
-                ),
-                'size' => 16,
-                'slug' => 'regular'
-            ),
-            array(
-                'name' => esc_attr__(
-                    'Medium',
-                    'growthlabseotheme02'
-                ),
-                'size' => 18,
-                'slug' => 'medium'
-            ),
-            array(
-                'name' => esc_attr__(
-                    'Large',
-                    'growthlabseotheme02'
-                ),
-                'size' => 22,
-                'slug' => 'large'
-            ),
-            array(
-                'name' => esc_attr__(
-                    'Extra Large',
-                    'growthlabseotheme02'
-                ),
-                'size' => 28,
-                'slug' => 'xl'
-            ),
-            array(
-                'name' => esc_attr__(
-                    'Huge',
-                    'growthlabseotheme02'
-                ),
-                'size' => 32,
-                'slug' => 'xxl'
-            )
-        ));
-
-        // Color Palette support
-        // Default values sourced from color-scheme.php via $default_colors global
-        global $default_colors;
-
-        $primary_default = $default_colors['primary']['default'];
-        $primary_dark    = $default_colors['primary']['dark'];
-        $primary_light   = $default_colors['primary']['light'];
-
-        $secondary_default = $default_colors['secondary']['default'];
-        $secondary_dark    = $default_colors['secondary']['dark'];
-        $secondary_light   = $default_colors['secondary']['light'];
-
-        $tertiary_default = $default_colors['tertiary']['default'];
-        $tertiary_dark    = $default_colors['tertiary']['dark'];
-        $tertiary_light   = $default_colors['tertiary']['light'];
-
-        $text_default = $default_colors['text'];
-
-        add_theme_support(
-            'editor-color-palette',
-            array(
-                array(
-                    'name'  => __(
-                        'Primary Color',
-                        'growthlabseotheme02'
-                    ),
-                    'slug'  => 'primary-color',
-                    'color' => get_theme_mod('primary_color', $primary_default),
-                ),
-                array(
-                    'name'  => __(
-                        'Primary Color Dark',
-                        'growthlabseotheme02'
-                    ),
-                    'slug'  => 'primary-color-dark',
-                    'color' => get_theme_mod('primary_color_dark', $primary_dark),
-                ),
-                array(
-                    'name'  => __(
-                        'Primary Color Light',
-                        'growthlabseotheme02'
-                    ),
-                    'slug'  => 'primary-color-light',
-                    'color' => get_theme_mod('primary_color_light', $primary_light),
-                ),
-                array(
-                    'name'  => __(
-                        'Secondary Color',
-                        'growthlabseotheme02'
-                    ),
-                    'slug'  => 'secondary-color',
-                    'color' => get_theme_mod('secondary_color', $secondary_default),
-                ),
-                array(
-                    'name'  => __(
-                        'Secondary Color Dark',
-                        'growthlabseotheme02'
-                    ),
-                    'slug'  => 'secondary-color-dark',
-                    'color' => get_theme_mod('secondary_color_dark', $secondary_dark),
-                ),
-                array(
-                    'name'  => __(
-                        'Secondary Color Light',
-                        'growthlabseotheme02'
-                    ),
-                    'slug'  => 'secondary-color-light',
-                    'color' => get_theme_mod('secondary_color_light', $secondary_light),
-                ),
-                array(
-                    'name'  => __(
-                        'Tertiary Color',
-                        'growthlabseotheme02'
-                    ),
-                    'slug'  => 'tertiary-color',
-                    'color' => get_theme_mod('tertiary_color', $tertiary_default),
-                ),
-                array(
-                    'name'  => __(
-                        'Tertiary Color Dark',
-                        'growthlabseotheme02'
-                    ),
-                    'slug'  => 'tertiary-color-dark',
-                    'color' => get_theme_mod('tertiary_color_dark', $tertiary_dark),
-                ),
-                array(
-                    'name'  => __(
-                        'Tertiary Color Light',
-                        'growthlabseotheme02'
-                    ),
-                    'slug'  => 'tertiary-color-light',
-                    'color' => get_theme_mod('tertiary_color_light', $tertiary_light),
-                ),
-                array(
-                    'name'  => __(
-                        'Text Color',
-                        'growthlabseotheme02'
-                    ),
-                    'slug'  => 'text-color',
-                    'color' => get_theme_mod('text_color', $text_default),
-                ),
-            )
-        );
-
         // Register Navigation Menus
         register_nav_menus(
             array(
@@ -307,6 +151,44 @@ if (!function_exists('growthlabseotheme02_setup')) {
     }
 }
 add_action('after_setup_theme', 'growthlabseotheme02_setup');
+
+add_filter('wp_theme_json_data_theme', function ($theme_json) {
+    global $default_colors, $default_fonts;
+
+    $data = $theme_json->get_data();
+
+    // ─── DESACTIVAR CSS GLOBAL NO DESEADO ───────────────────────────────────
+    $data['settings']['color']['defaultPalette']            = false;
+    $data['settings']['color']['defaultGradients']          = false;
+    $data['settings']['typography']['defaultFontSizes']     = false;
+    $data['settings']['spacing']['defaultSpacingSizes']     = false;
+
+    // ─── PALETA DE COLORES ───────────────────────────────────────────────────
+    $data['settings']['color']['palette'] = [
+        ['name' => __('Primary Color',        'growthlabseotheme02'), 'slug' => 'primary-color',        'color' => get_theme_mod('primary_color',        $default_colors['primary']['default'])],
+        ['name' => __('Primary Color Dark',   'growthlabseotheme02'), 'slug' => 'primary-color-dark',   'color' => get_theme_mod('primary_color_dark',   $default_colors['primary']['dark'])],
+        ['name' => __('Primary Color Light',  'growthlabseotheme02'), 'slug' => 'primary-color-light',  'color' => get_theme_mod('primary_color_light',  $default_colors['primary']['light'])],
+        ['name' => __('Secondary Color',      'growthlabseotheme02'), 'slug' => 'secondary-color',      'color' => get_theme_mod('secondary_color',      $default_colors['secondary']['default'])],
+        ['name' => __('Secondary Color Dark', 'growthlabseotheme02'), 'slug' => 'secondary-color-dark', 'color' => get_theme_mod('secondary_color_dark', $default_colors['secondary']['dark'])],
+        ['name' => __('Secondary Color Light', 'growthlabseotheme02'), 'slug' => 'secondary-color-light', 'color' => get_theme_mod('secondary_color_light', $default_colors['secondary']['light'])],
+        ['name' => __('Tertiary Color',       'growthlabseotheme02'), 'slug' => 'tertiary-color',       'color' => get_theme_mod('tertiary_color',       $default_colors['tertiary']['default'])],
+        ['name' => __('Tertiary Color Dark',  'growthlabseotheme02'), 'slug' => 'tertiary-color-dark',  'color' => get_theme_mod('tertiary_color_dark',  $default_colors['tertiary']['dark'])],
+        ['name' => __('Tertiary Color Light', 'growthlabseotheme02'), 'slug' => 'tertiary-color-light', 'color' => get_theme_mod('tertiary_color_light', $default_colors['tertiary']['light'])],
+        ['name' => __('Text Color',           'growthlabseotheme02'), 'slug' => 'text-color',           'color' => get_theme_mod('text_color',           $default_colors['text'])],
+    ];
+
+    // ─── FUENTES ─────────────────────────────────────────────────────────────
+    $font_primary   = get_theme_mod('font_primary',   $default_fonts['primary']);
+    $font_secondary = get_theme_mod('font_secondary', $default_fonts['secondary']);
+
+    $data['settings']['typography']['fontFamilies'] = [
+        ['name' => $font_primary,   'slug' => 'primary',   'fontFamily' => "\"{$font_primary}\", sans-serif"],
+        ['name' => $font_secondary, 'slug' => 'secondary', 'fontFamily' => "\"{$font_secondary}\", serif"],
+    ];
+
+    $theme_json->update_with($data);
+    return $theme_json;
+});
 
 /**
  * Remove link from custom logo
@@ -384,7 +266,7 @@ function inline_main_critical_css()
 
     echo '<style id="main-css">' . $critical_css . '</style>';
 }
-add_action('wp_head', 'inline_main_critical_css', 1);
+add_action('wp_head', 'inline_main_critical_css', 10);
 
 function growthlabseotheme02_scripts()
 {
@@ -677,6 +559,7 @@ add_action('customize_controls_print_footer_scripts', function () {
 add_filter('script_loader_src', 'add_dynamic_version_to_theme_scripts', 10, 2);
 add_filter('style_loader_src', 'add_dynamic_version_to_theme_styles', 10, 2);
 
+// Add dynamic colors to theme.json
 function add_dynamic_version_to_theme_scripts($src, $handle)
 {
     $theme_dir_uri = get_template_directory_uri();

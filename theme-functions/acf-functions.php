@@ -44,6 +44,14 @@ if (!function_exists('register_acf_blocks')) {
             delete_transient($cache_key);
         }
 
+        // Force a rebuild during local development if the block cache is stale or if
+        // the admin requests a cache clear. This helps ensure updated block.json
+        // metadata is picked up immediately.
+        if (is_admin() && (defined('WP_DEBUG') && WP_DEBUG || isset($_GET['clear_block_cache']))) {
+            delete_transient($cache_key);
+            delete_transient($hash_key);
+        }
+
         $block_files = get_transient($cache_key);
 
         if ($block_files === false) {
@@ -86,7 +94,7 @@ add_action('switch_theme', function () {
     delete_transient('theme_block_files_hash_'  . get_stylesheet());
 });
 
-add_action('init', 'register_acf_blocks', 5);
+add_action('init', 'register_acf_blocks', 11);
 
 /**
  * Load block assets only when block is present on the page
