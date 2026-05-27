@@ -28,6 +28,7 @@
     &__offices {
       max-width: 100%;
       width: 100%;
+      overflow: hidden;
       @include m.flex-center;
       flex-direction: column;
       gap: var(--sp-sm);
