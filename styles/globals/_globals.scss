@@ -476,6 +476,7 @@ img.bg-image {
   }
 
   &--primary {
+    @extend .btn;
     background: rgb(var(--primary));
     border: 1px solid rgb(var(--tertiary));
 
@@ -489,6 +490,7 @@ img.bg-image {
   }
 
   &--secondary {
+    @extend .btn;
     background: rgb(var(--secondary-light));
     border: 1px solid rgb(var(--tertiary));
 
@@ -502,6 +504,7 @@ img.bg-image {
   }
 
   &--tertiary {
+    @extend .btn;
     background: linear-gradient(
       180deg,
       rgb(var(--tertiary-dark)) 0%,
