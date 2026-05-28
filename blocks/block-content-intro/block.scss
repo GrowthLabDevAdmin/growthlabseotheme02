@@ -157,6 +157,10 @@
       flex: 0 0 100%;
 
       *:not(a) {
+        color: rgb(var(--primary));
+      }
+
+      *:not(strong, em, b, i, u, sub, sup) {
         text-align: center;
         color: rgb(var(--primary));
         font-size: 1.8rem;
@@ -277,8 +281,11 @@
       flex: 1 0 55%;
 
       *:not(a) {
-        text-align: center;
         color: rgb(var(--primary));
+      }
+
+      *:not(strong, em, b, i, u, sub, sup) {
+        text-align: center;
         font-size: 1.8rem;
         line-height: 1.8;
         @media (min-width: v.$tablet) {
