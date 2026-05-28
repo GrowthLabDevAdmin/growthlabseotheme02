@@ -197,8 +197,15 @@
       letter-spacing: -0.4px;
       text-align: center;
 
+      &::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
       @media (min-width: v.$tablet) {
         text-align: left;
+        left: 0;
+        transform: none;
       }
     }
   }
