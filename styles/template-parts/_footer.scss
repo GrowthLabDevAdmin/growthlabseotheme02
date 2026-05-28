@@ -235,11 +235,10 @@
         z-index: 1;
         padding: var(--sp-xsm);
         background: rgba(var(--secondary-light));
-        display: flex;
+        @include m.flex-center;
         flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
         gap: var(--sp-xsm);
+        text-align: center;
         font-style: normal;
 
         @media (min-width: v.$tablet) {
@@ -251,6 +250,8 @@
           left: 50%;
           transform: translateX(-50%);
           border-radius: 2rem;
+          align-items: flex-start;
+          text-align: left;
         }
 
         @media (min-width: v.$ldpi) {
