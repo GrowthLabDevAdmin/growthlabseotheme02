@@ -382,6 +382,21 @@ img.bg-image {
     font-weight: 700;
   }
 
+  em,
+  strong {
+    line-height: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    color: currentColor;
+
+    * {
+      line-height: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+    }
+  }
+
   li {
     &::before {
       content: "\25AA";
