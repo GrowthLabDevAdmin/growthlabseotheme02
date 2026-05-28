@@ -599,21 +599,35 @@ if (!function_exists('acf_color_picker_palette_script')) {
                 max-width: 100% !important;
             }
         </style>
-<?php
+    <?php
     }
 }
 add_action('acf/input/admin_head', 'acf_color_picker_palette_script');
 
 // Encode Google Maps embeds to avoid ModSecurity false positives
-add_filter('acf/update_value/name=google_maps_embed_code', function ($value, $post_id, $field) {
+add_action('acf/input/admin_footer', function () {
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
 
-    if (empty($value) || !is_string($value)) {
-        return $value;
-    }
+            document.querySelector('#post').addEventListener('submit', function() {
 
-    if (str_starts_with($value, 'base64:')) {
-        return $value;
-    }
+                document.querySelectorAll('input').forEach(field => {
 
-    return 'base64:' . base64_encode($value);
-}, 10, 3);
+                    if (
+                        field.value &&
+                        field.value.includes('google.com/maps/embed')
+                    ) {
+
+                        field.value = 'base64:' + btoa(
+                            unescape(encodeURIComponent(field.value))
+                        );
+                    }
+                });
+
+            });
+
+        });
+    </script>
+<?php
+});
