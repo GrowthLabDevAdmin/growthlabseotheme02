@@ -5,6 +5,7 @@
   position: relative;
   z-index: 5;
   padding: var(--sp-sm) 0 var(--sp-md);
+  background-color: rgba(var(--secondary));
   overflow: visible;
 
   @media (min-width: v.$ldpi) {
@@ -23,6 +24,45 @@
     }
   }
 
+  &.bg-gradient,
+  &.image {
+    background-color: rgba(var(--primary-dark));
+
+    *:not(a) {
+      color: rgb(var(--secondary-light)) !important;
+    }
+
+    &__pretitle {
+      color: rgb(var(--tertiary));
+    }
+
+    .col {
+      background:
+        linear-gradient(rgba(var(--primary-dark)), rgba(var(--primary-dark)))
+          padding-box,
+        linear-gradient(
+            90deg,
+            rgb(var(--tertiary-dark)) 0%,
+            rgb(var(--tertiary-light)) 50%,
+            rgb(var(--tertiary)) 100%
+          )
+          border-box;
+      @media (min-width: v.$ldpi) {
+        background: none;
+        border: none;
+      }
+
+      &__image {
+        img {
+          mask-image: linear-gradient(
+            rgba(var(--primary-dark)) 50%,
+            transparent 100%
+          );
+        }
+      }
+    }
+  }
+
   &__wrapper {
     @include m.flex-center;
     flex-wrap: wrap;
@@ -37,7 +77,7 @@
     width: 100%;
     & > * {
       @include m.title(
-        rgb(var(--secondary-light)),
+        rgb(var(--primary-dark)),
         2.4rem,
         3.2vw,
         6.5rem,
@@ -60,7 +100,7 @@
     @include m.flex-center;
     flex-wrap: wrap;
     background:
-      linear-gradient(rgba(var(--primary-dark)), rgba(var(--primary-dark)))
+      linear-gradient(rgba(var(--secondary-dark)), rgba(var(--secondary-dark)))
         padding-box,
       linear-gradient(
           90deg,
@@ -111,10 +151,6 @@
         display: block;
         object-fit: cover;
         object-position: center center;
-        mask-image: linear-gradient(
-          rgba(var(--primary-dark)) 50%,
-          transparent 100%
-        );
       }
     }
 
@@ -123,7 +159,7 @@
 
       *:not(a) {
         text-align: center;
-        color: rgb(var(--secondary));
+        color: rgb(var(--primary));
         font-size: 1.8rem;
         line-height: 1.8;
 
@@ -147,7 +183,7 @@
       flex: 0 0 100%;
       margin-bottom: 3.5rem;
       @include m.title(
-        rgba(var(--secondary-light)),
+        rgba(var(--primary-dark)),
         2.1rem,
         2vw,
         3.5rem,
@@ -243,7 +279,7 @@
 
       *:not(a) {
         text-align: center;
-        color: rgb(var(--secondary));
+        color: rgb(var(--primary));
         font-size: 1.8rem;
         line-height: 1.8;
         @media (min-width: v.$tablet) {
