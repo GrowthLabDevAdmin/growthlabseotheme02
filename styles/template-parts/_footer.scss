@@ -6,11 +6,7 @@
   position: relative;
   z-index: 5;
   overflow: visible;
-  background: linear-gradient(
-    to bottom,
-    rgba(var(--primary), 1) 0%,
-    rgba(var(--primary-light), 1) 100%
-  );
+  background-color: rgb(var(--secondary));
 
   //Footer Form Section
   .contact-form-footer {
@@ -21,7 +17,6 @@
     align-items: center;
     justify-content: flex-start;
     row-gap: var(--sp-sm);
-    background-color: rgba(var(--secondary));
 
     @media (min-width: v.$tablet) {
       padding: 0;
@@ -303,6 +298,12 @@
   }
 
   .content-info-footer {
+    background: linear-gradient(
+      to bottom,
+      rgba(var(--primary), 1) 0%,
+      rgba(var(--primary-light), 1) 100%
+    );
+
     &__wrapper {
       padding: var(--sp-xsm);
       @include m.flex-center;
@@ -386,6 +387,11 @@
   .copyright-footer {
     width: 100%;
     padding: var(--sp-xsm) 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(var(--primary-light), 1) 0%,
+      rgba(var(--primary), 1) 100%
+    );
 
     @media (min-width: v.$mdpi) {
       padding: var(--sp-sm) 0;
