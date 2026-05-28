@@ -26,7 +26,7 @@ if (!defined('ABSPATH')) {
     $options = get_current_language_options();
     foreach ($options as $key => $value) $$key = $value;
 
-    $logo_link = home_url('/' . get_current_language()['slug']);
+    $logo_link = $logo_link ?? home_url('/' . get_current_language()['slug']);
     $phone_number = $contact_phone ?: $main_phone_number;
 
     if (get_field('custom_header', $post_id)) {

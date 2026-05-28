@@ -128,7 +128,7 @@
 
           <?php if (($logo && isset($logo)) || ($cta_button && isset($cta_button))): ?>
 
-            <div class="content-info-footer__col">
+            <div class="content-info-footer__col--social">
               <?php if ($logo && isset($logo)) img_print_picture_tag(img: $logo, classes: "footer-logo", max_size: "medium") ?>
 
 

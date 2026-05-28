@@ -334,7 +334,8 @@
         flex: 0 0 100%;
       }
 
-      &:nth-of-type(2) {
+      &--social {
+        @extend .content-info-footer__col;
         padding: 0;
         order: 0;
         @include m.flex-center;
