@@ -204,8 +204,11 @@
 
       @media (min-width: v.$tablet) {
         text-align: left;
-        left: 0;
-        transform: none;
+
+        &::after {
+          left: 0;
+          transform: none;
+        }
       }
     }
   }
