@@ -410,9 +410,9 @@
                             "label": "Google Maps Embed Code",
                             "name": "google_maps_embed_code",
                             "aria-label": "",
-                            "type": "url",
+                            "type": "text",
                             "instructions": "Paste the embed URL only (starts with https:\/\/www.google.com\/maps\/embed) Not the full code - just the src URL.",
-                            "required": 0,
+                            "required": false,
                             "conditional_logic": 0,
                             "wrapper": {
                                 "width": "",
@@ -420,8 +420,10 @@
                                 "id": ""
                             },
                             "default_value": "",
-                            "allow_in_bindings": 0,
+                            "maxlength": "",
                             "placeholder": "",
+                            "prepend": "",
+                            "append": "",
                             "parent_repeater": "field_6960a065cbdae"
                         },
                         {
@@ -1309,5 +1311,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1779997557
+    "modified": 1780000532
 }
