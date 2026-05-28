@@ -25,6 +25,7 @@ aside {
 .contact-form {
   position: relative;
   z-index: 5;
+  background-color: rgb(var(--secondary));
 
   $parent: &;
 
