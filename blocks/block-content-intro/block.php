@@ -19,7 +19,7 @@ if (get_field('toggle_block')):
         <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
         <?php
-        if (isset($background_image) && $background_image && $background_type === 'image') img_print_picture_tag(img: $background_image, is_cover: true, classes: "content-intro__bg bg-image gradient-overlay");
+        if (isset($background_image) && $background_image && isset($background_type) && $background_type === 'image') img_print_picture_tag(img: $background_image, is_cover: true, classes: "content-intro__bg bg-image gradient-overlay");
         ?>
 
         <div class="content-intro__wrapper container">
@@ -31,16 +31,17 @@ if (get_field('toggle_block')):
 
             <?php foreach (get_field("columns") as $column => $col) $$column = $col; ?>
 
-            <div class="col col--image">
-                <?php
-                if (isset($featured_image) && $featured_image) img_print_picture_tag(
-                    img: $featured_image,
-                    max_size: "content",
-                    min_size: "featured-small",
-                    classes: "col__image"
-                );
-                ?>
-            </div>
+            <?php if (isset($featured_image) && $featured_image): ?>
+                <div class="col col--image">
+                    <?php img_print_picture_tag(
+                        img: $featured_image,
+                        max_size: "content",
+                        min_size: "featured-small",
+                        classes: "col__image"
+                    );
+                    ?>
+                </div>
+            <?php endif ?>
 
             <div class="col">
                 <?php
