@@ -117,39 +117,47 @@
       <section class="content-info-footer">
         <div class="content-info-footer__wrapper container">
 
-          <div class="content-info-footer__col">
-            <div class="formatted-text">
-              <?= $first_column_content && isset($first_column_content) ? $first_column_content : '' ?>
+          <?php if (isset($first_column_content) && $first_column_content): ?>
+            <div class="content-info-footer__col">
+              <div class="formatted-text">
+                <?= $first_column_content && isset($first_column_content) ? $first_column_content : '' ?>
+              </div>
             </div>
-          </div>
+          <?php endif; ?>
 
-          <div class="content-info-footer__col">
-            <?php if ($logo && isset($logo)) img_print_picture_tag(img: $logo, classes: "footer-logo", max_size: "medium") ?>
+          <?php if (($logo && isset($logo)) || ($cta_button && isset($cta_button))): ?>
 
-            <div class="content-info-footer__social">
-              <?php get_template_part('template-parts/social', 'networks', ["social_networks" => $select_social_networks ?? null]); ?>
+            <div class="content-info-footer__col">
+              <?php if ($logo && isset($logo)) img_print_picture_tag(img: $logo, classes: "footer-logo", max_size: "medium") ?>
+
+
+              <div class="content-info-footer__social">
+                <?php get_template_part('template-parts/social', 'networks', ["social_networks" => $select_social_networks ?? null]); ?>
+              </div>
+
+              <?php if ($cta_button && isset($cta_button)): ?>
+                <a href="<?= $cta_button['url'] ?>" class="btn btn--primary" target="<?= $cta_button['target'] ?>" aria-label="<?= esc_attr($cta_button['title']) ?>">
+                  <span>
+                    <?= esc_html($cta_button['title']) ?>
+                  </span>
+                </a>
+              <?php endif; ?>
             </div>
 
-            <?php if ($cta_button && isset($cta_button)): ?>
-              <a href="<?= $cta_button['url'] ?>" class="btn btn--primary" target="<?= $cta_button['target'] ?>" aria-label="<?= esc_attr($cta_button['title']) ?>">
-                <span>
-                  <?= esc_html($cta_button['title']) ?>
-                </span>
-              </a>
-            <?php endif; ?>
-          </div>
+          <?php endif; ?>
 
-          <div class="content-info-footer__col">
-            <div class="formatted-text">
-              <?= $last_column_content && isset($last_column_content) ? $last_column_content : '' ?>
+          <?php if (isset($last_column_content) && $last_column_content): ?>
+            <div class="content-info-footer__col">
+              <div class="formatted-text">
+                <?= $last_column_content && isset($last_column_content) ? $last_column_content : '' ?>
+              </div>
             </div>
-          </div>
+          <?php endif; ?>
+
         </div>
       </section>
 
-    <?php
-    endif;
-    ?>
+    <?php endif; ?>
 
     <?php
     if (!$copyright_section['hide_section']):
