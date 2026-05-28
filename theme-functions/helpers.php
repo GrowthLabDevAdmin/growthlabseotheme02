@@ -51,7 +51,7 @@ if (!function_exists('block_style_attribute')) {
                     continue;
                 }
                 if (is_string($v) || is_numeric($v)) {
-                    $style_attr .= "$k: " . normalize_block_spacing($v) . "; ";
+                    $style_attr .= "$k: " . normalize_block_spacing($v) . '; ';
                 }
             }
         }

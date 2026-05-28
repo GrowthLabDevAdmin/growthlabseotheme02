@@ -95,4 +95,3 @@ if (get_field('toggle_block')):
 <?php
 endif;
 ?>
-<?= block_style_attribute($block); ?>

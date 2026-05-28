@@ -28,12 +28,11 @@
   &.image {
     background-color: rgba(var(--primary-dark));
 
-    *:not(a) {
-      color: rgb(var(--secondary-light)) !important;
-    }
-
-    &__pretitle {
-      color: rgb(var(--tertiary));
+    &__title,
+    .col__content *:not(a),
+    .col__title,
+    .inner-cta-box__content *:not(a) {
+      color: rgb(var(--secondary-light));
     }
 
     .col {
