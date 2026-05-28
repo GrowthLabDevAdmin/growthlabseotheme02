@@ -88,7 +88,7 @@
     align-self: flex-end;
 
     @media (min-width: v.$ldpi) {
-      height: 65rem;
+      height: 60rem;
       flex: 1 0 calc(45% - (var(--sp-xsm) / 2));
     }
 
@@ -502,7 +502,7 @@
 
     #{$hero}__side-portrait {
       @media (min-width: v.$ldpi) {
-        height: 55rem;
+        height: 60rem;
       }
     }
 
