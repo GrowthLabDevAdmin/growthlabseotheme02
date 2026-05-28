@@ -4,10 +4,23 @@ if (!defined('ABSPATH')) {
 }
 ?>
 
-<?php if ($args['iframe_src']):
-    if ($args['iframe_src']): ?>
+<?php if ($args['map_url']):
+    $google_maps_url = $args['map_url'];
+
+    preg_match('/@([-0-9.]+),([-0-9.]+)/', $google_maps_url, $matches);
+
+    $lat = $matches[1] ?? '';
+    $lng = $matches[2] ?? '';
+
+    $iframe_src = sprintf(
+        'https://maps.google.com/maps?q=%s,%s&z=15&output=embed',
+        $lat,
+        $lng
+    );
+
+    if ($iframe_src): ?>
         <div class="<?= $args["classes"] ?> gmap-lazy"
-            data-src="<?= esc_url($args['iframe_src']) ?>"
+            data-src="<?= esc_url($iframe_src) ?>"
             data-city="<?= esc_attr($args['name']) ?>">
             <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#999;text-align:center;">
                 <svg style="width:48px;height:48px;margin-bottom:8px;opacity:0.5;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

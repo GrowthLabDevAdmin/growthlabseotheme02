@@ -44,8 +44,9 @@
                   <div class="footer-office__inner">
                     <?php
                     get_template_part('template-parts/google', 'maps', array(
-                      'iframe_src' => $office['google_maps_embed_code'],
-                      'classes' => 'footer-office__map'
+                      'map_url' => $office['google_maps_url'],
+                      'classes' => 'footer-office__map',
+                      'name' => $office['city']
                     ));
                     ?>
 
