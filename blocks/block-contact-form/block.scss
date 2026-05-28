@@ -34,7 +34,7 @@ aside {
   }
 
   &:not(.light) {
-    * {
+    *:not(a, svg, path, strong, .gform_button) {
       color: rgb(var(--secondary));
     }
   }
