@@ -19,10 +19,10 @@ if (!defined('ABSPATH')) {
 
             <div class="location-card__inner accordion__inner">
                 <div class="location-card__col">
-                    <?php if ($location['google_maps_url']): ?>
+                    <?php if ($location['google_maps_embed_code']): ?>
                         <?php
                         $args = array(
-                            "map_url" => $location['google_maps_url'],
+                            "iframe_src" => $location['google_maps_embed_code'],
                             "name" => $location['city'],
                             "classes" => "location-card__map"
                         );

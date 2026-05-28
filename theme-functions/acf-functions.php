@@ -603,3 +603,17 @@ if (!function_exists('acf_color_picker_palette_script')) {
     }
 }
 add_action('acf/input/admin_head', 'acf_color_picker_palette_script');
+
+// Encode Google Maps embeds to avoid ModSecurity false positives
+add_filter('acf/update_value/name=google_maps_embed_code', function ($value, $post_id, $field) {
+
+    if (empty($value) || !is_string($value)) {
+        return $value;
+    }
+
+    if (str_starts_with($value, 'base64:')) {
+        return $value;
+    }
+
+    return 'base64:' . base64_encode($value);
+}, 10, 3);
