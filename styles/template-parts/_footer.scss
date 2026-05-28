@@ -91,6 +91,7 @@
     }
 
     .contact-form {
+      background-color: transparent;
       flex: 1 0 calc(50% - var(--sp-sm) / 2);
       @include m.flex-center;
       flex-direction: column;
