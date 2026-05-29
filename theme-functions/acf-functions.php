@@ -604,28 +604,62 @@ if (!function_exists('acf_color_picker_palette_script')) {
 }
 add_action('acf/input/admin_head', 'acf_color_picker_palette_script');
 
-// Encode Google Maps embeds to avoid ModSecurity false positives
+// NOTE: The google_maps_embed_code field stores values with a base64: prefix.
+// Encoding happens client-side (acf/input/admin_footer) before saving
+// to prevent ModSecurity false positives with Google Maps URLs.
+// DO NOT move this logic to PHP — the 403 occurs before the request reaches PHP.
+//
+// Selector: .acf-field[data-name="google_maps_embed_code"] input[type="text"]
+// The field may be nested inside repeaters; the selector covers this via data-name.
+//
+// To decode on frontend output:
+// if ( str_starts_with( $value, 'base64:' ) ) {
+//     $value = base64_decode( substr( $value, 7 ) );
+// }
 add_action('acf/input/admin_footer', function () {
     ?>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
-            document.querySelector('#post').addEventListener('submit', function() {
-
-                document.querySelectorAll('input').forEach(field => {
-
+            function encodeGoogleMapsFields() {
+                document.querySelectorAll(
+                    '.acf-field[data-name="google_maps_embed_code"] input[type="text"]'
+                ).forEach(function(field) {
                     if (
                         field.value &&
-                        field.value.includes('google.com/maps/embed')
+                        field.value.includes('google.com/maps/embed') &&
+                        !field.value.startsWith('base64:')
                     ) {
-
                         field.value = 'base64:' + btoa(
                             unescape(encodeURIComponent(field.value))
                         );
                     }
                 });
+            }
 
-            });
+            // Classic editor
+            var form = document.querySelector('#post');
+            if (form) {
+                form.addEventListener('submit', encodeGoogleMapsFields);
+            }
+
+            // Gutenberg
+            if (typeof wp !== 'undefined' && wp.data) {
+                var wasSaving = false;
+
+                wp.data.subscribe(function() {
+                    var editor = wp.data.select('core/editor');
+                    if (!editor) return;
+
+                    var isSaving = editor.isSavingPost() && !editor.isAutosavingPost();
+
+                    if (isSaving && !wasSaving) {
+                        encodeGoogleMapsFields();
+                    }
+
+                    wasSaving = isSaving;
+                });
+            }
 
         });
     </script>
