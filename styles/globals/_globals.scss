@@ -74,10 +74,13 @@ h6 *,
   margin: 0;
   margin-bottom: 2rem;
   font-family: var(--font-secondary);
-  color: rgba(var(--primary));
   font-weight: 600;
   line-height: 1.25;
   text-rendering: optimizeSpeed;
+
+  &:not(strong, em, i, b, span, a, blockquote, li) {
+    color: rgba(var(--primary));
+  }
 }
 
 h1,
