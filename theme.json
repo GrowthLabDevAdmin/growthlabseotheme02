@@ -32,13 +32,13 @@
           "name": "Heading",
           "slug": "heading",
           "size": "4.8rem",
-          "fluid": { "min": "3rem", "max": "4.8rem" }
+          "fluid": { "min": "2rem", "max": "4.8rem" }
         },
         {
           "name": "Section",
           "slug": "section",
           "size": "3.6rem",
-          "fluid": { "min": "2.4rem", "max": "3.6rem" }
+          "fluid": { "min": "2rem", "max": "3.6rem" }
         },
         {
           "name": "Subheading",
