@@ -18,12 +18,12 @@
     "pages",
     "custom grid"
   ],
- "acf": {   
-"mode": true, 
+ "acf": {
+"mode": "edit",    
     "renderTemplate": "block.php"
   },
   "supports": {
-    "mode": true,
+    
     "customClassName": true,
     "alignWide": true,
     "spacing": {

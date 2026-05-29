@@ -8,11 +8,11 @@
   "icon": "block-default",
   "keywords": ["growthlabseo", "contact", "form", "picture"],
   "acf": {
-    "mode": true,
+"mode": "edit",
     "renderTemplate": "block.php"
   },
   "supports": {
-    "mode": true,
+    
     "customClassName": true,
     "alignWide": true,
     "spacing": {
