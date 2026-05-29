@@ -1,16 +1,17 @@
 {
   "name": "acf/faq",
   "title": "FAQ",
-   "apiVersion": 3,
+ 
 "viewStyle": ["file:./block-min.css"],
   "category": "growthlabseotheme02-blocks",
   "icon": "block-default",
   "keywords": ["growthlabseo", "cta", "content", "faq", "accordion"],
  "acf": {
-"mode": "edit",    
+"mode": "auto",    
     "renderTemplate": "block.php"
   },
   "supports": {
+"mode": true,
     
     "customClassName": true,
     "alignWide": true,

@@ -1,16 +1,17 @@
 {
   "name": "acf/cta-box",
   "title": "CTA Box",
-   "apiVersion": 3,
+ 
 "viewStyle": ["file:./block-min.css"],
   "category": "growthlabseotheme02-blocks",
   "icon": "block-default",
   "keywords": ["growthlabseo", "cta", "inset", "box"],
  "acf": {
-"mode": "edit",    
+"mode": "auto",    
     "renderTemplate": "block.php"
   },
   "supports": {
+"mode": true,
     
     "customClassName": true,
     "alignWide": true,

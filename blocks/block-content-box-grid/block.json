@@ -1,17 +1,18 @@
 {
   "name": "acf/content-box-grid",
   "title": "Content Box Grid",
-   "apiVersion": 3,
+ 
 "viewStyle": ["file:./block-min.css"],
   "script": ["file:./block-min.js"],
   "category": "growthlabseotheme02-blocks",
   "icon": "block-default",
   "keywords": ["growthlabseo", "content", "grid", "menu", "boxes"],
   "acf": {
-"mode": "edit",
+"mode": "auto",
     "renderTemplate": "block.php"
   },
   "supports": {
+"mode": true,
     
     "customClassName": true,
     "alignWide": true,

@@ -1,7 +1,7 @@
 {
   "name": "acf/two-columns",
   "title": "Two Columns",
-  "apiVersion": 3,
+
   "viewStyle": ["file:./block-min.css"],
   "script": ["file:./block-min.js"],
   "category": "growthlabseotheme02-blocks",
@@ -15,10 +15,11 @@
     "image"
   ],
   "acf": {
-    "mode": "edit",
+    "mode": "auto",
     "renderTemplate": "block.php"
   },
   "supports": {
+"mode": true,
     "customClassName": true,
     "alignWide": true,
     "spacing": {

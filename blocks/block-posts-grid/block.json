@@ -1,7 +1,7 @@
 {
   "name": "acf/posts-grid",
   "title": "Posts Grid",
-   "apiVersion": 3,
+ 
 "viewStyle": ["file:./block-min.css"],
   "script": ["file:./block-min.js"],
   "category": "growthlabseotheme02-blocks",
@@ -19,10 +19,11 @@
     "custom grid"
   ],
  "acf": {
-"mode": "edit",    
+"mode": "auto",    
     "renderTemplate": "block.php"
   },
   "supports": {
+"mode": true,
     
     "customClassName": true,
     "alignWide": true,
