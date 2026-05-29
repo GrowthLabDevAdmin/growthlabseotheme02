@@ -1,7 +1,8 @@
 {
   "name": "acf/office-locations",
   "title": "Office Locations",
-  "viewStyle": ["file:./block-min.css"],
+   "apiVersion": 3,
+"viewStyle": ["file:./block-min.css"],
   "script": ["file:./block-min.js"],
   "category": "growthlabseotheme02-blocks",
   "icon": "block-default",
@@ -16,7 +17,7 @@
     "renderTemplate": "block.php"
   },
   "supports": {
-    
+    "mode": false,
     "customClassName": true,
     "alignWide": true,
     "spacing": {
