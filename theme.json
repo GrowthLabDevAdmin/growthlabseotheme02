@@ -14,13 +14,56 @@
       "customFontSize": true,
       "lineHeight": true,
       "letterSpacing": true,
+      "fluid": true,
       "fontSizes": [
-        { "name": "Small", "slug": "small", "size": "12px" },
-        { "name": "Regular", "slug": "regular", "size": "16px" },
-        { "name": "Medium", "slug": "medium", "size": "18px" },
-        { "name": "Large", "slug": "large", "size": "22px" },
-        { "name": "Extra Large", "slug": "xl", "size": "28px" },
-        { "name": "Huge", "slug": "xxl", "size": "32px" }
+        {
+          "name": "Display",
+          "slug": "display",
+          "size": "8rem",
+          "fluid": { "min": "4rem", "max": "8rem" }
+        },
+        {
+          "name": "Hero",
+          "slug": "hero",
+          "size": "6.5rem",
+          "fluid": { "min": "4rem", "max": "6.5rem" }
+        },
+        {
+          "name": "Heading",
+          "slug": "heading",
+          "size": "4.8rem",
+          "fluid": { "min": "3rem", "max": "4.8rem" }
+        },
+        {
+          "name": "Section",
+          "slug": "section",
+          "size": "3.6rem",
+          "fluid": { "min": "2.4rem", "max": "3.6rem" }
+        },
+        {
+          "name": "Subheading",
+          "slug": "subheading",
+          "size": "2.8rem",
+          "fluid": { "min": "2rem", "max": "2.8rem" }
+        },
+        {
+          "name": "Body",
+          "slug": "body",
+          "size": "1.8rem",
+          "fluid": { "min": "1.5rem", "max": "1.8rem" }
+        },
+        {
+          "name": "Base",
+          "slug": "base",
+          "size": "1.6rem",
+          "fluid": { "min": "1.4rem", "max": "1.8rem" }
+        },
+        {
+          "name": "Small",
+          "slug": "small",
+          "size": "1.4rem",
+          "fluid": { "min": "1.2rem", "max": "1.6rem" }
+        }
       ]
     },
     "spacing": {
