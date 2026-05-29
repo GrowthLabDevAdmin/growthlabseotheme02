@@ -13,7 +13,7 @@
     "custom carousel"
   ],
  "acf": {   
-"mode": "edit", 
+"mode": true, 
     "renderTemplate": "block.php"
   },
   "supports": {
