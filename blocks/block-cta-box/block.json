@@ -5,8 +5,8 @@
   "category": "growthlabseotheme02-blocks",
   "icon": "block-default",
   "keywords": ["growthlabseo", "cta", "inset", "box"],
-  "acf": {
-    "mode": "edit",
+  "mode": "edit",
+"acf": {    
     "renderTemplate": "block.php"
   },
   "supports": {

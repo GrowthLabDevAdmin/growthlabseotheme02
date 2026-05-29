@@ -13,8 +13,8 @@
     "text",
     "image"
   ],
-  "acf": {
-    "mode": "edit",
+  "mode": "edit",
+"acf": {    
     "renderTemplate": "block.php"
   },
   "supports": {

@@ -17,8 +17,8 @@
     "pages",
     "custom grid"
   ],
-  "acf": {
-    "mode": "edit",
+  "mode": "edit",
+"acf": {    
     "renderTemplate": "block.php"
   },
   "supports": {

@@ -6,8 +6,8 @@
   "category": "growthlabseotheme02-blocks",
   "icon": "block-default",
   "keywords": ["growthlabseo", "content", "grid", "menu", "boxes"],
+  "mode": "edit",
   "acf": {
-    "mode": "edit",
     "renderTemplate": "block.php"
   },
   "supports": {
@@ -17,7 +17,7 @@
     "spacing": {
       "margin": true,
       "padding": true,
-      "blockGap":  ["horizontal", "vertical"]
+      "blockGap": ["horizontal", "vertical"]
     }
   },
   "align": "full"
