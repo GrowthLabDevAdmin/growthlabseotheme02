@@ -5,12 +5,12 @@
   "category": "growthlabseotheme02-blocks",
   "icon": "block-default",
   "keywords": ["growthlabseo", "cta", "content", "faq", "accordion"],
-  "mode": "edit",
-"acf": {    
+ "acf": {   
+"mode": "edit", 
     "renderTemplate": "block.php"
   },
   "supports": {
-    "mode": false,
+    
     "customClassName": true,
     "alignWide": true,
     "spacing": {

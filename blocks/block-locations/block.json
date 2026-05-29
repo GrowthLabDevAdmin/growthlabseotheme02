@@ -11,12 +11,12 @@
     "locations",
     "custom carousel"
   ],
-  "mode": "edit",
-"acf": {    
+ "acf": {   
+"mode": "edit", 
     "renderTemplate": "block.php"
   },
   "supports": {
-    "mode": false,
+    
     "customClassName": true,
     "alignWide": true,
     "spacing": {

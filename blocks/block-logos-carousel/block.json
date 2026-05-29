@@ -6,12 +6,12 @@
   "category": "growthlabseotheme02-blocks",
   "icon": "block-default",
   "keywords": ["growthlabseo", "carousel", "logos"],
-  "mode": "edit",
-"acf": {    
+ "acf": {   
+"mode": "edit", 
     "renderTemplate": "block.php"
   },
   "supports": {
-    "mode": false,
+    
     "customClassName": true,
     "alignWide": true,
     "spacing": {
