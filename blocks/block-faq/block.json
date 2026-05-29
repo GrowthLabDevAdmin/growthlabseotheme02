@@ -7,7 +7,7 @@
   "icon": "block-default",
   "keywords": ["growthlabseo", "cta", "content", "faq", "accordion"],
  "acf": {
-"mode": "auto",    
+"mode": "edit",    
     "renderTemplate": "block.php"
   },
   "supports": {
