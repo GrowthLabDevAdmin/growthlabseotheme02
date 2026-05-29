@@ -11,7 +11,7 @@
     "renderTemplate": "block.php"
   },
   "supports": {
-    "mode": false,
+    "mode": true,
     "customClassName": true,
     "alignWide": true,
     "spacing": {
