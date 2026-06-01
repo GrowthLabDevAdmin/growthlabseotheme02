@@ -32,7 +32,7 @@ foreach (get_fields() as $key => $value) $$key = $value;
                 <main role="main" class="single__main">
                     <div class="single-team__heading">
                         <p class="single-team__role pretitle"><?= $role; ?></p>
-                        <p class="single-team__title"><?php the_title(); ?></p>
+                        <h1 class="single-team__title"><?php the_title(); ?></h1>
                     </div>
                     <div class="single-team__content formatted-text">
                         <?php the_content(); ?>

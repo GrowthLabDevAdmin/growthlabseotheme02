@@ -186,16 +186,16 @@ if (!function_exists('my_wp_editor_formats')) {
         $text_default      = $default_colors['text']                 ?? '#15253f';
 
         add_theme_support('editor-color-palette', [
-            ['name' => __('Primary Color',         'growthlabseotheme02'), 'slug' => 'primary',         'color' => sanitize_hex_color(get_theme_mod('primary_color',         $primary_default))   ?: $primary_default],
-            ['name' => __('Primary Dark',          'growthlabseotheme02'), 'slug' => 'primary-dark',    'color' => sanitize_hex_color(get_theme_mod('primary_color_dark',    $primary_dark))      ?: $primary_dark],
-            ['name' => __('Primary Light',         'growthlabseotheme02'), 'slug' => 'primary-light',   'color' => sanitize_hex_color(get_theme_mod('primary_color_light',   $primary_light))     ?: $primary_light],
-            ['name' => __('Secondary Color',       'growthlabseotheme02'), 'slug' => 'secondary',       'color' => sanitize_hex_color(get_theme_mod('secondary_color',       $secondary_default)) ?: $secondary_default],
-            ['name' => __('Secondary Dark',        'growthlabseotheme02'), 'slug' => 'secondary-dark',  'color' => sanitize_hex_color(get_theme_mod('secondary_color_dark',  $secondary_dark))    ?: $secondary_dark],
-            ['name' => __('Secondary Light',       'growthlabseotheme02'), 'slug' => 'secondary-light', 'color' => sanitize_hex_color(get_theme_mod('secondary_color_light', $secondary_light))   ?: $secondary_light],
-            ['name' => __('Tertiary Color',        'growthlabseotheme02'), 'slug' => 'tertiary',        'color' => sanitize_hex_color(get_theme_mod('tertiary_color',        $tertiary_default))  ?: $tertiary_default],
-            ['name' => __('Tertiary Dark',         'growthlabseotheme02'), 'slug' => 'tertiary-dark',   'color' => sanitize_hex_color(get_theme_mod('tertiary_color_dark',   $tertiary_dark))     ?: $tertiary_dark],
-            ['name' => __('Tertiary Light',        'growthlabseotheme02'), 'slug' => 'tertiary-light',  'color' => sanitize_hex_color(get_theme_mod('tertiary_color_light',  $tertiary_light))    ?: $tertiary_light],
-            ['name' => __('Text Color',            'growthlabseotheme02'), 'slug' => 'text',            'color' => sanitize_hex_color(get_theme_mod('text_color',            $text_default))      ?: $text_default],
+            ['name' => __('Primary Color',         get_text_domain()), 'slug' => 'primary',         'color' => sanitize_hex_color(get_theme_mod('primary_color',         $primary_default))   ?: $primary_default],
+            ['name' => __('Primary Dark',          get_text_domain()), 'slug' => 'primary-dark',    'color' => sanitize_hex_color(get_theme_mod('primary_color_dark',    $primary_dark))      ?: $primary_dark],
+            ['name' => __('Primary Light',         get_text_domain()), 'slug' => 'primary-light',   'color' => sanitize_hex_color(get_theme_mod('primary_color_light',   $primary_light))     ?: $primary_light],
+            ['name' => __('Secondary Color',       get_text_domain()), 'slug' => 'secondary',       'color' => sanitize_hex_color(get_theme_mod('secondary_color',       $secondary_default)) ?: $secondary_default],
+            ['name' => __('Secondary Dark',        get_text_domain()), 'slug' => 'secondary-dark',  'color' => sanitize_hex_color(get_theme_mod('secondary_color_dark',  $secondary_dark))    ?: $secondary_dark],
+            ['name' => __('Secondary Light',       get_text_domain()), 'slug' => 'secondary-light', 'color' => sanitize_hex_color(get_theme_mod('secondary_color_light', $secondary_light))   ?: $secondary_light],
+            ['name' => __('Tertiary Color',        get_text_domain()), 'slug' => 'tertiary',        'color' => sanitize_hex_color(get_theme_mod('tertiary_color',        $tertiary_default))  ?: $tertiary_default],
+            ['name' => __('Tertiary Dark',         get_text_domain()), 'slug' => 'tertiary-dark',   'color' => sanitize_hex_color(get_theme_mod('tertiary_color_dark',   $tertiary_dark))     ?: $tertiary_dark],
+            ['name' => __('Tertiary Light',        get_text_domain()), 'slug' => 'tertiary-light',  'color' => sanitize_hex_color(get_theme_mod('tertiary_color_light',  $tertiary_light))    ?: $tertiary_light],
+            ['name' => __('Text Color',            get_text_domain()), 'slug' => 'text',            'color' => sanitize_hex_color(get_theme_mod('text_color',            $text_default))      ?: $text_default],
         ]);
     }
 }

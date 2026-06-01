@@ -1,4 +1,15 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
+
+if (!function_exists('get_text_domain')) {
+    function get_text_domain()
+    {
+        return $GLOBALS['theme_text_domain'];
+    }
+}
+
 
 if (!function_exists('get_field_options')) {
     function get_field_options($field_name, $format_value = true)

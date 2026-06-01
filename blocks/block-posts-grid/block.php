@@ -42,8 +42,8 @@ if (get_field('toggle_block')):
     <section
         id="<?= esc_attr($block_id ?? '') ?>"
         class="block posts-grid<?= !empty($block['className']) ? ' ' . esc_attr($block['className']) : '' ?>"
-       <?= block_style_attribute($block); ?>
-        <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>
+        <?= block_style_attribute($block); ?>
+        <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
         <?php
         if (isset($background_image) && $background_image) img_print_picture_tag(img: $background_image, is_cover: true, classes: "posts-grid__bg bg-image gradient-overlay");
