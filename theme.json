@@ -15,6 +15,202 @@
       "lineHeight": true,
       "letterSpacing": true,
       "fluid": true,
+      "fontFamilies": [
+        {
+          "name": "Mona Sans",
+          "slug": "primary",
+          "fontFamily": "\"Mona Sans\", sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Mona Sans",
+              "fontWeight": "300",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/mona-sans-v4-latin/mona-sans-v4-latin-300.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Mona Sans",
+              "fontWeight": "300",
+              "fontStyle": "italic",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/mona-sans-v4-latin/mona-sans-v4-latin-300italic.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Mona Sans",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/mona-sans-v4-latin/mona-sans-v4-latin-regular.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Mona Sans",
+              "fontWeight": "400",
+              "fontStyle": "italic",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/mona-sans-v4-latin/mona-sans-v4-latin-italic.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Mona Sans",
+              "fontWeight": "600",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/mona-sans-v4-latin/mona-sans-v4-latin-600.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Mona Sans",
+              "fontWeight": "600",
+              "fontStyle": "italic",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/mona-sans-v4-latin/mona-sans-v4-latin-600italic.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Mona Sans",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/mona-sans-v4-latin/mona-sans-v4-latin-700.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Mona Sans",
+              "fontWeight": "700",
+              "fontStyle": "italic",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/mona-sans-v4-latin/mona-sans-v4-latin-700italic.woff2"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Roboto Serif",
+          "slug": "secondary",
+          "fontFamily": "\"Roboto Serif\", serif",
+          "fontFace": [
+            {
+              "fontFamily": "Roboto Serif",
+              "fontWeight": "100",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-100.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Roboto Serif",
+              "fontWeight": "100",
+              "fontStyle": "italic",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-100italic.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Roboto Serif",
+              "fontWeight": "300",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-300.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Roboto Serif",
+              "fontWeight": "300",
+              "fontStyle": "italic",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-300italic.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Roboto Serif",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-regular.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Roboto Serif",
+              "fontWeight": "400",
+              "fontStyle": "italic",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-italic.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Roboto Serif",
+              "fontWeight": "500",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-500.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Roboto Serif",
+              "fontWeight": "500",
+              "fontStyle": "italic",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-500italic.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Roboto Serif",
+              "fontWeight": "600",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-600.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Roboto Serif",
+              "fontWeight": "600",
+              "fontStyle": "italic",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-600italic.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Roboto Serif",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-700.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Roboto Serif",
+              "fontWeight": "700",
+              "fontStyle": "italic",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./fonts/roboto-serif-v17-latin/roboto-serif-v17-latin-700italic.woff2"
+              ]
+            }
+          ]
+        }
+      ],
       "fontSizes": [
         {
           "name": "Display",

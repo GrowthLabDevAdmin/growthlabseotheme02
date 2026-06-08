@@ -180,15 +180,6 @@ add_filter('wp_theme_json_data_theme', function ($theme_json) {
         ['name' => __('Text Color',           get_text_domain()), 'slug' => 'text-color',           'color' => get_theme_mod('text_color',           $default_colors['text'])],
     ];
 
-    // ─── FUENTES ─────────────────────────────────────────────────────────────
-    $font_primary   = get_theme_mod('font_primary',   $default_fonts['primary']);
-    $font_secondary = get_theme_mod('font_secondary', $default_fonts['secondary']);
-
-    $data['settings']['typography']['fontFamilies'] = [
-        ['name' => $font_primary,   'slug' => 'primary',   'fontFamily' => "\"{$font_primary}\", sans-serif"],
-        ['name' => $font_secondary, 'slug' => 'secondary', 'fontFamily' => "\"{$font_secondary}\", serif"],
-    ];
-
     $theme_json->update_with($data);
     return $theme_json;
 });

@@ -49,6 +49,48 @@ function _theme_get_tinymce_color_map(): array
     return $map;
 }
 
+
+/**
+ * Helper interno — construye el string font_formats para TinyMCE.
+ *
+ * Orden: fuentes del tema (theme.json) → fuentes custom (Font Library) → sistema.
+ * Se llama desde tiny_mce_before_init y acf_wysiwyg_tinymce_settings, contexto
+ * en el que WP_Theme_JSON_Resolver ya tiene los datos mergeados correctamente.
+ */
+function _theme_get_tinymce_font_formats(): string
+{
+    $entries = [];
+    $seen    = [];
+
+    if (class_exists('WP_Theme_JSON_Resolver')) {
+        $settings = WP_Theme_JSON_Resolver::get_merged_data()->get_settings();
+        $families = $settings['typography']['fontFamilies'] ?? [];
+
+        foreach (['theme', 'custom'] as $source) {
+            foreach (($families[$source] ?? []) as $font) {
+                $name   = $font['name']       ?? '';
+                $family = $font['fontFamily'] ?? $name;
+                if (! $name || isset($seen[$name])) continue;
+                // TinyMCE font_formats no admite comillas dobles en el valor CSS
+                // "Mona Sans", sans-serif → Mona Sans,sans-serif
+                $family = str_replace('"', '', $family);
+                $seen[$name] = true;
+                $entries[]     = "{$name}={$family}";
+            }
+        }
+    }
+
+    if (empty($entries)) {
+        $entries[] = 'Mona Sans=Mona Sans,sans-serif';
+        $entries[] = 'Roboto Serif=Roboto Serif,serif';
+    }
+
+    $entries[] = 'Arial=Arial,Helvetica,sans-serif';
+    $entries[] = 'Times New Roman=Times New Roman,Times,serif';
+
+    return implode(';', $entries);
+}
+
 // Register the line height plugin for TinyMCE
 add_filter('mce_external_plugins', function ($plugins) {
     $plugins['lineheight'] = get_template_directory_uri() . '/js/vendor/tiny-mce/lineheight-min.js';
@@ -76,7 +118,7 @@ add_filter('mce_css', 'my_acf_editor_styles');
 if (!function_exists('my_acf_wysiwyg_custom_settings')) {
     function my_acf_wysiwyg_custom_settings($init)
     {
-        $init['font_formats']     = 'Mona Sans=Mona Sans,sans-serif;Roboto Serif=Roboto Serif,serif;Arial=Arial,Helvetica,sans-serif;Times New Roman=Times New Roman,Times,serif';
+        $init['font_formats']     = _theme_get_tinymce_font_formats();
         $init['fontsize_formats'] = '8px 10px 12px 14px 16px 18px 20px 24px 28px 32px 36px 40px 42px 44px 46px 48px 50px 52px 54px 56px 58px 60px 62px 64px 72px 80px 88px 96px 104px 124px 148px 156px 168px';
         $init['lineheight_formats'] = '.5 .55 .6 .65 .7 .75 .8 .85 .9 .95 1 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 2 2.5 3';
         return $init;
@@ -88,7 +130,7 @@ add_filter('tiny_mce_before_init', 'my_acf_wysiwyg_custom_settings', 1);
 if (!function_exists('my_acf_tinymce_settings')) {
     function my_acf_tinymce_settings($init, $id)
     {
-        $init['font_formats']     = 'Mona Sans=Mona Sans,sans-serif;Roboto Serif=Roboto Serif,serif;Arial=Arial,Helvetica,sans-serif;Times New Roman=Times New Roman,Times,serif';
+        $init['font_formats']     = _theme_get_tinymce_font_formats();
         $init['fontsize_formats'] = '8px 10px 12px 14px 16px 18px 20px 24px 28px 32px 36px 40px 42px 44px 46px 48px 50px 52px 54px 56px 58px 60px 62px 64px 72px 80px 88px 96px 104px 124px 148px 156px 168px';
         $init['lineheight_formats'] = '.5 .55 .6 .65 .7 .75 .8 .85 .9 .95 1 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 2 2.5 3';
         return $init;
@@ -205,7 +247,7 @@ add_action('after_setup_theme', 'my_wp_editor_formats');
 if (!function_exists('my_wp_editor_default_settings')) {
     function my_wp_editor_default_settings($init)
     {
-        $init['font_formats']     = 'Mona Sans=Mona Sans,sans-serif;Roboto Serif=Roboto Serif,serif;Arial=Arial,Helvetica,sans-serif;Times New Roman=Times New Roman,Times,serif';
+        $init['font_formats']     = _theme_get_tinymce_font_formats();
         $init['fontsize_formats'] = '8px 10px 12px 14px 16px 18px 20px 24px 28px 32px 36px 40px 42px 44px 46px 48px 50px 52px 54px 56px 58px 60px 62px 64px 72px 80px 88px 96px 104px 124px 148px 156px 168px';
         $init['lineheight_formats'] = '.5 .55 .6 .65 .7 .75 .8 .85 .9 .95 1 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 2 2.5 3';
         $init['toolbar1']         = 'formatselect,fontselect,fontsizeselect,lineheightselect,bold,italic,underline,forecolor,backcolor,bullist,numlist,alignleft,aligncenter,alignright,link,unlink,removeformat,undo,redo';

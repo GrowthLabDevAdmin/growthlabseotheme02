@@ -196,6 +196,23 @@
                     "allow_in_bindings": 0
                 },
                 {
+                    "key": "field_6a21d04cd7276",
+                    "label": "CTA Button Mobile Only",
+                    "name": "cta_button_mobile_only",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "allow_in_bindings": 0
+                },
+                {
                     "key": "field_6960a065bceb6",
                     "label": "Top Callout First Line",
                     "name": "top_callout_first_line",
@@ -1328,5 +1345,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1780001738
+    "modified": 1780600938
 }
