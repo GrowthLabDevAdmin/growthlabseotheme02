@@ -147,11 +147,23 @@ if (!defined('ABSPATH')) {
             </div>
 
             <?php if ($cta_button): ?>
-                <div class="site-header__cta">
-                    <a href="<?= $cta_button['url'] ?>" class="cta-button btn btn--tertiary" target="<?= $cta_button['target'] ?>" aria-label="<?= esc_attr($cta_button['title']) ?>">
+                <div class="site-header__cta <?= isset($cta_button_mobile_only) ? 'hide-on-mobile hide-on-tablet' : ''; ?>">
+                    <a href="<?= $cta_button['url'] ?>" class="cta-button btn--tertiary" target="<?= $cta_button['target'] ?>" aria-label="<?= esc_attr($cta_button['title']) ?>">
 
                         <span class="cta-button__text">
                             <?= $cta_button['title'] ?>
+                        </span>
+
+                    </a>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($cta_button_mobile_only): ?>
+                <div class="site-header__cta--mobile-only hide-on-desktop">
+                    <a href="<?= $cta_button_mobile_only['url'] ?>" class="cta-button btn--tertiary" target="<?= $cta_button_mobile_only['target'] ?>" aria-label="<?= esc_attr($cta_button_mobile_only['title']) ?>">
+
+                        <span class="cta-button__text">
+                            <?= $cta_button_mobile_only['title'] ?>
                         </span>
 
                     </a>

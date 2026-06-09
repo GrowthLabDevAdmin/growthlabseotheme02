@@ -35,7 +35,7 @@
   }
 
   &.light {
-    background: rgb(var(--secondary-light));
+    background: rgb(var(--secondary));
 
     #{$parent}__title,
     #{$parent}__content * {
