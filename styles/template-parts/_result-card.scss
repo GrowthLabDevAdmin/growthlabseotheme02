@@ -4,6 +4,7 @@
 .result-card {
   height: auto;
   padding: var(--sp-xsm) !important;
+  display: flex;
   $card: &;
 
   &.grid {
