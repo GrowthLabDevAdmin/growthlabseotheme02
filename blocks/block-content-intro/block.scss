@@ -28,7 +28,8 @@
   &.image {
     background-color: rgba(var(--primary-dark));
 
-    &__title,
+    #{$parent}__title,
+    #{$parent}__title > *,
     .col__content *:not(a),
     .col__title,
     .inner-cta-box__content *:not(a) {
