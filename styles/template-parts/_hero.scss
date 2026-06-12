@@ -394,7 +394,7 @@
         margin-bottom: var(--sp-xsm);
         @include m.title(
           rgb(var(--secondary)),
-          4rem,
+          2.8rem,
           6.2vw,
           5.8rem,
           null,
@@ -402,14 +402,14 @@
           false
         );
 
-        & > * {
-          all: inherit;
+        --font-scale: 0.8;
+
+        @media (min-width: v.$tablet) {
+          --font-scale: 1;
         }
 
-        @media (max-width: calc(v.$tablet - 1px)) {
-          * {
-            font-size: 80%;
-          }
+        & > * {
+          all: inherit;
         }
       }
 

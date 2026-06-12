@@ -35,7 +35,7 @@ if (!$bg_mobile) $bg_mobile = [];
 
                     <div class="content-box__main">
                         <div class="content-box__title">
-                            <?= $args["hero_title"] ?>
+                            <?= transform_inline_font_sizes($args["hero_title"]) ?>
                         </div>
                         <?php print_title($hero_subtitle, $hero_subtitle_tag, "content-box__subtitle", true); ?>
                     </div>

@@ -334,3 +334,69 @@ if (!function_exists('get_yt_code')) {
         return $match[1];
     }
 }
+
+// Transforma los estilos en línea de font-size a variables CSS personalizadas
+function transform_inline_font_sizes(
+    string $html,
+    string $font_size_var = '--fs'
+): string {
+
+    if (trim($html) === '') {
+        return $html;
+    }
+
+    libxml_use_internal_errors(true);
+
+    $dom = new DOMDocument();
+
+    $dom->loadHTML(
+        mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'),
+        LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
+    );
+
+    foreach ($dom->getElementsByTagName('*') as $element) {
+
+        if (!$element->hasAttribute('style')) {
+            continue;
+        }
+
+        $style = $element->getAttribute('style');
+
+        if (
+            !preg_match(
+                '/font-size\s*:\s*([^;]+)/i',
+                $style,
+                $matches
+            )
+        ) {
+            continue;
+        }
+
+        $font_size = trim($matches[1]);
+
+        // Elimina el font-size original
+        $style = preg_replace(
+            '/font-size\s*:\s*[^;]+;?/i',
+            '',
+            $style
+        );
+
+        $style = trim($style);
+
+        if ($style !== '' && substr($style, -1) !== ';') {
+            $style .= ';';
+        }
+
+        // Agrega la variable y la nueva regla
+        $style .= sprintf(
+            '%s:%s;font-size:calc(var(%s) * var(--font-scale, 1));',
+            $font_size_var,
+            $font_size,
+            $font_size_var
+        );
+
+        $element->setAttribute('style', $style);
+    }
+
+    return $dom->saveHTML();
+}
