@@ -56,8 +56,16 @@
         grid-row: 2/3;
 
         .callout {
-          span:first-of-type {
-            display: none;
+          span {
+            font-size: 1.8rem;
+
+            &:first-of-type {
+              display: none;
+            }
+          }
+
+          a {
+            font-size: 2rem;
           }
         }
       }
