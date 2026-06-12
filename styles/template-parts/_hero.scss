@@ -405,6 +405,12 @@
         & > * {
           all: inherit;
         }
+
+        @media (max-width: calc(v.$tablet - 1px)) {
+          * {
+            font-size: 80%;
+          }
+        }
       }
 
       &__subtitle {

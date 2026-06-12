@@ -450,19 +450,19 @@ img.bg-image {
 }
 
 /* Responsive Visibility */
-@media (max-width: calc($tablet - 1px)) {
+@media (max-width: calc(v.$tablet - 1px)) {
   .hide-on-mobile {
     display: none !important;
   }
 }
 
-@media (max-width: calc($ldpi - 1px)) {
+@media (max-width: calc(v.$ldpi - 1px)) {
   .hide-on-tablet {
     display: none !important;
   }
 }
 
-@media (min-width: $ldpi) {
+@media (min-width: v.$ldpi) {
   .hide-on-desktop {
     display: none !important;
   }
