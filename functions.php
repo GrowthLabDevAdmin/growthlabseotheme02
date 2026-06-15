@@ -235,7 +235,7 @@ function inline_main_critical_css()
     $color_scheme = theme_get_customizer_css();
 
     $critical_css = file_get_contents(get_template_directory() . "/styles/main-min.css");
-    $critical_css .= file_get_contents(get_stylesheet_uri());
+    $critical_css .= file_get_contents(get_stylesheet_directory() . "/style.css");
     $critical_css = $fonts_css . $color_scheme . $critical_css;
 
     // Add Splide critical CSS only when carousels are present
