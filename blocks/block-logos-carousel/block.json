@@ -2,7 +2,7 @@
   "name": "acf/logos-carousel",
   "title": "Logos Carousel",
  
-"viewStyle": ["file:./block-min.css"],
+  "style": ["file:./block-min.css"],
   "script": ["file:./block-min.js"],
   "category": "growthlabseotheme02-blocks",
   "icon": "block-default",

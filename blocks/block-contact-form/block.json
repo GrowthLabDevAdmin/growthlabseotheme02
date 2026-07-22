@@ -1,7 +1,7 @@
 {
   "name": "acf/contact-form",
   "title": "Contact Form",
-  "viewStyle": ["file:./block-min.css"],
+  "style": ["file:./block-min.css"],
   "script": ["file:./block-min.js"],
   "category": "growthlabseotheme02-blocks",
   "icon": "block-default",

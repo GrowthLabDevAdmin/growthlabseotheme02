@@ -2,7 +2,7 @@
   "name": "acf/faq",
   "title": "FAQ",
  
-"viewStyle": ["file:./block-min.css"],
+  "style": ["file:./block-min.css"],
   "category": "growthlabseotheme02-blocks",
   "icon": "block-default",
   "keywords": ["growthlabseo", "cta", "content", "faq", "accordion"],
