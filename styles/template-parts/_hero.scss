@@ -276,8 +276,11 @@
       text-transform: uppercase;
 
       @media (min-width: v.$ldpi) {
-        margin-top: 3rem;
         text-align: left;
+
+        &:first-child {
+          margin-top: 3rem;
+        }
       }
 
       & > * {
