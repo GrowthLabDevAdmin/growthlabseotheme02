@@ -245,7 +245,7 @@ strong {
 
   .bg-gradient {
     background: none;
-    background-color: transparent;
+    background-color: transparent !important;
     &::after {
       content: none;
     }
