@@ -5,13 +5,13 @@ if (!defined('ABSPATH')) {
 foreach ($args as $key => $value) $$key = $value;
 ?>
 
-<div class="ampersand-separator <?= esc_attr($classes); ?>">
+<div class="logo-separator <?= esc_attr($classes); ?>">
     <hr>
     <?php
     $options = get_field_options("options");
 
     if ($options["logo_symbol"]) {
-        img_print_picture_tag(img: $options["logo_symbol"], max_size: "medium");
+        img_print_picture_tag(img: $options["logo_symbol"], max_size: "medium", classes: "logo-separator__logo");
     } else {
         include get_stylesheet_directory() . '/assets/img/ampersand-symbol.svg';
     } ?>

@@ -32,6 +32,25 @@
   &__separator {
     max-width: 70%;
     margin-bottom: var(--sp-xsm);
+    @include m.flex-center;
+    gap: 2.5rem;
+
+    hr {
+      height: 2px;
+      width: calc(50% - 5rem);
+      display: block;
+      background-color: rgb(var(--tertiary));
+    }
+
+    picture,
+    svg {
+      width: 5rem;
+      height: 5rem;
+
+      path {
+        fill: rgb(var(--tertiary));
+      }
+    }
   }
 
   &__grid {
