@@ -22,7 +22,7 @@
 
   &__title {
     @include m.title(
-      $color: var(--secondary),
+      $color: rgba(var(--secondary)),
       $font-size-min: 2.2rem,
       $font-size-mid: 2.4vw,
       $font-size-max: 4.8rem,
