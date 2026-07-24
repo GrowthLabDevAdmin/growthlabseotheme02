@@ -112,6 +112,14 @@
     }
   }
 
+  &__tagline {
+    margin-bottom: 0;
+    font-family: var(--font-secondary);
+    font-size: clamp(2.2rem, 2.4vw, 3.4rem);
+    color: rgba(var(--secondary));
+    line-height: 1;
+  }
+
   &__title {
     margin: 0;
     @include m.title(
@@ -126,6 +134,7 @@
 
     & > * {
       all: inherit;
+      margin-top: 0;
     }
 
     em,

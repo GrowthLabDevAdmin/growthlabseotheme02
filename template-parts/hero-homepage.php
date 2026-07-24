@@ -40,7 +40,7 @@ if (!$bg_mobile) $bg_mobile = [];
                 print_title(
                     title: $hero_tagline,
                     tag: $hero_tagline_tag,
-                    classes: "hero__tagline h3"
+                    classes: "hero__tagline"
                 );
             } ?>
 
