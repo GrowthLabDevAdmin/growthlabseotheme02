@@ -36,6 +36,14 @@ if (!$bg_mobile) $bg_mobile = [];
         <?php if ($side_portrait) img_print_picture_tag(img: $side_portrait, max_size: "content", min_size: "featured-small", classes: "hero__side-portrait", is_priority: true); ?>
 
         <div class="hero__content">
+            <?php if (isset($hero_tagline) && $hero_tagline) {
+                print_title(
+                    title: $hero_tagline,
+                    tag: $hero_tagline_tag,
+                    classes: "hero__tagline h3"
+                );
+            } ?>
+
             <div class="hero__title">
                 <?= $args["hero_title"] ?>
             </div>

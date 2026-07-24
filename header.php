@@ -54,7 +54,7 @@ if (!defined('ABSPATH')) {
 
                     <div class="site-logo__symbol">
                         <?php
-                        $options = get_field_options("options");
+                        $options = get_field_options("options") ?? [];
                         if ($options["logo_symbol"]) {
                             echo img_generate_picture_tag(img: $options["logo_symbol"], max_size: "medium", min_size: "medium", classes: "site-logo__symbol-image");
                         }
