@@ -9,9 +9,12 @@
 
   $parent: &;
 
+  &.image,
   &.light {
     background-color: rgba(var(--secondary));
+  }
 
+  &.light {
     #{$parent}__pretitle {
       color: rgb(var(--primary-dark));
     }
