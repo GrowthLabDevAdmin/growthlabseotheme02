@@ -37,9 +37,12 @@
       padding-top: var(--sp-md);
     }
 
+    &.image,
     &.light {
       background-color: rgba(var(--secondary));
+    }
 
+    &.light {
       #{$parent}__content {
         color: rgb(var(--text));
       }
