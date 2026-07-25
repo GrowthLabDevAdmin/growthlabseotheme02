@@ -9,10 +9,16 @@ if (get_field('toggle_block')):
 
     <section
         id="<?= esc_attr($block_id ?? '') ?>"
-        class="block cta-box <?= esc_attr($box_style) ?><?= !empty($block['className']) ? ' ' . esc_attr($block['className']) : '' ?>"
-       <?= block_style_attribute($block); ?>
+        class="block cta-box 
+        <?= esc_attr($box_style) ?>
+        <?= !empty($block['className']) ? ' ' . esc_attr($block['className']) : '' ?>
+        <?= $background_type ?? "dark" ?>"
+        <?= block_style_attribute($block); ?>
         <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
+        <?php
+        if (isset($background_image) && $background_image && isset($background_type) && $background_type === 'image') img_print_picture_tag(img: $background_image, is_cover: true, classes: "cta-box__bg bg-image gradient-overlay");
+        ?>
 
         <div class="cta-box__wrapper container">
 

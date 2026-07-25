@@ -9,6 +9,22 @@
 
   $parent: &;
 
+  &.light {
+    background-color: rgba(var(--secondary));
+
+    #{$parent}__pretitle {
+      color: rgb(var(--primary-dark));
+    }
+
+    #{$parent}__title {
+      color: rgb(var(--primary-dark));
+    }
+
+    #{$parent}__wrapper {
+      background-color: rgba(var(--secondary-light));
+    }
+  }
+
   &.full {
     padding-top: calc(35rem + var(--sp-sm));
     position: relative;
@@ -16,6 +32,14 @@
 
     @media (min-width: v.$ldpi) {
       padding-top: var(--sp-md);
+    }
+
+    &.light {
+      background-color: rgba(var(--secondary));
+
+      #{$parent}__content {
+        color: rgb(var(--text));
+      }
     }
 
     #{$parent}__wrapper {
