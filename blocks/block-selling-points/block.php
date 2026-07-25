@@ -9,12 +9,17 @@ if (get_field('toggle_block')):
 
     <section
         id="<?= $block_id ?? "" ?>"
-        class="block selling-points bg-gradient <?= $block_classes ?? "" ?>"
-        <?php
-        if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'";
-        ?>>
+        class="block selling-points
+        <?= !empty($block['className']) ? ' ' . esc_attr($block['className']) : '' ?>
+        <?= $background_type !== null && $background_type === "dark" ? "bg-gradient" : $background_type ?>"
+        <?= block_style_attribute($block); ?>
+        <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
-        <div class="selling-points__wrapper container">
+        <?php
+        if (isset($background_image) && $background_image && isset($background_type) && $background_type === 'image') img_print_picture_tag(img: $background_image, is_cover: true, classes: "selling-points__bg bg-image gradient-overlay");
+        ?>
+
+        <div class=" selling-points__wrapper container">
 
             <?php
             if (isset($title) && $title) {

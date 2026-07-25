@@ -3,12 +3,38 @@
 
 .selling-points {
   padding: var(--sp-xsm) 0 var(--sp-md);
+  position: relative;
 
   @media (min-width: v.$ldpi) {
     padding: var(--sp-xsm) 0 var(--sp-lg);
   }
 
   $parent: &;
+
+  &.light {
+    background-color: rgb(var(--secondary));
+
+    #{$parent}__title {
+      color: rgb(var(--primary));
+    }
+
+    #{$parent}__content {
+      color: rgb(var(--text));
+    }
+
+    /*     #{$parent}__separator {
+      hr {
+        background-color: rgb(var(--primary));
+      }
+
+      picture,
+      svg {
+        path {
+          fill: rgb(var(--primary));
+        }
+      }
+    } */
+  }
 
   &__wrapper {
     @include m.flex-center;
