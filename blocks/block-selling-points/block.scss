@@ -59,7 +59,10 @@
 
   &__content {
     max-width: 96rem;
-    color: rgb(var(--secondary-light));
+
+    *:not(a) {
+      color: rgb(var(--secondary-light));
+    }
   }
 
   &__separator {
