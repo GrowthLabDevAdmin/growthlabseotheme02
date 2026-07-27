@@ -717,3 +717,74 @@ iframe {
   height: 100%;
   border: 0;
 }
+
+/* Video Overlay - Lightbox
+--------------------------------------------------------------- */
+#video-overlay {
+  display: flex; /* siempre flex, la transición no se interrumpe */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0;
+  transition:
+    background-color 0.5s ease-in-out,
+    opacity 0.5s ease-in-out;
+}
+
+#video-overlay.active {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 1;
+}
+
+#video-overlay .video-container {
+  transform: scale(0);
+  transition: transform 0.6s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+#video-overlay .video-container.active {
+  width: 90%;
+  height: 300px;
+  transform: scale(1);
+}
+
+#video-overlay .video-container iframe,
+#video-overlay .video-container video {
+  width: 100%;
+  height: 100%;
+}
+
+/* Botón cerrar */
+#video-overlay .overlay-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.25rem 0.5rem;
+  z-index: 1001;
+}
+
+@media (min-width: 768px) {
+  #video-overlay .video-container.active {
+    width: 70%;
+    height: 350px;
+  }
+}
+
+@media (min-width: 1440px) {
+  #video-overlay .video-container.active {
+    width: 50%;
+    height: 500px;
+  }
+}
