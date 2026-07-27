@@ -400,3 +400,29 @@ function transform_inline_font_sizes(
 
     return $dom->saveHTML();
 }
+
+if (!function_exists('get_youtube_thumbnail')) {
+    function get_youtube_thumbnail(string $video_id, string $size = 'hqdefault'): string
+    {
+        $sizes = ['maxresdefault', 'sddefault', 'hqdefault', 'mqdefault', 'default'];
+        $base  = "https://img.youtube.com/vi/{$video_id}";
+
+        // Validar desde el tamaño solicitado hacia abajo
+        $start = array_search($size, $sizes, true);
+        $sizes = array_slice($sizes, $start !== false ? $start : 2);
+
+        foreach ($sizes as $s) {
+            $url      = "{$base}/{$s}.jpg";
+            $response = wp_remote_head($url);
+
+            if (! is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
+                // YouTube devuelve un placeholder 120×90 para tamaños no disponibles
+                $headers = wp_remote_retrieve_headers($response);
+                $length  = (int) ($headers['content-length'] ?? 0);
+                if ($length > 2000) return $url; // el placeholder pesa ~1.4kb
+            }
+        }
+
+        return "{$base}/hqdefault.jpg"; // fallback seguro
+    }
+}
