@@ -237,9 +237,9 @@
             "label": "YouTube URL",
             "name": "youtube_url",
             "aria-label": "",
-            "type": "url",
+            "type": "text",
             "instructions": "",
-            "required": 0,
+            "required": false,
             "conditional_logic": [
                 [
                     {
@@ -255,8 +255,10 @@
                 "id": ""
             },
             "default_value": "",
-            "allow_in_bindings": 0,
-            "placeholder": ""
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_69e6816b7a4be",
@@ -301,5 +303,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1785182487
+    "modified": 1785182772
 }
