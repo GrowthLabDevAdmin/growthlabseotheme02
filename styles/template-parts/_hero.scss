@@ -119,7 +119,7 @@
     text-align: center;
     text-transform: uppercase;
     font-family: var(--font-secondary);
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 1.7vw, 2rem);
     color: rgba(var(--secondary));
     line-height: 1.2;
 
