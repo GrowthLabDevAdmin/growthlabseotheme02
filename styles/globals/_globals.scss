@@ -727,7 +727,7 @@ iframe {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 1000;
+  z-index: 10000;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0);
@@ -772,7 +772,7 @@ iframe {
   cursor: pointer;
   line-height: 1;
   padding: 0.25rem 0.5rem;
-  z-index: 10000;
+  z-index: 10001;
 }
 
 @media (min-width: 768px) {
