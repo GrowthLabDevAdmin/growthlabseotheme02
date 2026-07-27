@@ -37,11 +37,13 @@ if (!window.loadSplide) {
 }
 
 (() => {
-  if (document.querySelector(".selling-points__carousel")) {
+  const carousels = document.querySelectorAll(
+    ".selling-points__carousel .splide",
+  );
+  if (carousels.length) {
     loadSplide(() => {
-      var sellingPointsCarousel = new Splide(
-        ".selling-points__carousel .splide",
-        {
+      carousels.forEach((el) => {
+        const spl = new Splide(el, {
           type: "loop",
           perPage: 1,
           perMove: 1,
@@ -51,17 +53,12 @@ if (!window.loadSplide) {
           slideFocus: false,
           mediaQuery: "min",
           breakpoints: {
-            [tablet]: {
-              perPage: 3,
-            },
-            [ldpi]: {
-              destroy: true,
-              arrows: false,
-            },
+            [tablet]: { perPage: 3 },
+            [ldpi]: { destroy: true, arrows: false },
           },
-        },
-      );
-      sellingPointsCarousel.mount();
+        });
+        spl.mount();
+      });
     });
   }
 })();
