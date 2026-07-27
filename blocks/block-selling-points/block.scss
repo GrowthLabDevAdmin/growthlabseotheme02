@@ -59,6 +59,7 @@
 
   &__content {
     max-width: 96rem;
+    color: rgb(var(--secondary-light));
   }
 
   &__separator {
@@ -92,7 +93,7 @@
       padding: var(--sp-xsm);
       display: flex !important;
       align-items: stretch;
-      justify-content: flex-start;
+      justify-content: center;
       flex-wrap: wrap;
       gap: var(--sp-xsm);
 
