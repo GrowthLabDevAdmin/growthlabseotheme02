@@ -26,7 +26,7 @@
     ?>
       <section class="contact-form-footer">
 
-        <?php if (!empty($offices)): ?>
+        <?php if (!empty($offices) && !$switch_side_map): ?>
           <div class="contact-form-footer__offices">
             <ul class="footer-offices-selector">
               <?php foreach ($offices as $office): ?>
@@ -80,6 +80,10 @@
                 </div>
               <?php endforeach; ?>
             </div>
+          </div>
+        <?php elseif ($side_image && isset($side_image)): ?>
+          <div class="contact-form-footer__side-image">
+            <?php img_print_picture_tag($side_image, is_cover: true, classes: "side-image bg-image") ?>
           </div>
         <?php endif; ?>
 

@@ -846,6 +846,61 @@
                     "endpoint": 0
                 },
                 {
+                    "key": "field_6a693ba9963dc",
+                    "label": "Switch Side Map",
+                    "name": "switch_side_map",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "allow_in_bindings": 0,
+                    "ui_on_text": "Image",
+                    "ui_off_text": "Map",
+                    "ui": 1
+                },
+                {
+                    "key": "field_6a693bba963dd",
+                    "label": "Side Image",
+                    "name": "side_image",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_6a693ba9963dc",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "allow_in_bindings": 0,
+                    "preview_size": "medium"
+                },
+                {
                     "key": "field_69f108301504e",
                     "label": "Contact Form Title",
                     "name": "contact_form_title",
@@ -1542,5 +1597,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1780600963
+    "modified": 1785282006
 }
