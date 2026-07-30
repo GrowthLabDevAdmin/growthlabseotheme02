@@ -83,7 +83,7 @@
           </div>
         <?php elseif ($side_image && isset($side_image)): ?>
           <div class="contact-form-footer__side-image">
-            <?php img_print_picture_tag($side_image, is_cover: true, classes: "side-image bg-image") ?>
+            <?php img_print_picture_tag($side_image, is_cover: false, max_size: "cover-desktop", min_size: "cover-mobile", classes: "side-image bg-image") ?>
           </div>
         <?php endif; ?>
 
