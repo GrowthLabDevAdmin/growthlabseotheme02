@@ -145,7 +145,7 @@
       $after: false
     );
 
-    & > * {
+    h1 > * {
       all: inherit;
       margin-top: 0;
     }
