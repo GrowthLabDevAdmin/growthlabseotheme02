@@ -283,7 +283,7 @@
         }
       }
 
-      & > * {
+      h1 {
         font-family: var(--font-secondary);
         font-size: clamp(2.5rem, 4vw, 5.5rem);
         font-weight: normal;
@@ -322,6 +322,7 @@
     }
 
     #{$hero}__title {
+      margin: 0;
       margin-bottom: var(--sp-xsm);
       @include m.title(rgb(var(--secondary)), 4rem, 6.2vw, 6.4rem, null, 1);
 
@@ -330,8 +331,25 @@
         transform: translateX(-50%);
       }
 
-      & > * {
-        all: inherit;
+      @media (min-width: v.$ldpi) {
+        text-align: left;
+
+        &:first-child {
+          margin-top: 3rem;
+        }
+      }
+
+      h1 {
+        font-family: var(--font-secondary);
+        font-size: clamp(2.5rem, 4vw, 5.5rem);
+        font-weight: normal;
+        line-height: 1;
+        color: rgb(var(--secondary-light));
+
+        * {
+          font-size: inherit;
+          color: currentColor;
+        }
       }
     }
 
