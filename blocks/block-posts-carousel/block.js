@@ -70,7 +70,7 @@ if (!window.loadSplide) {
         type: "loop",
         perPage: 1,
         perMove: 1,
-        autoplay: carouselType === "post" ? true : false,
+        autoplay: carouselType === "any" ? true : false,
         interval: 3000,
         pauseOnHover: true,
         pauseOnFocus: true,
