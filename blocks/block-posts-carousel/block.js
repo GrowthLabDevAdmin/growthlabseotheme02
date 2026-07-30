@@ -21,7 +21,8 @@ if (!window.loadSplide) {
           window.__splideCallbacks = [];
           return;
         }
-        if (attempts < 10) { // Retry up to 10 times
+        if (attempts < 10) {
+          // Retry up to 10 times
           setTimeout(() => checkSplide(attempts + 1), 100); // Check every 100ms
         } else {
           console.error("Splide failed to load after retries");
@@ -69,6 +70,10 @@ if (!window.loadSplide) {
         type: "loop",
         perPage: 1,
         perMove: 1,
+        autoplay: carouselType === "post" ? true : false,
+        interval: 3000,
+        pauseOnHover: true,
+        pauseOnFocus: true,
         arrows: true,
         pagination: false,
         mediaQuery: "min",
