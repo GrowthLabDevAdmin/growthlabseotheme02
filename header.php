@@ -138,7 +138,7 @@ if (!defined('ABSPATH')) {
             </div>
 
             <?php if ($cta_button): ?>
-                <div class="site-header__cta <?= isset($cta_button_mobile_only) ? 'hide-on-mobile hide-on-tablet' : ''; ?>">
+                <div class="site-header__cta <?= isset($cta_button_mobile_only) && $cta_button_mobile_only ? 'hide-on-mobile hide-on-tablet' : ''; ?>">
                     <a href="<?= $cta_button['url'] ?>" class="cta-button btn--tertiary" target="<?= $cta_button['target'] ?>" aria-label="<?= esc_attr($cta_button['title']) ?>">
 
                         <span class="cta-button__text">
