@@ -51,15 +51,6 @@ if (!defined('ABSPATH')) {
                         echo img_generate_picture_tag(img: $image, max_size: "medium", alt_text: get_bloginfo('name'), is_priority: true, classes: "site-logo__image");
                     }
                     ?>
-
-                    <div class="site-logo__symbol">
-                        <?php
-                        $options = get_field_options("options") ?? [];
-                        if ($options["logo_symbol"]) {
-                            echo img_generate_picture_tag(img: $options["logo_symbol"], max_size: "medium", min_size: "medium", classes: "site-logo__symbol-image");
-                        }
-                        ?>
-                    </div>
                     <span>Site Logo</span>
                 </a>
             </div>
