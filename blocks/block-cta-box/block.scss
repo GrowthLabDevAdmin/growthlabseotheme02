@@ -29,7 +29,6 @@
   }
 
   &.full {
-    padding-top: calc(35rem + var(--sp-sm));
     position: relative;
     background-color: rgba(var(--primary-dark));
 
@@ -45,6 +44,12 @@
     &.light {
       #{$parent}__content {
         color: rgb(var(--text));
+      }
+    }
+
+    &:has(#{$parent}__side-img) {
+      @media (max-width: calc( v.$ldpi - 1px)) {
+        padding-top: calc(35rem + var(--sp-sm));
       }
     }
 
