@@ -34,7 +34,7 @@ if (!defined('ABSPATH')) {
 
                     <p class="location-card__address"><?= $location['address'] ?></p>
 
-                    <?php if ($location['cta_button']['url']): ?>
+                    <?php if (!empty($location['cta_button']) && $location['cta_button']['url']): ?>
                         <a href="<?= $location['cta_button']['url'] ?>" class="location-card__cta" aria-label="<?= esc_attr($location['cta_button']['title']) ?>">
                             <?= $location['cta_button']['title'] ?>
                         </a>
