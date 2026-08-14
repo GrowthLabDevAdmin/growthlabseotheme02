@@ -19,7 +19,7 @@ if (get_field('toggle_block')):
         <?php if ($show_top_separator) echo "separator" ?>
         <?= !empty($block['className']) ? ' ' . esc_attr($block['className']) : '' ?>
         "
-       <?= block_style_attribute($block); ?>
+        <?= block_style_attribute($block); ?>
         <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
         <?php
@@ -34,22 +34,26 @@ if (get_field('toggle_block')):
         ">
             <?php $title ? print_title($title, $title_tag, "two-columns__title") : "" ?>
 
-            <div class="two-columns__col">
-                <div class="formatted-text two-columns__content">
-                    <?= $text_content ?? "" ?>
+            <?php if (isset($text_content) && $text_content): ?>
+                <div class="two-columns__col">
+                    <div class="formatted-text two-columns__content">
+                        <?= $text_content ?? "" ?>
+                    </div>
                 </div>
-            </div>
+            <?php endif; ?>
 
-            <div class="two-columns__col two-columns__col--image">
-                <?php
-                if (isset($image) && $image) img_print_picture_tag(
-                    img: $image,
-                    max_size: "large",
-                    min_size: "content",
-                    classes: "two-columns__image $reverse"
-                );
-                ?>
-            </div>
+            <?php if (isset($image) && $image && !empty($image)): ?>
+                <div class="two-columns__col two-columns__col--image">
+                    <?php
+                    if (isset($image) && $image) img_print_picture_tag(
+                        img: $image,
+                        max_size: "large",
+                        min_size: "content",
+                        classes: "two-columns__image $reverse"
+                    );
+                    ?>
+                </div>
+            <?php endif; ?>
         </div>
 
     </section>
