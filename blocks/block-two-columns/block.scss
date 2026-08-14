@@ -192,7 +192,7 @@
       padding: 0 0;
       grid-row: 2/3;
 
-      &:only-child {
+      &:only-of-type {
         grid-column: 1/3;
       }
     }
