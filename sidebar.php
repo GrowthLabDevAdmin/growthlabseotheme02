@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 
 <aside role="complementary" class="sidebar <?= $args["classes"] ?>">
 
-    <?php dynamic_sidebar("sidebar-default" . get_current_language()["slug"] !== "" ? "-" . get_current_language()["slug"] : "") ?>
+    <?php dynamic_sidebar("sidebar-default" . (get_current_language()["slug"] !== "" ? "-" . get_current_language()["slug"] : "")) ?>
 
     <?php
     if (get_field("menus", $args["ID"]) && have_rows("menus", $args["ID"])):
