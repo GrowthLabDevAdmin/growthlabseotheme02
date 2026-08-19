@@ -30,7 +30,7 @@ if (!defined('ABSPATH')) {
         <div class="post-card__inner">
             <span class="post-card__meta"><?= $args["meta"] ?></span>
 
-            <p class="post-card__title"><?= $args["title"] ?></p>
+            <?php print_title($args["title"], $args["title_tag"], "post-card__title"); ?>
 
             <p class="post-card__content"><?= $args["excerpt"] ?></p>
 

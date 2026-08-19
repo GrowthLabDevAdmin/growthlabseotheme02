@@ -83,6 +83,7 @@ if (get_field('toggle_block')):
                                         "classes" => "splide__slide posts-carousel__card",
                                         "picture" => $picture ?? '',
                                         "title" => $title ?? '',
+                                        "title_tag" => $title_tag ? $title_tag : $items_title_tag ?? 'h3',
                                         "link_url" => $link['url'] ?? '',
                                         "link_target" => $link['target'] ?? '_self',
                                     ));
@@ -99,6 +100,7 @@ if (get_field('toggle_block')):
                                                 "classes" => "splide__slide posts-carousel__card",
                                                 "numerical_amount" => $numerical_amount,
                                                 "case_title" => $case_title,
+                                                "title_tag" => $items_title_tag ?? 'h3',
                                             ));
                                             break;
 
@@ -107,6 +109,7 @@ if (get_field('toggle_block')):
                                                 "classes" => "splide__slide posts-carousel__card",
                                                 "picture" => $headshot,
                                                 "title" => get_the_title(),
+                                                "title_tag" => $items_title_tag ?? 'h3',
                                                 "role" => $role,
                                                 "content" => get_the_excerpt(),
                                                 "link_url" => get_the_permalink(),
@@ -120,6 +123,7 @@ if (get_field('toggle_block')):
                                                 "picture" => get_the_post_thumbnail_url(),
                                                 "meta" => get_the_date(),
                                                 "title" => get_the_title(),
+                                                "title_tag" => $items_title_tag ?? 'h3',
                                                 "excerpt" => get_the_excerpt(),
                                                 "link_url" => get_the_permalink(),
                                                 "link_target" => '_blank',
@@ -140,6 +144,7 @@ if (get_field('toggle_block')):
                                                 "classes" => "splide__slide posts-carousel__card",
                                                 "picture" => get_the_post_thumbnail_url(),
                                                 "title" => get_the_title(),
+                                                "title_tag" => $items_title_tag ?? 'h3',
                                                 "link_url" => get_the_permalink(),
                                                 "link_target" => '_blank',
                                             ));

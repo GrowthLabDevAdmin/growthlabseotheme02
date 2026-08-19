@@ -394,6 +394,40 @@
             "delay": 0
         },
         {
+            "key": "field_6a84f09f9c6af",
+            "label": "Items Title Tag",
+            "name": "items_title_tag",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "p": "p"
+            },
+            "default_value": "p",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
             "key": "field_690cca4f14dc1",
             "label": "Select Results Posts",
             "name": "select_results_posts",
@@ -733,6 +767,40 @@
                     "parent_repeater": "field_691a8a3595dd0"
                 },
                 {
+                    "key": "field_6a84f0429c6ae",
+                    "label": "Title Tag",
+                    "name": "title_tag",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "h1": "h1",
+                        "h2": "h2",
+                        "h3": "h3",
+                        "h4": "h4",
+                        "h5": "h5",
+                        "h6": "h6",
+                        "p": "p"
+                    },
+                    "default_value": "p",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0,
+                    "parent_repeater": "field_691a8a3595dd0"
+                },
+                {
                     "key": "field_691a8a9695dd3",
                     "label": "Content",
                     "name": "content",
@@ -821,5 +889,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1776217286
+    "modified": 1787097303
 }

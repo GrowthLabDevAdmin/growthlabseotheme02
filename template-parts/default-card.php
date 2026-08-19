@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
 
     <div class="default-card__inner tx-center">
 
-        <p class="default-card__title"><?= $args["title"] ?></p>
+        <?php print_title($args["title"], $args["title_tag"], "default-card__title"); ?>
 
     </div>
 

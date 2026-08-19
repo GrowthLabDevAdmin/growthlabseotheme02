@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
 
             <span class="result-card__amount">$<?= format_number_abbreviated($args["numerical_amount"]) ?></span>
 
-            <p class="result-card__title"><?= $args["case_title"] ?></p>
+            <?php print_title($args["case_title"], $args["title_tag"], "result-card__title"); ?>
 
             <?php if (isset($args["case_description"]) && $args["case_description"]): ?>
                 <p class="result-card__description"><?= $args["case_description"] ?></p>
