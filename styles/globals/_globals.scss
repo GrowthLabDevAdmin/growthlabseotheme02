@@ -150,6 +150,13 @@ a {
   transition: 0.3s ease-in-out;
 }
 
+* a {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
 a:hover,
 a:active,
 a:focus {
