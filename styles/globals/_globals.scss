@@ -354,7 +354,10 @@ img.bg-image {
   text-transform: uppercase;
 }
 
-:where(.formatted-text) {
+:where(.formatted-text),
+.wp-block-media-text__content,
+.wp-block-paragraph,
+.wp-block-list {
   font-size: clamp(1.4rem, 2.2vw, 1.8rem);
   font-family: var(--font-primary);
   font-weight: 400;
