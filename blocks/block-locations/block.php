@@ -10,18 +10,20 @@ if (get_field('toggle_block')):
     <section
         id="<?= esc_attr($block_id ?? '') ?>"
         class="block locations<?= !empty($block['className']) ? ' ' . esc_attr($block['className']) : '' ?>"
-       <?= block_style_attribute($block); ?>
+        <?= block_style_attribute($block); ?>
         <?php if (isset($extract_block_from_content) && $extract_block_from_content) echo "data-extract='$place'"; ?>>
 
         <div class="locations__wrapper container">
 
-            <div class="locations__content tx-center">
-                <?php
-                if (isset($pretitle) && $pretitle) print_title($pretitle, $pretitle_tag, "locations__pretitle pretitle");
-                if (isset($title) && $title) print_title($title, $title_tag, "locations__title tx-center");
-                echo $main_content;
-                ?>
-            </div>
+            <?php if (isset($pretitle) && $pretitle || isset($title) && $title || isset($main_content) && $main_content): ?>
+                <div class="locations__content tx-center">
+                    <?php
+                    if (isset($pretitle) && $pretitle) print_title($pretitle, $pretitle_tag, "locations__pretitle pretitle");
+                    if (isset($title) && $title) print_title($title, $title_tag, "locations__title tx-center");
+                    echo $main_content;
+                    ?>
+                </div>
+            <?php endif; ?>
 
             <div class="locations-cards">
                 <?php
