@@ -8,7 +8,10 @@
   $card: &;
 
   &__container {
+    height: 100%;
     background-color: rgb(var(--primary));
+    display: flex;
+    flex-direction: column;
     @include m.nice-corner("top-left", "top-right", -1rem, 5rem, $bw-lg: 5px);
   }
 
@@ -38,6 +41,7 @@
 
   &__wrapper {
     width: 100%;
+    height: 100%;
     display: flex;
     border: 2px solid rgb(var(--tertiary-light));
     border-top: 0;
