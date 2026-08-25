@@ -7,8 +7,13 @@
 
   $card: &;
 
+  &.disabled {
+    #{$card}__container {
+      height: 100%;
+    }
+  }
+
   &__container {
-    height: 100%;
     background-color: rgb(var(--primary));
     display: flex;
     flex-direction: column;
