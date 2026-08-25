@@ -349,6 +349,27 @@
             "ui": 1
         },
         {
+            "key": "field_6a8cdd2a5da39",
+            "label": "Disable Accordion",
+            "name": "disable_accordion",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
             "key": "field_692a0961a0136",
             "label": "Offices",
             "name": "offices",
@@ -606,5 +627,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1780000210
+    "modified": 1787616600
 }

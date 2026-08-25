@@ -41,7 +41,7 @@ if (get_field('toggle_block')):
                                 'card',
                                 array(
                                     'location' => $location,
-                                    'classes' => "locations-cards__card"
+                                    'classes' => "locations-cards__card" . (isset($disable_accordion) && $disable_accordion ? ' disabled' : '')
                                 )
                             );
                         }

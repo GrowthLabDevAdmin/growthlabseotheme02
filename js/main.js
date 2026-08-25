@@ -10,7 +10,7 @@ const blocksInContent = document.querySelectorAll(
   ".page-template-default .page__main .block[data-extract]",
 );
 
-const accordionItems = document.querySelectorAll(".accordion");
+const accordionItems = document.querySelectorAll(".accordion:not(.disabled)");
 
 //Breakpoints
 const mobile = 480;
