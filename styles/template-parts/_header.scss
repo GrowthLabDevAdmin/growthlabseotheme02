@@ -112,7 +112,7 @@
   }
 
   &:not(:has(#{$header}__cta)),
-  &:not(:has(#{$header}__cta)).scrolling {
+  &.scrolling:not(:has(#{$header}__cta)) {
     &:has(#{$header}__cta--mobile-only) {
       @media (min-width: v.$ldpi) {
         #{$header}__navigation {
