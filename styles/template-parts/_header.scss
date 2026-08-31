@@ -90,6 +90,7 @@
             place-items: center;
 
             span {
+              &:only-of-type,
               &:first-of-type {
                 padding-right: 1rem;
                 grid-row: 2/3;
@@ -724,6 +725,7 @@
         font-size: 2.2rem;
       }
 
+      &:only-of-type,
       &:first-of-type {
         @media (min-width: v.$mdpi) {
           padding-right: 1rem;
