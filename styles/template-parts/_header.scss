@@ -111,7 +111,8 @@
     }
   }
 
-  &:not(:has(#{$header}__cta)) {
+  &:not(:has(#{$header}__cta)),
+  &:not(:has(#{$header}__cta)).scrolling {
     &:has(#{$header}__cta--mobile-only) {
       @media (min-width: v.$ldpi) {
         #{$header}__navigation {
