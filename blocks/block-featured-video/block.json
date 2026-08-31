@@ -6,7 +6,8 @@
   "icon": "block-default",
   "keywords": ["growthlabseo", "video", "lazy loading", "lightbox", "youtube"],
   "acf": {
-    "mode": "edit",
+       "renderPreview": false,
+
     "renderTemplate": "block.php"
   },
   "supports": {

@@ -1,25 +1,25 @@
 {
   "name": "acf/logos-carousel",
   "title": "Logos Carousel",
- 
+
   "style": ["file:./block-min.css"],
   "script": ["file:./block-min.js"],
   "category": "growthlabseotheme02-blocks",
   "icon": "block-default",
   "keywords": ["growthlabseo", "carousel", "logos"],
- "acf": {
-"mode": "edit",    
+  "acf": {
+    "renderPreview": false,
     "renderTemplate": "block.php"
   },
   "supports": {
-"mode": true,
-    
+    "mode": true,
+
     "customClassName": true,
     "alignWide": true,
     "spacing": {
       "margin": true,
       "padding": true,
-      "blockGap":  ["horizontal", "vertical"]
+      "blockGap": ["horizontal", "vertical"]
     }
   },
   "align": "full"

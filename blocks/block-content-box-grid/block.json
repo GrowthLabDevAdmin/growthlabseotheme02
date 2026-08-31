@@ -8,7 +8,7 @@
   "icon": "block-default",
   "keywords": ["growthlabseo", "content", "grid", "menu", "boxes"],
   "acf": {
-"mode": "edit",
+ "renderPreview": false,
     "renderTemplate": "block.php"
   },
   "supports": {

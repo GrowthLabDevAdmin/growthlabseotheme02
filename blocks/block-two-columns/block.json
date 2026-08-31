@@ -15,7 +15,8 @@
     "image"
   ],
   "acf": {
-    "mode": "edit",
+       "renderPreview": false,
+
     "renderTemplate": "block.php"
   },
   "supports": {
