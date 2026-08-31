@@ -121,10 +121,10 @@ if (!defined('ABSPATH')) {
                                 </div>
                             <?php endif; ?>
 
-                            <?php if ($top_callout_first_line): ?>
+                            <?php if ($top_callout_first_line && $top_callout_first_line !== ''): ?>
                                 <span><?= $top_callout_first_line ?></span>
                             <?php endif; ?>
-                            <?php if ($top_callout_second_line): ?>
+                            <?php if ($top_callout_second_line && $top_callout_second_line !== ''): ?>
                                 <span><?= $top_callout_second_line ?></span>
                             <?php endif; ?>
                             <a href="tel:+1<?= get_flat_number($phone_number) ?>" class="callout__phone" aria-label="Call us at <?= esc_attr($phone_number) ?>">
