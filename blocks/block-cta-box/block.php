@@ -58,12 +58,14 @@ if (get_field('toggle_block')):
                             foreach ($cta_buttons as $button):
                                 $cta_link = $button['link'];
                                 $btn_style = $i === 0 ? "tertiary" : "primary";
+                                if (!empty($cta_link['title']) && !empty($cta_link['url'])):
                             ?>
-                                <a href="<?= $cta_link['url'] ?>" target="<?= $cta_link['target'] ?>" class="btn btn--<?= $btn_style ?>" aria-label="<?= esc_attr($cta_link['title']) ?>">
-                                    <span><?= $cta_link['title'] ?></span>
-                                </a>
+                                    <a href="<?= $cta_link['url'] ?>" target="<?= $cta_link['target'] ?>" class="btn btn--<?= $btn_style ?>" aria-label="<?= esc_attr($cta_link['title']) ?>">
+                                        <span><?= $cta_link['title'] ?></span>
+                                    </a>
                             <?php
-                                $i++;
+                                    $i++;
+                                endif;
                             endforeach;
                             ?>
                         </div>
