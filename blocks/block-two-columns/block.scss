@@ -37,7 +37,10 @@
   &.light {
     background: rgb(var(--secondary));
 
-    #{$parent}__title,
+    #{$parent}__title {
+      color: rgb(var(--primary));
+    }
+
     #{$parent}__content * {
       color: rgb(var(--text));
     }

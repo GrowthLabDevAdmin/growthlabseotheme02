@@ -268,6 +268,9 @@
 
     #{$hero}__content {
       padding: 0;
+      &:only-child {
+        margin-bottom: var(--sp-md);
+      }
     }
 
     #{$hero}__title {
