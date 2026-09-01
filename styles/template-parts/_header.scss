@@ -215,6 +215,7 @@
       #{$header}__logo {
         @media (min-width: v.$mdpi) {
           max-height: 13rem;
+          justify-content: start;
 
           #{$header}:has(.main-nav) {
             grid-row: 1/3;
