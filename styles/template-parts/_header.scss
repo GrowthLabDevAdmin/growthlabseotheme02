@@ -56,10 +56,10 @@
         grid-row: 2/3;
 
         .callout {
-          span {
+          &__text {
             font-size: 1.8rem;
 
-            &:first-of-type {
+            &--first {
               display: none;
             }
           }
