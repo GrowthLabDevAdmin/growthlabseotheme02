@@ -35,6 +35,8 @@ if ($hero_title === null || $hero_title === "") {
     } elseif (is_tax()) {
         $hero_title = single_term_title('', false);
     }
+
+    $hero_title = "<h1>$hero_title</h1>";
 }
 
 ?>
