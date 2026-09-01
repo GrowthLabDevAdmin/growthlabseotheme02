@@ -123,6 +123,7 @@
           width: 90%;
           grid-column: 2/4;
           grid-column-end: none !important;
+          justify-self: start;
 
           .callout {
             span:only-of-type,
@@ -148,6 +149,7 @@
           width: 90%;
           grid-column: 2/4;
           grid-column-end: none !important;
+          justify-self: start;
 
           .callout {
             span:only-of-type,
@@ -222,6 +224,12 @@
           &__symbol {
             opacity: 1;
           }
+        }
+      }
+
+      .callout {
+        &__phone {
+          transform: scale(0.9);
         }
       }
 
