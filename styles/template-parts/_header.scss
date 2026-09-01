@@ -169,6 +169,12 @@
         justify-self: start;
       }
     }
+
+    @media (min-width: v.$ldpi) {
+      .callout {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
   }
 
   &--sticky {
