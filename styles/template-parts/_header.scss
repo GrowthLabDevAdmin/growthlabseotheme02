@@ -111,8 +111,7 @@
     }
   }
 
-  &:not(:has(#{$header}__cta)),
-  &.scrolling:not(:has(#{$header}__cta)) {
+  &:not(:has(#{$header}__cta)) {
     &:has(#{$header}__cta--mobile-only) {
       @media (min-width: v.$ldpi) {
         #{$header}__navigation {
@@ -123,7 +122,6 @@
           width: 90%;
           grid-column: 2/4;
           grid-column-end: none !important;
-          justify-self: start;
 
           .callout {
             span:only-of-type,
@@ -149,7 +147,6 @@
           width: 90%;
           grid-column: 2/4;
           grid-column-end: none !important;
-          justify-self: start;
 
           .callout {
             span:only-of-type,
@@ -162,6 +159,14 @@
             }
           }
         }
+      }
+    }
+  }
+
+  &.scrolling:not(:has(#{$header}__cta)) {
+    @media (min-width: v.$tablet) {
+      #{$header}__callout {
+        justify-self: start;
       }
     }
   }
