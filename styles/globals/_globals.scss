@@ -665,11 +665,13 @@ img {
   }
 }
 
-img.alignleft:not(:only-child) {
+img.alignleft:not(:only-child),
+.alignleft:not(:only-child) {
   margin: 5px 20px 0px 0px;
 }
 
-img.alignright:not(:only-child) {
+img.alignright:not(:only-child),
+.alignright:not(:only-child) {
   margin: 5px 0px 0px 20px;
 }
 
