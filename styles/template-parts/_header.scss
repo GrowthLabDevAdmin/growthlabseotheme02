@@ -89,16 +89,15 @@
             grid-template-columns: repeat(2, 50%);
             place-items: center;
 
-            span {
-              &:only-of-type,
-              &:first-of-type {
+            &__text {
+              &--first {
                 padding-right: 1rem;
                 grid-row: 2/3;
                 grid-column: 1/2;
                 border-right: 2px solid rgb(var(--tertiary));
               }
 
-              &:last-of-type:not(:only-of-type) {
+              &--second {
                 grid-row: 1/2;
                 grid-column: 1/3;
                 justify-self: end;
@@ -124,8 +123,7 @@
           grid-column-end: none !important;
 
           .callout {
-            span:only-of-type,
-            span:first-of-type {
+            &__text--first {
               justify-self: end;
 
               & ~ * {
@@ -149,8 +147,7 @@
           grid-column-end: none !important;
 
           .callout {
-            span:only-of-type,
-            span:first-of-type {
+            &__text--first {
               justify-self: end;
 
               & ~ * {
@@ -757,7 +754,7 @@
       }
     }
 
-    span {
+    &__text {
       text-transform: uppercase;
       font-size: 1.4rem;
       line-height: 1.5;
@@ -771,8 +768,7 @@
         font-size: 2.2rem;
       }
 
-      &:only-of-type,
-      &:first-of-type {
+      &--first {
         @media (min-width: v.$mdpi) {
           padding-right: 1rem;
           grid-row: 2/3;
@@ -781,7 +777,7 @@
         }
       }
 
-      &:last-of-type:not(:only-of-type) {
+      &--second {
         @media (min-width: v.$tablet) {
           font-size: 1.4rem;
           color: rgb(var(--tertiary-light));
