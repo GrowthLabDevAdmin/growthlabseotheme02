@@ -34,7 +34,18 @@ aside {
   }
 
   &:not(.light) {
-    *:not(a, svg, path, strong, .gform_button, input, textarea, select) {
+    *:not(
+      a,
+      svg,
+      path,
+      strong,
+      .gform_button,
+      input,
+      textarea,
+      select,
+      .option,
+      .item
+    ) {
       color: rgb(var(--secondary));
     }
   }

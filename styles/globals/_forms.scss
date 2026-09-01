@@ -28,7 +28,9 @@ input[type="text"],
 input[type="email"],
 input[type="tel"],
 input[type="url"],
-textarea {
+textarea,
+.ts-control,
+.ts-dropdown {
   width: 100%;
   padding: 10px 16px;
   background: rgb(var(--secondary-light));
@@ -39,8 +41,19 @@ textarea {
   line-height: 1.5;
   color: rgb(var(--text));
 
+  .item,
   &::placeholder {
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-family: var(--font-primary);
+    line-height: 1.5;
     color: rgb(var(--text), 0.6);
+  }
+
+  .option {
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-family: var(--font-primary);
+    line-height: 1.5;
+    color: rgb(var(--text));
   }
 }
 

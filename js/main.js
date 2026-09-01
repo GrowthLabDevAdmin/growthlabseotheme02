@@ -33,6 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".sidebar").forEach((el) => {
     if (!el.querySelector("*")) el.classList.add("is-empty");
   });
+
+  document.querySelectorAll("select").forEach((el) => {
+    new TomSelect(el, {
+      controlInput: null,
+    });
+  });
 });
 
 function eventListeners() {

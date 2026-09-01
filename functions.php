@@ -243,6 +243,11 @@ function inline_main_critical_css()
     if (file_exists($splide_css_file)) {
         $critical_css .= "\n/* Splide Critical CSS */\n" . file_get_contents($splide_css_file);
     }
+    // Add Tom Select critical CSS only when selects are present
+    $tom_select_css_file = get_template_directory() . '/styles/vendor/tom-select/tom-select-min.css';
+    if (file_exists($tom_select_css_file)) {
+        $critical_css .= "\n/* Tom Select Critical CSS */\n" . file_get_contents($tom_select_css_file);
+    }
 
     // Add block critical CSS if any
     if (!empty($block_critical_css)) {
@@ -274,11 +279,20 @@ function growthlabseotheme02_scripts()
     // Gravity Forms - remove maps
     wp_dequeue_script('gform_gravityforms_maps');
 
+    //Tom Select
+    wp_enqueue_script(
+        'growthlabseotheme02-tom-select',
+        get_template_directory_uri() . '/js/vendor/tom-select/tom-select-min.js',
+        array(),
+        filemtime(get_template_directory() . '/js/vendor/tom-select/tom-select-min.js'),
+        true
+    );
+
     // Main JS scripts.
     wp_enqueue_script(
         'growthlabseotheme02-main-scripts',
         get_template_directory_uri() . '/js/main-min.js',
-        array(),
+        array('growthlabseotheme02-tom-select'),
         filemtime(get_template_directory() . '/js/main-min.js'),
         true
     );
