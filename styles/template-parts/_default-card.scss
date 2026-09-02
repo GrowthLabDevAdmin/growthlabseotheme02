@@ -71,6 +71,7 @@
     color: rgb(var(--secondary-light));
     font-family: var(--font-secondary);
     font-size: clamp(1.6rem, 2vw, 3.5rem);
+    font-weight: 400;
     transition: 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 
