@@ -34,11 +34,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!el.querySelector("*")) el.classList.add("is-empty");
   });
 
-  document.querySelectorAll("select").forEach((el) => {
-    new TomSelect(el, {
-      controlInput: null,
+  document
+    .querySelectorAll("select:not(.posts-filters__select)")
+    .forEach((el) => {
+      new TomSelect(el, {
+        controlInput: null,
+      });
     });
-  });
 });
 
 function eventListeners() {
