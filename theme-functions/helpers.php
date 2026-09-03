@@ -426,3 +426,39 @@ if (!function_exists('get_youtube_thumbnail')) {
         return "{$base}/hqdefault.jpg"; // fallback seguro
     }
 }
+
+function phonenumber($atts, $content = null)
+{
+    extract(shortcode_atts(array(
+        'target' => '_self',
+        'link_id' => '',
+        'link_class' => '',
+        'wrapper' => '',
+        'text' => ''
+    ), $atts));
+
+    $options = get_current_language_options();
+
+    $phone = $options['main_phone_number'] ?? "";
+
+    if ($phone != '') {
+        $linktext = $phone;
+        $linkhref = get_flat_number($phone);
+    } else {
+        $linktext = $text ?: '';
+        $linkhref = get_flat_number($phone) ?: ($linktext ?: "");
+    }
+
+    $output = '';
+    if ($wrapper != '') :
+        $output .= "<$wrapper class='$link_class' id='$link_id'>";
+        $link_class = '';
+        $link_id = '';
+    endif;
+    $output .= "<a href='tel:+1$linkhref' target='$target' id='$link_id' class='$link_class'>$linktext</a>";
+    if ($wrapper != '') :
+        $output .= "</$wrapper>";
+    endif;
+    return $output;
+}
+add_shortcode('phonenumber', 'phonenumber');
