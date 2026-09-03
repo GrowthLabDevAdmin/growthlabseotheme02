@@ -11,7 +11,7 @@ foreach (get_fields() as $key => $value) $$key = $value;
 
                 <aside role="complementary" class="single__sidebar single-team__sidebar formatted-text">
                     <?php
-                    if (has_post_thumbnail()) {
+                    if (isset($headshot) && !empty($headshot)) {
                         img_print_picture_tag(img: $headshot, max_size: "cover-mobile", classes: "single-team__picture");
                     }
                     ?>
