@@ -10,7 +10,7 @@ $post_id = get_option('page_for_posts');
 
     <div class="blog__wrapper container">
 
-        <main role="main" class="blog__main border-box">
+        <main role="main" class="blog__main">
 
             <div class="blog__loop">
 
